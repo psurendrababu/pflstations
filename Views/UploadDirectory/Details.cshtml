@@ -1,0 +1,29 @@
+﻿@model PipelineFeatureList.Models.UploadDirectory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UploadDirectory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Directory)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Directory)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DatabaseName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DatabaseName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.UploadDirectoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

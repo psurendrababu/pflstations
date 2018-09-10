@@ -1,0 +1,69 @@
+﻿@model PipelineFeatureList.Models.WorkflowAction
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WorkflowAction</legend>
+
+        @Html.HiddenFor(model => model.WorkflowActionID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy_UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy_UserID)
+            @Html.ValidationMessageFor(model => model.CreatedBy_UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedOn)
+            @Html.ValidationMessageFor(model => model.CreatedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedBy_UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedBy_UserID)
+            @Html.ValidationMessageFor(model => model.ModifiedBy_UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedOn)
+            @Html.ValidationMessageFor(model => model.ModifiedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WorkflowActionItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WorkflowActionItem)
+            @Html.ValidationMessageFor(model => model.WorkflowActionItem)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

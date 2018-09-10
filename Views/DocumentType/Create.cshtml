@@ -1,0 +1,73 @@
+﻿@model PipelineFeatureList.Models.DocumentType
+
+@{
+    ViewBag.Title = "Create Document Type";
+}
+
+<h2>Create Document Type</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocumentType</legend>
+
+        <table><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocumentTypeItem)
+        </div></td>
+        <td>
+        <div class="wide">
+            @Html.EditorFor(model => model.DocumentTypeItem)
+            @Html.ValidationMessageFor(model => model.DocumentTypeItem)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PreConstruction)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PreConstruction)
+            @Html.ValidationMessageFor(model => model.PreConstruction)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipeSystemID, "PipeSystem")
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.DropDownList("PipeSystemID", "- Select a Pipe System -")
+            @Html.ValidationMessageFor(model => model.PipeSystemID)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipeLineID, "Pipeline")
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.DropDownList("PipeLineID", "- Select a Pipeline -")
+            @Html.ValidationMessageFor(model => model.PipeLineID)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PageRequired)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PageRequired)
+            @Html.ValidationMessageFor(model => model.PageRequired)
+        </div>
+        </td></tr></table>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

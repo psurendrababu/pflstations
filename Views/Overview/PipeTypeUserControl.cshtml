@@ -1,0 +1,7 @@
+﻿@model PipelineFeatureList.Models.Overview
+@{PipelineFeatureList.Models.PipelineFeatureListDBContext db = new PipelineFeatureList.Models.PipelineFeatureListDBContext();}
+    @Html.DropDownList(
+        "TypeID", new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem", "- Select a Feature Type -"),
+            "- Select a Feature Type -"
+            )
+

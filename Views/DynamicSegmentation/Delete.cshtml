@@ -1,0 +1,81 @@
+﻿@model PipelineFeatureList.Models.DynamicSegmentation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DynamicSegmentation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Engineer_UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Engineer_UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.QueuedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.QueuedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CompletedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CompletedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipelineSystemID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipelineSystemID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipelineID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipelineID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsLatestCopy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsLatestCopy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProcessingMessage)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProcessingMessage)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

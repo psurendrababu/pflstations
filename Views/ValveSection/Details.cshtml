@@ -1,0 +1,112 @@
+﻿@model PipelineFeatureList.Models.ValveSection
+
+@{
+    ViewBag.Title = "Valve Section Details";
+}
+
+<h2>Valve Section Details</h2>
+
+<fieldset>
+    <legend>ValveSection</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystem.PipeSystemItem)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Pipeline.PipelineItem)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.Pipeline.PipelineItem)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionBegin)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionBegin)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionEnd)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionEnd)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrionStationSeries)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.OrionStationSeries)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MilePointBegin)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.MilePointBegin)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MilePointEnd)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.MilePointEnd)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrionStationBegin)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.OrionStationBegin)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrionStationEnd)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.OrionStationEnd)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GISStationBegin)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.GISStationBegin)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GISStationEnd)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.GISStationEnd)
+    </div>
+    </td></tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CurrentMAOP)
+    </div></td>
+    <td><div class="display-field">
+        @Html.DisplayFor(model => model.CurrentMAOP)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" }) |
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>

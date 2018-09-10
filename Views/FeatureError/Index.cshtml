@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.FeatureError>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureErrorItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ErrorText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderBy)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeatureErrorItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ErrorText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderBy)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FeatureErrorID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FeatureErrorID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FeatureErrorID })
+        </td>
+    </tr>
+}
+
+</table>

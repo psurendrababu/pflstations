@@ -1,0 +1,25 @@
+﻿@model PipelineFeatureList.Controllers.ValveSectionStatus
+
+@{
+    ViewBag.Title = "Valve Section Status Details";
+}
+
+<h2>Valve Section Status Details</h2>
+
+<fieldset>
+    <legend>ValveSectionStatus</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionStatusItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionStatusItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ValveSectionStatusID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

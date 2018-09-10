@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ReportingGroup>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReportingGroupName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReportingGroupName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReportingGroupID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReportingGroupID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReportingGroupID })
+        </td>
+    </tr>
+}
+
+</table>

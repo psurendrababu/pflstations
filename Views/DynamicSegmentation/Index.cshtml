@@ -1,0 +1,81 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.DynamicSegmentation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Engineer_UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QueuedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PipelineSystemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PipelineID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsLatestCopy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessingMessage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Engineer_UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QueuedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipelineSystemID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipelineID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsLatestCopy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessingMessage)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DynamicSegmentationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DynamicSegmentationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DynamicSegmentationID })
+        </td>
+    </tr>
+}
+
+</table>

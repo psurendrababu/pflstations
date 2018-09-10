@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.BendRadius>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BendRadiusItem)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BendRadiusItem)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BendRadiusID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BendRadiusID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BendRadiusID })
+        </td>
+    </tr>
+}
+
+</table>

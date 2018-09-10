@@ -1,0 +1,25 @@
+﻿@model PipelineFeatureList.Models.Manufacturer
+
+@{
+    ViewBag.Title = "Manufacturer Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Manufacturer</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ManufacturerItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ManufacturerItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ManufacturerID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>

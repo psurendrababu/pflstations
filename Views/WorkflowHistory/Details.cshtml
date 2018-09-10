@@ -1,0 +1,57 @@
+﻿@model PipelineFeatureList.Models.WorkflowHistory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>WorkflowHistory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChangedBy_UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChangedBy_UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChangedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChangedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Old_WorkflowStatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Old_WorkflowStatusID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WorkflowActionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WorkflowActionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.New_WorkflowStatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.New_WorkflowStatusID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.WorkflowHistoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

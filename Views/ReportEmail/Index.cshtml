@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ReportEmail>
+
+@{
+    ViewBag.Title = "Report Emails";
+}
+
+<h2>Report Emails</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" }) @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Report.ReportName)
+        </th>
+        <th>
+            @Html.Raw("User")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Report.ReportName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ReportEmailsID }, htmlAttributes: new { @class = "linkbutton" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ReportEmailsID }, htmlAttributes: new { @class = "linkbutton" })
+        </td>
+    </tr>
+}
+</table>
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</div>
+</table>

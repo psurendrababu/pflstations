@@ -1,0 +1,36 @@
+﻿@model PipelineFeatureList.Controllers.ValveSectionErrorLevel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ValveSectionErrorLevel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionErrorLevelItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionErrorLevelItem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BackColor)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BackColor)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ForeColor)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ForeColor)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ValveSectionErrorLevelID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

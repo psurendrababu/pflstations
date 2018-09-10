@@ -1,0 +1,14 @@
+﻿@model PipelineFeatureList.Models.Overview
+@{PipelineFeatureList.Models.PipelineFeatureListDBContext db = new PipelineFeatureList.Models.PipelineFeatureListDBContext();}
+@using (Ajax.BeginForm("SelectFeature", "CascadingDropDown", new AjaxOptions { UpdateTargetId = "TypeID" }))
+{
+    @Html.DropDownListFor(
+            m => m.FeatureData.FeatureID ,
+                        new SelectList(db.Features, "FeatureID", "FeatureItem"), "- Select a Feature -"
+        )
+}
+<script type="text/javascript">
+    $('#SelectedFeatureId').change(function () {
+        $(this).parents('form').submit();
+    });
+</script>

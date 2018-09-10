@@ -1,0 +1,36 @@
+﻿@model PipelineFeatureList.Models.FeatureError
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FeatureError</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeatureErrorItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeatureErrorItem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ErrorText)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ErrorText)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrderBy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrderBy)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.FeatureErrorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

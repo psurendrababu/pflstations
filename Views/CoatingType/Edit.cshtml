@@ -1,0 +1,40 @@
+﻿@model PipelineFeatureList.Models.CoatingType
+
+@{
+    ViewBag.Title = "Edit Coating Type";
+}
+
+<h2>Edit Coating Type</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CoatingType</legend>
+
+        @Html.HiddenFor(model => model.CoatingTypeID)
+
+        <table><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CoatingTypeItem)
+        </div></td>
+        <td>
+        <div class="wide">
+            @Html.EditorFor(model => model.CoatingTypeItem)
+            @Html.ValidationMessageFor(model => model.CoatingTypeItem)
+        </div>
+        </td></tr></table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

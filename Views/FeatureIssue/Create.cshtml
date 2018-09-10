@@ -1,0 +1,123 @@
+﻿@model PipelineFeatureList.Models.FeatureIssue
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>FeatureIssue</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionID)
+            @Html.ValidationMessageFor(model => model.ValveSectionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionFeatureID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionFeatureID)
+            @Html.ValidationMessageFor(model => model.ValveSectionFeatureID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeatureNumber)
+            @Html.ValidationMessageFor(model => model.FeatureNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BuilderID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BuilderID)
+            @Html.ValidationMessageFor(model => model.BuilderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BuilderCreatedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BuilderCreatedOn)
+            @Html.ValidationMessageFor(model => model.BuilderCreatedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BuilderDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BuilderDescription)
+            @Html.ValidationMessageFor(model => model.BuilderDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CheckerID)
+            @Html.ValidationMessageFor(model => model.CheckerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckerCreatedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CheckerCreatedOn)
+            @Html.ValidationMessageFor(model => model.CheckerCreatedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckerDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CheckerDescription)
+            @Html.ValidationMessageFor(model => model.CheckerDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EngineerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EngineerID)
+            @Html.ValidationMessageFor(model => model.EngineerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EngineerCreatedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EngineerCreatedOn)
+            @Html.ValidationMessageFor(model => model.EngineerCreatedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EngineerDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EngineerDescription)
+            @Html.ValidationMessageFor(model => model.EngineerDescription)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

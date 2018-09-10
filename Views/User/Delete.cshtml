@@ -1,0 +1,94 @@
+﻿@model PipelineFeatureList.Models.UsersData
+
+@{PipelineFeatureList.Models.PipelineFeatureListDBContext db = new PipelineFeatureList.Models.PipelineFeatureListDBContext();}
+@{
+    ViewBag.Title = "Delete User";
+}
+
+<h2>Delete User</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>User</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserData.UserName)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserData.UserName)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserData.FirstName)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserData.FirstName)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserData.LastName)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserData.LastName)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserData.Email)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserData.Email)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserData.Password)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserData.Password)
+    </div>
+    </td>
+    </tr>
+    <tr><td>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.UserData.Active)
+        </div></td>
+        <td>
+        <div class="display-field">
+            @if (Model.UserData.Active)
+            {
+                @Html.Raw("Active");
+            }
+            else
+            {
+                @Html.Raw("Inactive");
+            }
+        </div>
+    </td></tr>
+    <tr valign="top"><td>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.UserTypes)
+        </div></td>
+        <td>
+        <div>
+            @for (int i = 0; i < Model.UserTypesCheckBoxes.Count; i++)
+            {
+                if (Model.UserTypesCheckBoxes[i].Selected)
+                {
+                    @Html.DisplayFor(x => Model.UserTypesCheckBoxes[i].Text)
+                    <br />
+                }
+            }
+        </div>
+        </td></tr></table>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> 
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+}

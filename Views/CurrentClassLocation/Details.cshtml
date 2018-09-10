@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.CurrentClassLocation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>CurrentClassLocation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CurrentClassLocationItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CurrentClassLocationItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CurrentClassLocationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

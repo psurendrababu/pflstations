@@ -1,0 +1,28 @@
+﻿@model PipelineFeatureList.Models.PipeSystem
+
+@{
+    ViewBag.Title = "Delete Pipe System";
+}
+
+<h2>Delete Pipe System</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>PipeSystem</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystemItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystemItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

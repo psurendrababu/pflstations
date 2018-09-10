@@ -1,0 +1,16 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionQC>
+
+@{
+    ViewBag.Title = "QC";
+}
+
+<h2>Quality Control</h2>
+
+<h3>Assigned to @Html.Raw(Session["UserName"].ToString())</h3>
+
+    @Html.Partial("QCAssigned")
+
+<hr />
+
+<h3>Pool</h3>
+    @Html.Partial("QCPool")

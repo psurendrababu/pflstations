@@ -1,0 +1,49 @@
+﻿@model PipelineFeatureList.Models.ClientReportScreen
+
+@{
+    ViewBag.Title = "Client Report Screen";
+}
+
+<h2>Client Report Screen</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+    <legend>ClientReport</legend>
+        <table>
+            <tr>
+                <td><h3>Report Type</h3></td><td><h3>Pipe System</h3></td><td><h3>Pipeline</h3></td><td colspan="2"><h3>Engineering Approved Date Range</h3></td>
+            </tr>
+            <tr>
+                <td><em>Hold Ctrl to select multiple Reports</em></td>
+                <td><em>Hold Ctrl to select multiple Pipe Systems</em></td>
+                <td><em>Hold Ctrl to select multiple Pipelines</em></td>
+                <td>@Html.TextBox("FromDate", Model.ClientReportData.FromDate.ToString("MM/dd/yyyy"), new { @class = "date" })</td>
+                <td>@Html.TextBox("ToDate", Model.ClientReportData.ToDate.ToString("MM/dd/yyyy"), new { @class = "date" })</td>
+            </tr>
+            <tr style="vertical-align:top;">
+                <td>@Html.ListBox("Reports", (MultiSelectList)ViewBag.MultiSelectReports, new {@class = "listBoxClass"})</td>
+                <td>@Html.ListBox("PipeSystems", (MultiSelectList)ViewBag.MultiSelectPipeSystems, new {@class = "listBoxClass"})</td>
+                <td>@Html.ListBox("Pipelines", (MultiSelectList)ViewBag.MultiSelectPipelines, new {@class = "listBoxClass"})</td>
+                <td colspan="2"><table>
+                        <tr><td><h3>Saved List</h3></td></tr>
+                        <tr><td>@Html.ListBox("ClientImports", (MultiSelectList)ViewBag.MultiSelectClientImports, new {@class = "listBoxClass2"})</td></tr>
+                        <tr><td><h3>SSID Excel List Import</h3></td></tr>
+                        <tr><td><input type="file" name="importFile" style="width:300px;" /></td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <p><input type="submit" value="Generate Report(s) Query" /></p>
+}
+
+@section Scripts {
+  @*@Scripts.Render("~/bundles/jqueryval")*@
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $('.date').datepicker({dateFormat: "mm/dd/yy"});
+        //});
+    </script>
+}

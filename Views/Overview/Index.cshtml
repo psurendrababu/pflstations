@@ -1,0 +1,1943 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.Overview>
+@{ 
+    ViewBag.Title = "Valve Section Overview";
+}
+
+<table>
+@foreach (var itemSection in Model)
+{
+    <tr><td><h3>Valve Section Information&nbsp;&nbsp;&nbsp;&nbsp;@Html.DisplayFor(modelitem => itemSection.PipeSystemData.PipeSystemItem) Pipeline: @Html.DisplayFor(modelitem => itemSection.PipelineData.PipelineItem)</h3></td><td><h3>Material Records Information</h3></td></tr>
+    break;
+}
+        <tr>
+        <td>
+        <table class="overviewtable">
+            @foreach (var itemSection in (ViewData["ValveSection"] as List<PipelineFeatureList.Models.ValveSection>))
+            {           
+                <tr><th>Valve Section Begin/End</th><td>@Html.DisplayFor(modelItem => itemSection.ValveSectionBegin) / @Html.DisplayFor(modelItem => itemSection.ValveSectionEnd)</td></tr>
+                <tr><th>Orion Station Series</th><td>@Html.DisplayFor(modelItem => itemSection.OrionStationSeries)</td></tr>
+                <tr><th>Mile Point Begin/End</th><td>@Html.DisplayFor(modelItem => itemSection.MilePointBegin) / @Html.DisplayFor(modelItem => itemSection.MilePointEnd)</td></tr>
+                <tr><th>Orion Station Begin/End</th><td>@Html.DisplayFor(modelItem => itemSection.OrionStationBegin) / @Html.DisplayFor(modelItem => itemSection.OrionStationEnd)</td></tr>
+                <tr><th>GIS Station Begin/End</th><td>@Html.DisplayFor(modelItem => itemSection.GISStationBegin) / @Html.DisplayFor(modelItem => itemSection.GISStationEnd)</td></tr>
+                <tr><th>Current MAOP</th><td>@Html.DisplayFor(modelItem => itemSection.CurrentMAOP)</td></tr>
+                <tr><th>PFL Length</th><td>@Html.DisplayFor(modelItem => itemSection.PFLLength)</td></tr>
+                <tr><th>Orion vs. PFL Length Discrepancy</th><td>@Html.DisplayFor(modelItem => itemSection.LengthDiscrepancyPlus)</td></tr>
+                if (ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering"
+                        || ViewBag.DisplayGroupName == "Annual Review")
+                {
+                    <tr><th>Segmentation Required</th><td>
+                        @try
+                        {
+                            if (itemSection.IsSegmentationDirty == true)
+                            {
+                                @Html.Raw("Yes")
+                            }
+                            else
+                            {
+                                @Html.Raw("No")
+                            }
+                        }
+                        catch
+                        {
+                            @Html.Raw("No")
+                        }
+                    </td></tr>
+                }
+                if (ViewBag.DisplayGroupName == "Final Engineering" || ViewBag.DisplayGroupName == "Engineering" ||
+                    ViewBag.DisplayGroupName == "Quality Control" || ViewBag.DisplayGroupName == "Annual Review")
+                {
+                    <tr><th>Crossings Status</th><td>
+                        @try
+                        {
+                            if (itemSection.CrossingsStatus == "Y")
+                            {
+                                @Html.Raw("Imported")
+                            }
+                            else if (itemSection.CrossingsStatus == "N")
+                            {
+                                @Html.Raw("Not Applicable")
+                            }
+                            else if (itemSection.CrossingsStatus == "M")
+                            {
+                                @Html.Raw("Not Available")
+                            }
+                            else
+                            {
+                                @Html.Raw("Not Available")
+                            }
+                        }
+                        catch
+                        {
+                            @Html.Raw("Not Available")
+                        }
+                        @if (ViewBag.DisplayGroupName == "Final Engineering" || ViewBag.DisplayGroupName == "Engineering" ||
+                            ViewBag.DisplayGroupName == "Quality Control" || ViewBag.DisplayGroupName == "Annual Review")
+                        {
+                            if (ViewBag.EditDisabled == false)
+                            {
+                                @Html.ActionLink("Import", "Crossings", "ValveSection", new { id = itemSection.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Import", "Crossings", "ValveSection", new { id = itemSection.ValveSectionID }, htmlAttributes: new { @class = "linkbuttondisabled" })
+                            }
+                        }
+                    </td>
+                    </tr>
+                }
+                <tr>
+                <td colspan="2">
+                    @*@if ((ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering") && itemSection.IsSegmentationDirty == true)
+                    {
+                        foreach (var workflowSection in (ViewData["WorkflowSection"] as List<PipelineFeatureList.Models.WorkflowRule>))
+                        {
+                            // Only show Segment status(es) if in Engineering and Dirty
+                            if (workflowSection.WorkflowAction.WorkflowActionItem != "Approve")
+                            {
+                                @Html.ActionLink(workflowSection.ButtonText, "StatusChange", "ValveSection", new
+                           {
+                               id = itemSection.ValveSectionID,
+                               oldStatus = workflowSection.Old_ValveSectionStatusID,
+                               newStatus = workflowSection.New_ValveSectionStatusID,
+                               description = workflowSection.Description
+                           },
+                               htmlAttributes: new { @class = "linkbutton" })
+                            }
+                        }
+                    }
+                    else
+                    {*@
+                        @foreach (var workflowSection in (ViewData["WorkflowSection"] as List<PipelineFeatureList.Models.WorkflowRuleList>))
+                        {
+                            if (ViewBag.IsDirty == false || (ViewBag.IsDirty && workflowSection.DisableDirty == false))
+                            {
+                                @Html.ActionLink(workflowSection.WorkflowRule.ButtonText, "StatusChange", "ValveSection", new
+                                {
+                                    id = itemSection.ValveSectionID,
+                                    oldStatus = workflowSection.WorkflowRule.Old_ValveSectionStatusID,
+                                    newStatus = workflowSection.WorkflowRule.New_ValveSectionStatusID,
+                                    description = workflowSection.WorkflowRule.Description
+                                },
+                                htmlAttributes: new { @class = "linkbutton" })
+                            }
+                        }
+                    @*}*@
+                </td>
+                </tr>
+                <tr><td></td>
+                <td align="right">
+                @if (ViewBag.EditDisabled == false)
+                {
+                    @Html.ActionLink("Edit", "AssignedEdit", "ValveSection", new { id = itemSection.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
+                }
+                else
+                {
+                    @Html.ActionLink("Edit", "AssignedEdit", "ValveSection", new { id = itemSection.ValveSectionID }, htmlAttributes: new { @class = "linkbuttondisabled" })
+                }
+                </td>
+                </tr>
+            }
+            
+                <tr><td colspan="2" align="center">
+                    <table  class="overviewtable"><tr>
+                    <td>Builder ID: 
+                        @foreach (var assignedSection in (ViewData["BuilderData"] as List<PipelineFeatureList.Models.OverviewBuilder>))
+                        {
+                            @Html.DisplayFor(modelItem => assignedSection.BuilderData.UserName)
+                        }
+                    </td>
+                    <td>QC ID:
+                        @foreach (var assignedSection in (ViewData["QCData"] as List<PipelineFeatureList.Models.OverviewQC>))
+                        {
+                            @Html.DisplayFor(modelItem => assignedSection.QCData.UserName)
+                        }
+                    </td>
+                    <td>Engineer ID:
+                        @foreach (var assignedSection in (ViewData["EngineerData"] as List<PipelineFeatureList.Models.OverviewEngineer>))
+                        {
+                            @Html.DisplayFor(modelItem => assignedSection.EngineerData.UserName)
+                        }
+                    </td></tr></table>
+                </td></tr>
+            
+        </table>
+        </td>
+        <td valign="top">
+        <div style="width:550px; height:300px; overflow:scroll">
+        <table class="overviewfeaturetable">
+            <tr><th></th><th>RECORDS<br />IDENTIFIER</th><th>DOCUMENT TYPE</th><th>FILE NAME</th><th>RECORD ID NAME</th><th>PAGE NUMBER</th><th>ELECTRONIC UNIQUE ID</th><th></th></tr>
+            @foreach (var itemDocs in (ViewData["RecordData"] as List<PipelineFeatureList.Models.DocumentRecord>))
+            {
+                if (itemDocs.RecordIdentifier != null)
+                {
+                        <tr>
+                        <td>
+                            @if (ViewBag.EditDisabled == false)
+                            {   
+                                @Html.ActionLink("Edit", "EditDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Edit", "EditDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => itemDocs.RecordIdentifier.RecordIdentifierItem)</td>
+                        <td>@Html.DisplayFor(modelItem => itemDocs.DocumentType.DocumentTypeItem)</td>
+                        <td>@Html.DisplayFor(modelItem => itemDocs.Filename)</td>
+                        <td>@Html.DisplayFor(modelItem => itemDocs.RecordIDName)</td>
+                        <td>@Html.DisplayFor(modelItem => itemDocs.Page)</td>
+                        <td>@Html.DisplayFor(modelItem => itemDocs.ElectronicUniqueID)</td>
+                        <td>
+                            @if (ViewBag.EditDisabled == false)
+                            {
+                                @Html.ActionLink("Delete", "DeleteDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Delete", "DeleteDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                            }
+                        </td>
+                        </tr>
+                }
+            }
+            <tr><th colspan="8">
+                @if (ViewBag.EditDisabled == false)
+                {                
+                    @Html.ActionLink("Create New Document", "CreateDoc", null, htmlAttributes: new { @class = "linkbuttonsmall" })
+                }
+                else
+                {
+                    @Html.ActionLink("Create New Document", "CreateDoc", null, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                }
+            </th></tr>
+        </table>
+        </div>
+        </td>
+    </tr>
+    <tr><td colspan="1"><h3>Error Messages</h3></td><td colspan="1"><h3>Feature Issues</h3></td></tr>
+    <tr><td colspan="1"><div style="width:100%; height:200px; overflow:scroll">
+        <table class="overviewfeaturetable">
+            <tr><th>FEATURE NUMBER</th><th>ERROR DESCRIPTION</th></tr>
+            @foreach (var itemErrors in (ViewData["ErrorData"] as List<PipelineFeatureList.Models.ValveSectionError>))
+            {
+                if (itemErrors.ValveSectionFeatureID != null)
+                {
+                    var backcolor = itemErrors.ValveSectionErrorLevel.BackColor;
+                    var forecolor = itemErrors.ValveSectionErrorLevel.ForeColor;
+                    var style = "color:" + @forecolor + "; background-color:" + @backcolor + ";";
+                    <tr>
+                    <td style="@style">@Html.DisplayFor(modelItem => itemErrors.ValveSectionFeature.FeatureNumber)</td>
+                    <td style="@style">@Html.DisplayFor(modelItem => itemErrors.ErrorDescription)</td>
+                    </tr>
+                }
+            }
+        </table>
+        </div>
+    </td>
+    <td colspan="1"><div style="width:100%; height:200px; overflow:scroll">
+        <table class="overviewfeaturetable">
+            <tr><th></th><th>FEATURE NUMBER</th><th>BUILDER DESCRIPTION</th><th>QC DESCRIPTION</th><th>ENGINEER DESCRIPTION</th><th></th></tr>
+            @foreach (var itemIssues in (ViewData["IssueData"] as List<PipelineFeatureList.Models.FeatureIssue>))
+            {
+                if (itemIssues.ValveSectionFeatureID != null)
+                {
+                    <tr>
+                    <td>
+                    @if (ViewBag.EditDisabled == false)
+                    {
+                        @Html.ActionLink("Edit", "EditIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Edit", "EditIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                    }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => itemIssues.FeatureNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => itemIssues.BuilderDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => itemIssues.CheckerDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => itemIssues.EngineerDescription)</td>
+                    <td>
+                    @if (ViewBag.EditDisabled == false)
+                    {
+                        @Html.ActionLink("Delete", "DeleteIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "DeleteIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    </td>
+                    </tr>
+                }
+            }
+            <tr><th colspan="6">
+                @if (ViewBag.EditDisabled == false)
+                {
+                    @Html.ActionLink("Create New Issue", "CreateIssue", null, htmlAttributes: new { @class = "linkbuttonsmall" })
+                }
+                else
+                {
+                    @Html.ActionLink("Create New Issue", "CreateIssue", null, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                }
+            </th></tr>
+        </table>
+        </div>
+    </td>
+    </tr>
+</table>
+
+
+@* ------------------------------ Valve Section Feature List ------------------------------ *@
+
+@{
+    string feature = "", featureid = "", pipetype = "", pipetypeid = "";
+    string od1 = "", od1id = "", od2 = "", od2id = "";
+    string odrecord1 = "", odrecord1id = "";
+    string odrecord2 = "", odrecord2id = "";
+    string wt1 = "", wt2 = "";
+    string wtrecord1 = "", wtrecord1id = "";
+    string wtrecord2 = "", wtrecord2id = "";
+    string st = "", stid = "";
+    string strecord1 = "", strecord1id = "";
+    string strecord2 = "", strecord2id = "";
+    string sr = "", srid = "", grade = "", gradeid = "";
+    string srrecord1 = "", srrecord1id = "";
+    string srrecord2 = "", srrecord2id = "";
+    string ansi = "", ansiid = "";
+    string material = "", materialid = "";
+    string angle = "";
+    string radius = "", radiusid = "";
+    string orient = "", orientid = "";
+    string mill = "";
+}
+
+<h3>Valve Section Feature List</h3><br />
+    @if (ViewBag.EditDisabled == false)
+    {
+        @Html.ActionLink("Create New Feature", "Create", null, htmlAttributes: new { @class = "linkbutton" }) 
+    }
+    else
+    {
+        @Html.ActionLink("Create New Feature", "Create", null, htmlAttributes: new { @class = "linkbuttondisabled" }) 
+    }
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @if (ViewBag.EditDisabled == false)
+    {
+        @Html.ActionLink("Regenerate Errors/Warnings", "Errors", null, htmlAttributes: new { @class = "linkbutton" })
+    }
+    else
+    {
+        @Html.ActionLink("Regenerate Errors/Warnings", "Errors", null, htmlAttributes: new { @class = "linkbuttondisabled" })
+    }
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @if ( (ViewBag.EditDisabled == false && 
+        (ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering"))
+        || ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Annual Review"
+        )
+    {
+        if (ViewBag.IsDirty)
+        {
+            @Html.ActionLink("Segment Now", "DSRs", null, htmlAttributes: new { @class = "linkbutton", @target = "child" })
+        }
+        else
+        {
+            @Html.ActionLink("Dynamic Segment Records", "DSRs", null, htmlAttributes: new { @class = "linkbutton", @target = "child" })
+        }
+    }
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @if (ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Final Engineering"
+        || ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Annual Review")
+    {
+        @Html.ActionLink("Engineering Summary Report", "DownloadReport", "Reporting", new { ReportName = "Internal Engineering Summary Report By Valve", ReportFormat = "EXCEL" }, new { @class = "linkbutton" });
+    }
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    @if (ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Final Engineering"
+        || ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Annual Review")
+    {
+        @Html.ActionLink("Acceptance Form", "DownloadReport", "Reporting", new { ReportName = "Acceptance Form", ReportFormat = "EXCEL" }, new { @class = "linkbutton" });
+    }
+     
+@*@if (ViewBag.DisplayGroupName != "Engineering")
+{*@
+<div style="width:1100px; height:400px; overflow:scroll" >
+        <table class="overviewfeaturetable">
+            @if (ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering" 
+                || ViewBag.DisplayGroupName == "Annual Review")
+            {
+                <tr><th colspan="45" style="text-align:left;">&nbsp;** BUILD RECORDS **</th></tr>
+            }
+            <tr><th></th><th colspan="12">FEATURE INFORMATION</th><th colspan="21">MAOP SPECIFICATIONS</th><th>MATERIAL</th><th colspan="3">BEND DATA</th><th colspan="2">COATING</th><th colspan="4">PURCHASE/INSTALL</th><th></th></tr>
+            <thead>
+            <tr><th>Edit<br />Insert</th>
+                <th>GIS Alignment Sheet<br />Begin Station</th><th>GIS Alignment Sheet<br />End Station</th><th>Feature Number</th><th>Feature</th>
+                <th>Type</th><th>Length<br />(feet)</th>@*<th>Length Discrepancy<br />(feet)</th><th>Current Class<br />Loc.</th><th>Class<br />Design<br />Factor</th><th>HCA Name</th>*@
+                <th>Job Number/Work Order<br />/Purchase Order #</th><th>Install Date<br />mm/dd/yyyy</th><th>In-Service Date<br />mm/dd/yyyy</th>
+                <th>Construction Type</th><th>Notes / Comments</th><th>Drawing<br />Identifier</th><th>O.D. 1<br />(inch)</th><th>OD<br />Records<br />Identifier 1</th>
+                <th>OD<br />Records<br />Identifier 2</th><th>OD Record<br />Matrix Check</th><th>W.T. 1<br />(inch)</th><th>WT<br />Records<br />Identifier 1</th>
+                <th>WT<br />Records<br />Identifier 2</th><th>WT Record<br />Matrix Check</th><th>O.D. 2<br />(inch)</th><th>W.T. 2<br />(inch)</th>
+                <th>Seam Weld Type</th><th>Seam<br />Records<br />Identifier 1</th><th>Seam<br />Records<br />Identifier 2</th>
+                <th>Seam Record<br />Matrix Check</th><th>Specification<br />/Rating</th><th>Grade</th><th>Spec/Grade<br />Records<br />Identifier 1</th>
+                <th>Spec/Grade<br />Records<br />Identifier 2</th><th>Spec/Grade Record<br />Matrix Check</th><th>ANSI Rating</th><th>Material Type</th>
+                <th>Angle</th><th>Radius</th><th>Orient</th><th>Coating Type</th><th>Description</th><th>Manufacturer</th><th>Manufacturer Type</th><th>Mill</th><th>MFR Date<br />mm/dd/yyyy</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.ValveSectionFeatureData != null)
+            {
+                if (item.FeatureData == null)
+                {
+                    feature = ""; featureid = "";
+                }
+                else
+                {
+                    feature = item.FeatureData.FeatureItem;
+                    featureid = item.FeatureData.FeatureID.ToString();
+                }
+                if (item.PipeTypeData == null)
+                {
+                    pipetype = ""; pipetypeid = "";
+                }
+                else
+                {
+                    pipetype = item.PipeTypeData.PipeTypeItem;
+                    pipetypeid = item.PipeTypeData.PipeTypeID.ToString();
+                }
+                if (item.OutsideDiameterData1 == null)
+                {
+                    od1 = ""; od1id = "";
+                }
+                else
+                {
+                    od1 = item.OutsideDiameterData1.OutsideDiameterItem.ToString();
+                    od1id = item.OutsideDiameterData1.OutsideDiameterID.ToString();
+                }
+                if (item.OutsideDiameterData2 == null)
+                {
+                    od2 = ""; od2id = "";
+                }
+                else
+                {
+                    od2 = item.OutsideDiameterData2.OutsideDiameterItem.ToString();
+                    od2id = item.OutsideDiameterData2.OutsideDiameterID.ToString();
+                }
+                if (item.ODRecordID1Data == null)
+                {
+                    odrecord1 = ""; odrecord1id = "";
+                }
+                else
+                {
+                    odrecord1 = item.ODRecordID1Data.RecordIdentifierItem;
+                    odrecord1id = item.ODRecordID1Data.RecordIdentifierID.ToString();
+                }
+                if (item.ODRecordID2Data == null)
+                {
+                    odrecord2 = ""; odrecord2id = "";
+                }
+                else
+                {
+                    odrecord2 = item.ODRecordID2Data.RecordIdentifierItem;
+                    odrecord2id = item.ODRecordID2Data.RecordIdentifierID.ToString();
+                }
+                wt1 = item.ValveSectionFeatureData.WallThickness1.ToString();
+                wt2 = item.ValveSectionFeatureData.WallThickness2.ToString();
+                if (item.WTRecordID1Data == null)
+                {
+                    wtrecord1 = ""; wtrecord1id = "";
+                }
+                else
+                {
+                    wtrecord1 = item.WTRecordID1Data.RecordIdentifierItem;
+                    wtrecord1id = item.WTRecordID1Data.RecordIdentifierID.ToString();
+                }
+                if (item.WTRecordID2Data == null)
+                {
+                    wtrecord2 = ""; wtrecord2id = "";
+                }
+                else
+                {
+                    wtrecord2 = item.WTRecordID2Data.RecordIdentifierItem;
+                    wtrecord2id = item.WTRecordID2Data.RecordIdentifierID.ToString();
+                }
+                if (item.SeamTypeData == null)
+                {
+                    st = ""; stid = "";
+                }
+                else
+                {
+                    st = item.SeamTypeData.SeamTypeItem;
+                    stid = item.SeamTypeData.SeamTypeID.ToString();
+                }
+                if (item.STRecordID1Data == null)
+                {
+                    strecord1 = ""; strecord1id = "";
+                }
+                else
+                {
+                    strecord1 = item.STRecordID1Data.RecordIdentifierItem;
+                    strecord1id = item.STRecordID1Data.RecordIdentifierID.ToString();
+                }
+                if (item.STRecordID2Data == null)
+                {
+                    strecord2 = ""; strecord2id = "";
+                }
+                else
+                {
+                    strecord2 = item.STRecordID2Data.RecordIdentifierItem;
+                    strecord2id = item.STRecordID2Data.RecordIdentifierID.ToString();
+                }
+                if (item.SpecRatingData == null)
+                {
+                    sr = ""; srid = "";
+                }
+                else
+                {
+                    sr = item.SpecRatingData.SpecRatingItem;
+                    srid = item.SpecRatingData.SpecRatingID.ToString();
+                }
+                if (item.SRRecordID1Data == null)
+                {
+                    srrecord1 = ""; srrecord1id = "";
+                }
+                else
+                {
+                    srrecord1 = item.SRRecordID1Data.RecordIdentifierItem;
+                    srrecord1id = item.SRRecordID1Data.RecordIdentifierID.ToString();
+                }
+                if (item.SRRecordID2Data == null)
+                {
+                    srrecord2 = ""; srrecord2id = "";
+                }
+                else
+                {
+                    srrecord2 = item.SRRecordID2Data.RecordIdentifierItem;
+                    srrecord2id = item.SRRecordID2Data.RecordIdentifierID.ToString();
+                }
+                if (item.ANSIRatingData == null)
+                {
+                    ansi = ""; ansiid = "";
+                }
+                else
+                {
+                    ansi = item.ANSIRatingData.ANSIRatingItem;
+                    ansiid = item.ANSIRatingData.ANSIRatingID.ToString();
+                }
+                if (item.MaterialTypeData == null)
+                {
+                    material = ""; materialid = "";
+                }
+                else
+                {
+                    material = item.MaterialTypeData.MaterialTypeItem;
+                    materialid = item.MaterialTypeData.MaterialTypeID.ToString();
+                }
+                angle = item.ValveSectionFeatureData.AngleID.ToString();
+                if (item.BendRadiusData == null)
+                {
+                    radius = ""; radiusid = "";
+                }
+                else
+                {
+                    radius = item.BendRadiusData.BendRadiusItem;
+                    radiusid = item.BendRadiusData.BendRadiusID.ToString();
+                }
+                if (item.OrientationData == null)
+                {
+                    orient = ""; orientid = "";
+                }
+                else
+                {
+                    orient = item.OrientationData.OrientationItem;
+                    orientid = item.OrientationData.OrientationID.ToString();
+                }
+                if (item.ValveSectionFeatureData.Mill == null)
+                {
+                    mill = "";
+                }
+                else
+                {
+                    mill = item.ValveSectionFeatureData.Mill.ToString();
+                }
+                if (item.GradeData == null)
+                {
+                    gradeid = "";
+                }
+                else
+                {
+                    gradeid = item.GradeData.GradeID.ToString();
+                }
+            }
+            if (item.ValveSectionFeatureData != null)
+            {
+            <tr>
+                <td>
+                    <p>
+                    @if (ViewBag.EditDisabled == false)
+                    {                
+                        @Html.ActionLink("Edit", "Edit", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })    
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })    
+                    }
+                    </p>
+
+                    <p>
+                    @if (ViewBag.EditDisabled == false)
+                    {   
+                        @Html.ActionLink("Insert", "Insert", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Insert", "Insert", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                    }
+                    </p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.GISAlignStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.GISAlignEnd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PipeTypeData.PipeTypeItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Length)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.LengthDiscrepancy)
+                </td>*@
+                <td>
+                    @try
+                    {
+                        if (item.ValveSectionFeatureData.JobWOPOUnknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.ValveSectionFeatureData.JobWOPOUnknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.JobWOPO));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.ValveSectionFeatureData.InstallDateUnknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.ValveSectionFeatureData.InstallDateUnknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.InstallDate));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.ValveSectionFeatureData.InServiceDateUnknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.ValveSectionFeatureData.InServiceDateUnknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.InServiceDate));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConstructionTypeData.ConstructionTypeItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DrawingData.RecordIdentifierItem)
+                </td>
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && od1id == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.OutsideDiameterData1.OutsideDiameterItem)
+                    }
+                </td>
+                <td>
+                    @if (odrecord1id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.ODRecordID1Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (odrecord2id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.ODRecordID2Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item.ValveSectionFeatureData != null)
+                {
+                    if (item.ValveSectionFeatureData.ODRecordMatrixCheck == 0 || item.ValveSectionFeatureData.ODRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && wt1 == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness1)
+                    }
+                </td>
+                <td>
+                    @if (wtrecord1id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.WTRecordID1Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (wtrecord2id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.WTRecordID2Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item.ValveSectionFeatureData != null)
+                {
+                    if (item.ValveSectionFeatureData.WTRecordMatrixCheck == 0 || item.ValveSectionFeatureData.WTRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (feature == "Pipe" && pipetype == "Casing" && od2id == "")
+                    {
+                        @Html.Raw("Unknown")
+                    }
+                    //else if (((feature == "Skip" && pipetype != "No Records") || feature != "Skip")
+                    //    && pipetypeid != "0" && od2id == "")
+                    else if (od2id == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.OutsideDiameterData2.OutsideDiameterItem)
+                    }
+                </td>
+                <td>
+                    @if (feature == "Pipe" && pipetype == "Casing" && wt2 == "")
+                    {
+                        @Html.Raw("Unknown")
+                    }
+                    //else if (((feature == "Skip" && pipetype != "No Records") || feature != "Skip")
+                    //    && pipetypeid != "0" && wt2 == "")
+                    else if (wt2 == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness2)
+                    }
+                </td>
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && stid == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.SeamTypeData.SeamTypeItem)
+                    }
+                </td>
+                <td>
+                    @if (strecord1id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.STRecordID1Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (strecord2id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.STRecordID2Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item.ValveSectionFeatureData != null)
+                {
+                    if (item.ValveSectionFeatureData.SeamRecordMatrixCheck == 0 || item.ValveSectionFeatureData.SeamRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && srid == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.SpecRatingData.SpecRatingItem)
+                    }
+                </td>
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && gradeid == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.GradeData.GradeItem)
+                    }
+                </td>
+                <td>
+                    @if (srrecord1id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.SRRecordID1Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (srrecord2id != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.SRRecordID2Data.RecordIdentifierItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item.ValveSectionFeatureData != null)
+                {
+                    if (item.ValveSectionFeatureData.SpecRatingRecordMatrixCheck == 0 || item.ValveSectionFeatureData.SpecRatingRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (ansiid != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.ANSIRatingData.ANSIRatingItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaterialTypeData.MaterialTypeItem)
+                </td>
+                <td>
+                    @if (angle != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.AngleID)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @if (radiusid != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.BendRadiusData.BendRadiusItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @if (orientid != "")
+                    {
+                        @Html.DisplayFor(modelItem => item.OrientationData.OrientationItem)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoatingTypeData.CoatingTypeItem)
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.ValveSectionFeatureData.DescriptionUnknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.ValveSectionFeatureData.DescriptionUnknown)
+                        {
+                            @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Description);
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturerData.ManufacturerItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturerTypeData.ManufacturerTypeItem)
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.ValveSectionFeatureData.MillUnknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.ValveSectionFeatureData.MillUnknown)
+                        {
+                            @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Mill);
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.ValveSectionFeatureData.MFRDateUnknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.ValveSectionFeatureData.MFRDateUnknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.MFRDate));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @if (ViewBag.EditDisabled == false)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                    }
+                </td>
+            </tr>
+            }
+        }
+        </tbody>
+        </table>
+</div>
+@*}*@
+@*@if ((ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering") && ViewBag.IsDirty != true)
+{
+<div style="width:1100px; height:400px; overflow:scroll">
+        <table class="overviewfeaturetable">
+            <tr><th colspan="59" style="text-align:left;">&nbsp;** SEGMENTATION RECORDS **</th></tr>
+            <tr><th></th><th colspan="19">FEATURE INFORMATION</th><th colspan="21">MAOP SPECIFICATIONS</th><th>MATERIAL</th>
+            <th colspan="3">BEND DATA</th><th colspan="2">COATING</th><th colspan="4">PURCHASE/INSTALL</th>
+            <th colspan="7">DESIGN PRESSURE CALCULATIONS</th><th></th></tr>
+            <tr><th>Edit<br />Insert</th>
+                <th>GIS Alignment Sheet<br />Begin Station</th><th>GIS Alignment Sheet<br />End Station</th><th>Feature Number</th><th>Feature</th>
+                <th>Type</th><th>Length<br />(feet)</th>                   
+                // this was commented <th>Length Discrepancy<br />(feet)</th>
+                <th>Crossing Type</th><th>Issues/Errors</th><th>GIS Stationing</th><th>Orion Stationing</th><th>Crossing Name & Notes</th>
+                <th>Current Class<br />Location</th><th>Class<br />Design<br />Factor</th><th>HCA Name</th>
+                <th>Job Number/Work Order<br />/Purchase Order #</th><th>Install Date<br />mm/dd/yyyy</th><th>In-Service Date<br />mm/dd/yyyy</th>
+                <th>Construction Type</th><th>Notes / Comments</th><th>Drawing<br />Identifier</th><th>O.D. 1<br />(inch)</th><th>OD<br />Records<br />Identifier 1</th>
+                <th>OD<br />Records<br />Identifier 2</th><th>OD Record<br />Matrix Check</th><th>W.T. 1<br />(inch)</th><th>WT<br />Records<br />Identifier 1</th>
+                <th>WT<br />Records<br />Identifier 2</th><th>WT Record<br />Matrix Check</th><th>O.D. 2<br />(inch)</th><th>W.T. 2<br />(inch)</th>
+                <th>Seam Weld Type</th><th>Seam<br />Records<br />Identifier 1</th><th>Seam<br />Records<br />Identifier 2</th>
+                <th>Seam Record<br />Matrix Check</th><th>Specification<br />/Rating</th><th>Grade</th><th>Spec/Grade<br />Records<br />Identifier 1</th>
+                <th>Spec/Grade<br />Records<br />Identifier 2</th><th>Spec/Grade Record<br />Matrix Check</th><th>ANSI Rating</th><th>Material Type</th>
+                <th>Angle</th><th>Radius</th><th>Orient</th><th>Coating Type</th><th>Description</th><th>Manufacturer</th><th>Manufacturer Type</th><th>Mill</th><th>MFR Date<br />mm/dd/yyyy</th>
+                <th>SMYS [S]<br />(psi)</th><th>Outside Diameter [D]<br />(inch)</th><th>Wall Thickness [t]<br />(inch)</th>
+                <th>Design Factor [F]</th><th> Joint Factor [E]</th><th>Temperature<br />Derating [T]</th><th>Design Pressure [P]<br />(psig)</th>
+                <th>Delete</th>
+            </tr>
+        @foreach (var item in ViewBag.DSRSection)
+        {
+            if (item != null)
+            {
+                if (item.Feature == null)
+                {
+                    feature = ""; featureid = "";
+                }
+                else
+                {
+                    feature = item.Feature;
+                    featureid = item.Feature.ToString();
+                }
+                if (item.FeatureType == null)
+                {
+                    pipetype = ""; pipetypeid = "";
+                }
+                else
+                {
+                    pipetype = item.FeatureType;
+                    pipetypeid = item.FeatureType.ToString();
+                }
+                if (item.Feature_OuterDiameter1 == null)
+                {
+                    od1 = ""; od1id = "";
+                }
+                else
+                {
+                    od1 = item.Feature_OuterDiameter1.ToString();
+                    od1id = item.Feature_OuterDiameter1.ToString();
+                }
+                if (item.Feature_OuterDiameter2 == null)
+                {
+                    od2 = ""; od2id = "";
+                }
+                else
+                {
+                    od2 = item.Feature_OuterDiameter2.ToString();
+                    od2id = item.Feature_OuterDiameter2.ToString();
+                }
+                if (item.Feature_OuterDiameterRecord1_Identfier == null)
+                {
+                    odrecord1 = ""; odrecord1id = "";
+                }
+                else
+                {
+                    odrecord1 = item.Feature_OuterDiameterRecord1_Description;
+                    odrecord1id = item.Feature_OuterDiameterRecord1_Identfier.ToString();
+                }
+                if (item.Feature_OuterDiameterRecord2_Identfier == null)
+                {
+                    odrecord2 = ""; odrecord2id = "";
+                }
+                else
+                {
+                    odrecord2 = item.Feature_OuterDiameterRecord2_Description;
+                    odrecord2id = item.Feature_OuterDiameterRecord2_Identfier.ToString();
+                }
+                if (item.Feature_WallThickness1 == null)
+                {
+                    wt1 = "";
+                }
+                else
+                {
+                    wt1 = item.Feature_WallThickness1.ToString();
+                }
+                if (item.Feature_WallThickness2 == null)
+                {
+                    wt2 = "";
+                }
+                else
+                {
+                    wt2 = item.Feature_WallThickness2.ToString();
+                }
+                if (item.Feature_WallThicknessRecord1_Identifier == null)
+                {
+                    wtrecord1 = ""; wtrecord1id = "";
+                }
+                else
+                {
+                    wtrecord1 = item.Feature_WallThicknessRecord1_Description;
+                    wtrecord1id = item.Feature_WallThicknessRecord1_Identifier.ToString();
+                }
+                if (item.Feature_WallThicknessRecord2_Identifier == null)
+                {
+                    wtrecord2 = ""; wtrecord2id = "";
+                }
+                else
+                {
+                    wtrecord2 = item.Feature_WallThicknessRecord2_Description;
+                    wtrecord2id = item.Feature_WallThicknessRecord2_Identifier.ToString();
+                }
+                if (item.Feature_SeamType == null)
+                {
+                    st = ""; stid = "";
+                }
+                else
+                {
+                    st = item.Feature_SeamType;
+                    stid = item.Feature_SeamType.ToString();
+                }
+                if (item.Feature_SeamRecord1_Identifier == null)
+                {
+                    strecord1 = ""; strecord1id = "";
+                }
+                else
+                {
+                    strecord1 = item.Feature_SeamRecord1_Description;
+                    strecord1id = item.Feature_SeamRecord1_Identifier.ToString();
+                }
+                if (item.Feature_SeamRecord2_Identifier == null)
+                {
+                    strecord2 = ""; strecord2id = "";
+                }
+                else
+                {
+                    strecord2 = item.Feature_SeamRecord2_Description;
+                    strecord2id = item.Feature_SeamRecord2_Identifier.ToString();
+                }
+                if (item.Feature_SpecRating == null)
+                {
+                    sr = ""; srid = "";
+                }
+                else
+                {
+                    sr = item.Feature_SpecRating;
+                    srid = item.Feature_SpecRating.ToString();
+                }
+                if (item.SpecRatingRecord1_Identifier == null)
+                {
+                    srrecord1 = ""; srrecord1id = "";
+                }
+                else
+                {
+                    srrecord1 = item.SpecRatingRecord1_Description;
+                    srrecord1id = item.SpecRatingRecord1_Identifier.ToString();
+                }
+                if (item.SpecRatingRecord2_Identifier == null)
+                {
+                    srrecord2 = ""; srrecord2id = "";
+                }
+                else
+                {
+                    srrecord2 = item.SpecRatingRecord2_Description;
+                    srrecord2id = item.SpecRatingRecord2_Identifier.ToString();
+                }
+                if (item.Feature_ANSIRating == null)
+                {
+                    ansi = ""; ansiid = "";
+                }
+                else
+                {
+                    ansi = item.Feature_ANSIRating;
+                    ansiid = item.Feature_ANSIRating.ToString();
+                }
+                if (item.Feature_MaterialType == null)
+                {
+                    material = ""; materialid = "";
+                }
+                else
+                {
+                    material = item.Feature_MaterialType;
+                    materialid = item.Feature_MaterialType.ToString();
+                }
+                if (item.Angle == null)
+                {
+                    angle = "";
+                }
+                else
+                {
+                    angle = item.Angle.ToString();
+                }
+                if (item.Feature_BendRadius == null)
+                {
+                    radius = ""; radiusid = "";
+                }
+                else
+                {
+                    radius = item.Feature_BendRadius;
+                    radiusid = item.Feature_BendRadius.ToString();
+                }
+                if (item.Feature_Orientation == null)
+                {
+                    orient = ""; orientid = "";
+                }
+                else
+                {
+                    orient = item.Feature_Orientation;
+                    orientid = item.Feature_Orientation.ToString();
+                }
+                if (item.Feature_Mill == null)
+                {
+                    mill = "";
+                }
+                else
+                {
+                    mill = item.Feature_Mill.ToString();
+                }
+                if (item.Feature_Grade == null)
+                {
+                    gradeid = "";
+                }
+                else
+                {
+                    gradeid = item.Feature_Grade.ToString();
+                }
+            }
+            if (item != null)
+            {
+            <tr>
+                <td>
+                    <p>
+                    @if (ViewBag.EditDisabled == false)
+                    {                
+                        @Html.ActionLink("Edit", "Edit", new { id = (item == null ? 0 : item.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })    
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = (item == null ? 0 : item.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })    
+                    }
+                    </p>
+
+                    <p>
+                    @if (ViewBag.EditDisabled == false)
+                    {   
+                        @Html.ActionLink("Insert", "Insert", new { id = (item == null ? 0 : item.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Insert", "Insert", new { id = (item == null ? 0 : item.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                    }
+                    </p>
+                </td>
+                <td>
+                    @Html.Raw(string.Format("{0:0+00}", item.Segment_Begin_Ft))
+                </td>
+                <td>
+                    @Html.Raw(string.Format("{0:0+00}", item.Segment_End_Ft))
+                </td>
+                <td>
+                    @Html.Raw(item.FeatureNumber + "." + string.Format("{0:00}", item.SegmentNumber))
+                </td>
+                <td>
+                    @Html.Raw(item.Feature)
+                </td>
+                <td>
+                    @Html.Raw(item.FeatureType)
+                </td>
+                <td>
+                    @Html.Raw(string.Format("{0:0}", item.Segment_Length))
+                </td>
+                // this was commented <td> @Html.Raw("") </td>
+                <td>
+                    @if (item.Crossing_Type != null)
+                    {
+                        @Html.Raw(item.Crossing_Type)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")    
+                    }
+                </td>
+                <td>
+                    @if (item.Crossing_IssuesAndErrors != null)
+                    {
+                        @Html.Raw(item.Crossing_IssuesAndErrors)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")    
+                    }
+                </td>
+                <td>
+                    @if (item.Crossing_Center_Ft != null)
+                    {
+                        @Html.Raw(string.Format("{0:0+00}", item.Crossing_Center_Ft))
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")    
+                    }
+                </td>
+                <td>
+                    @if (item.Crossing_Orion_Center_Ft != null)
+                    {
+                        @Html.Raw(string.Format("{0:0+00}", item.Crossing_Orion_Center_Ft))
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")    
+                    }
+                </td>
+                <td>
+                    @if (item.Crossing_NamesAndNotes != null)
+                    {
+                        @Html.Raw(item.Crossing_NamesAndNotes)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")    
+                    }
+                </td>
+                <td>
+                    @if (item.Current_Class_Location != null)
+                    {
+                        @Html.Raw(item.Current_Class_Location)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @Html.Raw(item.Segment_DesignFactor)
+                </td>
+                <td>
+                    @if (item.Segment_HCA != null)
+                    {
+                        @Html.Raw(item.Segment_HCA)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.Feature_JobWorkOrderPurchaseOrder_Unknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.Feature_JobWorkOrderPurchaseOrder_Unknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.Feature_JobWorkOrderPurchaseOrder));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.Feature_InstallDate_Unknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.Feature_InstallDate_Unknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.Feature_InstallDate));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.Feature_InServiceDate_Unknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.Feature_InServiceDate_Unknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.Feature_InServiceDate));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_ConstructionType)
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_Notes)
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_Drawing_Description)
+                </td>
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && od1id == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.Raw(item.Feature_OuterDiameter1)
+                    }
+                </td>
+                <td>
+                    @if (odrecord1id != "")
+                    {
+                        @Html.Raw(item.Feature_OuterDiameterRecord1_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (odrecord2id != "")
+                    {
+                        @Html.Raw(item.Feature_OuterDiameterRecord2_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item != null)
+                {
+                    if (item.Feature_ODRecordMatrixCheck == 0 || item.Feature_ODRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && wt1 == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        if (item.Feature_WallThickness1 != null)
+                        {
+                            @Html.Raw(string.Format("{0:0.0000}", item.Feature_WallThickness1))
+                        }
+                        else
+                        {
+                            @Html.Raw("");
+                        }
+                    }
+                </td>
+                <td>
+                    @if (wtrecord1id != "")
+                    {
+                        @Html.Raw(item.Feature_WallThicknessRecord1_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (wtrecord2id != "")
+                    {
+                        @Html.Raw(item.Feature_WallThicknessRecord2_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item != null)
+                {
+                    if (item.Feature_WTRecordMatrixCheck == 0 || item.Feature_WTRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (feature == "Pipe" && pipetype == "Casing" && od2id == "")
+                    {
+                        @Html.Raw("Unknown")
+                    }
+                    else if (od2id == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.Raw(item.Feature_OuterDiameter2)
+                    }
+                </td>
+                <td>
+                    @if (feature == "Pipe" && pipetype == "Casing" && wt2 == "")
+                    {
+                        @Html.Raw("Unknown")
+                    }
+                    else if (wt2 == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        if (item.Feature_WallThickness2 != null)
+                        {
+                            @Html.Raw(string.Format("{0:0.0000}", item.Feature_WallThickness2))
+                        }
+                        else
+                        {
+                            @Html.Raw("");
+                        }
+                    }
+                </td>
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && stid == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.Raw(item.Feature_SeamType)
+                    }
+                </td>
+                <td>
+                    @if (strecord1id != "")
+                    {
+                        @Html.Raw(item.Feature_SeamRecord1_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (strecord2id != "")
+                    {
+                        @Html.Raw(item.Feature_SeamRecord2_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item != null)
+                {
+                    if (item.Feature_SeamRecordMatrixCheck == 0 || item.Feature_SeamRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && srid == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.Raw(item.Feature_SpecRating)
+                    }
+                </td>
+                <td>
+                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && gradeid == "")
+                    {
+                        @Html.Raw("N/A")
+                    }
+                    else
+                    {
+                        @Html.Raw(item.Feature_Grade)
+                    }
+                </td>
+                <td>
+                    @if (srrecord1id != "")
+                    {
+                        @Html.Raw(item.SpecRatingRecord1_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                <td>
+                    @if (srrecord2id != "")
+                    {
+                        @Html.Raw(item.SpecRatingRecord2_Description)
+                    }
+                    else
+                    {
+                        @Html.Raw("")
+                    }
+                </td>
+                @if (item != null)
+                {
+                    if (item.Feature_SpecRatingRecordMatrixCheck == 0 || item.Feature_SpecRatingRecordMatrixCheck == null)
+                    {
+                    <td style='background-color:Red'>No</td>
+                    }
+                    else
+                    {
+                    <td style='background-color:Green'>Yes</td>
+                    }
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>
+                    @if (ansiid != "")
+                    {
+                        @Html.Raw(item.Feature_ANSIRating)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_MaterialType)
+                </td>
+                <td>
+                    @if (angle != "")
+                    {
+                        @Html.Raw(item.Angle)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @if (radiusid != "")
+                    {
+                        @Html.Raw(item.Feature_BendRadius)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @if (orientid != "")
+                    {
+                        @Html.Raw(item.Feature_Orientation)
+                    }
+                    else
+                    {
+                        @Html.Raw("N/A")
+                    }
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_CoatingType)
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.Feature_CoatingDescription_Unknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.Feature_CoatingDescription_Unknown)
+                        {
+                            @Html.Raw(item.Feature_CoatingDescription);
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_Manufacturer)
+                </td>
+                <td>
+                    @Html.Raw(item.Feature_ManufacturerType)
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.Feature_Mill_Unknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.Feature_Mill_Unknown)
+                        {
+                            @Html.Raw(item.Feature_Mill);
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @try
+                    {
+                        if (item.Feature_ManufacturerDate_Unknown)
+                        {
+                            @Html.Raw("Unknown")
+                        }
+                    }
+                    catch { }
+                    @try
+                    {
+                        if (!item.Feature_ManufacturerDate_Unknown)
+                        {
+                            @Html.Raw(string.Format("{0:d}", item.Feature_ManufacturerDate));
+                        }
+                    }
+                    catch { }
+                </td>
+                <td>
+                    @if (feature != "Skip")
+                    {
+                        @Html.Raw(item.Segment_SMYS)
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                </td>
+                <td>
+                    @if (feature != "Skip")
+                    {
+                        @Html.Raw(item.Feature_OuterDiameter1)
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                </td>
+                <td>
+                    @if (feature != "Skip")
+                    {
+                        if (item.Feature_WallThickness1 != null)
+                        {
+                            @Html.Raw(string.Format("{0:0.0000}", item.Feature_WallThickness1))
+                        }
+                        else
+                        {
+                            @Html.Raw("");
+                        }
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                </td>
+                <td>
+                    @if (feature != "Skip")
+                    {
+                        @Html.Raw(item.Segment_DesignFactor)
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                </td>
+                <td>
+                    @if (feature != "Skip")
+                    {
+                        @Html.Raw(item.Segment_JointFactor)
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                </td>
+                <td>
+                    @if (feature != "Skip")
+                    {
+                        @Html.Raw(item.Segment_TemperatureDerating)
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                </td>
+                @if (ViewBag.MAOP > item.Segment_DesignPressure && feature != "Skip" && item.Segment_DesignPressure != null)
+                {
+                    <td style='background-color:Red'>
+                    @if (feature != "Skip")
+                    {
+                        if (item.Segment_DesignPressure != null)
+                        {
+                            @Html.Raw(string.Format("{0:0}", item.Segment_DesignPressure))
+                        }
+                        else
+                        {
+                            @Html.Raw("")
+                        }
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                    </td>
+                }
+                else
+                {
+                    <td>
+                    @if (feature != "Skip")
+                    {
+                        if (item.Segment_DesignPressure != null)
+                        {
+                            @Html.Raw(string.Format("{0:0}", item.Segment_DesignPressure))
+                        }
+                        else
+                        {
+                            @Html.Raw("")
+                        }
+                    }
+                    else
+                    {
+                        @Html.Raw("Skip")
+                    }
+                    </td>
+                }
+                <td>
+                    @if (ViewBag.EditDisabled == false)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = (item == null ? 0 : item.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = (item == null ? 0 : item.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                    }
+                </td>
+            </tr>
+            }
+        }
+        </table>
+</div>
+}
+*@
+
+<br />
+
+@foreach (var itemSection in (ViewData["StatusSection"] as List<PipelineFeatureList.Models.ValveSectionStatus>))
+{
+    @*if (Session["GroupClassificationAdmin"] != null && Session["GroupClassificationAdmin"].ToString() == "Administrator")
+    {
+    <div>
+        @Html.ActionLink("Back to Valve Sections", "Index", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })            
+    </div>
+    }*@
+    if (itemSection.DisplayGroup.DisplayGroupName == "Unassigned" || itemSection.DisplayGroup.DisplayGroupName == "Build")
+    {
+        @Html.ActionLink("Back to Valve Sections", "BuildAssigned", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+    }
+    else if (itemSection.DisplayGroup.DisplayGroupName == "Quality Control")
+    {
+        @Html.ActionLink("Back to Valve Sections", "QC", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+    }
+    else if (itemSection.DisplayGroup.DisplayGroupName == "Engineering")
+    {
+        @Html.ActionLink("Back to Valve Sections", "Engineering", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+    }
+    else if (itemSection.DisplayGroup.DisplayGroupName == "Final Engineering")
+    {
+        @Html.ActionLink("Back to Valve Sections", "FinalEngineering", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+    }
+    else if (itemSection.DisplayGroup.DisplayGroupName == "Annual Review")
+    {
+        @Html.ActionLink("Back to Valve Sections", "AnnualReview", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+    }
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() 
+            {
+                //$("#tblFeatures").tablesorter(); 
+            } 
+        ); 
+    </script>
+}

@@ -1,0 +1,34 @@
+﻿@model PipelineFeatureList.Models.Pipeline
+
+@{
+    ViewBag.Title = "Pipeline Details";
+}
+
+<h2>Pipeline Details</h2>
+
+<fieldset>
+    <legend>Pipeline</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipelineItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipelineItem)
+    </div></td>
+    </tr>
+    <tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystemID)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>

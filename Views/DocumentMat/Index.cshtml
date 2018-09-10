@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PipelineFeatureList.Controllers.DocumentMat>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentType1ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentType2ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComboType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentType1ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentType2ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComboType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocumentMatID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocumentMatID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocumentMatID })
+        </td>
+    </tr>
+}
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin")
+</div>
+</table>

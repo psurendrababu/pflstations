@@ -1,0 +1,53 @@
+﻿@model PipelineFeatureList.Controllers.DocumentMat
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocumentMat</legend>
+
+        @Html.HiddenFor(model => model.DocumentMatID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocumentType1ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DocumentType1ID)
+            @Html.ValidationMessageFor(model => model.DocumentType1ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocumentType2ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DocumentType2ID)
+            @Html.ValidationMessageFor(model => model.DocumentType2ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ComboType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ComboType)
+            @Html.ValidationMessageFor(model => model.ComboType)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

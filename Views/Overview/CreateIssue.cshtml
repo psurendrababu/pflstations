@@ -1,0 +1,123 @@
+﻿@model PipelineFeatureList.Models.FeatureIssue
+
+@{
+    ViewBag.Title = "Create Feature Issue";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.BuilderCreatedOn)
+        @Html.HiddenFor(model => model.BuilderID)
+        @Html.HiddenFor(model => model.CheckerCreatedOn)
+        @Html.HiddenFor(model => model.CheckerID)
+        @Html.HiddenFor(model => model.EngineerCreatedOn)
+        @Html.HiddenFor(model => model.EngineerID)
+        <legend>FeatureIssue</legend>
+        <table><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureNumber)
+        </div></td>
+        <td>
+        <div class="wide">
+            @Html.EditorFor(model => model.FeatureNumber)
+            @Html.ValidationMessageFor(model => model.FeatureNumber)
+        </div></td></tr>
+            @*@if (ViewBag.DisplayGroupName == "Unassigned" || ViewBag.DisplayGroupName == "Build")
+            {*@
+                <tr><td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.BuilderDescription)
+                </div></td>
+                <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.BuilderDescription)
+                </div>
+                </td></tr>
+            @*}
+            else
+            {
+                <tr><td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.BuilderDescription)
+                </div></td>
+                <td>
+                <div class="wide">
+                @Html.DisplayFor(model => model.BuilderDescription)
+                </div>
+                </td></tr>
+            }*@
+            
+            @*@if (ViewBag.DisplayGroupName == "Quality Control")
+            {*@
+                <tr><td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CheckerDescription)
+                </div></td>
+                <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.CheckerDescription)
+                </div>
+                </td></tr>
+            @*}
+            else
+            {
+                <tr><td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.CheckerDescription)
+                </div></td>
+                <td>
+                <div class="wide">
+                    @Html.DisplayFor(model => model.CheckerDescription)
+                </div>
+                </td></tr>
+            }*@
+            @*@if (ViewBag.DisplayGroupName == "Engineering")
+            {*@
+                <tr><td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.EngineerDescription)
+                </div></td>
+                <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.EngineerDescription)
+                </div>
+                </td></tr>
+            @*}
+            else
+            {
+                <tr><td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.EngineerDescription)
+                </div></td>
+                <td>
+                <div class="wide">
+                    @Html.DisplayFor(model => model.EngineerDescription)
+                </div>
+                </td></tr>
+            }*@
+            </table>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*onchangeevent*@
+    @*<script type="text/javascript">
+        function onchangeevent(e) {
+            var featureSelected = document.getElementById('ddlValveSectionFeature');
+            var featureSelectedText = featureSelected.options[featureSelected.selectedIndex].innerHTML;
+            document.getElementById("hdnFeatureNumber").value = featureSelectedText;
+        }
+    </script>*@
+}

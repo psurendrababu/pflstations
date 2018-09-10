@@ -1,0 +1,77 @@
+﻿@model PipelineFeatureList.Models.WorkflowHistory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WorkflowHistory</legend>
+
+        @Html.HiddenFor(model => model.WorkflowHistoryID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionID)
+            @Html.ValidationMessageFor(model => model.ValveSectionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChangedBy_UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChangedBy_UserID)
+            @Html.ValidationMessageFor(model => model.ChangedBy_UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChangedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChangedOn)
+            @Html.ValidationMessageFor(model => model.ChangedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Old_WorkflowStatusID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Old_WorkflowStatusID)
+            @Html.ValidationMessageFor(model => model.Old_WorkflowStatusID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WorkflowActionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WorkflowActionID)
+            @Html.ValidationMessageFor(model => model.WorkflowActionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.New_WorkflowStatusID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.New_WorkflowStatusID)
+            @Html.ValidationMessageFor(model => model.New_WorkflowStatusID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

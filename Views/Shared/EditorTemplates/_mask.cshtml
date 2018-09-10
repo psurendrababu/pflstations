@@ -1,0 +1,15 @@
+﻿ ﻿@using PipelineFeatureList.Common1
+
+ @model String
+   
+ @{ var maskedInput = ViewData.GetModelAttribute<InputMaskAttribute>();
+      if (maskedInput != null)
+      {
+           <div class="editor-label">
+               @Html.LabelForModel()
+           </div>
+           <div class="editor-field">
+               @Html.TextBoxFor(m => m, new { id = ViewData.ModelMetadata.AdditionalValues[InputMaskAttribute.templateHint] })
+           </div>
+      }
+ }

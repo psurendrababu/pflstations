@@ -1,0 +1,43 @@
+﻿@model PipelineFeatureList.Models.NotificationEmail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>NotificationEmail</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Report)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Report)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Emails)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Emails)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Flag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Flag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.NotificationEmailID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

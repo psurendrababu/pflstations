@@ -1,0 +1,591 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.DynamicSegmentationRecord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HCA_UploadIdentifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadHighConsequenceAreaDataID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Class_UploadIdentifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadClassDataID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crossing_UploadIdentifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UploadCrossingDataID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PipeSystemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PipelineID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionFeatureID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PipeSystem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pipeline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrionStationSeries)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrionStationBegin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrionStationEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_BeginStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_EndStation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_MilePointBegin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_MilePointEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_GISStationBegin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_GISStationEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_CurrentMAOP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection_PFLLength)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SegmentNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_Begin_Ft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_End_Ft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_Length)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_HCA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_Class)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crossing_Center_Ft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crossing_NamesAndNotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crossing_Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Crossing_IssuesAndErrors)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_JobWorkOrderPurchaseOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_JobWorkOrderPurchaseOrder_Unknown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_InstallDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_InstallDate_Unknown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_InServiceDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_InServiceDate_Unknown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_ConstructionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Drawing_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Drawing_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_OuterDiameter1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_OuterDiameter2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord1_Identfier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord1_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord2_Identfier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord2_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_ODRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WallThickness1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WallThickness2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord1_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord1_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord2_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord2_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_WTRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SeamType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SeamRecord1_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SeamRecord1_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SeamRecord2_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SeamRecord2_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SeamRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SpecRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Grade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecord1_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecord1_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecord2_Identifier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecord2_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_SpecRatingRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_MatrixPass)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_ANSIRating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_MaterialType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Angle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_BendRadius)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Orientation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_CoatingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_CoatingDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_CoatingDescription_Unknown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_ManufacturerType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Mill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_Mill_Unknown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_ManufacturerDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Feature_ManufacturerDate_Unknown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Current_Class_Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_SMYS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_DesignFactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_JointFactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_TemperatureDerating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Segment_DesignPressure)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HCA_UploadIdentifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadHighConsequenceAreaDataID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Class_UploadIdentifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadClassDataID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crossing_UploadIdentifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UploadCrossingDataID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipeSystemID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipelineID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionFeatureID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipeSystem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pipeline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrionStationSeries)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrionStationBegin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrionStationEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_BeginStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_EndStation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_MilePointBegin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_MilePointEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_GISStationBegin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_GISStationEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_CurrentMAOP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection_PFLLength)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeatureNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SegmentNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_Begin_Ft)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_End_Ft)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_Length)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_HCA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_Class)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crossing_Center_Ft)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crossing_NamesAndNotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crossing_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Crossing_IssuesAndErrors)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeatureType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_JobWorkOrderPurchaseOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_JobWorkOrderPurchaseOrder_Unknown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_InstallDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_InstallDate_Unknown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_InServiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_InServiceDate_Unknown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_ConstructionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Drawing_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Drawing_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_OuterDiameter1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_OuterDiameter2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_OuterDiameterRecord1_Identfier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_OuterDiameterRecord1_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_OuterDiameterRecord2_Identfier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_OuterDiameterRecord2_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_ODRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WallThickness1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WallThickness2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WallThicknessRecord1_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WallThicknessRecord1_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WallThicknessRecord2_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WallThicknessRecord2_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_WTRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SeamType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SeamRecord1_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SeamRecord1_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SeamRecord2_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SeamRecord2_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SeamRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SpecRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecord1_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecord1_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecord2_Identifier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecord2_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_SpecRatingRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_MatrixPass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_ANSIRating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_MaterialType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Angle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_BendRadius)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Orientation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_CoatingType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_CoatingDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_CoatingDescription_Unknown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_ManufacturerType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Mill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_Mill_Unknown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_ManufacturerDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Feature_ManufacturerDate_Unknown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Current_Class_Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_SMYS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_DesignFactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_JointFactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_TemperatureDerating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Segment_DesignPressure)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DynamicSegmentationRecordID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DynamicSegmentationRecordID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DynamicSegmentationRecordID })
+        </td>
+    </tr>
+}
+
+</table>

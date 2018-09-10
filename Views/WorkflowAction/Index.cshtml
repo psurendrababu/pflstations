@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.WorkflowAction>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy_UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy_UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkflowActionItem)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy_UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy_UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkflowActionItem)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkflowActionID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkflowActionID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkflowActionID })
+        </td>
+    </tr>
+}
+
+</table>

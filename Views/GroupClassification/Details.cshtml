@@ -1,0 +1,25 @@
+﻿@model PipelineFeatureList.Controllers.GroupClassification
+
+@{
+    ViewBag.Title = "User Type Details";
+}
+
+<h2>User Type Details</h2>
+
+<fieldset>
+    <legend>GroupClassification</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GroupClassificationItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GroupClassificationItem)
+    </div>
+    </td></tr></table>    
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.GroupClassificationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

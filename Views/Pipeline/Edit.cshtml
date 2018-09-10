@@ -1,0 +1,51 @@
+﻿@model PipelineFeatureList.Models.Pipeline
+
+@{
+    ViewBag.Title = "Edit Pipeline";
+}
+
+<h2>Edit Pipeline</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Pipeline</legend>
+
+        @Html.HiddenFor(model => model.PipelineID)
+
+        <table><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipelineItem)
+        </div></td>
+        <td>
+        <div class="medium">
+            @Html.EditorFor(model => model.PipelineItem)
+            @Html.ValidationMessageFor(model => model.PipelineItem)
+        </div>
+        </td></tr>
+        <tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipeSystemID)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.DropDownList("PipeSystemID", "- Select a Pipe System -")
+        </div>
+        </td></tr></table>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

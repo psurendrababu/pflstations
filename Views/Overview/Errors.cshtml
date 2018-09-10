@@ -1,0 +1,16 @@
+﻿@model PipelineFeatureList.Models.ValveSectionFeature
+
+@{
+    ViewBag.Title = "Regenerate Valve Section Errors / Warnings";
+}
+
+<h2>Regenerate Valve Section Errors / Warnings</h2>
+
+<h3>Are you sure you want to regenerate Valve Section Errors / Warnings?</h3>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Regenerate" /></p>
+    <p>
+        @Html.ActionLink("Back to List", "Index", null, new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+}

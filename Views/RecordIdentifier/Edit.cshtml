@@ -1,0 +1,37 @@
+﻿@model PipelineFeatureList.Models.RecordIdentifier
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>RecordIdentifier</legend>
+
+        @Html.HiddenFor(model => model.RecordIdentifierID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecordIdentifierItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecordIdentifierItem)
+            @Html.ValidationMessageFor(model => model.RecordIdentifierItem)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.OutsideDiameter
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>OutsideDiameter</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OutsideDiameterItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OutsideDiameterItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OutsideDiameterID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

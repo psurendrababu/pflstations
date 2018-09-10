@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.UsersData>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>User</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" }) @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserData.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserData.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserData.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserData.Email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.UserTypes)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.UserData.Active)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr valign="top">
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserData.Email)
+        </td>
+        @*<td style="white-space:normal;" width="300px">
+            @Html.DisplayFor(modelItem => item.UserTypes)
+        </td>*@
+        <td>
+        @try
+        {
+            if (item.UserData.Active)
+            {
+                @Html.Raw("Active")
+            }
+        }
+        catch { }
+        @try
+        {
+            if (!item.UserData.Active)
+            {
+                @Html.Raw("Inactive");
+            }
+        }
+        catch { }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserData.UserID }, htmlAttributes: new { @class = "linkbutton" }) 
+            @Html.ActionLink("Details", "Details", new { id = item.UserData.UserID }, htmlAttributes: new { @class = "linkbutton" }) 
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserData.UserID }, htmlAttributes: new { @class = "linkbutton" })
+        </td>
+    </tr>
+}
+</table>
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</div>

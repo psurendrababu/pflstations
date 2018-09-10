@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.Grade
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Grade</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GradeItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GradeItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.GradeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

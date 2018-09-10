@@ -1,0 +1,36 @@
+﻿@model PipelineFeatureList.Controllers.DocumentMat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DocumentMat</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentType1ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentType1ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentType2ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentType2ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ComboType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ComboType)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DocumentMatID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

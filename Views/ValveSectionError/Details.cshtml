@@ -1,0 +1,43 @@
+﻿@model PipelineFeatureList.Controllers.ValveSectionError
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ValveSectionError</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionFeatureID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionFeatureID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionErrorLevelID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionErrorLevelID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ErrorDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ErrorDescription)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ValveSectionErrorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

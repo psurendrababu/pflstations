@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Pipeline Feature List Home Page";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1><br />
+                @*<h2>@ViewBag.Message</h2>*@
+                @try
+                {
+                    if (Session["UserID"] == null)
+                    {
+                        <h2>Please @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) to continue.</h2>
+                    }
+                    else
+                    {
+                        <h2>Home</h2>   
+                    }
+                }
+                catch { 
+                    <h2>Please @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) to continue.</h2>
+                }
+                            
+                
+                
+            </hgroup>
+            
+        </div>
+    </section>
+}

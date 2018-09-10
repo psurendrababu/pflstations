@@ -1,0 +1,39 @@
+﻿@model PipelineFeatureList.Models.PipeType
+
+@{
+    ViewBag.Title = "Edit Pipe Type";
+}
+
+<h2>Edit Pipe Type</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>PipeType</legend>
+
+        @Html.HiddenFor(model => model.PipeTypeID)
+
+        <table><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipeTypeItem)
+        </div></td>
+        <td>
+        <div class="medium">
+            @Html.EditorFor(model => model.PipeTypeItem)
+            @Html.ValidationMessageFor(model => model.PipeTypeItem)
+        </div>
+        </td></tr></table>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

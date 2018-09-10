@@ -1,0 +1,676 @@
+﻿@model PipelineFeatureList.Models.DynamicSegmentationRecord
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DynamicSegmentationRecord</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HCA_UploadIdentifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HCA_UploadIdentifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UploadHighConsequenceAreaDataID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UploadHighConsequenceAreaDataID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Class_UploadIdentifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Class_UploadIdentifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UploadClassDataID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UploadClassDataID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Crossing_UploadIdentifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Crossing_UploadIdentifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UploadCrossingDataID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UploadCrossingDataID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystemID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystemID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipelineID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipelineID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionFeatureID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionFeatureID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystem)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Pipeline)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Pipeline)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrionStationSeries)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrionStationSeries)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrionStationBegin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrionStationBegin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrionStationEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrionStationEnd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_BeginStation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_BeginStation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_EndStation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_EndStation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_MilePointBegin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_MilePointBegin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_MilePointEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_MilePointEnd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_GISStationBegin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_GISStationBegin)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_GISStationEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_GISStationEnd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_CurrentMAOP)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_CurrentMAOP)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSection_PFLLength)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSection_PFLLength)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeatureNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeatureNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SegmentNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SegmentNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_Begin_Ft)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_Begin_Ft)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_End_Ft)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_End_Ft)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_Length)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_Length)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_HCA)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_HCA)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_Class)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_Class)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Crossing_Center_Ft)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Crossing_Center_Ft)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Crossing_NamesAndNotes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Crossing_NamesAndNotes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Crossing_Type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Crossing_Type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Crossing_IssuesAndErrors)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Crossing_IssuesAndErrors)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeatureType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeatureType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_JobWorkOrderPurchaseOrder)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_JobWorkOrderPurchaseOrder)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_JobWorkOrderPurchaseOrder_Unknown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_JobWorkOrderPurchaseOrder_Unknown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_InstallDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_InstallDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_InstallDate_Unknown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_InstallDate_Unknown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_InServiceDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_InServiceDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_InServiceDate_Unknown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_InServiceDate_Unknown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_ConstructionType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_ConstructionType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Notes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Notes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Drawing_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Drawing_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Drawing_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Drawing_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_OuterDiameter1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_OuterDiameter1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_OuterDiameter2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_OuterDiameter2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord1_Identfier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_OuterDiameterRecord1_Identfier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord1_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_OuterDiameterRecord1_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord2_Identfier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_OuterDiameterRecord2_Identfier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_OuterDiameterRecord2_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_OuterDiameterRecord2_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_ODRecordMatrixCheck)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_ODRecordMatrixCheck)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WallThickness1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WallThickness1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WallThickness2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WallThickness2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord1_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WallThicknessRecord1_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord1_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WallThicknessRecord1_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord2_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WallThicknessRecord2_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WallThicknessRecord2_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WallThicknessRecord2_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_WTRecordMatrixCheck)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_WTRecordMatrixCheck)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SeamType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SeamType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SeamRecord1_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SeamRecord1_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SeamRecord1_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SeamRecord1_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SeamRecord2_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SeamRecord2_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SeamRecord2_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SeamRecord2_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SeamRecordMatrixCheck)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SeamRecordMatrixCheck)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SpecRating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SpecRating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Grade)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Grade)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecRatingRecord1_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecRatingRecord1_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecRatingRecord1_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecRatingRecord1_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecRatingRecord2_Identifier)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecRatingRecord2_Identifier)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecRatingRecord2_Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecRatingRecord2_Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_SpecRatingRecordMatrixCheck)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_SpecRatingRecordMatrixCheck)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_MatrixPass)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_MatrixPass)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_ANSIRating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_ANSIRating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_MaterialType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_MaterialType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Angle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Angle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_BendRadius)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_BendRadius)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Orientation)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Orientation)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_CoatingType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_CoatingType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_CoatingDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_CoatingDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_CoatingDescription_Unknown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_CoatingDescription_Unknown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Manufacturer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Manufacturer)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_ManufacturerType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_ManufacturerType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Mill)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Mill)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_Mill_Unknown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_Mill_Unknown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_ManufacturerDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_ManufacturerDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Feature_ManufacturerDate_Unknown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Feature_ManufacturerDate_Unknown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Current_Class_Location)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Current_Class_Location)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_SMYS)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_SMYS)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_DesignFactor)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_DesignFactor)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_JointFactor)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_JointFactor)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_TemperatureDerating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_TemperatureDerating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Segment_DesignPressure)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Segment_DesignPressure)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

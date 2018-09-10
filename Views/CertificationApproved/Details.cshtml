@@ -1,0 +1,36 @@
+﻿@model PipelineFeatureList.Models.CertificationApproved
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>CertificationApproved</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CertificationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CertificationDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CertificationApprovedID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

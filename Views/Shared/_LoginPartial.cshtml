@@ -1,0 +1,58 @@
+﻿@if (Session["UserName"] != null) {
+    
+    var sqlDB = new System.Data.SqlClient.SqlConnectionStringBuilder(
+        System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
+    var dbName = sqlDB.InitialCatalog;
+    
+    <table><tr><td>
+        Hello, @Html.Raw(Session["UserName"].ToString()) - @System.Configuration.ConfigurationManager.AppSettings["webpages:Environment"] @System.Configuration.ConfigurationManager.AppSettings["webpages:Version"]
+        </td>
+        <td>
+        @*@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }*@
+        <label id="heartbeat" class="message-error"></label>
+        </td>
+    </tr></table>
+}
+else
+{
+    <ul>
+        @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+        @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+    </ul>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        SetupSessionUpdater('KeepSessionAlive');
+    });
+    var keepSessionAlive = false;
+    var keepSessionAliveUrl = null;
+
+    function SetupSessionUpdater(actionUrl) {
+        keepSessionAliveUrl = actionUrl;
+        var container = $("#body");
+        //container.mousemove(function () { keepSessionAlive = true; });
+        //container.keydown(function () { keepSessionAlive = true; });
+        CheckToKeepSessionAlive();
+    }
+
+    function CheckToKeepSessionAlive() {
+        setTimeout("KeepSessionAlive()", 300000);
+        sessionStorage.Heartbeat = Date();
+        $("#heartbeat").html("Session Refreshed: " + sessionStorage.Heartbeat);
+    }
+
+    function KeepSessionAlive() {
+        if (keepSessionAlive && keepSessionAliveUrl != null) {
+            $.ajax({
+                type: "POST",
+                url: keepSessionAliveUrl,
+                success: function () { keepSessionAlive = false; }
+            });
+        }
+        CheckToKeepSessionAlive();
+    }
+</script>

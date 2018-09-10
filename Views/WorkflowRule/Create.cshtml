@@ -1,0 +1,99 @@
+﻿@model PipelineFeatureList.Models.WorkflowRule
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WorkflowRule</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy_UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy_UserID)
+            @Html.ValidationMessageFor(model => model.CreatedBy_UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedOn)
+            @Html.ValidationMessageFor(model => model.CreatedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedBy_UserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedBy_UserID)
+            @Html.ValidationMessageFor(model => model.ModifiedBy_UserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedOn)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedOn)
+            @Html.ValidationMessageFor(model => model.ModifiedOn)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Old_ValveSectionStatusID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Old_ValveSectionStatusID)
+            @Html.ValidationMessageFor(model => model.Old_ValveSectionStatusID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WorkflowActionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WorkflowActionID)
+            @Html.ValidationMessageFor(model => model.WorkflowActionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.New_ValveSectionStatusID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.New_ValveSectionStatusID)
+            @Html.ValidationMessageFor(model => model.New_ValveSectionStatusID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.New_ValveSectionOwnerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.New_ValveSectionOwnerID)
+            @Html.ValidationMessageFor(model => model.New_ValveSectionOwnerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.New_ValveSectionOwnerWorkflowVariableID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.New_ValveSectionOwnerWorkflowVariableID)
+            @Html.ValidationMessageFor(model => model.New_ValveSectionOwnerWorkflowVariableID)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

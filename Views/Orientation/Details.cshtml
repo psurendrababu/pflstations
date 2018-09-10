@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.Orientation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Orientation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OrientationItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OrientationItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.OrientationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

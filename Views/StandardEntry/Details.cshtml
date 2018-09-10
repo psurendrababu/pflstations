@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.StandardEntry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>StandardEntry</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StandardEntryItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StandardEntryItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.StandardEntryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

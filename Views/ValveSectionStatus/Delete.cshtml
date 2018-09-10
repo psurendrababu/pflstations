@@ -1,0 +1,28 @@
+﻿@model PipelineFeatureList.Controllers.ValveSectionStatus
+
+@{
+    ViewBag.Title = "Delete Valve Section Status";
+}
+
+<h2>Delete Valve Section Status</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ValveSectionStatus</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionStatusItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionStatusItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

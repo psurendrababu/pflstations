@@ -1,0 +1,81 @@
+﻿@model PipelineFeatureList.Models.WorkflowRule
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>WorkflowRule</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedBy_UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy_UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedBy_UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedBy_UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Old_ValveSectionStatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Old_ValveSectionStatusID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WorkflowActionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WorkflowActionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.New_ValveSectionStatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.New_ValveSectionStatusID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.New_ValveSectionOwnerID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.New_ValveSectionOwnerID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.New_ValveSectionOwnerWorkflowVariableID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.New_ValveSectionOwnerWorkflowVariableID)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

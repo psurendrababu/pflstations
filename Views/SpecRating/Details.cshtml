@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.SpecRating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>SpecRating</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SpecRatingItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SpecRatingItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.SpecRatingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.SpecRating>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingItem)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingItem)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SpecRatingID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SpecRatingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SpecRatingID })
+        </td>
+    </tr>
+}
+
+</table>

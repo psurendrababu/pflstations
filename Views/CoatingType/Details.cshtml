@@ -1,0 +1,25 @@
+﻿@model PipelineFeatureList.Models.CoatingType
+
+@{
+    ViewBag.Title = "Coating Type Details";
+}
+
+<h2>Coating Type Details</h2>
+
+<fieldset>
+    <legend>CoatingType</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CoatingTypeItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CoatingTypeItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CoatingTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

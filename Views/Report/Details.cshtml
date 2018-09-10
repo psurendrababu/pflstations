@@ -1,0 +1,29 @@
+﻿@model PipelineFeatureList.Models.Report
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Report</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ReportName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ReportName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ReportID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

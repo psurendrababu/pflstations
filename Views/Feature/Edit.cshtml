@@ -1,0 +1,37 @@
+﻿@model PipelineFeatureList.Models.Feature
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Feature</legend>
+
+        @Html.HiddenFor(model => model.FeatureID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeatureItem)
+            @Html.ValidationMessageFor(model => model.FeatureItem)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

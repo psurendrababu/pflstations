@@ -1,0 +1,60 @@
+﻿@model PipelineFeatureList.Models.WorkflowHistory
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>WorkflowHistory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChangedBy_UserID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChangedBy_UserID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ChangedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ChangedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Old_WorkflowStatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Old_WorkflowStatusID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WorkflowActionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WorkflowActionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.New_WorkflowStatusID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.New_WorkflowStatusID)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

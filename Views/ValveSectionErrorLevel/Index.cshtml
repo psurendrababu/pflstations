@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PipelineFeatureList.Controllers.ValveSectionErrorLevel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionErrorLevelItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BackColor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForeColor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionErrorLevelItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackColor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForeColor)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ValveSectionErrorLevelID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ValveSectionErrorLevelID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ValveSectionErrorLevelID })
+        </td>
+    </tr>
+}
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin")
+</div>
+</table>

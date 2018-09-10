@@ -1,0 +1,91 @@
+﻿@model PipelineFeatureList.Models.DocumentRecord
+
+@{
+    ViewBag.Title = "Create Document Record";
+}
+
+<h2>Create Document Record</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocumentRecord</legend>
+
+        <table><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionID, "ValveSection")
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.DropDownList("ValveSectionID", "- Select a Valve Section -")
+            @Html.ValidationMessageFor(model => model.ValveSectionID)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecordIdentifier.RecordIdentifierItem)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.DropDownList("RecordIdentifierID", "- Select a Record Identifier -")
+            @Html.ValidationMessageFor(model => model.RecordIdentifierID)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocumentTypeID, "DocumentType")
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.DropDownList("DocumentTypeID", "- Select a Document Type -")
+            @Html.ValidationMessageFor(model => model.DocumentTypeID)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Filename)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Filename)
+            @Html.ValidationMessageFor(model => model.Filename)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecordIDName)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecordIDName)
+            @Html.ValidationMessageFor(model => model.RecordIDName)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ElectronicUniqueID)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ElectronicUniqueID)
+            @Html.ValidationMessageFor(model => model.ElectronicUniqueID)
+        </div>
+        </td></tr><tr><td>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Page)
+        </div></td>
+        <td>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Page)
+            @Html.ValidationMessageFor(model => model.Page)
+        </div>
+        </td></tr></table>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

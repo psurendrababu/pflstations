@@ -1,0 +1,779 @@
+﻿@model PipelineFeatureList.Models.DynamicSegmentationRecord
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DynamicSegmentationRecord</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HCA_UploadIdentifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HCA_UploadIdentifier)
+            @Html.ValidationMessageFor(model => model.HCA_UploadIdentifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UploadHighConsequenceAreaDataID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UploadHighConsequenceAreaDataID)
+            @Html.ValidationMessageFor(model => model.UploadHighConsequenceAreaDataID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Class_UploadIdentifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Class_UploadIdentifier)
+            @Html.ValidationMessageFor(model => model.Class_UploadIdentifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UploadClassDataID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UploadClassDataID)
+            @Html.ValidationMessageFor(model => model.UploadClassDataID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Crossing_UploadIdentifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Crossing_UploadIdentifier)
+            @Html.ValidationMessageFor(model => model.Crossing_UploadIdentifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UploadCrossingDataID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UploadCrossingDataID)
+            @Html.ValidationMessageFor(model => model.UploadCrossingDataID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipeSystemID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PipeSystemID)
+            @Html.ValidationMessageFor(model => model.PipeSystemID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipelineID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PipelineID)
+            @Html.ValidationMessageFor(model => model.PipelineID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionID)
+            @Html.ValidationMessageFor(model => model.ValveSectionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionFeatureID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionFeatureID)
+            @Html.ValidationMessageFor(model => model.ValveSectionFeatureID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PipeSystem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PipeSystem)
+            @Html.ValidationMessageFor(model => model.PipeSystem)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pipeline)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pipeline)
+            @Html.ValidationMessageFor(model => model.Pipeline)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrionStationSeries)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrionStationSeries)
+            @Html.ValidationMessageFor(model => model.OrionStationSeries)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrionStationBegin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrionStationBegin)
+            @Html.ValidationMessageFor(model => model.OrionStationBegin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrionStationEnd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrionStationEnd)
+            @Html.ValidationMessageFor(model => model.OrionStationEnd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_BeginStation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_BeginStation)
+            @Html.ValidationMessageFor(model => model.ValveSection_BeginStation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_EndStation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_EndStation)
+            @Html.ValidationMessageFor(model => model.ValveSection_EndStation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_MilePointBegin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_MilePointBegin)
+            @Html.ValidationMessageFor(model => model.ValveSection_MilePointBegin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_MilePointEnd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_MilePointEnd)
+            @Html.ValidationMessageFor(model => model.ValveSection_MilePointEnd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_GISStationBegin)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_GISStationBegin)
+            @Html.ValidationMessageFor(model => model.ValveSection_GISStationBegin)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_GISStationEnd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_GISStationEnd)
+            @Html.ValidationMessageFor(model => model.ValveSection_GISStationEnd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_CurrentMAOP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_CurrentMAOP)
+            @Html.ValidationMessageFor(model => model.ValveSection_CurrentMAOP)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSection_PFLLength)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSection_PFLLength)
+            @Html.ValidationMessageFor(model => model.ValveSection_PFLLength)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeatureNumber)
+            @Html.ValidationMessageFor(model => model.FeatureNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SegmentNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SegmentNumber)
+            @Html.ValidationMessageFor(model => model.SegmentNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_Begin_Ft)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_Begin_Ft)
+            @Html.ValidationMessageFor(model => model.Segment_Begin_Ft)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_End_Ft)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_End_Ft)
+            @Html.ValidationMessageFor(model => model.Segment_End_Ft)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_Length)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_Length)
+            @Html.ValidationMessageFor(model => model.Segment_Length)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_HCA)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_HCA)
+            @Html.ValidationMessageFor(model => model.Segment_HCA)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_Class)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_Class)
+            @Html.ValidationMessageFor(model => model.Segment_Class)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Crossing_Center_Ft)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Crossing_Center_Ft)
+            @Html.ValidationMessageFor(model => model.Crossing_Center_Ft)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Crossing_NamesAndNotes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Crossing_NamesAndNotes)
+            @Html.ValidationMessageFor(model => model.Crossing_NamesAndNotes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Crossing_Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Crossing_Type)
+            @Html.ValidationMessageFor(model => model.Crossing_Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Crossing_IssuesAndErrors)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Crossing_IssuesAndErrors)
+            @Html.ValidationMessageFor(model => model.Crossing_IssuesAndErrors)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature)
+            @Html.ValidationMessageFor(model => model.Feature)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeatureType)
+            @Html.ValidationMessageFor(model => model.FeatureType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_JobWorkOrderPurchaseOrder)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_JobWorkOrderPurchaseOrder)
+            @Html.ValidationMessageFor(model => model.Feature_JobWorkOrderPurchaseOrder)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_JobWorkOrderPurchaseOrder_Unknown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_JobWorkOrderPurchaseOrder_Unknown)
+            @Html.ValidationMessageFor(model => model.Feature_JobWorkOrderPurchaseOrder_Unknown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_InstallDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_InstallDate)
+            @Html.ValidationMessageFor(model => model.Feature_InstallDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_InstallDate_Unknown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_InstallDate_Unknown)
+            @Html.ValidationMessageFor(model => model.Feature_InstallDate_Unknown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_InServiceDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_InServiceDate)
+            @Html.ValidationMessageFor(model => model.Feature_InServiceDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_InServiceDate_Unknown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_InServiceDate_Unknown)
+            @Html.ValidationMessageFor(model => model.Feature_InServiceDate_Unknown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_ConstructionType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_ConstructionType)
+            @Html.ValidationMessageFor(model => model.Feature_ConstructionType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Notes)
+            @Html.ValidationMessageFor(model => model.Feature_Notes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Drawing_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Drawing_Identifier)
+            @Html.ValidationMessageFor(model => model.Feature_Drawing_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Drawing_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Drawing_Description)
+            @Html.ValidationMessageFor(model => model.Feature_Drawing_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_OuterDiameter1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_OuterDiameter1)
+            @Html.ValidationMessageFor(model => model.Feature_OuterDiameter1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_OuterDiameter2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_OuterDiameter2)
+            @Html.ValidationMessageFor(model => model.Feature_OuterDiameter2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_OuterDiameterRecord1_Identfier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_OuterDiameterRecord1_Identfier)
+            @Html.ValidationMessageFor(model => model.Feature_OuterDiameterRecord1_Identfier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_OuterDiameterRecord1_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_OuterDiameterRecord1_Description)
+            @Html.ValidationMessageFor(model => model.Feature_OuterDiameterRecord1_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_OuterDiameterRecord2_Identfier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_OuterDiameterRecord2_Identfier)
+            @Html.ValidationMessageFor(model => model.Feature_OuterDiameterRecord2_Identfier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_OuterDiameterRecord2_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_OuterDiameterRecord2_Description)
+            @Html.ValidationMessageFor(model => model.Feature_OuterDiameterRecord2_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_ODRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_ODRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.Feature_ODRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WallThickness1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WallThickness1)
+            @Html.ValidationMessageFor(model => model.Feature_WallThickness1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WallThickness2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WallThickness2)
+            @Html.ValidationMessageFor(model => model.Feature_WallThickness2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WallThicknessRecord1_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WallThicknessRecord1_Identifier)
+            @Html.ValidationMessageFor(model => model.Feature_WallThicknessRecord1_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WallThicknessRecord1_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WallThicknessRecord1_Description)
+            @Html.ValidationMessageFor(model => model.Feature_WallThicknessRecord1_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WallThicknessRecord2_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WallThicknessRecord2_Identifier)
+            @Html.ValidationMessageFor(model => model.Feature_WallThicknessRecord2_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WallThicknessRecord2_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WallThicknessRecord2_Description)
+            @Html.ValidationMessageFor(model => model.Feature_WallThicknessRecord2_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_WTRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_WTRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.Feature_WTRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SeamType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SeamType)
+            @Html.ValidationMessageFor(model => model.Feature_SeamType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SeamRecord1_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SeamRecord1_Identifier)
+            @Html.ValidationMessageFor(model => model.Feature_SeamRecord1_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SeamRecord1_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SeamRecord1_Description)
+            @Html.ValidationMessageFor(model => model.Feature_SeamRecord1_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SeamRecord2_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SeamRecord2_Identifier)
+            @Html.ValidationMessageFor(model => model.Feature_SeamRecord2_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SeamRecord2_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SeamRecord2_Description)
+            @Html.ValidationMessageFor(model => model.Feature_SeamRecord2_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SeamRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SeamRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.Feature_SeamRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SpecRating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SpecRating)
+            @Html.ValidationMessageFor(model => model.Feature_SpecRating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Grade)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Grade)
+            @Html.ValidationMessageFor(model => model.Feature_Grade)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecord1_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecord1_Identifier)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecord1_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecord1_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecord1_Description)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecord1_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecord2_Identifier)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecord2_Identifier)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecord2_Identifier)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecord2_Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecord2_Description)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecord2_Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_SpecRatingRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_SpecRatingRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.Feature_SpecRatingRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_MatrixPass)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_MatrixPass)
+            @Html.ValidationMessageFor(model => model.Feature_MatrixPass)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_ANSIRating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_ANSIRating)
+            @Html.ValidationMessageFor(model => model.Feature_ANSIRating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_MaterialType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_MaterialType)
+            @Html.ValidationMessageFor(model => model.Feature_MaterialType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Angle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Angle)
+            @Html.ValidationMessageFor(model => model.Angle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_BendRadius)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_BendRadius)
+            @Html.ValidationMessageFor(model => model.Feature_BendRadius)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Orientation)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Orientation)
+            @Html.ValidationMessageFor(model => model.Feature_Orientation)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_CoatingType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_CoatingType)
+            @Html.ValidationMessageFor(model => model.Feature_CoatingType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_CoatingDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_CoatingDescription)
+            @Html.ValidationMessageFor(model => model.Feature_CoatingDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_CoatingDescription_Unknown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_CoatingDescription_Unknown)
+            @Html.ValidationMessageFor(model => model.Feature_CoatingDescription_Unknown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Manufacturer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Manufacturer)
+            @Html.ValidationMessageFor(model => model.Feature_Manufacturer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_ManufacturerType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_ManufacturerType)
+            @Html.ValidationMessageFor(model => model.Feature_ManufacturerType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Mill)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Mill)
+            @Html.ValidationMessageFor(model => model.Feature_Mill)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_Mill_Unknown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_Mill_Unknown)
+            @Html.ValidationMessageFor(model => model.Feature_Mill_Unknown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_ManufacturerDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_ManufacturerDate)
+            @Html.ValidationMessageFor(model => model.Feature_ManufacturerDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Feature_ManufacturerDate_Unknown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Feature_ManufacturerDate_Unknown)
+            @Html.ValidationMessageFor(model => model.Feature_ManufacturerDate_Unknown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Current_Class_Location)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Current_Class_Location)
+            @Html.ValidationMessageFor(model => model.Current_Class_Location)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_SMYS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_SMYS)
+            @Html.ValidationMessageFor(model => model.Segment_SMYS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_DesignFactor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_DesignFactor)
+            @Html.ValidationMessageFor(model => model.Segment_DesignFactor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_JointFactor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_JointFactor)
+            @Html.ValidationMessageFor(model => model.Segment_JointFactor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_TemperatureDerating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_TemperatureDerating)
+            @Html.ValidationMessageFor(model => model.Segment_TemperatureDerating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Segment_DesignPressure)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Segment_DesignPressure)
+            @Html.ValidationMessageFor(model => model.Segment_DesignPressure)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

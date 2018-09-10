@@ -1,0 +1,99 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.FeatureIssue>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionFeatureID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuilderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuilderCreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuilderDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckerCreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckerDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngineerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngineerCreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngineerDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionFeatureID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeatureNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuilderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuilderCreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuilderDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckerCreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckerDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngineerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngineerCreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngineerDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FeatureIssueID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FeatureIssueID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FeatureIssueID })
+        </td>
+    </tr>
+}
+
+</table>

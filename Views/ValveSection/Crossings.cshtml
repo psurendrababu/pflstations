@@ -1,0 +1,30 @@
+﻿@model PipelineFeatureList.Models.ValveSectionCrossings
+
+@{
+    ViewBag.Title = "Valve Section Crossings";
+}
+
+<h2>Valve Section Crossings</h2>
+
+
+@using (Html.BeginForm("Crossings", "ValveSection", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    <div class="fileinputs">
+        <input type="file" name="file" class="file" />
+    </div>
+
+    @Html.DropDownList("CrossingStatus")
+    <p></p> 
+    
+    <input type="submit" name="Submit" id="Submit" value="Upload/Update Status" />
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}

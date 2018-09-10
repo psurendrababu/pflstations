@@ -1,0 +1,37 @@
+﻿@model PipelineFeatureList.Models.SpecRating
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SpecRating</legend>
+
+        @Html.HiddenFor(model => model.SpecRatingID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingItem)
+            @Html.ValidationMessageFor(model => model.SpecRatingItem)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

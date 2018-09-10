@@ -1,0 +1,81 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.WorkflowRule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy_UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy_UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Old_ValveSectionStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkflowActionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.New_ValveSectionStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.New_ValveSectionOwnerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.New_ValveSectionOwnerWorkflowVariableID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy_UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy_UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Old_ValveSectionStatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkflowActionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.New_ValveSectionStatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.New_ValveSectionOwnerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.New_ValveSectionOwnerWorkflowVariableID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkflowRuleID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkflowRuleID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkflowRuleID })
+        </td>
+    </tr>
+}
+
+</table>

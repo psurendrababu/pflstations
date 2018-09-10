@@ -1,0 +1,62 @@
+﻿@model PipelineFeatureList.Models.GenerateReport
+
+@{
+    ViewBag.Title = "Generate Reports";
+}
+
+<h2>Generate Reports</h2>
+
+@using (Html.BeginForm("ReportFilter", "GenerateReport", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Engineering</legend>
+        
+        <table width="100%">
+            <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><div class="editor-label">@Html.Raw("Pipe System")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipeSystemData", ViewBag.PipeSystemID as SelectList, "- Select a Pipe System -", new { id = "ddlPipeSystems", onchange = "onchangeevent1()" })</div></td>
+            <td><div class="editor-label">@Html.Raw("Pipeline")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipelineData", ViewBag.PipelineID as SelectList, "- Select a Pipeline -", new { id = "ddlPipelines", onchange = "onchangeevent2()" })</div></td>
+            <td><input type="submit" value="Filter" /></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<table width="100%">
+    <tr>
+        <th>
+            @Html.Raw("ANR")
+        </th>
+        <th>
+            @Html.Raw("GLGT")
+        </th>
+        <th>
+            @Html.Raw("GTN")
+        </th>
+        <th>
+            @Html.Raw("NB")
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DropDownList("ANRValveSectionsData", ViewBag.ANRValveSectionsData as MultiSelectList, "- Select ANR Valve Section(s) -")
+        </td>
+        <td>
+            @Html.DropDownList("GLGTValveSectionsData", ViewBag.GLGTValveSectionsData as MultiSelectList, "- Select GLGT Valve Section(s) -")
+        </td>
+        <td>
+            @Html.DropDownList("GTNValveSectionsData", ViewBag.GTNValveSectionsData as MultiSelectList, "- Select GTN Valve Section(s) -")
+        </td>
+        <td>
+            @Html.DropDownList("NBValveSectionsData", ViewBag.NBValveSectionsData as MultiSelectList, "- Select NB Valve Section(s) -")
+        </td>
+    </tr>
+</table>
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</div>

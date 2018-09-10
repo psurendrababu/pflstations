@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.HCA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>HCA</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HCAItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HCAItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.HCAID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

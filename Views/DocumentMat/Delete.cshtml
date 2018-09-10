@@ -1,0 +1,39 @@
+﻿@model PipelineFeatureList.Controllers.DocumentMat
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DocumentMat</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentType1ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentType1ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentType2ID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentType2ID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ComboType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ComboType)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

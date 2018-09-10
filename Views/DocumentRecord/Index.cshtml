@@ -1,0 +1,69 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.DocumentRecord>
+
+@{
+    ViewBag.Title = "Document Records";
+}
+
+<h2>Document Records</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSection.OrionStationSeries)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecordIdentifier.RecordIdentifierItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentType.DocumentTypeItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Filename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecordIDName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ElectronicUniqueID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Page)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection.OrionStationSeries)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecordIdentifier.RecordIdentifierItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentType.DocumentTypeItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Filename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecordIDName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ElectronicUniqueID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Page)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocumentRecordID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocumentRecordID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocumentRecordID })
+        </td>
+    </tr>
+}
+
+</table>

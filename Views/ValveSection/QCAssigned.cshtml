@@ -1,0 +1,104 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionQC>
+
+@{
+    ViewBag.Title = "QC";
+}
+
+<table width="100%">
+    <tr>
+        <th>
+            @Html.Raw("System")
+        </th>
+        <th>
+            @Html.Raw("Line")
+        </th>
+        <th>
+            @Html.Raw("Section")
+        </th>
+        <th>
+            @Html.Raw("Orion")
+        </th>
+        <th>
+            @Html.Raw("Status")
+        </th>
+        <th>
+            @Html.Raw("Length")
+        </th>
+        <th>
+            @Html.Raw("Features")
+        </th>
+        <th>
+            @Html.Raw("QC")
+        </th>
+        <th>
+            @Html.Raw("Builder")
+        </th>
+        <th>
+            @Html.Raw("Crossings Status")
+        </th>
+    </tr>
+    
+@foreach (var item in Model)
+{
+    if (item.ValveSectionQCAssigned != null)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.PipeSystem.PipeSystemItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Pipeline.PipelineItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveSection.ValveSectionBegin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveSection.OrionStationSeries)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveStatus.ValveSectionStatusItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Length)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.NumberOfFeatures)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ReadyForQC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Builder.FirstName) @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Builder.LastName)
+            </td>
+            <td>
+                @try
+                {
+                    if (item.ValveSectionQCAssigned.ValveSection.CrossingsStatus == "M")
+                    {
+                        @Html.Raw("Not Available")
+                    }
+                    else if (item.ValveSectionQCAssigned.ValveSection.CrossingsStatus == "Y")
+                    {
+                        @Html.Raw("Imported")
+                    }
+                    else if (item.ValveSectionQCAssigned.ValveSection.CrossingsStatus == "N")
+                    {
+                        @Html.Raw("Not Applicable")
+                    }
+                    else
+                    {
+                        @Html.Raw("Not Available")
+                    }
+                }
+                catch
+                {
+                    @Html.Raw("Not Available")
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionQCAssigned.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionQCAssigned.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
+            </td>
+        </tr>
+    }
+}
+</table>

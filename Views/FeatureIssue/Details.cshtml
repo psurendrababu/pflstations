@@ -1,0 +1,99 @@
+﻿@model PipelineFeatureList.Models.FeatureIssue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>FeatureIssue</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ValveSectionFeatureID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ValveSectionFeatureID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FeatureNumber)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FeatureNumber)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BuilderID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BuilderID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BuilderCreatedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BuilderCreatedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BuilderDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BuilderDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckerID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckerID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckerCreatedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckerCreatedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CheckerDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CheckerDescription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EngineerID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EngineerID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EngineerCreatedOn)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EngineerCreatedOn)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EngineerDescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EngineerDescription)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.FeatureIssueID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

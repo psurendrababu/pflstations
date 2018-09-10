@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionEngineering>
+
+@{
+    ViewBag.Title = "Engineering";
+}
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function onchangeevent1(e) {
+            var selectedItem = $("#ddlPipeSystems").val();
+            var selectedItem2 = $("#ddlPipelines").val();
+            if (selectedItem == "") selectedItem = 0;
+            if (selectedItem2 == "") selectedItem2 = 0;
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/ValveSection/EngineeringDropDowns/',
+                data: { "id1": selectedItem, "id2": selectedItem2 },
+                dataType: 'json',
+                success: function (data) {
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve pipe types.');
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function onchangeevent2(e) {
+            var selectedItem = $("#ddlPipeSystems").val();
+            var selectedItem2 = $("#ddlPipelines").val();
+            if (selectedItem == "") selectedItem = 0;
+            if (selectedItem2 == "") selectedItem2 = 0;
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/ValveSection/EngineeringDropDowns/',
+                data: { "id1": selectedItem, "id2": selectedItem2 },
+                dataType: 'json',
+                success: function (data) {
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve pipe types.');
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            onchangeevent1(null);
+            onchangeevent2(null);
+        });
+    </script>
+}
+
+<h2>Engineering</h2>
+
+<h3>Assigned to @Html.Raw(Session["UserName"].ToString())</h3>
+
+    @Html.Partial("EngineeringAssigned")
+
+<hr />
+
+<h3>Pool</h3>
+    @Html.Partial("EngineeringPool")

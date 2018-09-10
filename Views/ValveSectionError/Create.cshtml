@@ -1,0 +1,59 @@
+﻿@model PipelineFeatureList.Controllers.ValveSectionError
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ValveSectionError</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionID)
+            @Html.ValidationMessageFor(model => model.ValveSectionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionFeatureID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionFeatureID)
+            @Html.ValidationMessageFor(model => model.ValveSectionFeatureID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionErrorLevelID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionErrorLevelID)
+            @Html.ValidationMessageFor(model => model.ValveSectionErrorLevelID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ErrorDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ErrorDescription)
+            @Html.ValidationMessageFor(model => model.ErrorDescription)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

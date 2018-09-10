@@ -1,0 +1,46 @@
+﻿@model PipelineFeatureList.Models.NotificationEmail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>NotificationEmail</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Report)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Report)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Emails)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Emails)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Flag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Flag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

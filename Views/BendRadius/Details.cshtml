@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.BendRadius
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>BendRadius</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BendRadiusItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BendRadiusItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BendRadiusID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

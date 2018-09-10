@@ -1,0 +1,25 @@
+﻿@model PipelineFeatureList.Models.PipeSystem
+
+@{
+    ViewBag.Title = "Pipe System Details";
+}
+
+<h2>Pipe System Details</h2>
+
+<fieldset>
+    <legend>PipeSystem</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystemItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystemItem)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PipeSystemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

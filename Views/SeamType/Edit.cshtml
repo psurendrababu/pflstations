@@ -1,0 +1,37 @@
+﻿@model PipelineFeatureList.Models.SeamType
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SeamType</legend>
+
+        @Html.HiddenFor(model => model.SeamTypeID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeamTypeItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeamTypeItem)
+            @Html.ValidationMessageFor(model => model.SeamTypeItem)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

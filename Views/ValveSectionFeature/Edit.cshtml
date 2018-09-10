@@ -1,0 +1,469 @@
+﻿@model PipelineFeatureList.Models.ValveSectionFeature
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ValveSectionFeature</legend>
+
+        @Html.HiddenFor(model => model.ValveSectionFeatureID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionID)
+            @Html.ValidationMessageFor(model => model.ValveSectionID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GISAlignStart)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GISAlignStart)
+            @Html.ValidationMessageFor(model => model.GISAlignStart)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GISAlignEnd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GISAlignEnd)
+            @Html.ValidationMessageFor(model => model.GISAlignEnd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeatureNumber)
+            @Html.ValidationMessageFor(model => model.FeatureNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FeatureID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FeatureID)
+            @Html.ValidationMessageFor(model => model.FeatureID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TypeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TypeID)
+            @Html.ValidationMessageFor(model => model.TypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Length)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Length)
+            @Html.ValidationMessageFor(model => model.Length)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JobWOPO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JobWOPO)
+            @Html.ValidationMessageFor(model => model.JobWOPO)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InstallDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InstallDate)
+            @Html.ValidationMessageFor(model => model.InstallDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InServiceDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InServiceDate)
+            @Html.ValidationMessageFor(model => model.InServiceDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConstructionTypeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConstructionTypeID)
+            @Html.ValidationMessageFor(model => model.ConstructionTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Notes)
+            @Html.ValidationMessageFor(model => model.Notes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DrawingID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DrawingID)
+            @Html.ValidationMessageFor(model => model.DrawingID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ODID1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ODID1)
+            @Html.ValidationMessageFor(model => model.ODID1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ODRecordID1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ODRecordID1)
+            @Html.ValidationMessageFor(model => model.ODRecordID1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ODRecordID2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ODRecordID2)
+            @Html.ValidationMessageFor(model => model.ODRecordID2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ODRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ODRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.ODRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WallThickness1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WallThickness1)
+            @Html.ValidationMessageFor(model => model.WallThickness1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WTRecordID1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WTRecordID1)
+            @Html.ValidationMessageFor(model => model.WTRecordID1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WTRecordID2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WTRecordID2)
+            @Html.ValidationMessageFor(model => model.WTRecordID2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WTRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WTRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.WTRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ODID2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ODID2)
+            @Html.ValidationMessageFor(model => model.ODID2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WallThickness2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WallThickness2)
+            @Html.ValidationMessageFor(model => model.WallThickness2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeamWeldTypeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeamWeldTypeID)
+            @Html.ValidationMessageFor(model => model.SeamWeldTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeamRecordID1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeamRecordID1)
+            @Html.ValidationMessageFor(model => model.SeamRecordID1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeamRecordID2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeamRecordID2)
+            @Html.ValidationMessageFor(model => model.SeamRecordID2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeamRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeamRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.SeamRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingID)
+            @Html.ValidationMessageFor(model => model.SpecRatingID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GradeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GradeID)
+            @Html.ValidationMessageFor(model => model.GradeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecordID1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecordID1)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecordID1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecordID2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecordID2)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecordID2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SpecRatingRecordMatrixCheck)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SpecRatingRecordMatrixCheck)
+            @Html.ValidationMessageFor(model => model.SpecRatingRecordMatrixCheck)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ANSIRatingID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ANSIRatingID)
+            @Html.ValidationMessageFor(model => model.ANSIRatingID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaterialTypeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MaterialTypeID)
+            @Html.ValidationMessageFor(model => model.MaterialTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AngleID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AngleID)
+            @Html.ValidationMessageFor(model => model.AngleID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RadiusID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RadiusID)
+            @Html.ValidationMessageFor(model => model.RadiusID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OrientID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OrientID)
+            @Html.ValidationMessageFor(model => model.OrientID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CoatingTypeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CoatingTypeID)
+            @Html.ValidationMessageFor(model => model.CoatingTypeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ManufacturerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ManufacturerID)
+            @Html.ValidationMessageFor(model => model.ManufacturerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mill)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Mill)
+            @Html.ValidationMessageFor(model => model.Mill)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MFRDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MFRDate)
+            @Html.ValidationMessageFor(model => model.MFRDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CurrentClassLoc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CurrentClassLoc)
+            @Html.ValidationMessageFor(model => model.CurrentClassLoc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ClassDesignFactor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ClassDesignFactor)
+            @Html.ValidationMessageFor(model => model.ClassDesignFactor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HCAName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HCAName)
+            @Html.ValidationMessageFor(model => model.HCAName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SMYS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SMYS)
+            @Html.ValidationMessageFor(model => model.SMYS)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OutsideDiameter)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OutsideDiameter)
+            @Html.ValidationMessageFor(model => model.OutsideDiameter)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WallThickness)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WallThickness)
+            @Html.ValidationMessageFor(model => model.WallThickness)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DesignFactor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DesignFactor)
+            @Html.ValidationMessageFor(model => model.DesignFactor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JointFactor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JointFactor)
+            @Html.ValidationMessageFor(model => model.JointFactor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TemperatureDerating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TemperatureDerating)
+            @Html.ValidationMessageFor(model => model.TemperatureDerating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DesignPressure)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DesignPressure)
+            @Html.ValidationMessageFor(model => model.DesignPressure)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BuilderID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BuilderID)
+            @Html.ValidationMessageFor(model => model.BuilderID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CheckerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CheckerID)
+            @Html.ValidationMessageFor(model => model.CheckerID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EngineerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EngineerID)
+            @Html.ValidationMessageFor(model => model.EngineerID)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

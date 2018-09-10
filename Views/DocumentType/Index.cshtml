@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.DocumentType>
+
+@{
+    ViewBag.Title = "Document Types";
+}
+
+<h2>Document Types</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentTypeItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreConstruction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PipeSystem.PipeSystemItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pipeline.PipelineItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PageRequired)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentTypeItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreConstruction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipeSystem.PipeSystemItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pipeline.PipelineItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PageRequired)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DocumentTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DocumentTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DocumentTypeID })
+        </td>
+    </tr>
+}
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin")
+</div>
+</table>

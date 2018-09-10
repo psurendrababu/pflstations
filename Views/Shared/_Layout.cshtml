@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="~/Scripts/jquery-1.7.1.js" type="text/javascript"></script>
+        <script src="~/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+        @*<script src="~/Scripts/jquery.maskedinput.js" type="text/javascript"></script>*@
+
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Pipeline Feature List</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @if (IsSectionDefined("CtrlJavascript"))
+        {
+            @RenderSection("CtrlJavascript");
+        }
+        
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("Pipeline Feature List", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                </div>
+                <div class="float-right">
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            @try
+                            {
+                                if (Session["GroupClassificationAdmin"].ToString() == "Administrator")
+                                {
+                                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["GroupClassificationBuilder"].ToString() == "Build Team")
+                                {
+                                    <li>@Html.ActionLink("Build", "BuildAssigned", "ValveSection")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["GroupClassificationQC"].ToString() == "Quality Control Team")
+                                {
+                                    <li>@Html.ActionLink("QC", "QC", "ValveSection")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["GroupClassificationEngineer"].ToString() == "Engineering Analysis Team")
+                                {
+                                    <li>@Html.ActionLink("Engineering", "Engineering", "ValveSection")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["GroupClassificationFinalEngineer"].ToString() == "Final Engineering Analysis Team")
+                                {
+                                    <li>@Html.ActionLink("Final Engineering", "FinalEngineering", "ValveSection")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["GroupClassificationAnnualReview"].ToString() == "Annual Review Team")
+                                {
+                                    <li>@Html.ActionLink("Annual Review", "AnnualReview", "ValveSection")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["GroupClassificationCertificationApproved"].ToString() == "Certification Approved Team")
+                                {
+                                    <li>@Html.ActionLink("Certified", "CertificationApproved", "ValveSection")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["UserID"] != null)
+                                {
+                                    <li>@Html.ActionLink("Account", "Manage", "Account")</li>
+                                }
+                            }
+                            catch { }
+                            @try
+                            {
+                                if (Session["UserID"] != null)
+                                {
+                                    <li>@Html.ActionLink("Log Off", "LogOff", "Account")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Log In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>   
+                                }
+                            }
+                            catch
+                            { 
+                                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Pipeline Feature List</p>
+                </div>
+            </div>
+        </footer>
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model PipelineFeatureList.Models.NotificationEmail
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>NotificationEmail</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Report)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Report)
+            @Html.ValidationMessageFor(model => model.Report)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Emails)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Emails)
+            @Html.ValidationMessageFor(model => model.Emails)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Flag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Flag)
+            @Html.ValidationMessageFor(model => model.Flag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

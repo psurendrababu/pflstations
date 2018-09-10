@@ -1,0 +1,33 @@
+﻿@model PipelineFeatureList.Models.ReportEmail
+
+@{
+    ViewBag.Title = "Report Email Details";
+}
+
+<h2>Report Email Details</h2>
+
+<fieldset>
+    <legend>ReportEmail</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Report.ReportName)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Report.ReportName)
+    </div></td>
+    <td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.UserName)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.UserName)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReportEmailsID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>

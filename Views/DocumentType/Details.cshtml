@@ -1,0 +1,57 @@
+﻿@model PipelineFeatureList.Models.DocumentType
+
+@{
+    ViewBag.Title = "Document Type Details";
+}
+
+<h2>Document Type Details</h2>
+
+<fieldset>
+    <legend>DocumentType</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentTypeItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentTypeItem)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PreConstruction)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PreConstruction)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystem.PipeSystemItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Pipeline.PipelineItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Pipeline.PipelineItem)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PageRequired)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PageRequired)
+    </div>
+    </td></tr></table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DocumentTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

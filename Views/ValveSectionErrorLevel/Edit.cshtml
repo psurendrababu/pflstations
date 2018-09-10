@@ -1,0 +1,53 @@
+﻿@model PipelineFeatureList.Controllers.ValveSectionErrorLevel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ValveSectionErrorLevel</legend>
+
+        @Html.HiddenFor(model => model.ValveSectionErrorLevelID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ValveSectionErrorLevelItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ValveSectionErrorLevelItem)
+            @Html.ValidationMessageFor(model => model.ValveSectionErrorLevelItem)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BackColor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BackColor)
+            @Html.ValidationMessageFor(model => model.BackColor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ForeColor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ForeColor)
+            @Html.ValidationMessageFor(model => model.ForeColor)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

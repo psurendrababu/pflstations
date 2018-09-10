@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionAdmin>
+
+@{
+    ViewBag.Title = "Valve Sections";
+}
+
+<h2>Valve Sections</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, htmlAttributes: new { @class = "linkbutton" })
+</p>
+<table width="100%">
+    <tr>
+        <th>
+            @Html.Raw("Pipe<br />System")
+        </th>
+        <th>
+            @Html.Raw("Pipe<br />Line")
+        </th>
+        <th>
+            @Html.Raw("Valve<br />Section")
+        </th>
+        <th>
+            @Html.Raw("Orion<br />Station<br />Series")
+        </th>
+        <th>
+            @Html.Raw("Builder")
+        </th>
+        <th>
+            @Html.Raw("QC")
+        </th>
+        <th>
+            @Html.Raw("Engineer")
+        </th>
+        <th>
+            @Html.Raw("Final Engineer")
+        </th>
+        <th>
+            @Html.Raw("Status")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PipeSystem.PipeSystemItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pipeline.PipelineItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection.ValveSectionBegin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSection.OrionStationSeries)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Builder.FirstName) @Html.DisplayFor(modelItem => item.Builder.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QC.FirstName) @Html.DisplayFor(modelItem => item.QC.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Engineer.FirstName) @Html.DisplayFor(modelItem => item.Engineer.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinalEngineer.FirstName) @Html.DisplayFor(modelItem => item.FinalEngineer.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveStatus.ValveSectionStatusItem)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ValveSection.ValveSectionID}, htmlAttributes: new { @class = "linkbuttonsmall" }) 
+            @Html.ActionLink("Delete", "Delete", new { id=item.ValveSection.ValveSectionID }, htmlAttributes: new { @class = "linkbuttonsmall" }) 
+            @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSection.OrionStationSeries, @class = "linkbuttonsmall"}, htmlAttributes: new { @class = "linkbuttonsmall" })
+        </td>
+    </tr>
+}
+</table>
+<p>
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</div>
+</p>

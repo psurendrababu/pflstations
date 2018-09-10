@@ -1,0 +1,60 @@
+﻿@model PipelineFeatureList.Models.DocumentType
+
+@{
+    ViewBag.Title = "Delete Document Type";
+}
+
+<h2>Delete Document Type</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DocumentType</legend>
+
+    <table><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocumentTypeItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocumentTypeItem)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PreConstruction)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PreConstruction)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PipeSystem.PipeSystemItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Pipeline.PipelineItem)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Pipeline.PipelineItem)
+    </div>
+    </td></tr><tr><td>
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PageRequired)
+    </div></td>
+    <td>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PageRequired)
+    </div>
+    </td></tr></table>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

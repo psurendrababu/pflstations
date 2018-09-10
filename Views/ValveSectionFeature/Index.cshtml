@@ -1,0 +1,389 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionFeature>
+
+@{
+    ViewBag.Title = "Valve Section Overview";
+}
+
+<table>
+    <tr><td><h2>Valve Section Information&nbsp;&nbsp;&nbsp;&nbsp;ANR Pipeline:</h2></td><td><h2>Material Records Information</h2></td></tr>
+    <tr><td>
+        <table border="1">
+            <tr><th>Orion Station Series</th><td></td></tr>
+            <tr><th>Valve Section Begin/End</th><td></td></tr>
+            <tr><th>Mile Point Begin/End</th><td></td></tr>
+            <tr><th>Orion Station Begin/End</th><td></td></tr>
+            <tr><th>GIS Station Begin/End</th><td></td></tr>
+            <tr><th>Current MAOP</th><td></td></tr>
+            <tr><td colspan="2">
+                <table><tr><td>Builder ID:</td><td>QC ID:</td><td>Engineer ID:</td></tr></table>
+            </td></tr>
+            <tr>
+            <td colspan="2"><h2>Error Messages</h2></td>
+            </tr>
+            <tr><td>Gridview will go here</td></tr>
+        </table>
+        </td>
+        <td>
+        <table border="1">
+            <tr><td>Gridview will go here</td></tr>
+            <tr><td>Add Record Edit Record</td></tr>
+        </table>
+        </td>
+    </tr>
+    <tr><td><h2>Valve Section Feature List</h2></td></tr>
+    <tr><td>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GISAlignStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GISAlignEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Length)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobWOPO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InstallDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InServiceDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConstructionTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrawingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODID1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODRecordID1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODRecordID2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WallThickness1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WTRecordID1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WTRecordID2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WTRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ODID2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WallThickness2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeamWeldTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeamRecordID1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeamRecordID2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeamRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GradeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecordID1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecordID2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecRatingRecordMatrixCheck)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ANSIRatingID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaterialTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AngleID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RadiusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoatingTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufacturerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MFRDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentClassLoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassDesignFactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HCAName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SMYS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OutsideDiameter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WallThickness)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DesignFactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JointFactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TemperatureDerating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DesignPressure)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuilderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngineerID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GISAlignStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GISAlignEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeatureNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FeatureID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Length)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobWOPO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstallDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InServiceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConstructionTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrawingID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODID1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODRecordID1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODRecordID2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WallThickness1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WTRecordID1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WTRecordID2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WTRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ODID2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WallThickness2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeamWeldTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeamRecordID1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeamRecordID2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeamRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GradeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecordID1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecordID2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecRatingRecordMatrixCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ANSIRatingID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaterialTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AngleID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RadiusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrientID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoatingTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManufacturerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MFRDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentClassLoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClassDesignFactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HCAName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SMYS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OutsideDiameter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WallThickness)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DesignFactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JointFactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TemperatureDerating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DesignPressure)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuilderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngineerID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ValveSectionFeatureID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ValveSectionFeatureID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ValveSectionFeatureID })
+        </td>
+    </tr>
+}
+
+</table>
+    
+    
+    </td></tr>
+</table>
+
+

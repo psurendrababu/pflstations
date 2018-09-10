@@ -1,0 +1,121 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionCertificationApproved>
+
+@{
+    ViewBag.Title = "CertificationApproved";
+}
+
+@using (Html.BeginForm("CertificationApproved", "ValveSection", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>CertificationApproved</legend>
+        
+        <table width="100%">
+            <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><div class="editor-label">@Html.Raw("Pipe System")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipeSystemData", ViewBag.PipeSystemID as SelectList, "- All Pipe Systems -", new { @id = "ddlPipeSystems", @onchange = "onchangeevent1()" })</div></td>
+            <td><div class="editor-label">@Html.Raw("Pipeline")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipelineData", ViewBag.PipelineID as SelectList, "- All Pipelines -", new { @id = "ddlPipelines", @onchange = "onchangeevent2()" })</div></td>
+            <td><input type="submit" value="Filter" onclick="onchangeevent2()" /></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<table width="100%">
+    <tr>
+        <th>
+            @Html.Raw("Pipe System")
+        </th>
+        <th>
+            @Html.Raw("Pipeline")
+        </th>
+        <th>
+            @Html.Raw("Valve Section")
+        </th>
+        <th>
+            @Html.Raw("Orion Station Series")
+        </th>
+        <th>
+            @Html.Raw("Status")
+        </th>
+        <th>
+            @Html.Raw("Segmentation Required")
+        </th>
+        <th>
+            @Html.Raw("Crossings Status")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.ValveSectionCertificationApprovedPool != null)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionCertificationApprovedPool.PipeSystem.PipeSystemItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionCertificationApprovedPool.Pipeline.PipelineItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionCertificationApprovedPool.ValveSection.ValveSectionBegin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionCertificationApprovedPool.ValveSection.OrionStationSeries)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValveSectionCertificationApprovedPool.ValveStatus.ValveSectionStatusItem)
+            </td>
+            <td>
+                @try
+                {
+                    if (item.ValveSectionCertificationApprovedPool.ValveSection.IsSegmentationDirty == true)
+                    {
+                        @Html.Raw("Yes")
+                    }
+                    else
+                    {
+                        @Html.Raw("No")
+                    }
+                }
+                catch
+                {
+                    @Html.Raw("No")
+                }
+            </td>
+            <td>
+                @try
+                {
+                    if (item.ValveSectionCertificationApprovedPool.ValveSection.CrossingsStatus == "M")
+                    {
+                        @Html.Raw("Not Available")
+                    }
+                    else if (item.ValveSectionCertificationApprovedPool.ValveSection.CrossingsStatus == "Y")
+                    {
+                        @Html.Raw("Imported")
+                    }
+                    else if (item.ValveSectionCertificationApprovedPool.ValveSection.CrossingsStatus == "N")
+                    {
+                        @Html.Raw("Not Applicable")
+                    }
+                    else
+                    {
+                        @Html.Raw("Not Available")
+                    }
+                }
+                catch
+                {
+                    @Html.Raw("Not Available")
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionCertificationApprovedPool.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionCertificationApprovedPool.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
+            </td>
+        </tr>
+    }
+}
+
+</table>
+

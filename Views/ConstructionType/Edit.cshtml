@@ -1,0 +1,37 @@
+﻿@model PipelineFeatureList.Models.ConstructionType
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ConstructionType</legend>
+
+        @Html.HiddenFor(model => model.ConstructionTypeID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ConstructionTypeItem)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ConstructionTypeItem)
+            @Html.ValidationMessageFor(model => model.ConstructionTypeItem)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,22 @@
+﻿@model PipelineFeatureList.Models.MaterialType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>MaterialType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MaterialTypeItem)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaterialTypeItem)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.MaterialTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

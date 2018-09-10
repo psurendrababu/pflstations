@@ -1,0 +1,63 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.WorkflowHistory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ValveSectionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedBy_UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Old_WorkflowStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkflowActionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.New_WorkflowStatusID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValveSectionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedBy_UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Old_WorkflowStatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkflowActionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.New_WorkflowStatusID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkflowHistoryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkflowHistoryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkflowHistoryID })
+        </td>
+    </tr>
+}
+
+</table>
