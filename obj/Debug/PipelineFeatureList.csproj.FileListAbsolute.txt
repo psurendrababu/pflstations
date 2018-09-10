@@ -1,0 +1,17 @@
+C:\Users\cforsyth\source\repos\pfl-stations\bin\PipelineFeatureList.dll.config
+C:\Users\cforsyth\source\repos\pfl-stations\bin\PipelineFeatureList.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\PipelineFeatureList.pdb
+C:\Users\cforsyth\source\repos\pfl-stations\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\Newtonsoft.Json.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Net.Http.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Net.Http.Formatting.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Net.Http.WebRequest.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Web.Http.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Web.Http.WebHost.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\Microsoft.ReportViewer.WebForms.xml
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\PipelineFeatureList.csproj.CoreCompileInputs.cache
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\PipelineFeatureList.csproj.CopyComplete
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\PipelineFeatureList.dll
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\PipelineFeatureList.pdb
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\PipelineFeatureList.csprojAssemblyReference.cache

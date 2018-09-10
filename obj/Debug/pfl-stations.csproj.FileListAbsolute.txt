@@ -1,0 +1,15 @@
+C:\Users\cforsyth\source\repos\pfl-stations\bin\pflstations.dll.config
+C:\Users\cforsyth\source\repos\pfl-stations\bin\pflstations.dll
+C:\Users\cforsyth\source\repos\pfl-stations\bin\pflstations.pdb
+C:\Users\cforsyth\source\repos\pfl-stations\bin\Microsoft.ReportViewer.WebForms.xml
+C:\Users\cforsyth\source\repos\pfl-stations\bin\Newtonsoft.Json.xml
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Net.Http.xml
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Net.Http.Formatting.xml
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Net.Http.WebRequest.xml
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Web.Http.xml
+C:\Users\cforsyth\source\repos\pfl-stations\bin\System.Web.Http.WebHost.xml
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\pfl-stations.csprojAssemblyReference.cache
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\pfl-stations.csproj.CoreCompileInputs.cache
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\pfl-stations.csproj.CopyComplete
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\pflstations.dll
+C:\Users\cforsyth\source\repos\pfl-stations\obj\Debug\pflstations.pdb
