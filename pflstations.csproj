@@ -86,9 +86,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
@@ -307,61 +304,40 @@
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\DotNetOpenAuth.AspNet.dll" />
-    <Content Include="bin\DotNetOpenAuth.AspNet.xml" />
     <Content Include="bin\DotNetOpenAuth.Core.dll" />
-    <Content Include="bin\DotNetOpenAuth.Core.xml" />
     <Content Include="bin\DotNetOpenAuth.OAuth.Consumer.dll" />
-    <Content Include="bin\DotNetOpenAuth.OAuth.Consumer.xml" />
     <Content Include="bin\DotNetOpenAuth.OAuth.dll" />
-    <Content Include="bin\DotNetOpenAuth.OAuth.xml" />
     <Content Include="bin\DotNetOpenAuth.OpenId.dll" />
     <Content Include="bin\DotNetOpenAuth.OpenId.RelyingParty.dll" />
-    <Content Include="bin\DotNetOpenAuth.OpenId.RelyingParty.xml" />
-    <Content Include="bin\DotNetOpenAuth.OpenId.xml" />
     <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Microsoft.ReportViewer.Common.dll" />
     <Content Include="bin\Microsoft.ReportViewer.WebForms.dll" />
-    <Content Include="bin\Microsoft.ReportViewer.WebForms.xml" />
     <Content Include="bin\Microsoft.ReportViewer.WinForms.dll" />
     <Content Include="bin\Microsoft.ReportViewer.WinForms.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Microsoft.Web.WebPages.OAuth.dll" />
-    <Content Include="bin\Microsoft.Web.WebPages.OAuth.xml" />
     <Content Include="bin\Mono.Math.dll" />
+    <Content Include="bin\Mono.Math.xml" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="bin\Org.Mentalis.Security.Cryptography.dll" />
-    <Content Include="bin\PipelineFeatureList.dll" />
-    <Content Include="bin\PipelineFeatureList.pdb" />
+    <Content Include="bin\Org.Mentalis.Security.Cryptography.xml" />
+    <Content Include="bin\pflstations.dll" />
+    <Content Include="bin\pflstations.pdb" />
     <Content Include="bin\System.Net.Http.dll" />
     <Content Include="bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.xml" />
     <Content Include="bin\System.Net.Http.WebRequest.dll" />
-    <Content Include="bin\System.Net.Http.WebRequest.xml" />
-    <Content Include="bin\System.Net.Http.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Http.dll" />
     <Content Include="bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\System.Web.Http.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
-    <Content Include="bin\WebMatrix.Data.xml" />
     <Content Include="bin\WebMatrix.WebData.dll" />
-    <Content Include="bin\WebMatrix.WebData.xml" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -420,6 +396,13 @@
     <Content Include="Global.asax" />
     <Content Include="Libs\Microsoft.ReportViewer.Common.dll" />
     <Content Include="Libs\Microsoft.ReportViewer.WebForms.dll" />
+    <Content Include="obj\Debug\pfl-stations.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\pflstations.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\pflstations.dll" />
+    <Content Include="obj\Debug\pflstations.pdb" />
+    <Content Include="obj\Debug\PipelineFeatureList.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\PipelineFeatureList.dll" />
+    <Content Include="obj\Debug\PipelineFeatureList.pdb" />
     <Content Include="packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll" />
     <Content Include="packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.xml" />
     <Content Include="packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net35-full\DotNetOpenAuth.Core.dll" />
@@ -458,6 +441,16 @@
     <Content Include="packages\EntityFramework.5.0.0\tools\EntityFramework.PowerShell.dll" />
     <Content Include="packages\EntityFramework.5.0.0\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.5.0.0\tools\migrate.exe" />
+    <Content Include="bin\pflstations.dll.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\pfl-stations.csproj.CopyComplete" />
+    <Content Include="obj\Debug\pfl-stations.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\pfl-stations.csprojAssemblyReference.cache" />
+    <Content Include="obj\Debug\pflstations.csproj.CopyComplete" />
+    <Content Include="obj\Debug\pflstations.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\PipelineFeatureList.csproj.CopyComplete" />
+    <Content Include="obj\Debug\PipelineFeatureList.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\PipelineFeatureList.csprojAssemblyReference.cache" />
     <None Include="packages\jQuery.1.7.1.1\Content\Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="packages\jQuery.1.7.1.1\Content\Scripts\jquery-1.7.1.js" />
     <Content Include="packages\jQuery.1.7.1.1\Content\Scripts\jquery-1.7.1.min.js" />
@@ -634,9 +627,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1185,9 +1181,6 @@
     <Content Include="packages\Modernizr.2.5.3\Modernizr.2.5.3.nupkg" />
     <Content Include="packages\Newtonsoft.Json.4.5.6\Newtonsoft.Json.4.5.6.nupkg" />
     <Content Include="packages\WebGrease.1.1.0\WebGrease.1.1.0.nupkg" />
-    <None Include="Properties\PublishProfiles\Debug %283coast%29.pubxml" />
-    <None Include="Properties\PublishProfiles\Release %28G2%29.pubxml" />
-    <None Include="Properties\PublishProfiles\Test %28G2%29.pubxml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxes.cshtml" />
     <Content Include="Views\Overview\Errors.cshtml" />
     <Content Include="Views\FeatureIssue\Index.cshtml" />
@@ -1300,6 +1293,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
