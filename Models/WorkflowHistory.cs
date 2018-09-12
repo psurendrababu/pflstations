@@ -11,7 +11,7 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public Int64 WorkflowHistoryID { get; set; }
-        [DisplayName("Valve Section ID")]
+        [DisplayName("Circuit ID")]
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Changed By")]
         public Int64 ChangedBy_UserID { get; set; }

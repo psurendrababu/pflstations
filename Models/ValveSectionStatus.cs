@@ -11,7 +11,7 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public int ValveSectionStatusID { get; set; }
-        [DisplayName("Valve Section Status")]
+        [DisplayName("Circtui Status")]
         public string ValveSectionStatusItem { get; set; }
         [DisplayName("Created By")]
         public Int64 CreatedBy_UserID { get; set; }

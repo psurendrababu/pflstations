@@ -11,7 +11,7 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public int ValveSectionErrorLevelID { get; set; }
-        [DisplayName("Valve Section Error Level")]
+        [DisplayName("Circuit Error Level")]
         public string ValveSectionErrorLevelItem { get; set; }
         [DisplayName("Back Color")]
         public string BackColor { get; set; }

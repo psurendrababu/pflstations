@@ -11,7 +11,7 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public Int64 DocumentRecordID { get; set; }
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Records Identifier")]
         public int RecordIdentifierID { get; set; }
@@ -26,7 +26,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("Page Number")]
         public string Page { get; set; }
         
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
         [DisplayName("Document Type")]
         public DocumentType DocumentType { get; set; }

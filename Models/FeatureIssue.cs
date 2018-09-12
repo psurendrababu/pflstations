@@ -12,10 +12,10 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("Feature Issue ID")]
         public Int64 FeatureIssueID { get; set; }
-        [DisplayName("Valve Section ID")]
+        [DisplayName("Circuit ID")]
         public Int64 ValveSectionID { get; set; }
         [Required]
-        [DisplayName("Valve Section Feature ID")]
+        [DisplayName("Circuit Feature ID")]
         public Int64 ValveSectionFeatureID { get; set; }
         [DisplayName("Feature Number")]
         public string FeatureNumber { get; set; }

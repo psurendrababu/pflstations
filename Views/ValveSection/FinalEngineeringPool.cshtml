@@ -14,10 +14,10 @@
         <table width="100%">
             <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><div class="editor-label">@Html.Raw("Pipe System")</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipeSystemData", ViewBag.PipeSystemID as SelectList, "- All Pipe Systems -", new { @id = "ddlPipeSystems", @onchange = "onchangeevent1()" })</div></td>
-            <td><div class="editor-label">@Html.Raw("Pipeline")</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipelineData", ViewBag.PipelineID as SelectList, "- All Pipelines -", new { @id = "ddlPipelines", @onchange = "onchangeevent2()" })</div></td>
+            <td><div class="editor-label">@Html.Raw("Station System")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipeSystemData", ViewBag.PipeSystemID as SelectList, "- All Station Systems -", new { @id = "ddlPipeSystems", @onchange = "onchangeevent1()" })</div></td>
+            <td><div class="editor-label">@Html.Raw("Station")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipelineData", ViewBag.PipelineID as SelectList, "- All Stations -", new { @id = "ddlPipelines", @onchange = "onchangeevent2()" })</div></td>
             <td><input type="submit" value="Filter" onclick="onchangeevent2()" /></td>
             </tr>
         </table>
@@ -27,13 +27,13 @@
 <table width="100%">
     <tr>
         <th>
-            @Html.Raw("Pipe System")
+            @Html.Raw("Station System")
         </th>
         <th>
-            @Html.Raw("Pipeline")
+            @Html.Raw("Station")
         </th>
         <th>
-            @Html.Raw("Valve Section")
+            @Html.Raw("Circuit")
         </th>
         <th>
             @Html.Raw("Orion Station Series")

@@ -19,15 +19,15 @@ namespace PipelineFeatureList.Models
         public Int64 ModifiedBy_UserID { get; set; }
         [DisplayName("Modified Date/Time")]
         public DateTime ModifiedOn { get; set; }
-        [DisplayName("Old Valve Section Status ID")]
+        [DisplayName("Old Circuit Status ID")]
         public int Old_ValveSectionStatusID { get; set; }
         [DisplayName("Workflow Action ID")]
         public int WorkflowActionID { get; set; }
-        [DisplayName("New Valve Section Status ID")]
+        [DisplayName("New Circuit Status ID")]
         public int New_ValveSectionStatusID { get; set; }
-        [DisplayName("New Valve Section Owner User ID")]
+        [DisplayName("New Circtui Owner User ID")]
         public Int64 New_ValveSectionOwner_UserID { get; set; }
-        [DisplayName("New Valve Section Owner Workflow Variable ID")]
+        [DisplayName("New Circuit Owner Workflow Variable ID")]
         public Int64 New_ValveSectionOwner_WorkflowVariableID { get; set; }
         [DisplayName("Description")]
         public string Description { get; set; }

@@ -19,11 +19,11 @@ namespace PipelineFeatureList.Models
         public Nullable<DateTime> StartedOn { get; set; }
         [DisplayName("Completed On")]
         public Nullable<DateTime> CompletedOn { get; set; }
-        [DisplayName("Pipeline System ID")]
+        [DisplayName("Station System ID")]
         public int PipelineSystemID { get; set; }
-        [DisplayName("Pipeline ID")]
+        [DisplayName("Station ID")]
         public int PipelineID { get; set; }
-        [DisplayName("Valve Section ID")]
+        [DisplayName("Circuit ID")]
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Is Latest Copy")]
         public bool IsLatestCopy { get; set; }

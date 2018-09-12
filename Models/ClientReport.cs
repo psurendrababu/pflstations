@@ -13,9 +13,9 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("Client Report")]
         public ClientReport ClientReportData { get; set; }
-        [DisplayName("Pipe Systems")]
+        [DisplayName("Station Systems")]
         public List<PipeSystem> PipeSystemData { get; set; }
-        [DisplayName("Pipelines")]
+        [DisplayName("Stations")]
         public List<Pipeline> PipelineData { get; set; }
         [DisplayName("Reports")]
         public List<Report> ReportData { get; set; }

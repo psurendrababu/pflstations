@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<PipelineFeatureList.Models.ValveSectionAdmin>
 
 @{
-    ViewBag.Title = "Valve Sections";
+    ViewBag.Title = "Circuits";
 }
 
-<h2>Valve Sections</h2>
+<h2>Stations</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create", null, null, htmlAttributes: new { @class = "linkbutton" })
@@ -12,13 +12,13 @@
 <table width="100%">
     <tr>
         <th>
-            @Html.Raw("Pipe<br />System")
+            @Html.Raw("Station<br />System")
         </th>
         <th>
-            @Html.Raw("Pipe<br />Line")
+            @Html.Raw("Station")
         </th>
         <th>
-            @Html.Raw("Valve<br />Section")
+            @Html.Raw("Circuit")
         </th>
         <th>
             @Html.Raw("Orion<br />Station<br />Series")

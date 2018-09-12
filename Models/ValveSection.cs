@@ -12,23 +12,23 @@ namespace PipelineFeatureList.Models
 {
     public class ValveSection
     {
-        [DisplayName("Valve Section ID")]
+        [DisplayName("Circuit ID")]
         [Required]
         public Int64 ValveSectionID { get; set; }
-        [DisplayName("Pipe System")]
-        [Required(AllowEmptyStrings = false, ErrorMessage="Pipe System Required")]
+        [DisplayName("Station System")]
+        [Required(AllowEmptyStrings = false, ErrorMessage="Station System Required")]
         public int? PipeSystemID { get; set; }
-        [DisplayName("Pipeline")]
-        [Required(ErrorMessage = "Pipe Line Required")]
+        [DisplayName("Station")]
+        [Required(ErrorMessage = "Station Required")]
         public int PipelineID { get; set; }
         [DisplayName("Orion Station Series")]
         [Required]
         [RegularExpression(@"^([0-9]\d*)$", ErrorMessage = "Please enter a valid Orion Station Series.")]
         public string OrionStationSeries { get; set; }
-        [DisplayName("Valve Section Begin")]
+        [DisplayName("Circuit Begin")]
         [Required]
         public string ValveSectionBegin { get; set; }
-        [DisplayName("Valve Section End")]
+        [DisplayName("Circuit End")]
         public string ValveSectionEnd { get; set; }
         [DisplayName("Mile Point Begin")]
         public Nullable<decimal> MilePointBegin { get; set; }
@@ -84,9 +84,9 @@ namespace PipelineFeatureList.Models
         [DisplayName("Crossings Status")]
         public string CrossingsStatus { get; set; }
 
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Status")]
         public ValveSectionStatus ValveSectionStatus { get; set; }
@@ -108,13 +108,13 @@ namespace PipelineFeatureList.Models
 
     public class ValveSectionAdmin
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
         //[DisplayName("Display")]
         //public DisplayGroup DisplayGroup { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Builder { get; set; }
@@ -134,11 +134,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionQCAssigned
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Length")]
         public decimal Length { get; set; }
@@ -153,7 +153,7 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionQCPool
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
         [DisplayName("Pipe System")]
         public PipeSystem PipeSystem { get; set; }
@@ -177,11 +177,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionEngineeringAssigned
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -190,11 +190,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionEngineeringPool
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -208,11 +208,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionFinalEngineeringAssigned
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -221,11 +221,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionFinalEngineeringPool
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -245,11 +245,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionAnnualReviewAssigned
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -258,11 +258,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionAnnualReviewPool
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -282,11 +282,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionCertificationApprovedAssigned
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circtui")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }
@@ -295,11 +295,11 @@ namespace PipelineFeatureList.Models
     }
     public class ValveSectionCertificationApprovedPool
     {
-        [DisplayName("Valve Section")]
+        [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }
         [DisplayName("Builder")]
         public User Users { get; set; }

@@ -14,7 +14,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("Certification Approved ID")]
         [Required]
         public Int64 CertificationApprovedID { get; set; }
-        [DisplayName("Valve Section ID")]
+        [DisplayName("Circuit ID")]
         [Required]
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Certification Date/Time")]

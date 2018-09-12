@@ -9,5 +9,4 @@ C:\Users\cforsyth\source\repos\pflstations\bin\Org.Mentalis.Security.Cryptograph
 C:\Users\cforsyth\source\repos\pflstations\bin\Mono.Math.dll
 C:\Users\cforsyth\source\repos\pflstations\bin\Org.Mentalis.Security.Cryptography.xml
 C:\Users\cforsyth\source\repos\pflstations\bin\Mono.Math.xml
-C:\Users\cforsyth\source\repos\pflstations\obj\Debug\pflstations.csprojAssemblyReference.cache
 C:\Users\cforsyth\source\repos\pflstations\bin\Newtonsoft.Json.dll

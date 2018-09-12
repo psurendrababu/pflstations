@@ -11,9 +11,9 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public int PipelineID { get; set; }
-        [DisplayName("Pipeline")]
+        [DisplayName("Station")]
         public string PipelineItem { get; set; }
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public int PipeSystemID { get; set; }
         [DisplayName("Created By")]
         public Int64 CreatedBy_UserID { get; set; }
@@ -24,7 +24,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("Modified Date/Time")]
         public DateTime ModifiedOn { get; set; }
 
-        [DisplayName("Pipe System")]
+        [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
 
     }

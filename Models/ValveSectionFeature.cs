@@ -10,9 +10,9 @@ namespace PipelineFeatureList.Models
 {
     public class ValveSectionFeature
     {
-        [DisplayName("Valve Section Feature ID")]
+        [DisplayName("Circuit Feature ID")]
         public Int64 ValveSectionFeatureID { get; set; }
-        [DisplayName("Valve Section ID")]
+        [DisplayName("Circuit ID")]
         public Int64 ValveSectionID { get; set; }
         [Required]
         [DisplayName("GIS Alignment Sheet Begin Station")]
