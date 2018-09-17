@@ -1951,7 +1951,6 @@ namespace PipelineFeatureList.Controllers
             if (valvesectionfeature.LengthDiscrepancy != 0)
             {
                 InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "LengthDiscNot0", false);
-                //db.SaveChanges();
             }
             /////////////////////
             // Feature Type
