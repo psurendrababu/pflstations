@@ -1,38 +1,69 @@
 ﻿@model PipelineFeatureList.Models.Pipeline
 
 @{
-    ViewBag.Title = "Edit Pipeline";
+    ViewBag.Title = "Edit Station";
 }
 
-<h2>Edit Pipeline</h2>
+<h2>Edit Station</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Pipeline</legend>
+        <legend>Station</legend>
 
         @Html.HiddenFor(model => model.PipelineID)
 
-        <table><tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PipelineItem)
-        </div></td>
-        <td>
-        <div class="medium">
-            @Html.EditorFor(model => model.PipelineItem)
-            @Html.ValidationMessageFor(model => model.PipelineItem)
-        </div>
-        </td></tr>
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PipeSystemID)
-        </div></td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("PipeSystemID", "- Select a Pipe System -")
-        </div>
-        </td></tr></table>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PipelineItem)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PipelineItem)
+                    @Html.ValidationMessageFor(model => model.PipelineItem)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PipeSystemID)
+                </td>
+                <td>
+                    @Html.DropDownList("PipeSystemID", "- Select a Pipe System -")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Street)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Street)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CrossStreet)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.CrossStreet)
+                </td>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Town)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Town)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Notes)
+                </td>
+                <td>
+                    @Html.TextAreaFor(model => model.Notes)
+                </td>
+            </tr>
+        </table>
 
         <p>
             <input type="submit" value="Save" />

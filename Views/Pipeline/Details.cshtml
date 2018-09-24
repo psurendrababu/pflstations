@@ -9,24 +9,63 @@
 <fieldset>
     <legend>Pipeline</legend>
 
-    <table><tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PipelineItem)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PipelineItem)
-    </div></td>
-    </tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PipeSystemID)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
-    </div>
-    </td></tr></table>
+    <table>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PipelineItem)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PipelineItem)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PipeSystemID)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Street)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.CrossStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CrossStreet)
+            </td>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Town)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Notes)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.CircuitCount)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CircuitCount)
+            </td>
+        </tr>
+    </table>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 

@@ -14,8 +14,8 @@
         <table width="100%">
             <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><div class="editor-label">@Html.Raw("Station System")</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipeSystemData", ViewBag.PipeSystemID as SelectList, "- All Station Systems -", new { @id = "ddlPipeSystems", @onchange = "onchangeevent1()" })</div></td>
+            <td><div class="editor-label">@Html.Raw("Station Location")</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipeSystemData", ViewBag.PipeSystemID as SelectList, "- All Station Locations -", new { @id = "ddlPipeSystems", @onchange = "onchangeevent1()" })</div></td>
             <td><div class="editor-label">@Html.Raw("Stations")</div></td>
             <td><div class="editor-field">@Html.DropDownList("PipelineData", ViewBag.PipelineID as SelectList, "- All Stations -", new { @id = "ddlPipelines", @onchange = "onchangeevent2()" })</div></td>
             <td><input type="submit" value="Filter" onclick="onchangeevent2()" /></td>
@@ -27,7 +27,7 @@
 <table width="100%">
     <tr>
         <th>
-            @Html.Raw("Station System")
+            @Html.Raw("Station Locatrion")
         </th>
         <th>
             @Html.Raw("Stations")
@@ -36,16 +36,7 @@
             @Html.Raw("Circuits")
         </th>
         <th>
-            @Html.Raw("Orion Station Series")
-        </th>
-        <th>
             @Html.Raw("Status")
-        </th>
-        <th>
-            @Html.Raw("Segmentation Required")
-        </th>
-        <th>
-            @Html.Raw("Crossings Status")
         </th>
     </tr>
 
@@ -63,52 +54,7 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionEngineeringPool.ValveSection.ValveSectionBegin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionEngineeringPool.ValveSection.OrionStationSeries)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ValveSectionEngineeringPool.ValveStatus.ValveSectionStatusItem)
-            </td>
-            <td>
-                @try
-                {
-                    if (item.ValveSectionEngineeringPool.ValveSection.IsSegmentationDirty == true)
-                    {
-                        @Html.Raw("Yes")
-                    }
-                    else
-                    {
-                        @Html.Raw("No")
-                    }
-                }
-                catch
-                {
-                    @Html.Raw("No")
-                }
-            </td>
-            <td>
-                @try
-                {
-                    if (item.ValveSectionEngineeringPool.ValveSection.CrossingsStatus == "M")
-                    {
-                        @Html.Raw("Not Available")
-                    }
-                    else if (item.ValveSectionEngineeringPool.ValveSection.CrossingsStatus == "Y")
-                    {
-                        @Html.Raw("Imported")
-                    }
-                    else if (item.ValveSectionEngineeringPool.ValveSection.CrossingsStatus == "N")
-                    {
-                        @Html.Raw("Not Applicable")
-                    }
-                    else
-                    {
-                        @Html.Raw("Not Available")
-                    }
-                }
-                catch
-                {
-                    @Html.Raw("Not Available")
-                }
             </td>
             <td>
                 @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionEngineeringPool.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionEngineeringPool.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })

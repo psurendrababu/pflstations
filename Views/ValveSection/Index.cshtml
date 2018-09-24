@@ -4,7 +4,7 @@
     ViewBag.Title = "Circuits";
 }
 
-<h2>Stations</h2>
+<h2>Circuits</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create", null, null, htmlAttributes: new { @class = "linkbutton" })
@@ -12,16 +12,13 @@
 <table width="100%">
     <tr>
         <th>
-            @Html.Raw("Station<br />System")
+            @Html.DisplayNameFor(model => model.PipeSystem)
         </th>
         <th>
-            @Html.Raw("Station")
+            @Html.DisplayNameFor(model => model.Pipeline)
         </th>
         <th>
             @Html.Raw("Circuit")
-        </th>
-        <th>
-            @Html.Raw("Orion<br />Station<br />Series")
         </th>
         <th>
             @Html.Raw("Builder")
@@ -50,9 +47,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ValveSection.ValveSectionBegin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ValveSection.OrionStationSeries)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Builder.FirstName) @Html.DisplayFor(modelItem => item.Builder.LastName)

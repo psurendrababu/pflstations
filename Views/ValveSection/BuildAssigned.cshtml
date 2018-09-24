@@ -9,16 +9,13 @@
 <table width="100%">
     <tr>
         <th>
-            @Html.Raw("Station System")
+            @Html.Raw("Station Location")
         </th>
         <th>
             @Html.Raw("Station")
         </th>
         <th>
-            @Html.Raw("Circuit")
-        </th>
-        <th>
-            @Html.Raw("Orion Station Series")
+            @Html.Raw("Circuit ID")
         </th>
         <th>
             @Html.Raw("Status")
@@ -37,14 +34,8 @@
             @Html.DisplayFor(modelItem => item.ValveSection.ValveSectionBegin)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ValveSection.OrionStationSeries)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.ValveStatus.ValveSectionStatusItem)
         </td>
-        @*<td>
-            @Html.ActionLink("Edit", "AssignedEdit", new { id = item.ValveSection.ValveSectionID })
-        </td>*@
         <td>
             @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
         </td>

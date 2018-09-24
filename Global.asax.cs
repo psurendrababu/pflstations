@@ -29,7 +29,7 @@ namespace PipelineFeatureList
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            ViewEngines.Engines.Add(new RazorViewEngine());
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

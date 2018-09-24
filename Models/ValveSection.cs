@@ -112,7 +112,7 @@ namespace PipelineFeatureList.Models
         public ValveSection ValveSection { get; set; }
         //[DisplayName("Display")]
         //public DisplayGroup DisplayGroup { get; set; }
-        [DisplayName("Station System")]
+        [DisplayName("Station Location")]
         public PipeSystem PipeSystem { get; set; }
         [DisplayName("Station")]
         public Pipeline Pipeline { get; set; }

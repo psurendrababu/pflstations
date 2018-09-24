@@ -11,7 +11,7 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public int PipeSystemID { get; set; }
-        [DisplayName("Station System")]
+        [DisplayName("Station Location")]
         public string PipeSystemItem { get; set; }
     }
 }

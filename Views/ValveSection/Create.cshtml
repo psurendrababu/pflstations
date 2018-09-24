@@ -1,25 +1,25 @@
 ﻿@model PipelineFeatureList.Models.ValveSection
 
 @{
-    ViewBag.Title = "Create Valve Section";
+    ViewBag.Title = "Create Circuit";
 }
 
-<h2>Create Valve Section</h2>
+<h2>Create Circuit</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>ValveSection</legend>
+        <legend>Circuit</legend>
 
         <table>
             <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.PipeSystemID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipeSystemID", "- Select a Pipe System -") @Html.ValidationMessageFor(x => x.PipeSystemID)</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipeSystemID", "- Select a Station System -") @Html.ValidationMessageFor(x => x.PipeSystemID)</div></td>
             </tr>
             <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.PipelineID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipelineID", "- Select a Pipeline -") @Html.ValidationMessageFor(x => x.PipelineID)</div></td>
+            <td><div class="editor-field">@Html.DropDownList("PipelineID", "- Select a Station -") @Html.ValidationMessageFor(x => x.PipelineID)</div></td>
             </tr>
             <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.ValveSectionBegin)</div></td>

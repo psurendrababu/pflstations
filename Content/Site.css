@@ -694,14 +694,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 0.75em;
-    border: 0 none;
+    border: 1px thin;
+    width: 100%;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
 }
 
 th {
     font-size: 1.2em;
     text-align: left;
-    border: none 0px;
-    padding-left: 0;
+    border: none;
 }
 
     th a {
@@ -713,7 +717,7 @@ th {
         color: #333;
         font-weight: 600;
         text-decoration: none;
-        padding: 0;
+        padding: 5;
     }
 
     th a:hover {
@@ -742,7 +746,7 @@ th {
 
 td {
     padding: 0.25em 2em 0.25em 0em;
-    border: 0 none;
+    border: 2px thin;
 }
 
 tr.pager td {

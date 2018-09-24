@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<PipelineFeatureList.Models.Pipeline>
+@using PipelineFeatureList.Models;
+@using System.Web.Mvc.Razor;
 
 @{
     ViewBag.Title = "Stations";
@@ -17,6 +19,18 @@
         <th>
             @Html.DisplayNameFor(model => model.PipeSystem)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CrossStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CircuitCount)
+        </th>
         <th></th>
     </tr>
 
@@ -30,8 +44,20 @@
             @Html.DisplayFor(modelItem => item.PipeSystem.PipeSystemItem)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 
-            @Html.ActionLink("Details", "Details", new { id = item.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 
+            @Html.DisplayFor(modelItem => item.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CrossStreet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CircuitCount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+            @Html.ActionLink("Details", "Details", new { id = item.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
             @Html.ActionLink("Delete", "Delete", new { id = item.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
         </td>
     </tr>

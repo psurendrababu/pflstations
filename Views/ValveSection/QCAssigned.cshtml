@@ -7,16 +7,13 @@
 <table width="100%">
     <tr>
         <th>
-            @Html.Raw("Station System")
+            @Html.Raw("Station Location")
         </th>
         <th>
             @Html.Raw("Station")
         </th>
         <th>
             @Html.Raw("Circuit")
-        </th>
-        <th>
-            @Html.Raw("Orion")
         </th>
         <th>
             @Html.Raw("Status")
@@ -32,9 +29,6 @@
         </th>
         <th>
             @Html.Raw("Builder")
-        </th>
-        <th>
-            @Html.Raw("Crossings Status")
         </th>
     </tr>
     
@@ -53,9 +47,6 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveSection.ValveSectionBegin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveSection.OrionStationSeries)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveStatus.ValveSectionStatusItem)
             </td>
             <td>
@@ -71,38 +62,9 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Builder.FirstName) @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Builder.LastName)
             </td>
             <td>
-                @try
-                {
-                    if (item.ValveSectionQCAssigned.ValveSection.CrossingsStatus == "M")
-                    {
-                        @Html.Raw("Not Available")
-                    }
-                    else if (item.ValveSectionQCAssigned.ValveSection.CrossingsStatus == "Y")
-                    {
-                        @Html.Raw("Imported")
-                    }
-                    else if (item.ValveSectionQCAssigned.ValveSection.CrossingsStatus == "N")
-                    {
-                        @Html.Raw("Not Applicable")
-                    }
-                    else
-                    {
-                        @Html.Raw("Not Available")
-                    }
-                }
-                catch
-                {
-                    @Html.Raw("Not Available")
-                }
-            </td>
-            <td>
                 @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionQCAssigned.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionQCAssigned.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
             </td>
         </tr>
-    }
-    else
-    {
-        <td>Didn't Work. - Curtis</td>
     }
 }
 </table>
