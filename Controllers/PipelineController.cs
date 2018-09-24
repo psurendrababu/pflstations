@@ -29,8 +29,6 @@ namespace PipelineFeatureList.Controllers
 
             }
 
-            int hold = 0;
-
             return View(model);
         }
 

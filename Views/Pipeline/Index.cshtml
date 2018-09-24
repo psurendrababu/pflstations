@@ -17,16 +17,19 @@
             @Html.DisplayNameFor(model => model.PipelineItem)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.StationName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PipeSystem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Town)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Street)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CrossStreet)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Town)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CircuitCount)
@@ -41,16 +44,19 @@
             @Html.DisplayFor(modelItem => item.PipelineItem)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.StationName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.PipeSystem.PipeSystemItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Town)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Street)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CrossStreet)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Town)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CircuitCount)

@@ -11,7 +11,7 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public int PipelineID { get; set; }
-        [DisplayName("Station")]
+        [DisplayName("Station ID")]
         public string PipelineItem { get; set; }
         [DisplayName("Station Location")]
         public int PipeSystemID { get; set; }
@@ -33,6 +33,8 @@ namespace PipelineFeatureList.Models
         public string Town { get; set; }
         [DisplayName("Circuit Count")]
         public int? CircuitCount { get; set; }
+        [DisplayName("Station Name")]
+        public string StationName { get; set; }
         
         [DisplayName("Station Location")]
         public PipeSystem PipeSystem { get; set; }
