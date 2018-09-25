@@ -87,26 +87,6 @@
                 }
                 <tr>
                 <td colspan="2">
-                    @*@if ((ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering") && itemSection.IsSegmentationDirty == true)
-                    {
-                        foreach (var workflowSection in (ViewData["WorkflowSection"] as List<PipelineFeatureList.Models.WorkflowRule>))
-                        {
-                            // Only show Segment status(es) if in Engineering and Dirty
-                            if (workflowSection.WorkflowAction.WorkflowActionItem != "Approve")
-                            {
-                                @Html.ActionLink(workflowSection.ButtonText, "StatusChange", "ValveSection", new
-                           {
-                               id = itemSection.ValveSectionID,
-                               oldStatus = workflowSection.Old_ValveSectionStatusID,
-                               newStatus = workflowSection.New_ValveSectionStatusID,
-                               description = workflowSection.Description
-                           },
-                               htmlAttributes: new { @class = "linkbutton" })
-                            }
-                        }
-                    }
-                    else
-                    {*@
                         @foreach (var workflowSection in (ViewData["WorkflowSection"] as List<PipelineFeatureList.Models.WorkflowRuleList>))
                         {
                             if (ViewBag.IsDirty == false || (ViewBag.IsDirty && workflowSection.DisableDirty == false))
@@ -162,57 +142,7 @@
             
         </table>
         </td>
-        <td valign="top">
-        <div style="width:550px; height:300px; overflow:scroll">
-        <table class="overviewfeaturetable">
-            <tr><th></th><th>RECORDS<br />IDENTIFIER</th><th>DOCUMENT TYPE</th><th>FILE NAME</th><th>RECORD ID NAME</th><th>PAGE NUMBER</th><th>ELECTRONIC UNIQUE ID</th><th></th></tr>
-            @foreach (var itemDocs in (ViewData["RecordData"] as List<PipelineFeatureList.Models.DocumentRecord>))
-            {
-                if (itemDocs.RecordIdentifier != null)
-                {
-                        <tr>
-                        <td>
-                            @if (ViewBag.EditDisabled == false)
-                            {   
-                                @Html.ActionLink("Edit", "EditDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Edit", "EditDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
-                            }
-                        </td>
-                        <td>@Html.DisplayFor(modelItem => itemDocs.RecordIdentifier.RecordIdentifierItem)</td>
-                        <td>@Html.DisplayFor(modelItem => itemDocs.DocumentType.DocumentTypeItem)</td>
-                        <td>@Html.DisplayFor(modelItem => itemDocs.Filename)</td>
-                        <td>@Html.DisplayFor(modelItem => itemDocs.RecordIDName)</td>
-                        <td>@Html.DisplayFor(modelItem => itemDocs.Page)</td>
-                        <td>@Html.DisplayFor(modelItem => itemDocs.ElectronicUniqueID)</td>
-                        <td>
-                            @if (ViewBag.EditDisabled == false)
-                            {
-                                @Html.ActionLink("Delete", "DeleteDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Delete", "DeleteDoc", new { id = (itemDocs.DocumentRecordID == null ? 0 : itemDocs.DocumentRecordID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
-                            }
-                        </td>
-                        </tr>
-                }
-            }
-            <tr><th colspan="8">
-                @if (ViewBag.EditDisabled == false)
-                {                
-                    @Html.ActionLink("Create New Document", "CreateDoc", null, htmlAttributes: new { @class = "linkbuttonsmall" })
-                }
-                else
-                {
-                    @Html.ActionLink("Create New Document", "CreateDoc", null, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
-                }
-            </th></tr>
-        </table>
-        </div>
-        </td>
+
     </tr>
     <tr><td colspan="1"><h3>Error Messages</h3></td><td colspan="1"><h3>Feature Issues</h3></td></tr>
     <tr><td colspan="1"><div style="width:100%; height:200px; overflow:scroll">

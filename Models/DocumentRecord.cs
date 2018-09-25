@@ -11,20 +11,20 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public Int64 DocumentRecordID { get; set; }
-        [DisplayName("Circuit")]
-        public Int64 ValveSectionID { get; set; }
-        [DisplayName("Records Identifier")]
-        public int RecordIdentifierID { get; set; }
+        [DisplayName("Station")]
+        public Int64 PipelineID { get; set; }
         [DisplayName("Document Type")]
         public int DocumentTypeID { get; set; }
         [DisplayName("File Name")]
         public string Filename { get; set; }
-        [DisplayName("Record ID Name")]
+        [DisplayName("Records ID")]
         public string RecordIDName { get; set; }
-        [DisplayName("Electronic Unique ID")]
-        public string ElectronicUniqueID { get; set; }
+        [DisplayName("Drawing Number")]
+        public string DrawingNumber { get; set; }
         [DisplayName("Page Number")]
         public string Page { get; set; }
+        [DisplayName("Revision Number")]
+        public string RevisionNumber { get; set; }
         
         [DisplayName("Circuit")]
         public ValveSection ValveSection { get; set; }

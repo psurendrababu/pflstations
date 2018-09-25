@@ -20,6 +20,14 @@
         </tr>
         <tr>
             <td>
+                @Html.DisplayNameFor(model => model.StationName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.StationName)
+            </td>
+        </tr>
+        <tr>
+            <td>
                 @Html.DisplayNameFor(model => model.PipeSystemID)
             </td>
             <td>
@@ -67,6 +75,7 @@
         </tr>
     </table>
 </fieldset>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 
     @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })

@@ -59,9 +59,9 @@ namespace PipelineFeatureList.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ValveSectionID = new SelectList(db.ValveSection, "ValveSectionID", "OrionStationSeries", documentrecord.ValveSectionID);
+            ViewBag.ValveSectionID = new SelectList(db.ValveSection, "ValveSectionID", "OrionStationSeries", documentrecord.PipelineID);
             ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
-            ViewBag.RecordIdentifierID = new SelectList(db.RecordIdentifiers, "RecordIdentifierID", "RecordIdentifierItem", documentrecord.RecordIdentifierID);
+            ViewBag.RecordIdentifierID = new SelectList(db.RecordIdentifiers, "RecordIdentifierID", "RecordIdentifierItem", documentrecord.DocumentRecordID);
             return View(documentrecord);
         }
 
@@ -75,9 +75,9 @@ namespace PipelineFeatureList.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ValveSectionID = new SelectList(db.ValveSection, "ValveSectionID", "OrionStationSeries", documentrecord.ValveSectionID);
+            ViewBag.ValveSectionID = new SelectList(db.ValveSection, "ValveSectionID", "OrionStationSeries", documentrecord.PipelineID);
             ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
-            ViewBag.RecordIdentifierID = new SelectList(db.RecordIdentifiers, "RecordIdentifierID", "RecordIdentifierItem", documentrecord.RecordIdentifierID);
+            ViewBag.RecordIdentifierID = new SelectList(db.RecordIdentifiers, "RecordIdentifierID", "RecordIdentifierItem", documentrecord.DocumentRecordID);
             return View(documentrecord);
         }
 
@@ -93,9 +93,9 @@ namespace PipelineFeatureList.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ValveSectionID = new SelectList(db.ValveSection, "ValveSectionID", "OrionStationSeries", documentrecord.ValveSectionID);
+            ViewBag.ValveSectionID = new SelectList(db.ValveSection, "ValveSectionID", "OrionStationSeries", documentrecord.PipelineID);
             ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
-            ViewBag.RecordIdentifierID = new SelectList(db.RecordIdentifiers, "RecordIdentifierID", "RecordIdentifierItem", documentrecord.RecordIdentifierID);
+            ViewBag.RecordIdentifierID = new SelectList(db.RecordIdentifiers, "RecordIdentifierID", "RecordIdentifierItem", documentrecord.DocumentRecordID);
             return View(documentrecord);
         }
 

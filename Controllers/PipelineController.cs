@@ -18,8 +18,8 @@ namespace PipelineFeatureList.Controllers
 
         public ActionResult Index()
         {
-            var model = db.Pipelines.Include("PipeSystem").OrderBy(p => p.PipelineItem).ToList();
-           
+            var model = db.Pipelines.OrderBy(p => p.PipelineItem).ToList();
+            
             foreach (var c in model)
             {
                 c.CircuitCount = (from vs in db.ValveSection
@@ -27,6 +27,8 @@ namespace PipelineFeatureList.Controllers
                                   where p.PipelineID == c.PipelineID
                                   select vs).Count();
 
+                db.Entry(c).Property("CircuitCount").IsModified = true;
+                db.SaveChanges();
             }
 
             return View(model);
@@ -43,7 +45,13 @@ namespace PipelineFeatureList.Controllers
                 return HttpNotFound();
             }
 
+                pipeline.CircuitCount = (from vs in db.ValveSection
+                                  join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                  where p.PipelineID == pipeline.PipelineID
+                                  select vs).Count();
 
+                db.Entry(pipeline).Property("CircuitCount").IsModified = true;
+                db.SaveChanges();
 
             return View(pipeline);
         }

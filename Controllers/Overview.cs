@@ -162,8 +162,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.DrawingID.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -182,8 +182,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.ODRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                     {
                                         riid = r.RecordIdentifierID,
@@ -199,8 +199,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.ODRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -216,8 +216,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.WTRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -233,8 +233,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.WTRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -250,8 +250,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SeamRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -267,8 +267,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SeamRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -284,8 +284,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SpecRatingRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -301,8 +301,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SpecRatingRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                                 select new
                                 {
                                     riid = r.RecordIdentifierID,
@@ -317,8 +317,8 @@ namespace PipelineFeatureList.Controllers
             }
 
             // Document Records
-            var RDmodel = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.ValveSectionID == ValveSectionID).OrderBy(d => d.DocumentRecordID).ToList();
-            ViewData.Add("RecordData", RDmodel);
+            //var RDmodel = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.ValveSectionID == ValveSectionID).OrderBy(d => d.DocumentRecordID).ToList();
+            //ViewData.Add("RecordData", RDmodel);
 
             // Issues
             var FImodel = db.FeatureIssues.Where(f => f.ValveSectionID == ValveSectionID).OrderBy(f => f.FeatureNumber).ThenBy(f => f.BuilderCreatedOn).ThenBy(f => f.CheckerCreatedOn).ThenBy(f => f.EngineerCreatedOn).ToList();
@@ -601,8 +601,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.DrawingID.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -621,8 +621,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.ODRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -638,8 +638,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.ODRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -655,8 +655,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.WTRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -672,8 +672,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.WTRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -689,8 +689,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SeamRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -706,8 +706,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SeamRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -723,8 +723,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SpecRatingRecordID1.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -740,8 +740,8 @@ namespace PipelineFeatureList.Controllers
                 {
                     i = items.ValveSectionFeatureData.SpecRatingRecordID2.Value;
                     var k = (from a in db.DocumentRecords
-                             join r in db.RecordIdentifiers on a.RecordIdentifierID equals r.RecordIdentifierID
-                             where a.DocumentRecordID == i && a.ValveSectionID == items.ValveSectionFeatureData.ValveSectionID
+                             join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
+                             where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
                              select new
                              {
                                  riid = r.RecordIdentifierID,
@@ -756,8 +756,8 @@ namespace PipelineFeatureList.Controllers
             }
 
             // Document Records
-            var RDmodel = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.ValveSectionID == ValveSectionID).OrderBy(d => d.DocumentRecordID).ToList();
-            ViewData.Add("RecordData", RDmodel);
+            //var RDmodel = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.ValveSectionID == ValveSectionID).OrderBy(d => d.DocumentRecordID).ToList();
+            //ViewData.Add("RecordData", RDmodel);
 
             // Issues
             var FImodel = db.FeatureIssues.Where(f => f.ValveSectionID == ValveSectionID).OrderBy(f => f.FeatureNumber).ThenBy(f => f.BuilderCreatedOn).ThenBy(f => f.CheckerCreatedOn).ThenBy(f => f.EngineerCreatedOn).ToList();
@@ -829,8 +829,8 @@ namespace PipelineFeatureList.Controllers
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem");
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availDocs = from d in db.DocumentRecords
-                            join r in db.RecordIdentifiers on d.RecordIdentifierID equals r.RecordIdentifierID
-                            where d.ValveSectionID == currSection
+                            join r in db.RecordIdentifiers on d.DocumentRecordID equals r.RecordIdentifierID
+                            where d.PipelineID == currSection
                             orderby d.DocumentRecordID
                             select new { d.DocumentRecordID, r.RecordIdentifierItem };
             ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
@@ -898,8 +898,8 @@ namespace PipelineFeatureList.Controllers
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem", valvesectionfeature.ConstructionTypeID);
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availDocs = from d in db.DocumentRecords
-                            join r in db.RecordIdentifiers on d.RecordIdentifierID equals r.RecordIdentifierID
-                            where d.ValveSectionID == currSection
+                            join r in db.RecordIdentifiers on d.DocumentRecordID equals r.RecordIdentifierID
+                            where d.PipelineID == currSection
                             orderby d.DocumentRecordID
                             select new {d.DocumentRecordID, r.RecordIdentifierItem };
             ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.DrawingID);
@@ -1114,8 +1114,8 @@ namespace PipelineFeatureList.Controllers
 
             int entry = 0;
             string nextentry = "";
-            try { entry = db.DocumentRecords.Where(v => v.ValveSectionID == currvalvesection).OrderByDescending(v => v.DocumentRecordID).Max(v => v.RecordIdentifierID); }
-            catch { }
+            //try { entry = db.DocumentRecords.Where(v => v.PipelineID == currvalvesection).OrderByDescending(v => v.DocumentRecordID).Max(v => v.DocumentRecordID); }
+            //catch { }
 
             if (entry == 0)
             {
@@ -1157,8 +1157,8 @@ namespace PipelineFeatureList.Controllers
             }
             if (ModelState.IsValid)
             {
-                documentrecord.ValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-                documentrecord.RecordIdentifierID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
+                documentrecord.PipelineID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+                documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
                 db.DocumentRecords.Add(documentrecord);
                 db.SaveChanges();
                 return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
@@ -1368,7 +1368,7 @@ namespace PipelineFeatureList.Controllers
 
             var updateValveSectionFeatures =
                 (from v in db1.ValveSectionFeatures
-                where v.ValveSectionID == documentrecord.ValveSectionID
+                where v.ValveSectionID == documentrecord.PipelineID
                 select v).ToList();
 
             bool docfound = false;
@@ -1689,8 +1689,8 @@ namespace PipelineFeatureList.Controllers
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availdocuments = from d in db.DocumentRecords
                                  join t in db.DocumentTypes on d.DocumentTypeID equals t.DocumentTypeID
-                                 join i in db.RecordIdentifiers on d.RecordIdentifierID equals i.RecordIdentifierID
-                                 where d.ValveSectionID == currSection
+                                 join i in db.RecordIdentifiers on d.DocumentRecordID equals i.RecordIdentifierID
+                                 where d.PipelineID == currSection
                                  orderby d.DocumentRecordID
                                  select new { Value = d.DocumentRecordID, Text = i.RecordIdentifierItem };
 
