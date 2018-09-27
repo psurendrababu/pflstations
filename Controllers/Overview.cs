@@ -1272,7 +1272,7 @@ namespace PipelineFeatureList.Controllers
             }
 
             ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
-            ViewBag.RecordIdentifierName = documentrecord.RecordIdentifier.RecordIdentifierItem;
+            //ViewBag.RecordIdentifierName = documentrecord.RecordIdentifier.RecordIdentifierItem;
 
             return View(documentrecord);
         }

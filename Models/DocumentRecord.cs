@@ -26,11 +26,11 @@ namespace PipelineFeatureList.Models
         [DisplayName("Revision Number")]
         public string RevisionNumber { get; set; }
         
-        [DisplayName("Circuit")]
-        public ValveSection ValveSection { get; set; }
-        [DisplayName("Document Type")]
-        public DocumentType DocumentType { get; set; }
-        [DisplayName("Record Identifier")]
-        public RecordIdentifier RecordIdentifier { get; set; }
+        //[DisplayName("Station")]
+        //public Pipeline Pipeline { get; set; }
+        //[DisplayName("Document Type")]
+        //public DocumentType DocumentType { get; set; }
+        //[DisplayName("Record Identifier")]
+        //public RecordIdentifier RecordIdentifier { get; set; }
     }
 }

@@ -74,6 +74,20 @@
             </td>
         </tr>
     </table>
+
+    <hr>
+
+
+    <table>
+
+        @foreach (var ItemDoc in ViewData["DocumentList"] as List<PipelineFeatureList.Models.DocumentRecord)
+        {
+
+        }
+    </table>
+
+    @Html.ActionLink("Create New Doc","CreateDoc", "Pipeline", Model, htmlAttributes: new { target = "_blank", @class = "linkbutton" })
+
 </fieldset>
 
 <p>

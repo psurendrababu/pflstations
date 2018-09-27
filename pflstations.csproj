@@ -999,7 +999,7 @@
     <Content Include="Views\DocumentRecord\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Overview\CreateDoc.cshtml" />
+    <Content Include="Views\Pipeline\CreateDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Overview\EditDoc.cshtml" />

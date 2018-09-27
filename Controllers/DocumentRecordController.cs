@@ -16,11 +16,11 @@ namespace PipelineFeatureList.Controllers
         //
         // GET: /DocumentRecord/
 
-        public ActionResult Index()
-        {
-            var documentrecords = db.DocumentRecords.Include(d => d.ValveSection).Include(d => d.DocumentType).Include(d => d.RecordIdentifier);
-            return View(documentrecords.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    var documentrecords = db.DocumentRecords.Include(d => d.PipelineID).Include(d => d.DocumentType).Include(d => d.RecordIdentifier);
+        //    return View(documentrecords.ToList());
+        //}
 
         //
         // GET: /DocumentRecord/Details/5

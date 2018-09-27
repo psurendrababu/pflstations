@@ -35,24 +35,33 @@ namespace PipelineFeatureList.Controllers
         }
 
         //
-        // GET: /Pipeline/Details/5
+        // GET: /Pipeline/Details/
 
         public ActionResult Details(int id = 0)
         {
             Pipeline pipeline = db.Pipelines.Include("PipeSystem").Where(p => p.PipelineID == id).First();
+
+            Session["CurrentPipeline"] = pipeline.PipelineID;
+
             if (pipeline == null)
             {
                 return HttpNotFound();
             }
 
-                pipeline.CircuitCount = (from vs in db.ValveSection
-                                  join p in db.Pipelines on vs.PipelineID equals p.PipelineID
-                                  where p.PipelineID == pipeline.PipelineID
-                                  select vs).Count();
+            pipeline.CircuitCount = (from vs in db.ValveSection
+                              join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                              where p.PipelineID == pipeline.PipelineID
+                              select vs).Count();
 
-                db.Entry(pipeline).Property("CircuitCount").IsModified = true;
-                db.SaveChanges();
+            db.Entry(pipeline).Property("CircuitCount").IsModified = true;
+            db.SaveChanges();
 
+            var DocumentList = (from p in db.Pipelines
+                                join doc in db.DocumentRecords on p.PipelineID equals doc.PipelineID
+                                where doc.PipelineID == pipeline.PipelineID
+                                select doc).ToList();
+            ViewData.Add("DocumentList", DocumentList);
+            
             return View(pipeline);
         }
 
@@ -159,6 +168,58 @@ namespace PipelineFeatureList.Controllers
             db.Pipelines.Remove(pipeline);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        //
+        // GET: /Pipeline/CreateDoc
+
+        public ActionResult CreateDoc(Pipeline pipeline)
+        {
+            //int currentPipeline = Convert.ToInt32(Session["CurrentPipeline"].ToString());
+
+            int entry = 0;
+            try { entry = (int)db.DocumentRecords.Where(p => p.PipelineID == pipeline.PipelineID).OrderByDescending(p => p.DocumentRecordID).Max(d => d.DocumentRecordID); }
+            catch { }
+
+            if (entry == 0)
+            {
+                Session["CurrentRecordIdentifier"] = "1";
+            }
+            else
+            {
+                entry++;
+                try
+                {
+                    Session["CurrentRecordIdentifier"] = entry;
+                }
+                catch
+                {
+                    Session["CurrentRecordIdentifier"] = "1";
+                }
+            }
+
+            ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem");
+            DocumentRecord documentrecord = new DocumentRecord() { PipelineID = pipeline.PipelineID };
+            ViewBag.PipelineItem = pipeline.PipelineItem;
+            return View(documentrecord);
+        }
+
+        //
+        // POST: /Pipeline/CreateDoc
+
+        [HttpPost]
+        public ActionResult CreateDoc(DocumentRecord documentrecord)
+        {
+            if (ModelState.IsValid)
+            {
+                //documentrecord.PipelineID = Convert.ToInt64(Session["CurrentPipeline"].ToString());
+                documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
+                db.DocumentRecords.Add(documentrecord);
+                db.SaveChanges();
+                return JavaScript("window.close();");
+            }
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)
