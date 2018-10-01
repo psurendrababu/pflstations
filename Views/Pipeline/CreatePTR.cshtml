@@ -1,0 +1,144 @@
+﻿@model PipelineFeatureList.Models.PressureDocumentRecord
+ 
+@{
+    ViewBag.Title = "Create Pressure Document Record";
+}
+
+<h2>Create Pressure Document Record</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocumentRecord</legend>
+
+        <h1>
+            Create Document for Station @ViewBag.PipelineItem
+        </h1>
+
+        @Html.HiddenFor(model => model.PipelineID)
+
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Filename)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Filename)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTMinTestPressure)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTMinTestPressure)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTMedium)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTMedium)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTDate)
+                </td>
+                <td>
+                    @Html.TextBox("Test Date", Model.PTDate, new { @class = "datepicker", @type = "date" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTDuration)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTDuration)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.InstDeadWtEval)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.InstDeadWtEval)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MinElevation)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.MinElevation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MaxElevation)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.MaxElevation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTNameLocation)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTNameLocation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTRecordingCharts)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.PTRecordingCharts)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTInstCalibrated)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model.PTInstCalibrated)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTOperatorName)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTOperatorName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTPersonResponsible)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTPersonResponsible)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTTestCompany)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PTTestCompany)
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

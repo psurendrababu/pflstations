@@ -21,8 +21,8 @@ namespace PipelineFeatureList.Models
         public string RecordIDName { get; set; }
         [DisplayName("Drawing Number")]
         public string DrawingNumber { get; set; }
-        [DisplayName("Page Number")]
-        public string Page { get; set; }
+        //[DisplayName("Page Number")]
+        //public string Page { get; set; }
         [DisplayName("Revision Number")]
         public string RevisionNumber { get; set; }
         [DisplayName("Document Type")]

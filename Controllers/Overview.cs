@@ -1150,8 +1150,7 @@ namespace PipelineFeatureList.Controllers
         public ActionResult CreateDoc(DocumentRecord documentrecord)
         {
             var dt = db.DocumentTypes.Where(d => d.DocumentTypeItem == "Completion Report" || d.DocumentTypeItem == "Pipeline Replacement Report").ToList();
-            if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID)
-                && documentrecord.Page == null)
+            if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID))
             {
                 //return View(documentrecord);
             }
@@ -1284,8 +1283,7 @@ namespace PipelineFeatureList.Controllers
         public ActionResult EditDoc(DocumentRecord documentrecord)
         {
             var dt = db.DocumentTypes.Where(d => d.DocumentTypeItem == "Completion Report" || d.DocumentTypeItem == "Pipeline Replacement Report").ToList();
-            if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID)
-                && documentrecord.Page == null)
+            if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID))
             {
                 //return View(documentrecord);
             }

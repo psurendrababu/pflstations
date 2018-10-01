@@ -1,8 +1,12 @@
 ﻿@model PipelineFeatureList.Models.Pipeline
 
 @{
-    ViewBag.Title = "Pipeline Details";
+    ViewBag.Title = "Station Details";
 }
+
+<h2>
+    Material Records Information
+</h2>
 
 <table>
     <tr>
@@ -20,9 +24,6 @@
         </th>
         <th>
             Revision Number
-        </th>
-        <th>
-            Page Number
         </th>
         <th></th>
     </tr>
@@ -45,9 +46,6 @@
             </td>
             <td>
                 @ItemDoc.RevisionNumber
-            </td>
-            <td>
-                @ItemDoc.Page
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditDoc",new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })

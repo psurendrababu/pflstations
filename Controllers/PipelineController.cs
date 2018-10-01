@@ -13,12 +13,17 @@ namespace PipelineFeatureList.Controllers
     {
         private PipelineFeatureListDBContext db = new PipelineFeatureListDBContext();
 
+        //------------------------------------------//
+        //---------------Main Section---------------//
+        //------------------------------------------//
         //
         // GET: /Pipeline/
 
         public ActionResult Index()
         {
-            var model = db.Pipelines.OrderBy(p => p.PipelineItem).ToList();
+            var model = new List<Pipeline>();
+
+            model = db.Pipelines.OrderBy(p => p.PipelineItem).ToList();
             
             foreach (var c in model)
             {
@@ -26,6 +31,11 @@ namespace PipelineFeatureList.Controllers
                                   join p in db.Pipelines on vs.PipelineID equals p.PipelineID
                                   where p.PipelineID == c.PipelineID
                                   select vs).Count();
+                         
+                c.PipeSystem = (from p in db.Pipelines
+                                join ps in db.PipeSystems on p.PipeSystemID equals ps.PipeSystemID
+                                where p.PipelineID == c.PipelineID
+                                select ps).FirstOrDefault();
 
                 db.Entry(c).Property("CircuitCount").IsModified = true;
                 db.SaveChanges();
@@ -159,8 +169,22 @@ namespace PipelineFeatureList.Controllers
 
             if (assigned.Count != 0)
             {
-                ModelState.AddModelError("", "Pipeline is assigned to a Valve Section and cannot be deleted.");
+                ModelState.AddModelError("", "Station assigned to a Valve Section and cannot be deleted.");
                 
+                if (pipeline == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(pipeline);
+            }
+
+            var documents = (from d in db.DocumentRecords
+                             where d.PipelineID == id
+                             select new { documents = d.DocumentRecordID }).ToList();
+
+            if (documents.Count != 0)
+            {
+                ModelState.AddModelError("", "Station as documents assigned and cannot be deleted.");
                 if (pipeline == null)
                 {
                     return HttpNotFound();
@@ -172,6 +196,11 @@ namespace PipelineFeatureList.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        //------------------------------------------------------//
+        //---------------Material Records Section---------------//
+        //------------------------------------------------------//
 
         //
         // GET: /Pipeline/CreateDoc
@@ -222,7 +251,7 @@ namespace PipelineFeatureList.Controllers
 
                 db.DocumentRecords.Add(documentrecord);
                 db.SaveChanges();
-                return RedirectToAction("Pipeline", "Details", new { documentrecord.PipelineID });
+                return RedirectToAction("Details", "Pipeline", new { id = documentrecord.PipelineID });
             }
 
             return View();
@@ -249,7 +278,7 @@ namespace PipelineFeatureList.Controllers
         }
 
         //
-        // POST: /Pipeline/EditDoc/5
+        // POST: /Pipeline/EditDoc/
 
         [HttpPost]
         public ActionResult EditDoc(DocumentRecord documentrecord)
@@ -266,6 +295,191 @@ namespace PipelineFeatureList.Controllers
                 return RedirectToAction("Details","Pipeline",new { id = documentrecord.PipelineID });
             }
             return View(documentrecord);
+        }
+
+        //
+        // GET: /Pipeline/DeleteDoc
+
+        public ActionResult DeleteDoc(int id = 0)
+        {
+            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
+            if (documentrecord == null)
+            {
+                return HttpNotFound();
+            }
+            return View(documentrecord);
+        }
+
+        //
+        // POST: /Pipeline/Delete/
+
+        [HttpPost, ActionName("DeleteDoc")]
+        public ActionResult DeleteDocConfirmed(int id)
+        {
+            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
+
+            var assigned = (from v in db.ValveSection
+                            where v.PipelineID == id
+                            select new { found = v.ValveSectionID }).ToList();
+
+            //Need to add in some validation code to look for feature attributes that have this document assigned to them.
+            //Cannot delete the record if there are documents assigned to any features
+
+            if (assigned.Count != 0)
+            {
+                ModelState.AddModelError("", "Station assigned to a Valve Section and cannot be deleted.");
+
+                if (documentrecord == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(documentrecord);
+            }
+
+            db.DocumentRecords.Remove(documentrecord);
+            db.SaveChanges();
+            return RedirectToAction("Details", "Pipeline", new { id = documentrecord.PipelineID });
+        }
+
+        //---------------------------------------------------//
+        //---------------Pressure Test Section---------------//
+        //---------------------------------------------------//
+
+        //
+        // GET: /Pipeline/CreateDoc
+
+        public ActionResult CreatePTR(Pipeline pipeline)
+        {
+            int entry = 0;
+            try { entry = (int)db.PressureDocumentRecords.Where(p => p.PipelineID == pipeline.PipelineID).OrderByDescending(p => p.PressureDocumentRecordID).Max(d => d.PressureDocumentRecordID); }
+            catch { }
+
+            if (entry == 0)
+            {
+                Session["CurrentRecordIdentifier"] = "1";
+            }
+            else
+            {
+                entry++;
+                try
+                {
+                    Session["CurrentRecordIdentifier"] = entry;
+                }
+                catch
+                {
+                    Session["CurrentRecordIdentifier"] = "1";
+                }
+            }
+
+            
+            PressureDocumentRecord pressuredocumentrecord = new PressureDocumentRecord() { PipelineID = pipeline.PipelineID };
+            ViewBag.PipelineItem = pipeline.PipelineItem;
+            return View(pressuredocumentrecord);
+        }
+
+        //
+        // POST: /Pipeline/CreateDoc
+
+        [HttpPost]
+        public ActionResult CreatePTR(DocumentRecord documentrecord)
+        {
+            if (ModelState.IsValid)
+            {
+                //documentrecord.PipelineID = Convert.ToInt64(Session["CurrentPipeline"].ToString());
+                documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
+
+                documentrecord.DocumentTypeItem = db.DocumentTypes.Where(doctype => doctype.DocumentTypeID == documentrecord.DocumentTypeID).Select(doctype => doctype.DocumentTypeItem).FirstOrDefault();
+
+                db.DocumentRecords.Add(documentrecord);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Pipeline", new { id = documentrecord.PipelineID });
+            }
+
+            return View();
+        }
+
+        //
+        // GET: /Pipeline/EditDoc/
+
+        public ActionResult EditPTR(int id = 0)
+        {
+            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
+            if (documentrecord == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.PipelineItem = db.Pipelines.Where(p => p.PipelineID == documentrecord.PipelineID).Select(p => p.PipelineItem).FirstOrDefault();
+
+            ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
+
+            ViewBag.DocumentRecordID = id;
+
+            return View(documentrecord);
+        }
+
+        //
+        // POST: /Pipeline/EditDoc/
+
+        [HttpPost]
+        public ActionResult EditPTR(DocumentRecord documentrecord)
+        {
+            if (ModelState.IsValid)
+            {
+                //documentrecord.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
+                //documentrecord.ModifiedOn = DateTime.Now;
+
+                documentrecord.DocumentTypeItem = db.DocumentTypes.Where(doctype => doctype.DocumentTypeID == documentrecord.DocumentTypeID).Select(doctype => doctype.DocumentTypeItem).FirstOrDefault();
+
+                db.Entry(documentrecord).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", "Pipeline", new { id = documentrecord.PipelineID });
+            }
+            return View(documentrecord);
+        }
+
+        //
+        // GET: /Pipeline/DeleteDoc
+
+        public ActionResult DeletePTR(int id = 0)
+        {
+            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
+            if (documentrecord == null)
+            {
+                return HttpNotFound();
+            }
+            return View(documentrecord);
+        }
+
+        //
+        // POST: /Pipeline/Delete/
+
+        [HttpPost, ActionName("DeleteDoc")]
+        public ActionResult DeletePTRConfirmed(int id)
+        {
+            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
+
+            var assigned = (from v in db.ValveSection
+                            where v.PipelineID == id
+                            select new { found = v.ValveSectionID }).ToList();
+
+            //Need to add in some validation code to look for feature attributes that have this document assigned to them.
+            //Cannot delete the record if there are documents assigned to any features
+
+            if (assigned.Count != 0)
+            {
+                ModelState.AddModelError("", "Station assigned to a Valve Section and cannot be deleted.");
+
+                if (documentrecord == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(documentrecord);
+            }
+
+            db.DocumentRecords.Remove(documentrecord);
+            db.SaveChanges();
+            return RedirectToAction("Details", "Pipeline", new { id = documentrecord.PipelineID });
         }
 
         protected override void Dispose(bool disposing)

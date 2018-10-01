@@ -368,6 +368,7 @@ namespace PipelineFeatureList.Models
         public DbSet<ClientReportPipeSystem> ClientReportPipeSystems { get; set; }
         public DbSet<ClientReportPipeline> ClientReportPipelines { get; set; }
         public DbSet<ClientReportImportList> ClientReportImportLists { get; set; }
+        public DbSet<PressureDocumentRecord> PressureDocumentRecords { get; set; }
         
         
     }

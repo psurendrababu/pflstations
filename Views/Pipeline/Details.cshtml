@@ -6,9 +6,6 @@
 
 <h2>Station Details</h2>
 
-<fieldset>
-    <legend>Station</legend>
-
 <table border="1">
     <tr>
         <td>
@@ -75,13 +72,13 @@
     </tr>
 </table>
 
-            <hr>
+<hr>
 
-            @Html.Partial("DocumentsDisplay")
-
-</fieldset>
+@Html.Partial("DocumentsDisplay")
 
 <hr>
+
+@Html.Partial("PTDocumentsDisplay")
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 
