@@ -1,94 +1,87 @@
 ﻿@model PipelineFeatureList.Models.Pipeline
 
 @{
-    ViewBag.Title = "Pipeline Details";
+    ViewBag.Title = "Station Details";
 }
 
-<h2>Pipeline Details</h2>
+<h2>Station Details</h2>
 
 <fieldset>
-    <legend>Pipeline</legend>
+    <legend>Station</legend>
 
-    <table>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.PipelineItem)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.PipelineItem)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.StationName)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.StationName)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.PipeSystemID)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Street)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.CrossStreet)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.CrossStreet)
-            </td>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.Town)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Town)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.Notes)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.CircuitCount)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.CircuitCount)
-            </td>
-        </tr>
-    </table>
+<table border="1">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.PipelineItem)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.PipelineItem)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.StationName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.StationName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.PipeSystemID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.PipeSystem.PipeSystemItem)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Street)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.CrossStreet)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CrossStreet)
+        </td>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Town)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Town)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Notes)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(model => model.CircuitCount)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CircuitCount)
+        </td>
+    </tr>
+</table>
 
-    <hr>
+            <hr>
 
-
-    <table>
-
-        @foreach (var ItemDoc in ViewData["DocumentList"] as List<PipelineFeatureList.Models.DocumentRecord)
-        {
-
-        }
-    </table>
-
-    @Html.ActionLink("Create New Doc","CreateDoc", "Pipeline", Model, htmlAttributes: new { target = "_blank", @class = "linkbutton" })
+            @Html.Partial("DocumentsDisplay")
 
 </fieldset>
+
+<hr>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 

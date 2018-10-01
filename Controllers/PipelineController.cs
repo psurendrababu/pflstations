@@ -61,7 +61,10 @@ namespace PipelineFeatureList.Controllers
                                 where doc.PipelineID == pipeline.PipelineID
                                 select doc).ToList();
             ViewData.Add("DocumentList", DocumentList);
-            
+
+            var DocumentTypeList = (from dt in db.DocumentTypes select dt).ToList();
+            ViewData.Add("DocumentTypeList", DocumentTypeList);
+
             return View(pipeline);
         }
 
@@ -214,12 +217,55 @@ namespace PipelineFeatureList.Controllers
             {
                 //documentrecord.PipelineID = Convert.ToInt64(Session["CurrentPipeline"].ToString());
                 documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
+
+                documentrecord.DocumentTypeItem = db.DocumentTypes.Where(doctype => doctype.DocumentTypeID == documentrecord.DocumentTypeID).Select(doctype => doctype.DocumentTypeItem).FirstOrDefault();
+
                 db.DocumentRecords.Add(documentrecord);
                 db.SaveChanges();
-                return JavaScript("window.close();");
+                return RedirectToAction("Pipeline", "Details", new { documentrecord.PipelineID });
             }
 
             return View();
+        }
+
+        //
+        // GET: /Pipeline/EditDoc/
+
+        public ActionResult EditDoc(int id = 0)
+        {
+            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
+            if (documentrecord == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.PipelineItem = db.Pipelines.Where(p => p.PipelineID == documentrecord.PipelineID).Select(p => p.PipelineItem).FirstOrDefault();
+
+            ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
+
+            ViewBag.DocumentRecordID = id;
+
+            return View(documentrecord);
+        }
+
+        //
+        // POST: /Pipeline/EditDoc/5
+
+        [HttpPost]
+        public ActionResult EditDoc(DocumentRecord documentrecord)
+        {
+            if (ModelState.IsValid)
+            {
+                //documentrecord.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
+                //documentrecord.ModifiedOn = DateTime.Now;
+
+                documentrecord.DocumentTypeItem = db.DocumentTypes.Where(doctype => doctype.DocumentTypeID == documentrecord.DocumentTypeID).Select(doctype => doctype.DocumentTypeItem).FirstOrDefault();
+
+                db.Entry(documentrecord).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details","Pipeline",new { id = documentrecord.PipelineID });
+            }
+            return View(documentrecord);
         }
 
         protected override void Dispose(bool disposing)

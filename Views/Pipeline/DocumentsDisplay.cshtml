@@ -1,0 +1,62 @@
+﻿@model PipelineFeatureList.Models.Pipeline
+
+@{
+    ViewBag.Title = "Pipeline Details";
+}
+
+<table>
+    <tr>
+        <th>
+            Records Identifier
+        </th>
+        <th>
+            Document Type
+        </th>
+        <th>
+            File Name
+        </th>
+        <th>
+            Drawing Number
+        </th>
+        <th>
+            Revision Number
+        </th>
+        <th>
+            Page Number
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var ItemDoc in ViewData["DocumentList"] as List<PipelineFeatureList.Models.DocumentRecord>)
+    {
+        <tr>
+            <td>
+                @ItemDoc.RecordIDName
+            </td>
+            <td>
+                @ItemDoc.DocumentTypeItem
+            </td>
+            <td>
+                @ItemDoc.Filename
+            </td>
+            <td>
+                @ItemDoc.DrawingNumber
+            </td>
+            <td>
+                @ItemDoc.RevisionNumber
+            </td>
+            <td>
+                @ItemDoc.Page
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditDoc",new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })
+                @Html.ActionLink("Delete", "DeleteDoc",new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })
+            </td>
+        </tr>
+    }
+</table>
+
+<hr>
+
+@Html.ActionLink("Create New Doc", "CreateDoc", "Pipeline", Model, htmlAttributes: new { @class = "linkbutton" })

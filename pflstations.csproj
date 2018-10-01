@@ -628,7 +628,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
     <None Include="Properties\PublishProfiles\Azure - FTP.pubxml" />
-    <Content Include="Views\Pipeline\DocumentMatDisplay.cshtml" />
+    <Content Include="Views\Pipeline\DocumentsDisplay.cshtml" />
+    <Content Include="Views\Pipeline\EditDoc.cshtml" />
+    <Content Include="Views\Pipeline\DeleteDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />
