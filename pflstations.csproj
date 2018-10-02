@@ -182,7 +182,7 @@
     <Compile Include="Controllers\ReportEmailController.cs" />
     <Compile Include="Models\ClientImportList.cs" />
     <Compile Include="Models\ClientReport.cs" />
-    <Compile Include="Models\PressureDocumentRecord.cs" />
+    <Compile Include="Models\PressureTestRecord.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="ReportViewerUserControl.ascx.cs">
       <DependentUpon>ReportViewerUserControl.ascx</DependentUpon>
@@ -634,6 +634,8 @@
     <Content Include="Views\Pipeline\DeleteDoc.cshtml" />
     <Content Include="Views\Pipeline\CreatePTR.cshtml" />
     <Content Include="Views\Pipeline\PTDocumentsDisplay.cshtml" />
+    <Content Include="Views\Pipeline\EditPTR.cshtml" />
+    <Content Include="Views\Pipeline\DeletePTR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />

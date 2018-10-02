@@ -1,0 +1,41 @@
+﻿@model PipelineFeatureList.Models.PressureTestRecord
+
+@{
+    ViewBag.Title = "Delete Pressure Test Record";
+}
+
+<h2>Delete Pressure Test Record</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DocumentRecord</legend>
+
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.Filename)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.Filename)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    For Station @ViewBag.StationName
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" />
+        @Html.ActionLink("Back to Station Details", "Details", new { id = ViewBag.StationID }, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+}

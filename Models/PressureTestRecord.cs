@@ -7,14 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PipelineFeatureList.Models
 {
-    public class PressureDocumentRecord
+    public class PressureTestRecord
     {
         [DisplayName("ID")]
-        public Int64 PressureDocumentRecordID { get; set; }
+        public Int64 PressureTestRecordID { get; set; }
         [DisplayName("Station ID")]
         public Int64 PipelineID { get; set; }
-        [DisplayName("Feature ID")]
-        public Int64 FeatureID { get; set; }
+        //[DisplayName("Feature ID")]
+        //public Int64 FeatureID { get; set; }
         [DisplayName("File Name")]
         public string Filename { get; set; }
 
@@ -43,7 +43,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("PT Person Responsible")]
         public string PTPersonResponsible { get; set; }
         [DisplayName("PT Test Company")]
-        public bool PTTestCompany { get; set; }
+        public string PTTestCompany { get; set; }
 
 
     }

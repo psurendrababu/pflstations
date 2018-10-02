@@ -1,19 +1,16 @@
-﻿@model PipelineFeatureList.Models.PressureDocumentRecord
+﻿@model PipelineFeatureList.Models.PressureTestRecord
  
 @{
-    ViewBag.Title = "Create Pressure Document Record";
+    ViewBag.Title = "Create Pressure Test Record";
 }
 
-<h2>Create Pressure Document Record</h2>
+<h2>Create Pressure Test Record</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>DocumentRecord</legend>
-
         <h1>
-            Create Document for Station @ViewBag.PipelineItem
+            Create Pressure Test Record for Station @ViewBag.PipelineItem
         </h1>
 
         @Html.HiddenFor(model => model.PipelineID)
@@ -136,7 +133,6 @@
         <p>
             <input type="submit" value="Create" />
         </p>
-    </fieldset>
 }
 
 @section Scripts {

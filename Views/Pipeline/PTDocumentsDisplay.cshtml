@@ -9,6 +9,105 @@
 </h2>
 
 
+<table>
+    <tr>
+        <th>
+            FileName
+        </th>
+        <th>
+            PT Min Pressure
+        </th>
+        <th>
+            PT Medium
+        </th>
+        <th>
+            PT Date
+        </th>
+        <th>
+            PT Duration
+        </th>
+        <th>
+            Instrument Dead Weight
+        </th>
+        <th>
+            PT Min Elevation
+        </th>
+        <th>
+            PT Max Elevation
+        </th>
+        <th>
+            PT Name and Location
+        </th>
+        <th>
+            PT Recording Charts?
+        </th>
+        <th>
+            PT Instrument Calibrated?
+        </th>
+        <th>
+            PT Operator
+        </th>
+        <th>
+            PT Person Responsible
+        </th>
+        <th>
+            PT Company
+        </th>
+    </tr>
+
+    @foreach (var ItemDoc in ViewData["PTRList"] as List<PipelineFeatureList.Models.PressureTestRecord>)
+    {
+    <tr>
+        <td>
+            @ItemDoc.Filename
+        </td>
+        <td>
+            @ItemDoc.PTMinTestPressure
+        </td>
+        <td>
+            @ItemDoc.PTMedium
+        </td>
+        <td>
+            @ItemDoc.PTDate
+        </td>
+        <td>
+            @ItemDoc.PTDuration
+        </td>
+        <td>
+            @ItemDoc.InstDeadWtEval
+        </td>
+        <td>
+            @ItemDoc.MinElevation
+        </td>
+        <td>
+            @ItemDoc.MaxElevation
+        </td>
+        <td>
+            @ItemDoc.PTNameLocation
+        </td>
+        <td>
+            @ItemDoc.PTRecordingCharts
+        </td>
+        <td>
+            @ItemDoc.PTInstCalibrated
+        </td>
+        <td>
+            @ItemDoc.PTOperatorName
+        </td>
+        <td>
+            @ItemDoc.PTPersonResponsible
+        </td>
+        <td>
+            @ItemDoc.PTTestCompany
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditPTR", new { id = ItemDoc.PressureTestRecordID }, htmlAttributes: new { @class = "linkbutton" })
+            @Html.ActionLink("Delete", "DeletePTR", new { id = ItemDoc.PressureTestRecordID }, htmlAttributes: new { @class = "linkbutton" })
+        </td>
+    </tr>
+    }
+</table>
+
 <hr>
 
 @Html.ActionLink("Create New PTR", "CreatePTR", "Pipeline", Model, htmlAttributes: new { @class = "linkbutton" })
