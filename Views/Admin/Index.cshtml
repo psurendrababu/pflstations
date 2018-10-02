@@ -4,34 +4,18 @@
 }
 
 <h2>Administration Page</h2>
-<p><br /></p>
-<p>@Html.ActionLink("Circuit Listing", "", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })</p>
-<br />
-@*<p>@Html.ActionLink("Reports", "", "GenerateReport", null, htmlAttributes: new { @class = "linkbutton" })</p>
-    <br />*@
-<p>@Html.ActionLink("Report Emails", "", "ReportEmail", null, htmlAttributes: new { @class = "linkbutton" })</p>
-<p>@Html.ActionLink("Manufacturers", "", "Manufacturer", null, htmlAttributes: new { @class = "linkbutton" })</p>
-<p>@Html.ActionLink("Stations", "", "Pipeline", null, htmlAttributes: new { @class = "linkbutton" })</p>
-<p>@Html.ActionLink("Users", "", "User", null, htmlAttributes: new { @class = "linkbutton" })</p>
 
-@*@Html.ActionLink("ANSI Ratings", "", "ANSIRating")
-    @Html.ActionLink("Bend Radius", "", "BendRadius")
-    @Html.ActionLink("Coating Types", "", "CoatingType")
-    @Html.ActionLink("Construction Types", "", "ConstructionType")
-    @Html.ActionLink("Current Class Locations", "", "CurrentClassLocation")
-    @Html.ActionLink("Document Types", "", "DocumentType")
-    @Html.ActionLink("Features", "", "Feature")
-    @Html.ActionLink("Grades", "", "Grade")
-    @Html.ActionLink("HCAs", "", "HCA")
-    @Html.ActionLink("Material Types", "", "MaterialType")
-    @Html.ActionLink("Orientations", "", "Orientation")
-    @Html.ActionLink("Outside Diameters", "", "OutsideDiameter")
-    @Html.ActionLink("Pipe Systems", "", "PipeSystem")
-    @Html.ActionLink("Pipe Types", "", "PipeType")
-    @Html.ActionLink("Record Identifiers", "", "RecordIdentifier")
-    @Html.ActionLink("Seam Weld Types", "", "SeamType")
-    @Html.ActionLink("Specifications / Ratings", "", "SpecRating")
-    @Html.ActionLink("Standard Entries", "", "StandardEntry")
-    @Html.ActionLink("Valve Section Statuses", "", "ValveSectionStatus")
-    @Html.ActionLink("User Types", "", "GroupClassification")
-*@
+<table>
+    <tr>
+        <td>@Html.ActionLink("Circuit Listing", "", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })</td>
+
+        <td>@Html.ActionLink("Report Emails", "", "ReportEmail", null, htmlAttributes: new { @class = "linkbutton" })</td>
+
+        <td>@Html.ActionLink("Manufacturers", "", "Manufacturer", null, htmlAttributes: new { @class = "linkbutton" })</td>
+
+        <td>@Html.ActionLink("Stations", "", "Pipeline", null, htmlAttributes: new { @class = "linkbutton" })</td>
+
+        <td>@Html.ActionLink("Users", "", "User", null, htmlAttributes: new { @class = "linkbutton" })</td>
+    </tr>
+</table>
+

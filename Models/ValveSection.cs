@@ -16,38 +16,36 @@ namespace PipelineFeatureList.Models
         [Required]
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Station System")]
-        [Required(AllowEmptyStrings = false, ErrorMessage="Station System Required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Station System Required")]
         public int? PipeSystemID { get; set; }
         [DisplayName("Station")]
         [Required(ErrorMessage = "Station Required")]
         public int PipelineID { get; set; }
-        [DisplayName("Orion Station Series")]
-        [Required]
-        [RegularExpression(@"^([0-9]\d*)$", ErrorMessage = "Please enter a valid Orion Station Series.")]
+        [DisplayName("Station Series")]
         public string OrionStationSeries { get; set; }
         [DisplayName("Circuit Begin")]
         [Required]
         public string ValveSectionBegin { get; set; }
         [DisplayName("Circuit End")]
         public string ValveSectionEnd { get; set; }
-        [DisplayName("Mile Point Begin")]
-        public Nullable<decimal> MilePointBegin { get; set; }
-        [DisplayName("Mile Point End")]
-        public Nullable<decimal> MilePointEnd { get; set; }
-        [DisplayName("Orion Station Begin")]
-        //[InputMask("99999+99.99")]
-        [DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> OrionStationBegin { get; set; }
-        [DisplayName("Orion Station End")]
-        //[InputMask("999-999-9999")]
-        [DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> OrionStationEnd { get; set; }
-        [DisplayName("GIS Start")]
-        [DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> GISStationBegin { get; set; }
-        [DisplayName("GIS End")]
-        [DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> GISStationEnd { get; set; }
+        //[DisplayName("Mile Point Begin")]
+        //public Nullable<decimal> MilePointBegin { get; set; }
+        //[DisplayName("Mile Point End")]
+        //public Nullable<decimal> MilePointEnd { get; set; }
+        //[DisplayName("Series Begin")]
+        ////[InputMask("99999+99.99")]
+        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
+        //public Nullable<decimal> OrionStationBegin { get; set; }
+        //[DisplayName("Series End")]
+        ////[InputMask("999-999-9999")]
+        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
+        //public Nullable<decimal> OrionStationEnd { get; set; }
+        //[DisplayName("GIS Start")]
+        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
+        //public Nullable<decimal> GISStationBegin { get; set; }
+        //[DisplayName("GIS End")]
+        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
+        //public Nullable<decimal> GISStationEnd { get; set; }
         [DisplayName("Current MAOP")]
         public Nullable<int> CurrentMAOP { get; set; }
         [DisplayName("Builder")]
@@ -71,18 +69,20 @@ namespace PipelineFeatureList.Models
         [DisplayName("Valve Section Status")]
         public Nullable<int> ValveSectionStatusID { get; set; }
         [DisplayName("PFL Length")]
-        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = false)]
+        //[DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = false)]
         public Nullable<decimal> PFLLength { get; set; }
-        [DisplayName("Orion vs. PFL Length Discrepancy")]
-        [DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> LengthDiscrepancyPlus { get; set; }
-        [DisplayName("Length Discrepancy -")]
-        [DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> LengthDiscrepancyMinus { get; set; }
-        [DisplayName("Is Segmentation Dirty")]
-        public Nullable<bool> IsSegmentationDirty { get; set; }
-        [DisplayName("Crossings Status")]
-        public string CrossingsStatus { get; set; }
+        //[DisplayName("Orion vs. PFL Length Discrepancy")]
+        //[DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
+        //public Nullable<decimal> LengthDiscrepancyPlus { get; set; }
+        //[DisplayName("Length Discrepancy -")]
+        //[DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
+        //public Nullable<decimal> LengthDiscrepancyMinus { get; set; }
+        //[DisplayName("Is Segmentation Dirty")]
+        //public Nullable<bool> IsSegmentationDirty { get; set; }
+        //[DisplayName("Crossings Status")]
+        //public string CrossingsStatus { get; set; }
+        [DisplayName("Description")]
+        public string Description { get; set; }
 
         [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
@@ -90,11 +90,6 @@ namespace PipelineFeatureList.Models
         public Pipeline Pipeline { get; set; }
         [DisplayName("Status")]
         public ValveSectionStatus ValveSectionStatus { get; set; }
-        
-        //[DisplayName("Display")]
-        //public DisplayGroup DisplayGroup { get; set; }
-        //[DisplayName("Builder")]
-        //public User Builder { get; set; }
     }
 
     public class ValveSectionCrossings

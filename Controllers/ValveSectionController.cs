@@ -806,8 +806,8 @@ namespace PipelineFeatureList.Controllers
             {
                 ValveSection.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 ValveSection.ModifiedOn = DateTime.Now;
-                ValveSection.IsSegmentationDirty = true;
-                ValveSection.LengthDiscrepancyPlus = (ValveSection.OrionStationEnd - ValveSection.OrionStationBegin) - ValveSection.PFLLength;
+                //ValveSection.IsSegmentationDirty = true;
+                //ValveSection.LengthDiscrepancyPlus = (ValveSection.OrionStationEnd - ValveSection.OrionStationBegin) - ValveSection.PFLLength;
                 db.Entry(ValveSection).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -826,7 +826,7 @@ namespace PipelineFeatureList.Controllers
                                          select new { v.ValveSectionStatusID }).FirstOrDefault();
                     InsertWorkHistory(ValveSection, unassigned.ValveSectionStatusID, approve.WorkflowActionID, readyforbuild.ValveSectionStatusID);
                     ValveSection.ValveSectionStatusID = readyforbuild.ValveSectionStatusID;
-                    ValveSection.IsSegmentationDirty = true;
+                    //ValveSection.IsSegmentationDirty = true;
 
                     db.Entry(ValveSection).State = EntityState.Modified;
                     db.SaveChanges();
@@ -904,8 +904,8 @@ namespace PipelineFeatureList.Controllers
             {
                 ValveSection.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 ValveSection.ModifiedOn = DateTime.Now;
-                ValveSection.IsSegmentationDirty = true;
-                ValveSection.LengthDiscrepancyPlus = (ValveSection.OrionStationEnd - ValveSection.OrionStationBegin) - ValveSection.PFLLength;
+                //ValveSection.IsSegmentationDirty = true;
+                //ValveSection.LengthDiscrepancyPlus = (ValveSection.OrionStationEnd - ValveSection.OrionStationBegin) - ValveSection.PFLLength;
 
                 db.Entry(ValveSection).State = EntityState.Modified;
                 db.SaveChanges();
@@ -949,100 +949,100 @@ namespace PipelineFeatureList.Controllers
         //
         // GET: /ValveSection/Crossings/5
 
-        public ActionResult Crossings(int id = 0)
-        {
-            ValveSection ValveSection = db.ValveSection.Find(id);
-            if (ValveSection == null)
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult Crossings(int id = 0)
+        //{
+        //    ValveSection ValveSection = db.ValveSection.Find(id);
+        //    if (ValveSection == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            Session["CurrentValveSection"] = ValveSection.ValveSectionID;
-            Session["CurrentOrionStationSeries"] = ValveSection.OrionStationSeries;
+        //    Session["CurrentValveSection"] = ValveSection.ValveSectionID;
+        //    Session["CurrentOrionStationSeries"] = ValveSection.OrionStationSeries;
 
-            string crossingstatus;
-            if (ValveSection.CrossingsStatus == null)
-                crossingstatus = "M";
-            else
-                crossingstatus = ValveSection.CrossingsStatus;
-            SelectList sl = new SelectList(new[]{
-              new SelectListItem{ Text="Crossings Imported", Value="Y"},
-              new SelectListItem{ Text="Crossings Not Applicable", Value="N"},
-              new SelectListItem{ Text="Crossings Not Available", Value="M"}
-            }, "Value", "Text", crossingstatus);
-            ViewBag.CrossingStatus = sl;
+        //    string crossingstatus;
+        //    if (ValveSection.CrossingsStatus == null)
+        //        crossingstatus = "M";
+        //    else
+        //        crossingstatus = ValveSection.CrossingsStatus;
+        //    SelectList sl = new SelectList(new[]{
+        //      new SelectListItem{ Text="Crossings Imported", Value="Y"},
+        //      new SelectListItem{ Text="Crossings Not Applicable", Value="N"},
+        //      new SelectListItem{ Text="Crossings Not Available", Value="M"}
+        //    }, "Value", "Text", crossingstatus);
+        //    ViewBag.CrossingStatus = sl;
             
-            return View();
-        }
+        //    return View();
+        //}
 
         //
         // POST: /ValveSection/CrossingsImport
-        [HttpPost]
-        public ActionResult Crossings(HttpPostedFileBase file, ValveSectionCrossings ValveSectionCrossing)
-        {
-            bool uploaded = false;
+        //[HttpPost]
+        //public ActionResult Crossings(HttpPostedFileBase file, ValveSectionCrossings ValveSectionCrossing)
+        //{
+        //    bool uploaded = false;
 
-            ValveSection valvesection = db.ValveSection.Find(Convert.ToInt64(Session["CurrentValveSection"].ToString()));
+        //    ValveSection valvesection = db.ValveSection.Find(Convert.ToInt64(Session["CurrentValveSection"].ToString()));
             
-            if (file != null)
-            {
-                if (file.ContentLength > 0)
-                {
-                    Int64 currValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+        //    if (file != null)
+        //    {
+        //        if (file.ContentLength > 0)
+        //        {
+        //            Int64 currValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
 
-                    var fileName = Path.GetFileName(file.FileName);
+        //            var fileName = Path.GetFileName(file.FileName);
 
-                    // Get Orion Station Series for the Valve Section
-                    var OrionStation = (from v in db.ValveSection
-                                        where v.ValveSectionID == currValveSectionID
-                                        select new { v.OrionStationSeries }).FirstOrDefault().OrionStationSeries;
+        //            // Get Orion Station Series for the Valve Section
+        //            var OrionStation = (from v in db.ValveSection
+        //                                where v.ValveSectionID == currValveSectionID
+        //                                select new { v.OrionStationSeries }).FirstOrDefault().OrionStationSeries;
 
-                    // Determine what database we are on
-                    var sqlDB = new System.Data.SqlClient.SqlConnectionStringBuilder(
-                    System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
-                    var dbName = sqlDB.InitialCatalog;
+        //            // Determine what database we are on
+        //            var sqlDB = new System.Data.SqlClient.SqlConnectionStringBuilder(
+        //            System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
+        //            var dbName = sqlDB.InitialCatalog;
 
-                    // Get the upload directory
-                    var UploadDirectories = (from u in db.UploadDirectories
-                                           where u.DatabaseName == dbName
-                                        select new { u.Upload_Directory, u.Local_Directory }).FirstOrDefault();
+        //            // Get the upload directory
+        //            var UploadDirectories = (from u in db.UploadDirectories
+        //                                   where u.DatabaseName == dbName
+        //                                select new { u.Upload_Directory, u.Local_Directory }).FirstOrDefault();
 
-                    // Rename file to standard
-                    string datetime = DateTime.Now.ToString("MMddyyyy_HHmmss");
-                    var path = Path.GetFullPath(UploadDirectories.Upload_Directory + dbName + @"\CVT" + OrionStation + "_" + datetime + ".xlsx");
-                    file.SaveAs(path);
+        //            // Rename file to standard
+        //            string datetime = DateTime.Now.ToString("MMddyyyy_HHmmss");
+        //            var path = Path.GetFullPath(UploadDirectories.Upload_Directory + dbName + @"\CVT" + OrionStation + "_" + datetime + ".xlsx");
+        //            file.SaveAs(path);
 
-                    // Call stored procedure to do the import
-                    SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("spImport_CrossingData", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@UserID", Session["UserID"].ToString()));
-                    cmd.Parameters.Add(new SqlParameter("@ValveSectionID", currValveSectionID));
-                    cmd.Parameters.Add(new SqlParameter("@UploadIdentifier", UploadDirectories.Local_Directory + dbName + @"\CVT" + OrionStation + "_" + datetime + ".xlsx"));
-                    cmd.Parameters.Add(new SqlParameter("@ReturnMessage", ""));
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-                    conn.Dispose();
+        //            // Call stored procedure to do the import
+        //            SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand("spImport_CrossingData", conn);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.Add(new SqlParameter("@UserID", Session["UserID"].ToString()));
+        //            cmd.Parameters.Add(new SqlParameter("@ValveSectionID", currValveSectionID));
+        //            cmd.Parameters.Add(new SqlParameter("@UploadIdentifier", UploadDirectories.Local_Directory + dbName + @"\CVT" + OrionStation + "_" + datetime + ".xlsx"));
+        //            cmd.Parameters.Add(new SqlParameter("@ReturnMessage", ""));
+        //            cmd.ExecuteNonQuery();
+        //            conn.Close();
+        //            conn.Dispose();
                     
-                    uploaded = true;
-                }
-            }
+        //            uploaded = true;
+        //        }
+        //    }
 
-            if (uploaded)
-            {
-                valvesection.CrossingsStatus = "Y";
-                valvesection.IsSegmentationDirty = true;
-            }
-            else if (valvesection.CrossingsStatus != "Y")
-                valvesection.CrossingsStatus = ValveSectionCrossing.CrossingStatus;
-            else
-                valvesection.CrossingsStatus = "M";
-            db.Entry(valvesection).State = EntityState.Modified;
-            db.SaveChanges();
+        //    if (uploaded)
+        //    {
+        //        valvesection.CrossingsStatus = "Y";
+        //        valvesection.IsSegmentationDirty = true;
+        //    }
+        //    else if (valvesection.CrossingsStatus != "Y")
+        //        valvesection.CrossingsStatus = ValveSectionCrossing.CrossingStatus;
+        //    else
+        //        valvesection.CrossingsStatus = "M";
+        //    db.Entry(valvesection).State = EntityState.Modified;
+        //    db.SaveChanges();
 
-            return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
-        }
+        //    return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+        //}
 
         //
         // GET: /ValveSection/StatusChange/5
