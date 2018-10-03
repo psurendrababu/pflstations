@@ -9,70 +9,59 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>ValveSection</legend>
+<fieldset>
+    <legend>ValveSection</legend>
 
-        @Html.HiddenFor(model => model.ValveSectionID)
-        @Html.HiddenFor(model => model.CreatedBy_UserID)
-        @Html.HiddenFor(model => model.CreatedOn)
-        @Html.HiddenFor(model => model.CurrentMAOP)
-        @Html.HiddenFor(model => model.OrionStationBegin)
-        @Html.HiddenFor(model => model.OrionStationEnd)
-        @Html.HiddenFor(model => model.GISStationBegin)
-        @Html.HiddenFor(model => model.GISStationEnd)
-        @Html.HiddenFor(model => model.MilePointBegin)
-        @Html.HiddenFor(model => model.MilePointEnd)
-        @Html.HiddenFor(model => model.ValveSectionEnd)
-        @Html.HiddenFor(model => model.PFLLength)
-        @Html.HiddenFor(model => model.LengthDiscrepancyPlus)
-        @Html.HiddenFor(model => model.LengthDiscrepancyMinus)
-        @Html.HiddenFor(model => model.ValveSectionStatusID)        
-        @Html.HiddenFor(model => model.CrossingsStatus)
-        @Html.HiddenFor(model => model.IsSegmentationDirty)
+    @Html.HiddenFor(model => model.PipeSystemID)
+    @Html.HiddenFor(model => model.ValveSectionID)
+    @Html.HiddenFor(model => model.CreatedBy_UserID)
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.HiddenFor(model => model.CurrentMAOP)
+    @Html.HiddenFor(model => model.PFLLength)
+    @Html.HiddenFor(model => model.ValveSectionStatusID)
 
-
-        <table>
-            <tr>
+    <table>
+        @*<tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.PipeSystemID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("PipeSystemID", "- Select a Pipe System -") @Html.ValidationMessageFor(x => x.PipeSystemID)</div></td>
-            </tr>
-            <tr>
+        </tr>*@
+        <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.PipelineID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("PipelineID", "- Select a Pipeline -") @Html.ValidationMessageFor(x => x.PipelineID)</div></td>
-            </tr>
-            <tr>
-            <td><div class="editor-label">@Html.Label("Valve Section")</div></td>
-            <td><div class="editor-field">@Html.EditorFor(model => model.ValveSectionBegin) @Html.ValidationMessageFor(model => model.ValveSectionBegin)</div></td>
-            </tr>
-            <tr>
-            <td><div class="editor-label">@Html.Label("Orion Station Series")</div></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(model => model.ValveSectionItem)</td>
+            <td>@Html.EditorFor(model => model.ValveSectionItem)</td>
+        </tr>
+        <tr>
+            <td><div class="editor-label">@Html.Label("Series")</div></td>
             <td><div class="editor-field">@Html.EditorFor(model => model.OrionStationSeries) @Html.ValidationMessageFor(model => model.OrionStationSeries)</div></td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.BuilderID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("BuilderID", "- Select a Builder -")</div></td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.QCID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("QCID", "- Select a QCer -")</div></td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.EngineerID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("EngineerID", "- Select an Engineer -")</div></td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.FinalEngineerID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("FinalEngineerID", "- Select a Final Engineer -")</div></td>
-            </tr>
-            @*<tr>
+        </tr>
+        @*<tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.ValveSectionStatusID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("ValveSectionStatusID", "- Select a Status -")</div></td>
             </tr>*@
-            <tr>
+        <tr>
             <td colspan="2"><p><input type="submit" value="Save" /></p></td>
-            </tr>
-        </table>
-    </fieldset>
+        </tr>
+    </table>
+</fieldset>
 }
 
 <div>

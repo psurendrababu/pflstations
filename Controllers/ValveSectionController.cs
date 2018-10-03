@@ -272,7 +272,7 @@ namespace PipelineFeatureList.Controllers
                                                 from pd in p1.DefaultIfEmpty()
                                                 where v.EngineerID == currEngineer
                                                 && dgd.DisplayGroupName == "Engineering"
-                                                orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                orderby psd.PipeSystemItem, pd.PipelineItem
                                                 select new ValveSectionEngineeringAssigned
                                                 {
                                                     ValveSection = v,
@@ -315,7 +315,7 @@ namespace PipelineFeatureList.Controllers
                                                        && (filterPipeline == 0 ?
                                                         true :
                                                         v.PipelineID == filterPipeline)
-                                              orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                              orderby psd.PipeSystemItem, pd.PipelineItem
                                               select new ValveSectionEngineeringPool
                                               {
                                                   ValveSection = v,
@@ -382,7 +382,7 @@ namespace PipelineFeatureList.Controllers
                                                     from pd in p1.DefaultIfEmpty()
                                                     where v.FinalEngineerID == currEngineer
                                                     && dgd.DisplayGroupName == "Final Engineering"
-                                                    orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                    orderby psd.PipeSystemItem, pd.PipelineItem
                                                     select new ValveSectionFinalEngineeringAssigned
                                                     {
                                                         ValveSection = v,
@@ -425,7 +425,7 @@ namespace PipelineFeatureList.Controllers
                                                        && (filterPipeline == 0 ? 
                                                         true : 
                                                         v.PipelineID == filterPipeline)
-                                                       orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                       orderby psd.PipeSystemItem, pd.PipelineItem
                                                        select new ValveSectionFinalEngineeringPool
                                                        {
                                                            ValveSection = v,
@@ -491,7 +491,7 @@ namespace PipelineFeatureList.Controllers
                                                                 from pd in p1.DefaultIfEmpty()
                                                                 where v.AnnualReviewerID == currEngineer
                                                                 && dgd.DisplayGroupName == "Annual Review"
-                                                                orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                                orderby psd.PipeSystemItem, pd.PipelineItem
                                                                 select new ValveSectionAnnualReviewAssigned
                                                                 {
                                                                     ValveSection = v,
@@ -532,7 +532,7 @@ namespace PipelineFeatureList.Controllers
                                                             && (filterPipeline == 0 ?
                                                              true :
                                                              v.PipelineID == filterPipeline)
-                                                            orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                            orderby psd.PipeSystemItem, pd.PipelineItem
                                                             select new ValveSectionAnnualReviewPool
                                                             {
                                                                 ValveSection = v,
@@ -638,7 +638,7 @@ namespace PipelineFeatureList.Controllers
                                                             && (filterPipeline == 0 ?
                                                              true :
                                                              v.PipelineID == filterPipeline)
-                                                            orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                            orderby psd.PipeSystemItem, pd.PipelineItem
                                                             select new ValveSectionCertificationApprovedPool
                                                             {
                                                                 ValveSection = v,
@@ -671,7 +671,7 @@ namespace PipelineFeatureList.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem");
+            //ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem");
             ViewBag.PipelineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem");
             //ViewBag.ValveSectionStatusID = new SelectList(db.ValveSectionStatus, "ValveSectionStatusID", "ValveSectionStatusItem");
             var builder = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
@@ -694,12 +694,11 @@ namespace PipelineFeatureList.Controllers
         [HttpPost]
         public ActionResult Create(ValveSection ValveSection)
         {
-            if (ModelState.IsValid && ValveSection.PipeSystemID != 0 && ValveSection.PipelineID != 0)
-            {
                 ValveSection.CreatedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 ValveSection.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 ValveSection.CreatedOn = DateTime.Now;
                 ValveSection.ModifiedOn = DateTime.Now;
+                ValveSection.PipeSystemID = (from p in db.Pipelines where p.PipelineID == ValveSection.PipelineID select p.PipeSystemID).FirstOrDefault();
 
                 db.ValveSection.Add(ValveSection);
                 db.SaveChanges();
@@ -719,27 +718,12 @@ namespace PipelineFeatureList.Controllers
                                       select new { v.ValveSectionStatusID }).FirstOrDefault();
                     InsertWorkHistory(ValveSection, unassigned.ValveSectionStatusID, approve.WorkflowActionID, readyforbuild.ValveSectionStatusID);
                     ValveSection.ValveSectionStatusID = readyforbuild.ValveSectionStatusID;
-                }
 
                 db.Entry(ValveSection).State = EntityState.Modified;
                 db.SaveChanges();
                 
                 return RedirectToAction("Index");
             }
-
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem");
-            ViewBag.PipelineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem");
-            //ViewBag.ValveSectionStatusID = new SelectList(db.ValveSectionStatus, "ValveSectionStatusID", "ValveSectionStatusItem");
-            var builder = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
-                                          select new
-                                          {
-                                              value = u.UserID,
-                                              text = u.FirstName + " " + u.LastName
-                                          }),
-                            "value",
-                            "text",
-                            null);
-            ViewBag.BuilderID = builder;
 
             return View(ValveSection);
         }

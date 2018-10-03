@@ -366,7 +366,7 @@ namespace PipelineFeatureList.Controllers
                                                 from pd in p1.DefaultIfEmpty()
                                                 where v.EngineerID == currEngineer
                                                 && dgd.DisplayGroupName == "Engineering"
-                                                orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                orderby psd.PipeSystemItem, pd.PipelineItem
                                                 select new ValveSectionEngineeringAssigned
                                                 {
                                                     ValveSection = v,
@@ -409,7 +409,7 @@ namespace PipelineFeatureList.Controllers
                                                        && (filterPipeline == 0 ?
                                                         true :
                                                         v.PipelineID == filterPipeline)
-                                              orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                              orderby psd.PipeSystemItem, pd.PipelineItem
                                               select new ValveSectionEngineeringPool
                                               {
                                                   ValveSection = v,
@@ -476,7 +476,7 @@ namespace PipelineFeatureList.Controllers
                                                     from pd in p1.DefaultIfEmpty()
                                                     where v.FinalEngineerID == currEngineer
                                                     && dgd.DisplayGroupName == "Final Engineering"
-                                                    orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                    orderby psd.PipeSystemItem, pd.PipelineItem
                                                     select new ValveSectionFinalEngineeringAssigned
                                                     {
                                                         ValveSection = v,
@@ -519,7 +519,7 @@ namespace PipelineFeatureList.Controllers
                                                        && (filterPipeline == 0 ? 
                                                         true : 
                                                         v.PipelineID == filterPipeline)
-                                                       orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                       orderby psd.PipeSystemItem, pd.PipelineItem
                                                        select new ValveSectionFinalEngineeringPool
                                                        {
                                                            ValveSection = v,
@@ -585,7 +585,7 @@ namespace PipelineFeatureList.Controllers
                                                     from pd in p1.DefaultIfEmpty()
                                                     where v.AnnualReviewerID == currEngineer
                                                     && dgd.DisplayGroupName == "Annual Review"
-                                                    orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                    orderby psd.PipeSystemItem, pd.PipelineItem
                                                             select new ValveSectionAnnualReviewAssigned
                                                     {
                                                         ValveSection = v,
@@ -626,7 +626,7 @@ namespace PipelineFeatureList.Controllers
                                                        && (filterPipeline == 0 ? 
                                                         true : 
                                                         v.PipelineID == filterPipeline)
-                                                       orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                       orderby psd.PipeSystemItem, pd.PipelineItem
                                                        select new ValveSectionAnnualReviewPool
                                                        {
                                                            ValveSection = v,
@@ -732,7 +732,7 @@ namespace PipelineFeatureList.Controllers
                                                             && (filterPipeline == 0 ?
                                                              true :
                                                              v.PipelineID == filterPipeline)
-                                                            orderby psd.PipeSystemItem, pd.PipelineItem, v.ValveSectionBegin
+                                                            orderby psd.PipeSystemItem, pd.PipelineItem
                                                             select new ValveSectionCertificationApprovedPool
                                                             {
                                                                 ValveSection = v,

@@ -12,8 +12,7 @@ namespace PipelineFeatureList.Models
 {
     public class ValveSection
     {
-        [DisplayName("Circuit ID")]
-        [Required]
+        [DisplayName("CircuitID")]
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Station System")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Station System Required")]
@@ -23,11 +22,11 @@ namespace PipelineFeatureList.Models
         public int PipelineID { get; set; }
         [DisplayName("Station Series")]
         public string OrionStationSeries { get; set; }
-        [DisplayName("Circuit Begin")]
-        [Required]
-        public string ValveSectionBegin { get; set; }
-        [DisplayName("Circuit End")]
-        public string ValveSectionEnd { get; set; }
+        //[DisplayName("Circuit Begin")]
+        //[Required]
+        //public string ValveSectionBegin { get; set; }
+        //[DisplayName("Circuit End")]
+        //public string ValveSectionEnd { get; set; }
         //[DisplayName("Mile Point Begin")]
         //public Nullable<decimal> MilePointBegin { get; set; }
         //[DisplayName("Mile Point End")]
@@ -83,6 +82,8 @@ namespace PipelineFeatureList.Models
         //public string CrossingsStatus { get; set; }
         [DisplayName("Description")]
         public string Description { get; set; }
+        [DisplayName("Circuit ID")]
+        public string ValveSectionItem { get; set; }
 
         [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }

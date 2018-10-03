@@ -629,22 +629,6 @@ namespace PipelineFeatureList.Controllers
             try { featurenumber = db.ValveSectionFeatures.Where(v => v.ValveSectionID == currvalvesection).Max(v => v.FeatureNumber); }
             catch { featurenumber = 0; }
 
-            //if (featurenumber == 0)
-            //{
-            //    var gisalignstart =
-            //        from v in db.ValveSection
-            //        where v.ValveSectionID == currvalvesection
-            //        select new { start = v.GISStationBegin };
-            //    ViewBag.GISAlignStart = (gisalignstart.First().start == null ? 0 : gisalignstart.First().start);
-            //}
-            //else
-            //{
-            //    var gisalignstart =
-            //        from v in db.ValveSectionFeatures
-            //        where v.ValveSectionID == currvalvesection && v.FeatureNumber == featurenumber
-            //        select new { start = v.GISAlignEnd };
-            //    ViewBag.GISAlignStart = gisalignstart.First().start;
-            //}
             featurenumber++;
             decimal diff = featurenumber % 1;
             featurenumber = featurenumber - diff;
@@ -772,63 +756,63 @@ namespace PipelineFeatureList.Controllers
         //
         // GET: /DocumentRecord/Create
 
-        public ActionResult CreateDoc()
-        {
-            Int64 currvalvesection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+        //public ActionResult CreateDoc()
+        //{
+        //    Int64 currvalvesection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
 
-            int entry = 0;
-            string nextentry = "";
-            //try { entry = db.DocumentRecords.Where(v => v.PipelineID == currvalvesection).OrderByDescending(v => v.DocumentRecordID).Max(v => v.DocumentRecordID); }
-            //catch { }
+        //    int entry = 0;
+        //    string nextentry = "";
+        //    //try { entry = db.DocumentRecords.Where(v => v.PipelineID == currvalvesection).OrderByDescending(v => v.DocumentRecordID).Max(v => v.DocumentRecordID); }
+        //    //catch { }
 
-            if (entry == 0)
-            {
-                Session["CurrentRecordIdentifier"] = "1";
-                ViewBag.RecordIdentifierName = "A";
-            }
-            else
-            {
-                entry++;
-                nextentry = "";
-                try 
-                { 
-                    nextentry = db.RecordIdentifiers.OrderByDescending(v => v.RecordIdentifierID).Where(v => v.RecordIdentifierID == entry).Select(v => v.RecordIdentifierItem).First(); 
-                    ViewBag.RecordIdentifierName = nextentry;
-                    Session["CurrentRecordIdentifier"] = entry;
-                }
-                catch 
-                { 
-                    ViewBag.RecordIdentifierName = "A"; 
-                    Session["CurrentRecordIdentifier"] = "1"; 
-                }
-            }
+        //    if (entry == 0)
+        //    {
+        //        Session["CurrentRecordIdentifier"] = "1";
+        //        ViewBag.RecordIdentifierName = "A";
+        //    }
+        //    else
+        //    {
+        //        entry++;
+        //        nextentry = "";
+        //        try 
+        //        { 
+        //            nextentry = db.RecordIdentifiers.OrderByDescending(v => v.RecordIdentifierID).Where(v => v.RecordIdentifierID == entry).Select(v => v.RecordIdentifierItem).First(); 
+        //            ViewBag.RecordIdentifierName = nextentry;
+        //            Session["CurrentRecordIdentifier"] = entry;
+        //        }
+        //        catch 
+        //        { 
+        //            ViewBag.RecordIdentifierName = "A"; 
+        //            Session["CurrentRecordIdentifier"] = "1"; 
+        //        }
+        //    }
             
-            ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem");
-            return View();
-        }
+        //    ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem");
+        //    return View();
+        //}
 
         //
         // POST: /DocumentRecord/Create
 
-        [HttpPost]
-        public ActionResult CreateDoc(DocumentRecord documentrecord)
-        {
-            var dt = db.DocumentTypes.Where(d => d.DocumentTypeItem == "Completion Report" || d.DocumentTypeItem == "Pipeline Replacement Report").ToList();
-            if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID))
-            {
-                //return View(documentrecord);
-            }
-            if (ModelState.IsValid)
-            {
-                documentrecord.PipelineID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-                documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
-                db.DocumentRecords.Add(documentrecord);
-                db.SaveChanges();
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
-            }
+        //[HttpPost]
+        //public ActionResult CreateDoc(DocumentRecord documentrecord)
+        //{
+        //    var dt = db.DocumentTypes.Where(d => d.DocumentTypeItem == "Completion Report" || d.DocumentTypeItem == "Pipeline Replacement Report").ToList();
+        //    if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID))
+        //    {
+        //        //return View(documentrecord);
+        //    }
+        //    if (ModelState.IsValid)
+        //    {
+        //        documentrecord.PipelineID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+        //        documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
+        //        db.DocumentRecords.Add(documentrecord);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+        //    }
 
-            return View(documentrecord);
-        }
+        //    return View(documentrecord);
+        //}
 
         //
         // GET: /FeatureIssue/Create
@@ -923,46 +907,6 @@ namespace PipelineFeatureList.Controllers
             return View(valvesectionfeature);
         }
 
-        //
-        // GET: /DocumentRecord/Edit/5
-
-        public ActionResult EditDoc(int id = 0)
-        {
-            DocumentRecord documentrecord = db.DocumentRecords.Include("RecordIdentifier").Where(d => d.DocumentRecordID == id).First();
-            if (documentrecord == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem", documentrecord.DocumentTypeID);
-            //ViewBag.RecordIdentifierName = documentrecord.RecordIdentifier.RecordIdentifierItem;
-
-            return View(documentrecord);
-        }
-        
-        //
-        // POST: /DocumentRecord/Edit/5
-
-        [HttpPost]
-        public ActionResult EditDoc(DocumentRecord documentrecord)
-        {
-            var dt = db.DocumentTypes.Where(d => d.DocumentTypeItem == "Completion Report" || d.DocumentTypeItem == "Pipeline Replacement Report").ToList();
-            if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID))
-            {
-                //return View(documentrecord);
-            }
-            if (ModelState.IsValid)
-            {
-                db.Entry(documentrecord).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
-            }
-            return View(documentrecord);
-        }
-
-        //
-        // GET: /FeatureIssue/Edit/5
-
         public ActionResult EditIssue(int id = 0)
         {
             FeatureIssue featureissue = db.FeatureIssues.Where(f => f.FeatureIssueID == id).First();
@@ -998,109 +942,6 @@ namespace PipelineFeatureList.Controllers
                 return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
             }
             return View(featureissue);
-        }
-
-        //
-        // GET: /DocumentRecord/Delete/5
-
-        public ActionResult DeleteDoc(int id = 0)
-        {
-            DocumentRecord documentrecord = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.DocumentRecordID == id).FirstOrDefault();
-            if (documentrecord == null)
-            {
-                return HttpNotFound();
-            }
-            return View(documentrecord);
-        }
-
-        //
-        // POST: /DocumentRecord/Delete/5
-
-        [HttpPost, ActionName("DeleteDoc")]
-        public ActionResult DeleteDocConfirmed(int id)
-        {
-            DocumentRecord documentrecord = db.DocumentRecords.Find(id);
-            db.DocumentRecords.Remove(documentrecord);
-            db.SaveChanges();
-            //db.Dispose();
-
-            PipelineFeatureListDBContext db1 = new PipelineFeatureListDBContext();
-            
-            // Update all features that have the document record
-
-            var updateValveSectionFeatures =
-                (from v in db1.ValveSectionFeatures
-                where v.ValveSectionID == documentrecord.PipelineID
-                select v).ToList();
-
-            bool docfound = false;
-            foreach (var item in updateValveSectionFeatures)
-            {
-                docfound = false;
-                if (item.DrawingID == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.DrawingID = null;
-                }
-                if (item.ODRecordID1 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.ODRecordID1 = null;
-                }
-                if (item.ODRecordID2 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.ODRecordID2 = null;
-                }
-                if (item.WTRecordID1 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.WTRecordID1 = null;
-                }
-                if (item.WTRecordID2 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.WTRecordID2 = null;
-                }
-                if (item.SeamRecordID1 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.SeamRecordID1 = null;
-                }
-                if (item.SeamRecordID2 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.SeamRecordID2 = null;
-                }
-                if (item.SpecRatingRecordID1 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.SpecRatingRecordID1 = null;
-                }
-                if (item.SpecRatingRecordID2 == documentrecord.DocumentRecordID)
-                {
-                    docfound = true;
-                    item.SpecRatingRecordID2 = null;
-                }
-                if (docfound)
-                {
-                    // Rerun the Matrix Check
-                    item.ODRecordMatrixCheck = (MatrixCheckforErrors("OD", (int)(item.ODRecordID1 == null ? 0 : item.ODRecordID1), (int)(item.ODRecordID2 == null ? 0 : item.ODRecordID2)) == true ? 0 : 1);
-                    item.WTRecordMatrixCheck = (MatrixCheckforErrors("WT", (int)(item.WTRecordID1 == null ? 0 : item.WTRecordID1), (int)(item.WTRecordID2 == null ? 0 : item.WTRecordID2)) == true ? 0 : 1);
-                    item.SeamRecordMatrixCheck = (MatrixCheckforErrors("ST", (int)(item.SeamRecordID1 == null ? 0 : item.SeamRecordID1), (int)(item.SeamRecordID2 == null ? 0 : item.SeamRecordID2)) == true ? 0 : 1);
-                    item.SpecRatingRecordMatrixCheck = (MatrixCheckforErrors("SR", (int)(item.SpecRatingRecordID1 == null ? 0 : item.SpecRatingRecordID1), (int)(item.SpecRatingRecordID2 == null ? 0 : item.SpecRatingRecordID2)) == true ? 0 : 1);
-
-                    db1.Entry(item).State = EntityState.Modified;
-                    db1.SaveChanges();
-                    //db1.Dispose();
-
-                    // Rerun the errors for the feature
-                    GenerateValveSectionErrors(item);
-                    GenerateGISBeginEndErrors();
-                }
-            }
-
-            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
         }
 
         //
@@ -1209,51 +1050,6 @@ namespace PipelineFeatureList.Controllers
 
         //
         // GET: /ValveSectionFeature/Resegment/5
-
-        ///PH 2014.05.22 - cleanup to isolate where to put record creation for DynamicSegmentation.  This function has no references.
-        //public void Resegment()
-        //{
-        //    Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-        //    ValveSection valvesection = db.ValveSection.Where(v => v.ValveSectionID == currSection).First();
-
-        //    DynamicSegmentation ds = new DynamicSegmentation
-        //    {
-        //        Engineer_UserID = Convert.ToInt64(Session["UserID"].ToString()),
-        //        QueuedOn = DateTime.Now,
-        //        PipelineSystemID = Convert.ToInt32(valvesection.PipeSystemID),
-        //        PipelineID = valvesection.PipelineID,
-        //        ValveSectionID = currSection,
-        //        IsLatestCopy = true,
-        //        ProcessingMessage = "Creating - Added from resegment Now button."
-        //    };
-        //    db.DynamicSegmentations.Add(ds);
-        //    db.SaveChanges();
-
-        //    // Call stored procedure to do the import
-        //    SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
-        //    conn.Open();
-        //    SqlCommand cmd = new SqlCommand("DynamicallySegment", conn);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.Parameters.Add(new SqlParameter("@ValveSectionID", currSection));
-        //    cmd.BeginExecuteNonQuery(delegate(IAsyncResult ar)
-        //    {
-        //        cmd.EndExecuteNonQuery(ar);
-        //        cmd.Dispose();
-        //        conn.Close();
-        //        conn.Dispose();
-        //    }, null);
-
-        //    Thread.Sleep(10000);
-            
-        //    //cmd.ExecuteNonQuery();
-        //    //conn.Close();
-        //    //conn.Dispose();
-
-
-
-        //    //return Index(currSection, Session["CurrentOrionStationSeries"].ToString());
-        //    //return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
-        //}
 
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult MatrixCheck(string checktype, int id1, int id2)

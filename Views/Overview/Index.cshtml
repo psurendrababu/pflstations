@@ -14,7 +14,6 @@
         <table class="overviewtable">
             @foreach (var itemSection in (ViewData["ValveSection"] as List<PipelineFeatureList.Models.ValveSection>))
             {           
-                <tr><th>Valve Section Begin/End</th><td>@Html.DisplayFor(modelItem => itemSection.ValveSectionBegin) / @Html.DisplayFor(modelItem => itemSection.ValveSectionEnd)</td></tr>
                 <tr><th>Station Series</th><td>@Html.DisplayFor(modelItem => itemSection.OrionStationSeries)</td></tr>
                 <tr><th>Current MAOP</th><td>@Html.DisplayFor(modelItem => itemSection.CurrentMAOP)</td></tr>
                 <tr><th>Length</th><td>@Html.DisplayFor(modelItem => itemSection.PFLLength)</td></tr>

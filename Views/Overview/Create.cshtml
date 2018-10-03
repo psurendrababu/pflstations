@@ -1,10 +1,10 @@
 ﻿@model PipelineFeatureList.Models.ValveSectionFeature
 
 @{
-    ViewBag.Title = "Create Valve Section Feature";
+    ViewBag.Title = "Create Circuit Feature";
 }
 
-<h2>Create Valve Section Feature</h2>
+<h2>Create Circuit Feature</h2>
 
 @using (Html.BeginForm())
 {
@@ -15,7 +15,7 @@
         @Html.HiddenFor(model => model.WTRecordMatrixCheck, new { id = "hdnWTRecordMatrixCheck" })
         @Html.HiddenFor(model => model.SeamRecordMatrixCheck, new { id = "hdnSeamRecordMatrixCheck" })
         @Html.HiddenFor(model => model.SpecRatingRecordMatrixCheck, new { id = "hdnSpecRatingRecordMatrixCheck" })
-        <legend>ValveSectionFeature</legend>
+        <legend>CircuitFeature</legend>
         <table>
         <tr><td>
         <div class="editor-label">
@@ -35,34 +35,7 @@
             @Html.Raw(ViewBag.FeatureNumber)
         </div>
         </td></tr>
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("GIS Alignment Begin/End / Length")
-        </div></td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @{
-            decimal gisstart = 0;
-            gisstart = (decimal)ViewBag.GISAlignStart;
-            }
-            @Html.TextBox("GISAlignStart", (decimal)ViewBag.GISAlignStart, new { @id = "tbGISAlignStart", onchange = "onchangeevent();" })
-            @Html.ValidationMessageFor(model => model.GISAlignStart)
-        </div>
-        </td>
-        <td> / </td>
-        <td><div class="editor-field">
-            @Html.TextBoxFor(x => x.GISAlignEnd, new { @id = "tbGISAlignEnd", onchange = "onchangeevent();" })
-            @Html.ValidationMessageFor(model => model.GISAlignEnd)
-        </div>
-        </td>
-        <td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.LabelFor(x => x.Length, new { @id = "lblLength", onchange = "onchangeeventlength();" })
-        </div>
-        </td></tr></table>
-        </td></tr>
-        
+ 
         <tr><td>
         <table><tr><td>
         <div class="editor-label">@Html.LabelFor(model => model.FeatureID)</div></td><td>/</td><td><div class="editor-label">@Html.LabelFor(model => model.TypeID)</div></td><td>
