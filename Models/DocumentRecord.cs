@@ -10,7 +10,7 @@ namespace PipelineFeatureList.Models
     public class DocumentRecord
     {
         [DisplayName("ID")]
-        public Int64 DocumentRecordID { get; set; }
+        public int DocumentRecordID { get; set; }
         [DisplayName("Station")]
         public Int64 PipelineID { get; set; }
         [DisplayName("DocumentTypeID")]

@@ -182,6 +182,7 @@
     <Compile Include="Controllers\ReportEmailController.cs" />
     <Compile Include="Models\ClientImportList.cs" />
     <Compile Include="Models\ClientReport.cs" />
+    <Compile Include="Models\HCAStatuses.cs" />
     <Compile Include="Models\PressureTestRecord.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="ReportViewerUserControl.ascx.cs">

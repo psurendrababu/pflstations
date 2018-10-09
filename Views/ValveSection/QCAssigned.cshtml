@@ -19,13 +19,7 @@
             @Html.Raw("Status")
         </th>
         <th>
-            @Html.Raw("Length")
-        </th>
-        <th>
-            @Html.Raw("Features")
-        </th>
-        <th>
-            @Html.Raw("QC")
+            @Html.Raw("Ready for QC")
         </th>
         <th>
             @Html.Raw("Builder")
@@ -44,16 +38,10 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Pipeline.PipelineItem)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveSection.ValveSectionBegin)
+                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveSection.ValveSectionItem)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ValveStatus.ValveSectionStatusItem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.Length)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.NumberOfFeatures)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValveSectionQCAssigned.ReadyForQC)

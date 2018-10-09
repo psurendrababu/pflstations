@@ -197,7 +197,7 @@
         @Html.ActionLink("Regenerate Errors/Warnings", "Errors", null, htmlAttributes: new { @class = "linkbuttondisabled" })
     }
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    @if ( (ViewBag.EditDisabled == false && 
+    @*@if ( (ViewBag.EditDisabled == false && 
         (ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering"))
         || ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Annual Review"
         )
@@ -210,8 +210,8 @@
         {
             @Html.ActionLink("Dynamic Segment Records", "DSRs", null, htmlAttributes: new { @class = "linkbutton", @target = "child" })
         }
-    }
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    }*@
+    @*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     @if (ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Final Engineering"
         || ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Annual Review")
     {
@@ -222,10 +222,8 @@
         || ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Annual Review")
     {
         @Html.ActionLink("Acceptance Form", "DownloadReport", "Reporting", new { ReportName = "Acceptance Form", ReportFormat = "EXCEL" }, new { @class = "linkbutton" });
-    }
+    }*@
      
-@*@if (ViewBag.DisplayGroupName != "Engineering")
-{*@
 <div style="width:1100px; height:400px; overflow:scroll" >
         <table class="overviewfeaturetable">
             @if (ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering" 
@@ -233,209 +231,56 @@
             {
                 <tr><th colspan="45" style="text-align:left;">&nbsp;** BUILD RECORDS **</th></tr>
             }
-            <tr><th></th><th colspan="12">FEATURE INFORMATION</th><th colspan="21">MAOP SPECIFICATIONS</th><th>MATERIAL</th><th colspan="3">BEND DATA</th><th colspan="2">COATING</th><th colspan="4">PURCHASE/INSTALL</th><th></th></tr>
+            @*<tr><th></th><th colspan="12">FEATURE INFORMATION</th><th colspan="21">MAOP SPECIFICATIONS</th><th>MATERIAL</th><th colspan="3">BEND DATA</th><th colspan="2">COATING</th><th colspan="4">PURCHASE/INSTALL</th><th></th></tr>*@
             <thead>
-            <tr><th>Edit<br />Insert</th>
-                <th>GIS Alignment Sheet<br />Begin Station</th><th>GIS Alignment Sheet<br />End Station</th><th>Feature Number</th><th>Feature</th>
-                <th>Type</th><th>Length<br />(feet)</th>@*<th>Length Discrepancy<br />(feet)</th><th>Current Class<br />Loc.</th><th>Class<br />Design<br />Factor</th><th>HCA Name</th>*@
-                <th>Job Number/Work Order<br />/Purchase Order #</th><th>Install Date<br />mm/dd/yyyy</th><th>In-Service Date<br />mm/dd/yyyy</th>
-                <th>Construction Type</th><th>Notes / Comments</th><th>Drawing<br />Identifier</th><th>O.D. 1<br />(inch)</th><th>OD<br />Records<br />Identifier 1</th>
-                <th>OD<br />Records<br />Identifier 2</th><th>OD Record<br />Matrix Check</th><th>W.T. 1<br />(inch)</th><th>WT<br />Records<br />Identifier 1</th>
-                <th>WT<br />Records<br />Identifier 2</th><th>WT Record<br />Matrix Check</th><th>O.D. 2<br />(inch)</th><th>W.T. 2<br />(inch)</th>
-                <th>Seam Weld Type</th><th>Seam<br />Records<br />Identifier 1</th><th>Seam<br />Records<br />Identifier 2</th>
-                <th>Seam Record<br />Matrix Check</th><th>Specification<br />/Rating</th><th>Grade</th><th>Spec/Grade<br />Records<br />Identifier 1</th>
-                <th>Spec/Grade<br />Records<br />Identifier 2</th><th>Spec/Grade Record<br />Matrix Check</th><th>ANSI Rating</th><th>Material Type</th>
-                <th>Angle</th><th>Radius</th><th>Orient</th><th>Coating Type</th><th>Description</th><th>Manufacturer</th><th>Manufacturer Type</th><th>Mill</th><th>MFR Date<br />mm/dd/yyyy</th>
+            <tr><th>Actions</th>
+                <th>Feature Order</th>
+                <th>Feature Number</th>
+                <th>Feature</th>
+                <th>Type</th>
+                <th>Length (feet)</th>
+                <th>Job Number/Work Order/Purchase Order #</th>
+                <th>Install Date</th>
+                <th>In-Service Date</th>
+                <th>Construction Type</th>
+                <th>Notes / Comments</th>
+                <th>Drawing Identifier</th>
+                <th>O.D. 1 (inch)</th>
+                <th>OD RecID 1</th>
+                <th>OD RecID 2</th>
+                <th>OD Matrix</th>
+                <th>W.T. 1 (inch)</th>
+                <th>WT RecID 1</th>
+                <th>WT RecID 2</th>
+                <th>WT Matrix</th>
+                <th>O.D. 2 (inch)</th>
+                <th>W.T. 2 (inch)</th>
+                <th>Seam Weld Type</th>
+                <th>Seam RecID 1</th>
+                <th>Seam RecID 2</th>
+                <th>Seam Matrix</th>
+                <th>Spec/Rating</th>
+                <th>Grade</th>
+                <th>Spec/Grade RecID 1</th>
+                <th>Spec/Grade RecID 2</th>
+                <th>Spec/Grade Matrix</th>
+                <th>ANSI Rating</th>
+                <th>Material Type</th>
+                <th>Angle</th>
+                <th>Radius</th>
+                <th>Orient</th>
+                <th>Coating Type</th>
+                <th>Cooating Desc.</th>
+                <th>Manufacturer</th>
+                <th>Manufacturer Type</th>
+                <th>Mill</th>
+                <th>MFR Date</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
         @foreach (var item in Model)
         {
-            if (item.ValveSectionFeatureData != null)
-            {
-                if (item.FeatureData == null)
-                {
-                    feature = ""; featureid = "";
-                }
-                else
-                {
-                    feature = item.FeatureData.FeatureItem;
-                    featureid = item.FeatureData.FeatureID.ToString();
-                }
-                if (item.PipeTypeData == null)
-                {
-                    pipetype = ""; pipetypeid = "";
-                }
-                else
-                {
-                    pipetype = item.PipeTypeData.PipeTypeItem;
-                    pipetypeid = item.PipeTypeData.PipeTypeID.ToString();
-                }
-                if (item.OutsideDiameterData1 == null)
-                {
-                    od1 = ""; od1id = "";
-                }
-                else
-                {
-                    od1 = item.OutsideDiameterData1.OutsideDiameterItem.ToString();
-                    od1id = item.OutsideDiameterData1.OutsideDiameterID.ToString();
-                }
-                if (item.OutsideDiameterData2 == null)
-                {
-                    od2 = ""; od2id = "";
-                }
-                else
-                {
-                    od2 = item.OutsideDiameterData2.OutsideDiameterItem.ToString();
-                    od2id = item.OutsideDiameterData2.OutsideDiameterID.ToString();
-                }
-                if (item.ODRecordID1Data == null)
-                {
-                    odrecord1 = ""; odrecord1id = "";
-                }
-                else
-                {
-                    odrecord1 = item.ODRecordID1Data.RecordIdentifierItem;
-                    odrecord1id = item.ODRecordID1Data.RecordIdentifierID.ToString();
-                }
-                if (item.ODRecordID2Data == null)
-                {
-                    odrecord2 = ""; odrecord2id = "";
-                }
-                else
-                {
-                    odrecord2 = item.ODRecordID2Data.RecordIdentifierItem;
-                    odrecord2id = item.ODRecordID2Data.RecordIdentifierID.ToString();
-                }
-                wt1 = item.ValveSectionFeatureData.WallThickness1.ToString();
-                wt2 = item.ValveSectionFeatureData.WallThickness2.ToString();
-                if (item.WTRecordID1Data == null)
-                {
-                    wtrecord1 = ""; wtrecord1id = "";
-                }
-                else
-                {
-                    wtrecord1 = item.WTRecordID1Data.RecordIdentifierItem;
-                    wtrecord1id = item.WTRecordID1Data.RecordIdentifierID.ToString();
-                }
-                if (item.WTRecordID2Data == null)
-                {
-                    wtrecord2 = ""; wtrecord2id = "";
-                }
-                else
-                {
-                    wtrecord2 = item.WTRecordID2Data.RecordIdentifierItem;
-                    wtrecord2id = item.WTRecordID2Data.RecordIdentifierID.ToString();
-                }
-                if (item.SeamTypeData == null)
-                {
-                    st = ""; stid = "";
-                }
-                else
-                {
-                    st = item.SeamTypeData.SeamTypeItem;
-                    stid = item.SeamTypeData.SeamTypeID.ToString();
-                }
-                if (item.STRecordID1Data == null)
-                {
-                    strecord1 = ""; strecord1id = "";
-                }
-                else
-                {
-                    strecord1 = item.STRecordID1Data.RecordIdentifierItem;
-                    strecord1id = item.STRecordID1Data.RecordIdentifierID.ToString();
-                }
-                if (item.STRecordID2Data == null)
-                {
-                    strecord2 = ""; strecord2id = "";
-                }
-                else
-                {
-                    strecord2 = item.STRecordID2Data.RecordIdentifierItem;
-                    strecord2id = item.STRecordID2Data.RecordIdentifierID.ToString();
-                }
-                if (item.SpecRatingData == null)
-                {
-                    sr = ""; srid = "";
-                }
-                else
-                {
-                    sr = item.SpecRatingData.SpecRatingItem;
-                    srid = item.SpecRatingData.SpecRatingID.ToString();
-                }
-                if (item.SRRecordID1Data == null)
-                {
-                    srrecord1 = ""; srrecord1id = "";
-                }
-                else
-                {
-                    srrecord1 = item.SRRecordID1Data.RecordIdentifierItem;
-                    srrecord1id = item.SRRecordID1Data.RecordIdentifierID.ToString();
-                }
-                if (item.SRRecordID2Data == null)
-                {
-                    srrecord2 = ""; srrecord2id = "";
-                }
-                else
-                {
-                    srrecord2 = item.SRRecordID2Data.RecordIdentifierItem;
-                    srrecord2id = item.SRRecordID2Data.RecordIdentifierID.ToString();
-                }
-                if (item.ANSIRatingData == null)
-                {
-                    ansi = ""; ansiid = "";
-                }
-                else
-                {
-                    ansi = item.ANSIRatingData.ANSIRatingItem;
-                    ansiid = item.ANSIRatingData.ANSIRatingID.ToString();
-                }
-                if (item.MaterialTypeData == null)
-                {
-                    material = ""; materialid = "";
-                }
-                else
-                {
-                    material = item.MaterialTypeData.MaterialTypeItem;
-                    materialid = item.MaterialTypeData.MaterialTypeID.ToString();
-                }
-                angle = item.ValveSectionFeatureData.AngleID.ToString();
-                if (item.BendRadiusData == null)
-                {
-                    radius = ""; radiusid = "";
-                }
-                else
-                {
-                    radius = item.BendRadiusData.BendRadiusItem;
-                    radiusid = item.BendRadiusData.BendRadiusID.ToString();
-                }
-                if (item.OrientationData == null)
-                {
-                    orient = ""; orientid = "";
-                }
-                else
-                {
-                    orient = item.OrientationData.OrientationItem;
-                    orientid = item.OrientationData.OrientationID.ToString();
-                }
-                if (item.ValveSectionFeatureData.Mill == null)
-                {
-                    mill = "";
-                }
-                else
-                {
-                    mill = item.ValveSectionFeatureData.Mill.ToString();
-                }
-                if (item.GradeData == null)
-                {
-                    gradeid = "";
-                }
-                else
-                {
-                    gradeid = item.GradeData.GradeID.ToString();
-                }
-            }
             if (item.ValveSectionFeatureData != null)
             {
             <tr>
@@ -463,13 +308,10 @@
                     </p>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.GISAlignStart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.GISAlignEnd)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureMarkNumber)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
@@ -480,9 +322,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Length)
                 </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.LengthDiscrepancy)
-                </td>*@
                 <td>
                     @try
                     {
@@ -544,7 +383,7 @@
                     @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DrawingData.RecordIdentifierItem)
+                    @Html.DisplayFor(modelItem => item.DrawingData.Filename)
                 </td>
                 <td>
                     @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && od1id == "")
@@ -559,7 +398,7 @@
                 <td>
                     @if (odrecord1id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.ODRecordID1Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.ODRecordID1Data.Filename)
                     }
                     else
                     {
@@ -569,7 +408,7 @@
                 <td>
                     @if (odrecord2id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.ODRecordID2Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.ODRecordID2Data.Filename)
                     }
                     else
                     {
@@ -604,7 +443,7 @@
                 <td>
                     @if (wtrecord1id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.WTRecordID1Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.WTRecordID1Data.Filename)
                     }
                     else
                     {
@@ -614,7 +453,7 @@
                 <td>
                     @if (wtrecord2id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.WTRecordID2Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.WTRecordID2Data.Filename)
                     }
                     else
                     {
@@ -641,8 +480,6 @@
                     {
                         @Html.Raw("Unknown")
                     }
-                    //else if (((feature == "Skip" && pipetype != "No Records") || feature != "Skip")
-                    //    && pipetypeid != "0" && od2id == "")
                     else if (od2id == "")
                     {
                         @Html.Raw("N/A")
@@ -657,8 +494,6 @@
                     {
                         @Html.Raw("Unknown")
                     }
-                    //else if (((feature == "Skip" && pipetype != "No Records") || feature != "Skip")
-                    //    && pipetypeid != "0" && wt2 == "")
                     else if (wt2 == "")
                     {
                         @Html.Raw("N/A")
@@ -681,7 +516,7 @@
                 <td>
                     @if (strecord1id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.STRecordID1Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.STRecordID1Data.Filename)
                     }
                     else
                     {
@@ -691,7 +526,7 @@
                 <td>
                     @if (strecord2id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.STRecordID2Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.STRecordID2Data.Filename)
                     }
                     else
                     {
@@ -736,7 +571,7 @@
                 <td>
                     @if (srrecord1id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.SRRecordID1Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.SRRecordID1Data.Filename)
                     }
                     else
                     {
@@ -746,7 +581,7 @@
                 <td>
                     @if (srrecord2id != "")
                     {
-                        @Html.DisplayFor(modelItem => item.SRRecordID2Data.RecordIdentifierItem)
+                        @Html.DisplayFor(modelItem => item.SRRecordID2Data.Filename)
                     }
                     else
                     {

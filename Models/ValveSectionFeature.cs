@@ -14,18 +14,18 @@ namespace PipelineFeatureList.Models
         public Int64 ValveSectionFeatureID { get; set; }
         [DisplayName("Circuit ID")]
         public Int64 ValveSectionID { get; set; }
-        [Required]
-        [DisplayName("GIS Alignment Sheet Begin Station")]
-        [DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        public decimal GISAlignStart { get; set; }
-        [Required]
-        [DisplayName("GIS Alignment Sheet End Station")]
-        [DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        public decimal GISAlignEnd { get; set; }
-        [Required]
-        [DisplayName("GIS Alignment Sheet Length Discrepancy")]
-        [DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
-        public decimal LengthDiscrepancy { get; set; }
+        //[Required]
+        //[DisplayName("GIS Alignment Sheet Begin Station")]
+        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
+        //public decimal GISAlignStart { get; set; }
+        //[Required]
+        //[DisplayName("GIS Alignment Sheet End Station")]
+        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
+        //public decimal GISAlignEnd { get; set; }
+        //[Required]
+        //[DisplayName("GIS Alignment Sheet Length Discrepancy")]
+        //[DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
+        //public decimal LengthDiscrepancy { get; set; }
         [DisplayName("Feature Number")]
         public decimal FeatureNumber { get; set; }
         [DisplayName("Feature")]
@@ -33,7 +33,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("Type")]
         public Nullable<int> TypeID { get; set; }
         [DisplayName("Length (feet)")]
-        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = false)]
+        //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = false)]
         public decimal Length { get; set; }
         [DisplayName("Job Number/Work Order/Purchase Order #")]
         public string JobWOPO { get; set; }
@@ -67,7 +67,7 @@ namespace PipelineFeatureList.Models
         public Nullable<int> ODRecordMatrixCheck { get; set; }
         [DisplayName("W.T. 1 (inch)")]
         [Range(0, 1, ErrorMessage = "Value must be between 0\" and 1\"")]
-        [DisplayFormat(DataFormatString = "{0:0.0000}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:0.0000}", ApplyFormatInEditMode = true)]
         public Nullable<double> WallThickness1 { get; set; }
         [DisplayName("WT Records Identifier 1")]
         public Nullable<int> WTRecordID1 { get; set; }
@@ -111,9 +111,9 @@ namespace PipelineFeatureList.Models
         public Nullable<int> OrientID { get; set; }
         [DisplayName("Coating Type")]
         public Nullable<int> CoatingTypeID { get; set; }
-        [DisplayName("Description")]
+        [DisplayName("Coating Description")]
         public string Description { get; set; }
-        [DisplayName("Unknown")]
+        [DisplayName("Coating Desc. Unknown")]
         public bool DescriptionUnknown { get; set; }
         [DisplayName("Manufacturer")]
         public Nullable<int> ManufacturerID { get; set; }
@@ -133,8 +133,8 @@ namespace PipelineFeatureList.Models
         public string CurrentClassLoc { get; set; }
         [DisplayName("Class Design Factor")]
         public string ClassDesignFactor { get; set; }
-        [DisplayName("HCA Name")]
-        public string HCAName { get; set; }
+        //[DisplayName("HCA Name")]
+        //public string HCAName { get; set; }
         [DisplayName("SMYS [S] (psi)")]
         public string SMYS { get; set; }
         [DisplayName("Outside Diameter [D] (inch)")]
@@ -163,5 +163,21 @@ namespace PipelineFeatureList.Models
         public Int64 ModifiedBy_UserID { get; set; }
         [DisplayName("Modified Date/Time")]
         public DateTime ModifiedOn { get; set; }
+
+
+        [DisplayName("Grade Record ID 1")]
+        public Nullable<int> GradeRecordID1 { get; set; }
+        [DisplayName("Grade Record ID 2")]
+        public Nullable<int> GradeRecordID2 { get; set; }
+        [DisplayName("MFR Model Number")]
+        public string MFRModelNumber { get; set; }
+        [DisplayName("PressureTestRecordID")]
+        public Nullable<int> PTRID { get; set; }
+        [DisplayName("Feature Mark Number")]
+        public string FeatureMarkNumber { get; set; }
+        [DisplayName("HCA Status ID")]
+        public Nullable<int> HCAStatusID { get; set; }
+        [DisplayName("Established Operating Pressure")]
+        public Nullable<int> OperatingPressure { get; set; }
     }
 }

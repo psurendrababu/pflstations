@@ -18,7 +18,7 @@ namespace PipelineFeatureList.Controllers
 
         public ActionResult Index()
         {
-            var documenttypes = db.DocumentTypes.Include(d => d.PipeSystem).Include(d => d.Pipeline);
+            var documenttypes = db.DocumentTypes;
             return View(documenttypes.ToList());
         }
 
@@ -40,8 +40,6 @@ namespace PipelineFeatureList.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem");
-            ViewBag.PipeLineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem");
             return View();
         }
 
@@ -58,8 +56,6 @@ namespace PipelineFeatureList.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem", documenttype.PipeSystemID);
-            ViewBag.PipeLineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem", documenttype.PipeLineID);
             return View(documenttype);
         }
 
@@ -73,8 +69,6 @@ namespace PipelineFeatureList.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem", documenttype.PipeSystemID);
-            ViewBag.PipeLineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem", documenttype.PipeLineID);
             return View(documenttype);
         }
 
@@ -90,8 +84,6 @@ namespace PipelineFeatureList.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem", documenttype.PipeSystemID);
-            ViewBag.PipeLineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem", documenttype.PipeLineID);
             return View(documenttype);
         }
 

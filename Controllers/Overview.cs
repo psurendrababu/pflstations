@@ -44,7 +44,7 @@ namespace PipelineFeatureList.Controllers
             ViewData.Add("ValveSection", VSmodel);
             //ViewData.Add("IsDirty",(VSmodel.First().IsSegmentationDirty == null ? false : VSmodel.First().IsSegmentationDirty));
 
-            int? vsStatusID = VSmodel.FirstOrDefault().ValveSectionStatusID;
+            int ? vsStatusID = VSmodel.FirstOrDefault().ValveSectionStatusID;
 
             // Status
             var Smodel = db.ValveSectionStatus
@@ -82,8 +82,6 @@ namespace PipelineFeatureList.Controllers
                             from cd in c1.DefaultIfEmpty()
                             join ct in db.ConstructionTypes on vsd.ConstructionTypeID equals ct.ConstructionTypeID into ct1
                             from ctd in ct1.DefaultIfEmpty()
-                            join d in db.RecordIdentifiers on vsd.DrawingID equals d.RecordIdentifierID into d1
-                            from dd in d1.DefaultIfEmpty()
                             join f in db.Features on vsd.FeatureID equals f.FeatureID into f1
                             from fd in f1.DefaultIfEmpty()
                             join g in db.Grades on vsd.GradeID equals g.GradeID into g1
@@ -102,21 +100,23 @@ namespace PipelineFeatureList.Controllers
                             from outd2d in outd12.DefaultIfEmpty()
                             join pt in db.PipeTypes on vsd.TypeID equals pt.PipeTypeID into pt1
                             from ptd in pt1.DefaultIfEmpty()
-                            join riOD1 in db.RecordIdentifiers on vsd.ODRecordID1 equals riOD1.RecordIdentifierID into riOD11
+                            join d in db.DocumentRecords on vsd.DrawingID equals d.DocumentRecordID into d1
+                            from drawd in d1.DefaultIfEmpty()
+                            join riOD1 in db.DocumentRecords on vsd.ODRecordID1 equals riOD1.DocumentRecordID into riOD11
                             from riOD1d in riOD11.DefaultIfEmpty()
-                            join riOD2 in db.RecordIdentifiers on vsd.ODRecordID2 equals riOD2.RecordIdentifierID into riOD21
+                            join riOD2 in db.DocumentRecords on vsd.ODRecordID2 equals riOD2.DocumentRecordID into riOD21
                             from riOD2d in riOD21.DefaultIfEmpty()
-                            join riWT1 in db.RecordIdentifiers on vsd.WTRecordID1 equals riWT1.RecordIdentifierID into riWT11
+                            join riWT1 in db.DocumentRecords on vsd.WTRecordID1 equals riWT1.DocumentRecordID into riWT11
                             from riWT1d in riWT11.DefaultIfEmpty()
-                            join riWT2 in db.RecordIdentifiers on vsd.WTRecordID2 equals riWT2.RecordIdentifierID into riWT21
+                            join riWT2 in db.DocumentRecords on vsd.WTRecordID2 equals riWT2.DocumentRecordID into riWT21
                             from riWT2d in riWT21.DefaultIfEmpty()
-                            join riST1 in db.RecordIdentifiers on vsd.SeamRecordID1 equals riST1.RecordIdentifierID into riST11
+                            join riST1 in db.DocumentRecords on vsd.SeamRecordID1 equals riST1.DocumentRecordID into riST11
                             from riST1d in riST11.DefaultIfEmpty()
-                            join riST2 in db.RecordIdentifiers on vsd.SeamRecordID2 equals riST2.RecordIdentifierID into riST21
+                            join riST2 in db.DocumentRecords on vsd.SeamRecordID2 equals riST2.DocumentRecordID into riST21
                             from riST2d in riST21.DefaultIfEmpty()
-                            join riSR1 in db.RecordIdentifiers on vsd.SpecRatingRecordID1 equals riSR1.RecordIdentifierID into riSR11
+                            join riSR1 in db.DocumentRecords on vsd.SpecRatingRecordID1 equals riSR1.DocumentRecordID into riSR11
                             from riSR1d in riSR11.DefaultIfEmpty()
-                            join riSR2 in db.RecordIdentifiers on vsd.SpecRatingRecordID2 equals riSR2.RecordIdentifierID into riSR21
+                            join riSR2 in db.DocumentRecords on vsd.SpecRatingRecordID2 equals riSR2.DocumentRecordID into riSR21
                             from riSR2d in riSR21.DefaultIfEmpty()
                             join st in db.SeamTypes on vsd.SeamWeldTypeID equals st.SeamTypeID into st1
                             from std in st1.DefaultIfEmpty()
@@ -131,9 +131,9 @@ namespace PipelineFeatureList.Controllers
                                 PipeSystemData = psd,
                                 PipelineData = pd,
                                 ANSIRatingData = ad,
+                                DrawingData = drawd,
                                 BendRadiusData = brd,
                                 ConstructionTypeData = ctd,
-                                DrawingData = dd,
                                 ODRecordID1Data = riOD1d,
                                 ODRecordID2Data = riOD2d,
                                 WTRecordID1Data = riWT1d,
@@ -155,166 +155,7 @@ namespace PipelineFeatureList.Controllers
                                 OutsideDiameterData1 = outd1d,
                                 OutsideDiameterData2 = outd2d
                             }).ToList();
-            int i = 0;
-            foreach (var items in model)
-            {
-                try
-                {
-                    i = items.ValveSectionFeatureData.DrawingID.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.DrawingData == null)
-                        items.DrawingData = new RecordIdentifier();
-                    items.DrawingData.RecordIdentifierID = k.riid;
-                    items.DrawingData.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e)
-                {
-                    int m = 1;
-                }
-                try
-                {
-                    i = items.ValveSectionFeatureData.ODRecordID1.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                    {
-                                        riid = r.RecordIdentifierID,
-                                        riitem = r.RecordIdentifierItem
-                                    }).First();
-                    if (items.ODRecordID1Data == null)
-                        items.ODRecordID1Data = new RecordIdentifier();
-                    items.ODRecordID1Data.RecordIdentifierID = k.riid;
-                    items.ODRecordID1Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.ODRecordID2.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.ODRecordID2Data == null)
-                        items.ODRecordID2Data = new RecordIdentifier();
-                    items.ODRecordID2Data.RecordIdentifierID = k.riid;
-                    items.ODRecordID2Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.WTRecordID1.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.WTRecordID1Data == null)
-                        items.WTRecordID1Data = new RecordIdentifier();
-                    items.WTRecordID1Data.RecordIdentifierID = k.riid;
-                    items.WTRecordID1Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.WTRecordID2.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.WTRecordID2Data == null)
-                        items.WTRecordID2Data = new RecordIdentifier();
-                    items.WTRecordID2Data.RecordIdentifierID = k.riid;
-                    items.WTRecordID2Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.SeamRecordID1.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.STRecordID1Data == null)
-                        items.STRecordID1Data = new RecordIdentifier();
-                    items.STRecordID1Data.RecordIdentifierID = k.riid;
-                    items.STRecordID1Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.SeamRecordID2.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.STRecordID2Data == null)
-                        items.STRecordID2Data = new RecordIdentifier();
-                    items.STRecordID2Data.RecordIdentifierID = k.riid;
-                    items.STRecordID2Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.SpecRatingRecordID1.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.SRRecordID1Data == null)
-                        items.SRRecordID1Data = new RecordIdentifier();
-                    items.SRRecordID1Data.RecordIdentifierID = k.riid;
-                    items.SRRecordID1Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-                try
-                {
-                    i = items.ValveSectionFeatureData.SpecRatingRecordID2.Value;
-                    var k = (from a in db.DocumentRecords
-                                join r in db.RecordIdentifiers on a.DocumentRecordID equals r.RecordIdentifierID
-                                where a.DocumentRecordID == i && a.PipelineID == items.ValveSectionFeatureData.ValveSectionID
-                                select new
-                                {
-                                    riid = r.RecordIdentifierID,
-                                    riitem = r.RecordIdentifierItem
-                                }).First();
-                    if (items.SRRecordID2Data == null)
-                        items.SRRecordID2Data = new RecordIdentifier();
-                    items.SRRecordID2Data.RecordIdentifierID = k.riid;
-                    items.SRRecordID2Data.RecordIdentifierItem = k.riitem;
-                }
-                catch (Exception e) { }
-            }
+
 
             // Document Records
             //var RDmodel = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.ValveSectionID == ValveSectionID).OrderBy(d => d.DocumentRecordID).ToList();
@@ -380,99 +221,6 @@ namespace PipelineFeatureList.Controllers
             return View(model);
         }
 
-        //
-        // GET: /ValveSectionFeature/DSRs
-
-        public ActionResult DSRs()
-        {
-            Int64 ValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-            string OrionStationSeries = Session["CurrentOrionStationSeries"].ToString();
-
-            // Valve Section
-            var VSmodel = db.ValveSection
-                .Include("ValveSectionStatus")
-                .Where(v => v.ValveSectionID == ValveSectionID)
-                .ToList();
-            ViewData.Add("ValveSection", VSmodel);
-            //ViewData.Add("IsDirty", VSmodel.First().IsSegmentationDirty);
-
-            int? vsStatusID = VSmodel.FirstOrDefault().ValveSectionStatusID;
-
-            // Status
-            var Smodel = db.ValveSectionStatus
-                .Include("DisplayGroup")
-                .Where(v => v.ValveSectionStatusID == vsStatusID)
-                .ToList();
-            ViewData.Add("StatusSection", Smodel);
-            ViewData.Add("EditDisabled", Smodel.FirstOrDefault().DisableEdit);
-            ViewData.Add("DisplayGroupName", Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName);
-
-            //if (VSmodel.First().IsSegmentationDirty == true && Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName != "Certification Approved")
-            //{
-            //    //Resegment();
-                
-            //    //PH 2014.05.22 need user id
-            //    //PipelineFeatureList.AppCode.AppLibrary.CopyToHistoryGenerateGradesDynamicSegmentation(ValveSectionID, 0, 0, 1);
-            //    PipelineFeatureList.AppCode.AppLibrary.CopyToHistoryGenerateGradesDynamicSegmentation(
-            //        Convert.ToInt64(Session["UserID"].ToString()),
-            //        ValveSectionID,
-            //        0,
-            //        0,
-            //        1); 
-            //    //PH 2014.05.22 end edit
-            //    Thread.Sleep(10000);
-            //}
-            
-            if (Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Engineering" ||
-                Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Final Engineering" ||
-                Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Annual Review" ||
-                Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Certification Approved")
-            {
-                var DSRmodel = db.DynamicSegmentationRecords
-                               .Where(d => d.ValveSectionID == ValveSectionID)
-                               .OrderBy(d => d.FeatureNumber)
-                               .ThenBy(d => d.SegmentNumber)
-                               .ToList();
-                ViewData.Add("DSRSection", DSRmodel);
-            }
-
-            var model = (from v in db.ValveSection
-                         join ps in db.PipeSystems on v.PipeSystemID equals ps.PipeSystemID into ps1
-                         from psd in ps1.DefaultIfEmpty()
-                         join p in db.Pipelines on v.PipelineID equals p.PipelineID into p1
-                         from pd in p1.DefaultIfEmpty()
-                         where v.ValveSectionID == ValveSectionID
-                         select new Overview
-                         {
-                             ValveSectionData = v,
-                             PipeSystemData = psd,
-                             PipelineData = pd
-                         }).ToList();
-
-            // Users
-            var Bmodel = (from u in db.Users
-                          join v in db.ValveSection on u.UserID equals v.BuilderID
-                          where v.ValveSectionID == ValveSectionID
-                          select new OverviewBuilder { BuilderData = u }).ToList();
-            ViewData.Add("BuilderData", Bmodel);
-            var Qmodel = (from u in db.Users
-                          join v in db.ValveSection on u.UserID equals v.QCID
-                          where v.ValveSectionID == ValveSectionID
-                          select new OverviewQC { QCData = u }).ToList();
-            ViewData.Add("QCData", Qmodel);
-            var Emodel = (from u in db.Users
-                          join v in db.ValveSection on u.UserID equals v.EngineerID
-                          where v.ValveSectionID == ValveSectionID
-                          select new OverviewEngineer { EngineerData = u }).ToList();
-            ViewData.Add("EngineerData", Emodel);
-
-            return View("DSRs", "_DSRLayout", model);
-            //return View(model);
-        }
-        
-        //
-        // GET: /ValveSectionFeature/Details/5
-
         public ActionResult Details(int id = 0)
         {
             ValveSectionFeature valvesectionfeature = db.ValveSectionFeatures.Find(id);
@@ -493,27 +241,25 @@ namespace PipelineFeatureList.Controllers
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem");
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availDocs = from d in db.DocumentRecords
-                            join r in db.RecordIdentifiers on d.DocumentRecordID equals r.RecordIdentifierID
+                            join r in db.Pipelines on d.PipelineID equals r.PipelineID
                             where d.PipelineID == currSection
                             orderby d.DocumentRecordID
-                            select new { d.DocumentRecordID, r.RecordIdentifierItem };
-            ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.WTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.SeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
-            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem");
+                            select new { d.DocumentRecordID, d.Filename };
+            ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.WTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.SeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
             List<OutsideDiameter> od1List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD1List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem");
             ViewBag.ODID1 = OD1List; 
-            //ViewBag.ODID1 = new SelectList(db.OutsideDiameters, "OutsideDiameterID", "OutsideDiameterItem");
             List<OutsideDiameter> od2List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD2List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem");
             ViewBag.ODID2 = OD2List; 
-            //ViewBag.ODID2 = new SelectList(db.OutsideDiameters, "OutsideDiameterID", "OutsideDiameterItem");
             ViewBag.SeamWeldTypeID = new SelectList(db.SeamTypes, "SeamTypeID", "SeamTypeItem");
             ViewBag.SpecRatingID = new SelectList(db.SpecRatings, "SpecRatingID", "SpecRatingItem");
             ViewBag.GradeID = new SelectList(db.Grades, "GradeID", "GradeItem");
@@ -530,6 +276,14 @@ namespace PipelineFeatureList.Controllers
             ViewBag.ManufacturerTypeID = ManuTypeList; 
             ViewBag.TypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem");
             ViewBag.Length = 0;
+            ViewBag.CurrentClassLocID = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
+            var availPTRs =  from pt in db.PressureTestRecords
+                             join p in db.Pipelines on pt.PipelineID equals p.PipelineID
+                             where pt.PipelineID == currSection
+                             orderby pt.Filename
+                             select new { pt.PressureTestRecordID, pt.Filename };
+            ViewBag.PressureTestRecordID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
+            ViewBag.HCAStatuses = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
         }
 
         public void ActionSetups(ValveSectionFeature valvesectionfeature)
@@ -558,23 +312,23 @@ namespace PipelineFeatureList.Controllers
 
             ViewBag.FeatureID = new SelectList(db.Features, "FeatureID", "FeatureItem", valvesectionfeature.FeatureID);
             ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem", valvesectionfeature.CurrentClassLoc);
-            ViewBag.HCAName = new SelectList(db.HCAs, "HCAID", "HCAItem", valvesectionfeature.HCAName);
+            //ViewBag.HCAName = new SelectList(db.HCAs, "HCAID", "HCAItem", valvesectionfeature.HCAName);
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem", valvesectionfeature.ConstructionTypeID);
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availDocs = from d in db.DocumentRecords
-                            join r in db.RecordIdentifiers on d.DocumentRecordID equals r.RecordIdentifierID
+                            join r in db.DocumentRecords on d.DocumentRecordID equals r.DocumentRecordID
                             where d.PipelineID == currSection
                             orderby d.DocumentRecordID
-                            select new {d.DocumentRecordID, r.RecordIdentifierItem };
-            ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.DrawingID);
-            ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.ODRecordID1);
-            ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.ODRecordID2);
-            ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.WTRecordID1);
-            ViewBag.WTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.WTRecordID2);
-            ViewBag.SeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.SeamRecordID1);
-            ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.SeamRecordID2);
-            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.SpecRatingRecordID1);
-            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "RecordIdentifierItem", valvesectionfeature.SpecRatingRecordID2);
+                            select new {d.DocumentRecordID, d.Filename };
+            ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.DrawingID);
+            ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID1);
+            ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID2);
+            ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID1);
+            ViewBag.WTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID2);
+            ViewBag.SeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID1);
+            ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID2);
+            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID1);
+            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID2);
             List<OutsideDiameter> od1List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD1List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID1);
             ViewBag.ODID1 = OD1List;
@@ -599,7 +353,15 @@ namespace PipelineFeatureList.Controllers
             ViewBag.ManufacturerTypeID = ManuTypeList;
             ViewBag.TypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem", valvesectionfeature.TypeID);
             ViewBag.ODRecordMatrixCheck = "";
-            ViewBag.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
+            //ViewBag.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
+            ViewBag.CurrentClassLocID = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
+            var availPTRs = from pt in db.PressureTestRecords
+                            join p in db.Pipelines on pt.PipelineID equals p.PipelineID
+                            where pt.PipelineID == currSection
+                            orderby pt.Filename
+                            select new { pt.PressureTestRecordID, pt.Filename };
+            ViewBag.PressureTestRecordID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
+            ViewBag.HCAStatuses = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
         }
 
         public void ActionUnknowns(ValveSectionFeature valvesectionfeature)
@@ -625,6 +387,15 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Create()
         {
             Int64 currvalvesection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+
+            string CurSta = (from p in db.Pipelines
+                             join vs in db.ValveSection on p.PipelineID equals vs.PipelineID
+                             where vs.ValveSectionID == currvalvesection
+                             select p.PipelineItem).FirstOrDefault();
+
+            ViewBag.CurrentStation = CurSta;
+
+
             decimal featurenumber; 
             try { featurenumber = db.ValveSectionFeatures.Where(v => v.ValveSectionID == currvalvesection).Max(v => v.FeatureNumber); }
             catch { featurenumber = 0; }
@@ -659,8 +430,6 @@ namespace PipelineFeatureList.Controllers
                 valvesectionfeature.CreatedOn = DateTime.Now;
                 valvesectionfeature.ModifiedOn = DateTime.Now;
 
-                valvesectionfeature.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
-                valvesectionfeature.LengthDiscrepancy = valvesectionfeature.Length - (valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart);
                 valvesectionfeature.ValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
                 valvesectionfeature.FeatureNumber = Convert.ToDecimal(Session["CurrentFeatureNumber"].ToString());
                 db.ValveSectionFeatures.Add(valvesectionfeature);
@@ -668,15 +437,12 @@ namespace PipelineFeatureList.Controllers
 
                 UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
                 GenerateValveSectionErrors(valvesectionfeature);
-                GenerateGISBeginEndErrors();
-
-                UpdateValveSectionToDirtyAsNeeded(valvesectionfeature.ValveSectionID);
 
                 return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
             }
              
             ViewBag.FeatureNumber = valvesectionfeature.FeatureNumber;
-            ViewBag.GISAlignStart = valvesectionfeature.GISAlignStart;
+
             ActionSetups();
             
             return View(valvesectionfeature);
@@ -702,12 +468,18 @@ namespace PipelineFeatureList.Controllers
                     select new { featurenumber = v.FeatureNumber };
             
             decimal featurenumber = featurenumberall.First().featurenumber + (decimal).01;
-            ViewBag.GISAlignStart = valvesectionfeature.GISAlignStart;
-            
+                        
             Session["CurrentFeatureNumber"] = featurenumber;
             ViewBag.FeatureNumber = featurenumber;
 
             ActionSetups();
+
+            string CurSta = (from p in db.Pipelines
+                             join vs in db.ValveSection on p.PipelineID equals vs.PipelineID
+                             where vs.ValveSectionID == currvalvesection
+                             select p.PipelineItem).FirstOrDefault();
+
+            ViewBag.CurrentStation = CurSta;
 
             return View();
         }
@@ -729,9 +501,6 @@ namespace PipelineFeatureList.Controllers
                 valvesectionfeature.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 valvesectionfeature.CreatedOn = DateTime.Now;
                 valvesectionfeature.ModifiedOn = DateTime.Now;
-
-                valvesectionfeature.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
-                valvesectionfeature.LengthDiscrepancy = valvesectionfeature.Length - (valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart);
                 valvesectionfeature.ValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
                 valvesectionfeature.FeatureNumber = Convert.ToDecimal(Session["CurrentFeatureNumber"].ToString());
                 db.ValveSectionFeatures.Add(valvesectionfeature);
@@ -739,80 +508,16 @@ namespace PipelineFeatureList.Controllers
 
                 UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
                 GenerateValveSectionErrors(valvesectionfeature);
-                GenerateGISBeginEndErrors();
-
-                UpdateValveSectionToDirtyAsNeeded(valvesectionfeature.ValveSectionID);
                 
                 return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
             }
 
             ViewBag.FeatureNumber = valvesectionfeature.FeatureNumber;
-            ViewBag.GISAlignStart = valvesectionfeature.GISAlignStart;
+            //ViewBag.GISAlignStart = valvesectionfeature.GISAlignStart;
             ActionSetups();
 
             return View(valvesectionfeature);
         }
-
-        //
-        // GET: /DocumentRecord/Create
-
-        //public ActionResult CreateDoc()
-        //{
-        //    Int64 currvalvesection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-
-        //    int entry = 0;
-        //    string nextentry = "";
-        //    //try { entry = db.DocumentRecords.Where(v => v.PipelineID == currvalvesection).OrderByDescending(v => v.DocumentRecordID).Max(v => v.DocumentRecordID); }
-        //    //catch { }
-
-        //    if (entry == 0)
-        //    {
-        //        Session["CurrentRecordIdentifier"] = "1";
-        //        ViewBag.RecordIdentifierName = "A";
-        //    }
-        //    else
-        //    {
-        //        entry++;
-        //        nextentry = "";
-        //        try 
-        //        { 
-        //            nextentry = db.RecordIdentifiers.OrderByDescending(v => v.RecordIdentifierID).Where(v => v.RecordIdentifierID == entry).Select(v => v.RecordIdentifierItem).First(); 
-        //            ViewBag.RecordIdentifierName = nextentry;
-        //            Session["CurrentRecordIdentifier"] = entry;
-        //        }
-        //        catch 
-        //        { 
-        //            ViewBag.RecordIdentifierName = "A"; 
-        //            Session["CurrentRecordIdentifier"] = "1"; 
-        //        }
-        //    }
-            
-        //    ViewBag.DocumentTypeID = new SelectList(db.DocumentTypes, "DocumentTypeID", "DocumentTypeItem");
-        //    return View();
-        //}
-
-        //
-        // POST: /DocumentRecord/Create
-
-        //[HttpPost]
-        //public ActionResult CreateDoc(DocumentRecord documentrecord)
-        //{
-        //    var dt = db.DocumentTypes.Where(d => d.DocumentTypeItem == "Completion Report" || d.DocumentTypeItem == "Pipeline Replacement Report").ToList();
-        //    if ((documentrecord.DocumentTypeID == dt.First().DocumentTypeID || documentrecord.DocumentTypeID == dt.Last().DocumentTypeID))
-        //    {
-        //        //return View(documentrecord);
-        //    }
-        //    if (ModelState.IsValid)
-        //    {
-        //        documentrecord.PipelineID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-        //        documentrecord.DocumentRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
-        //        db.DocumentRecords.Add(documentrecord);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
-        //    }
-
-        //    return View(documentrecord);
-        //}
 
         //
         // GET: /FeatureIssue/Create
@@ -870,6 +575,14 @@ namespace PipelineFeatureList.Controllers
 
             ActionSetups(valvesectionfeature);
 
+            string CurSta = (from p in db.Pipelines
+                             join vs in db.ValveSection on p.PipelineID equals vs.PipelineID
+                             where vs.ValveSectionID == valvesectionfeature.ValveSectionID
+                             select p.PipelineItem).FirstOrDefault();
+
+            ViewBag.CurrentStation = CurSta;
+
+
             return View(valvesectionfeature);
         }
 
@@ -888,17 +601,13 @@ namespace PipelineFeatureList.Controllers
                 
                 valvesectionfeature.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 valvesectionfeature.ModifiedOn = DateTime.Now;
-                valvesectionfeature.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
-                valvesectionfeature.LengthDiscrepancy = valvesectionfeature.Length - (valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart);
+
                 db.Entry(valvesectionfeature).State = EntityState.Modified;
                 db.SaveChanges();
 
                 UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
                 GenerateValveSectionErrors(valvesectionfeature);
-                GenerateGISBeginEndErrors();
-
-                UpdateValveSectionToDirtyAsNeeded(valvesectionfeature.ValveSectionID);
-
+                
                 return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
             }
 
@@ -1017,8 +726,6 @@ namespace PipelineFeatureList.Controllers
 
             UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
 
-            UpdateValveSectionToDirtyAsNeeded(valvesectionfeature.ValveSectionID);
-
             return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
         }
 
@@ -1043,7 +750,7 @@ namespace PipelineFeatureList.Controllers
             {
                 GenerateValveSectionErrors(item);
             }
-            GenerateGISBeginEndErrors();
+            //GenerateGISBeginEndErrors();
 
             return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
         }
@@ -1147,10 +854,10 @@ namespace PipelineFeatureList.Controllers
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availdocuments = from d in db.DocumentRecords
                                  join t in db.DocumentTypes on d.DocumentTypeID equals t.DocumentTypeID
-                                 join i in db.RecordIdentifiers on d.DocumentRecordID equals i.RecordIdentifierID
+                                 join i in db.DocumentRecords on d.DocumentRecordID equals i.DocumentRecordID
                                  where d.PipelineID == currSection
                                  orderby d.DocumentRecordID
-                                 select new { Value = d.DocumentRecordID, Text = i.RecordIdentifierItem };
+                                 select new { Value = d.DocumentRecordID, Text = i.Filename };
 
             return Json(availdocuments, JsonRequestBehavior.AllowGet);
         }
@@ -1255,30 +962,17 @@ namespace PipelineFeatureList.Controllers
         public void UpdateValveSectionHeaderLengths(Int64 valvesectionid)
         {
             // Update Valve Section Header with length totals
-            decimal sum = 0, plus = 0, minus = 0;
+            decimal sum = 0;
             try {
                 var lengthSum = db.ValveSectionFeatures.Where(v => v.ValveSectionID == valvesectionid).Sum(v => v.Length);
                 sum = lengthSum;
             }
             catch { }
-            //try {
-            //    var discPlusSum = db.ValveSectionFeatures.Where(v => v.ValveSectionID == valvesectionid).Where(v => v.LengthDiscrepancy > 0).Sum(v => v.LengthDiscrepancy);
-            //    plus = discPlusSum;
-            //}
-            //catch { }
-            //try
-            //{
-            //    var discMinusSum = db.ValveSectionFeatures.Where(v => v.ValveSectionID == valvesectionid).Where(v => v.LengthDiscrepancy < 0).Sum(v => v.LengthDiscrepancy);
-            //    minus = discMinusSum;
-            //}
-            //catch { }
 
             ValveSection vs = (from vs1 in db.ValveSection
                                where vs1.ValveSectionID == valvesectionid
                                select vs1).SingleOrDefault();
             vs.PFLLength = sum;
-            //vs.LengthDiscrepancyPlus = (vs.OrionStationEnd - vs.OrionStationBegin) - vs.PFLLength;
-            //vs.LengthDiscrepancyMinus = 0;
             db.SaveChanges();
         }
 
@@ -1390,25 +1084,11 @@ namespace PipelineFeatureList.Controllers
             /////////////////////////////////////////////////////////////////////
 
             /////////////////////
-            // GIS Align 
-            /////////////////////
-            if (valvesectionfeature.GISAlignStart > valvesectionfeature.GISAlignEnd)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "GISBeginGreaterEnd", false);
-            }
-            /////////////////////
             // Length
             /////////////////////            
             if (valvesectionfeature.Length < 0)
             {
                 InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "Length<0", false);
-            }
-            /////////////////////
-            // Length Discrepancy
-            /////////////////////            
-            if (valvesectionfeature.LengthDiscrepancy != 0)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "LengthDiscNot0", false);
             }
             /////////////////////
             // Feature Type
@@ -1696,60 +1376,7 @@ namespace PipelineFeatureList.Controllers
             db.Entry(valvesectionfeature).State = EntityState.Modified;
             db.SaveChanges();
         }
-        public void GenerateGISBeginEndErrors()
-        {
-            Int64 currValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
-            var valvesectionfeatures = (from v in db.ValveSectionFeatures
-                             where v.ValveSectionID == currValveSectionID
-                             orderby v.GISAlignStart
-                             select new
-                             {
-                                 ValveSectionFeature = v
-                             }).ToList();
-            
-            decimal lastend = 0, currstart = 0;
-            Int64 lastfeatureid = 0, currfeatureid = 0;
-            bool first = true;
 
-            try
-            {
-                var valvesectionerrors = db.ValveSectionErrors.Where(f => f.ValveSectionID == currValveSectionID)
-                    .Where(f => f.ErrorDescription == "ERROR: GIS Alignment Sheet Begin Station does not equal GIS Alignment Sheet End Station of previous feature" || f.ErrorDescription == "ERROR: GIS Alignment Sheet End Station does not equal GIS Alignment Sheet Begin Station of next feature")
-                    .ToList();
-                foreach (var item in valvesectionerrors)
-                {
-                    db.ValveSectionErrors.Remove(item);
-                    db.SaveChanges();
-                }
-            }
-            catch { }
-
-            // Get Error IDs
-            var errorLevels = (from l in db.ValveSectionErrorLevels orderby l.ValveSectionErrorLevelItem select new { l.ValveSectionErrorLevelID }).ToList();
-            int errorid;
-            string strError = "ERROR: ";
-            errorid = errorLevels.First().ValveSectionErrorLevelID;
-
-            foreach (var valvesectionfeature in valvesectionfeatures)
-            {
-                currstart = valvesectionfeature.ValveSectionFeature.GISAlignStart;
-                currfeatureid = Convert.ToInt64(valvesectionfeature.ValveSectionFeature.ValveSectionFeatureID);
-
-                if (!first)
-                {
-                    if (currstart != lastend)
-                    {
-                        InsertError(currValveSectionID, currfeatureid, errorid, strError, "GISBeginNotEqPrevEnd", false);
-                        InsertError(currValveSectionID, lastfeatureid, errorid, strError, "GISEndNotEqNextBegin", false);
-                    }
-                }
-                else
-                    first = false;
-                
-                lastend = valvesectionfeature.ValveSectionFeature.GISAlignEnd;
-                lastfeatureid = Convert.ToInt64(valvesectionfeature.ValveSectionFeature.ValveSectionFeatureID);
-            }
-        }
         public void InsertError(Int64 valveSectionID, Int64 valveSectionFeatureID, int errorLevelID, string errorLevelString, string featureErrorItem, bool NoValue)
         {
             string errorDescription = "";

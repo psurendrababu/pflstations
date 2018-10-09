@@ -26,408 +26,641 @@
         @Html.HiddenFor(model => model.SpecRatingRecordMatrixCheck, new { id = "hdnSpecRatingRecordMatrixCheck" })
         
         <table>
-        <tr><td>
-        
-        <div class="editor-label">
-            @Html.Label("Orion Station Series")
-        </div></td>
-        <td>
-        <div class="editor-field">
-            @Html.Raw(Session["CurrentOrionStationSeries"].ToString())
-        </div>
-        </td></tr>
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FeatureNumber)
-        </div></td>
-        <td>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.FeatureNumber)
-        </div>
-        </td></tr>
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("GIS Alignment Begin/End / Length")
-        </div></td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.GISAlignStart, new { @id = "tbGISAlignStart", onchange = "onchangeevent();" })
-            @Html.ValidationMessageFor(model => model.GISAlignStart)
-        </div>
-        </td>
-        <td> / </td>
-        <td><div class="editor-field">
-            @Html.TextBoxFor(model => model.GISAlignEnd, new { @id = "tbGISAlignEnd", onchange = "onchangeevent();" })
-            @Html.ValidationMessageFor(model => model.GISAlignEnd)
-        </div>
-        </td>
-        <td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.LabelFor(model => model.Length , new { @id = "lblLength", onchange = "onchangeeventlength();" })
-        </div>
-        </td></tr></table>
-        </td></tr>
-        
-        <tr><td>
-        <table><tr><td>
-        <div class="editor-label">@Html.LabelFor(model => model.FeatureID)</div></td><td>/</td><td><div class="editor-label">@Html.LabelFor(model => model.TypeID)</div></td><td>
-        </td></tr></table>
-        </td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, "- Select a Feature -", new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
-            <label id="ddlSelectedFeature" style="display:none;">
-                @Html.Raw(ViewBag.SelectedFeature)
-            </label>
-        </div></td><td> / </td>
-        <td>
-        <div class="editor-field" id="divPipeTypes">
-            @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, "- Select a Feature Type -", new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
+            <tr>
+                <td>
 
-            <label id="ddlSelectedPipeType" style="display:none;">
-                @Html.Raw(ViewBag.SelectedPipeType)
-            </label>
-        </div>
-        </td></tr>
-        </table>
-        </td></tr>
+                    <div class="editor-label">
+                        @Html.Label("Series")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.Raw(Session["CurrentOrionStationSeries"].ToString())
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.JobWOPO)
-        </div></td>
-        <td><table><tr><td><div class="editor-field">
-            @Html.EditorFor(model => model.JobWOPO)
-            @Html.ValidationMessageFor(model => model.JobWOPO)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.CheckBoxFor(model => model.JobWOPOUnknown) Unknown
-        </div>
-        </td></tr></table>
-        </td></tr>
+            <tr>
+                <td>
+                    Current Station
+                </td>
+                <td>
+                    @Html.Raw(ViewBag.CurrentStation)
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("Install / Inservice Date")
-        </div></td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.InstallDate)
-            @Html.ValidationMessageFor(model => model.InstallDate)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
-        </div></td><td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.InServiceDate)
-            @Html.ValidationMessageFor(model => model.InServiceDate)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.CheckBoxFor(model => model.InServiceDateUnknown) Unknown
-        </div>
-        </td></tr></table>
-        </td></tr>
-        
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ConstructionTypeID)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FeatureMarkNumber)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DisplayFor(model => model.FeatureMarkNumber)
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("Feature Notes/Comments")
-        </div></td>
-        <td><div class="editor-field">
-            @Html.TextAreaFor(model => model.Notes, 6, 200, null)
-            @Html.ValidationMessageFor(model => model.Notes)
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Length)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Length)
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DrawingID)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.DropDownList("DrawingID", "- Select a Drawing Identifier -")
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-label">@Html.LabelFor(model => model.FeatureID)</div>
+                            </td>
+                            <td>/</td>
+                            <td><div class="editor-label">@Html.LabelFor(model => model.TypeID)</div></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, "- Select a Feature -", new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                                    <label id="ddlSelectedFeature" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedFeature)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field" id="divPipeTypes">
+                                    @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, "- Select a Feature Type -", new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("OD 1 / Rec ID 1 / Rec ID 2")
-        </div></td>
-        <td>
-        <table>
-        <tr>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("ODID1", ViewBag.ODID1 as SelectList, "- Select an OD -", new { id = "ddlODID1" })
-            <label id="ddlSelectedODID1" style="display:none;">
-                @Html.Raw(ViewBag.SelectedODID1)
-            </label>
-        </div>
-        </td>
-        <td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1"})@*, onchange = "onchangeeventOD();" })*@
-            <label id="ddlSelectedODRecordID1" style="display:none;">
-                @Html.Raw(ViewBag.SelectedODRecordID1)
-            </label>
-        </div>
-        </td>
-        <td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2"})@*, onchange = "onchangeeventOD();" })*@
-            <label id="ddlSelectedODRecordID2" style="display:none;">
-                @Html.Raw(ViewBag.SelectedODRecordID2)
-            </label>
-        </div>
-        </td>
-        <td><label id="ODRecordMatrixCheck" class="message-error"></label>
-        </td>
-        </tr></table>
-        </td>
-        </tr>
+                                    <label id="ddlSelectedPipeType" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedPipeType)
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("WT 1 / Rec ID 1 / Rec ID 2")
-        </div></td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.WallThickness1)
-            @Html.ValidationMessageFor(model => model.WallThickness1)
-        </div></td><td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1"})@*, onchange = "onchangeeventWT();" })*@
-            <label id="ddlSelectedWTRecordID1" style="display:none;">
-                @Html.Raw(ViewBag.SelectedWTRecordID1)
-            </label>
-        </div></td><td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2"})@*, onchange = "onchangeeventWT();" })*@
-            <label id="ddlSelectedWTRecordID2" style="display:none;">
-                @Html.Raw(ViewBag.SelectedWTRecordID2)
-            </label>
-        </div>
-        </td>
-        <td><label id="WTRecordMatrixCheck" class="message-error"></label>
-        </td></tr></table>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.JobWOPO)
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.JobWOPO)
+                                    @Html.ValidationMessageFor(model => model.JobWOPO)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.JobWOPOUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ODID2)
-        </div></td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("ODID2", ViewBag.ODID2 as SelectList, "- Select an OD -", new { id = "ddlODID2" })
-            <label id="ddlSelectedODID2" style="display:none;">
-                @Html.Raw(ViewBag.SelectedODID2)
-            </label>
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Install / Inservice Date")
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.InstallDate)
+                                    @Html.ValidationMessageFor(model => model.InstallDate)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.InServiceDate)
+                                    @Html.ValidationMessageFor(model => model.InServiceDate)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.InServiceDateUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.WallThickness2)
-        </div></td>
-        <td>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.WallThickness2)
-            @Html.ValidationMessageFor(model => model.WallThickness2)
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ConstructionTypeID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.Label("Seam Weld Type / Rec ID 1 / Rec ID 2")
-        </div></td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.DropDownList("SeamWeldTypeID", ViewBag.SeamWeldTypeID as SelectList, "- Select a Seam Weld Type -", new { id = "ddlSeamWeldTypeID" })
-            <label id="ddlSelectedSeamWeldTypeID" style="display:none;">
-                @Html.Raw(ViewBag.SelectedSeamWeldTypeID)
-            </label>
-        </div></td><td> / </td>
-        <td><div class="editor-field">
-            @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1"})@*, onchange = "onchangeeventST();" })*@
-            <label id="ddlSelectedSTRecordID1" style="display:none;">
-                @Html.Raw(ViewBag.SelectedSTRecordID1)
-            </label>
-        </div></td><td> / </td>
-        <td><div class="editor-field">
-            @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2"})@*, onchange = "onchangeeventST();" })*@
-            <label id="ddlSelectedSTRecordID2" style="display:none;">
-                @Html.Raw(ViewBag.SelectedSTRecordID2)
-            </label>
-        </div>
-        </td>
-        <td><label id="STRecordMatrixCheck" class="message-error"></label>
-        </td>
-        </tr></table>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Feature Notes/Comments")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Notes, 6, 200, null)
+                        @Html.ValidationMessageFor(model => model.Notes)
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td>
-        <table><tr><td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td><td>/</td><td><div class="editor-label">@Html.LabelFor(model => model.GradeID)</div>
-        </td></tr></table>
-        </td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, "- Select a Spec Rating -", new { id = "ddlSpecRatingID" })
-            <label id="ddlSelectedSpecRatingID" style="display:none;">
-                @Html.Raw(ViewBag.SelectedSpecRatingID)
-            </label>
-        </div></td><td> / </td>
-        <td><div class="editor-field">
-            @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, "- Select a Grade -", new { id = "ddlGradeID" })
-            <label id="ddlSelectedGradeID" style="display:none;">
-                @Html.Raw(ViewBag.SelectedGradeID)
-            </label>
-        </div></td>
-        </tr></table>
-        </td></tr>
-        
-        <tr>
-        <td><div class="editor-label">@Html.Label("Spec/Grade Records 1 / 2")</div></td>
-        <td>
-        <table><tr><td>
-        <div class="editor-field">
-            @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1"})@*, onchange = "onchangeeventSR();" })*@
-            <label id="ddlSelectedSRRecordID1" style="display:none;">
-                @Html.Raw(ViewBag.SelectedSRRecordID1)
-            </label>
-        </div>
-        </td>
-        <td> / </td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2"})@*, onchange = "onchangeeventSR();" })*@
-            <label id="ddlSelectedSRRecordID2" style="display:none;">
-                @Html.Raw(ViewBag.SelectedSRRecordID2)
-            </label>
-        </div>
-        </td>
-        <td><label id="SRRecordMatrixCheck" class="message-error"></label>
-        </td></tr></table>
-        </td>
-        </tr>
-    
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ANSIRatingID)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select an ANSI Rating -", new { id = "ddlANSIRatingID" })
-            <label id="ddlSelectedANSIRatingID" style="display:none;">
-                @Html.Raw(ViewBag.SelectedANSIRatingID)
-            </label>
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.DrawingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("DrawingID", "- Select a Drawing Identifier -")
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td><div class="editor-label">
-            @Html.LabelFor(model => model.MaterialTypeID)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.DropDownList("MaterialTypeID", "- Select a Material Type -")
-        </div>
-        </td></tr>
-        
-        <tr><td>
-        <table><tr><td><div class="editor-label">@Html.LabelFor(model => model.AngleID)</div></td><td>/</td><td><div class="editor-label">@Html.LabelFor(model => model.RadiusID)</div></td><td>/</td><td><div class="editor-label">@Html.LabelFor(model => model.OrientID)</div>
-        </td></tr></table>
-        </td>
-        <td><table><tr><td>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AngleID)
-            @Html.ValidationMessageFor(model => model.AngleID)
-        </div></td><td> / </td>
-        <td><div class="editor-field">
-            @Html.DropDownList("RadiusID", ViewBag.RadiusID as SelectList, "- Select a Bend Radius -", new { id = "ddlRadiusID" })
-            <label id="ddlSelectedRadiusID" style="display:none;">
-                @Html.Raw(ViewBag.SelectedRadiusID)
-            </label>
-        </div></td><td> / </td>
-        <td><div class="editor-field">
-            @Html.DropDownList("OrientID", ViewBag.OrientID as SelectList, "- Select an Orientation -", new { id = "ddlOrientID" })
-            <label id="ddlSelectedOrientID" style="display:none;">
-                @Html.Raw(ViewBag.SelectedOrientID)
-            </label>
-        </div>
-        </td></tr></table>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("OD 1 / Rec ID 1 / Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODID1", ViewBag.ODID1 as SelectList, "- Select an OD -", new { id = "ddlODID1" })
+                                    <label id="ddlSelectedODID1" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedODID1)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1" })@*, onchange = "onchangeeventOD();" })*@
+                                    <label id="ddlSelectedODRecordID1" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedODRecordID1)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2" })@*, onchange = "onchangeeventOD();" })*@
+                                    <label id="ddlSelectedODRecordID2" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedODRecordID2)
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <label id="ODRecordMatrixCheck" class="message-error"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td><div class="editor-label">@Html.LabelFor(model => model.CoatingTypeID)</div></td>
-        <td>
-        <div class="editor-field">
-            @Html.DropDownList("CoatingTypeID", "- Select a Coating Type -")
-        </div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("WT 1 / Rec ID 1 / Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.WallThickness1)
+                                    @Html.ValidationMessageFor(model => model.WallThickness1)
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1" })@*, onchange = "onchangeeventWT();" })*@
+                                    <label id="ddlSelectedWTRecordID1" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedWTRecordID1)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2" })@*, onchange = "onchangeeventWT();" })*@
+                                    <label id="ddlSelectedWTRecordID2" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedWTRecordID2)
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <label id="WTRecordMatrixCheck" class="message-error"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">@Html.LabelFor(model => model.Description)</div>
-        </td>
-        <td><table><tr><td>
-        <div class="wide">
-            @Html.EditorFor(model => model.Description)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.CheckBoxFor(model => model.DescriptionUnknown) Unknown
-        </div>
-        </td></tr></table>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ODID2)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ODID2", ViewBag.ODID2 as SelectList, "- Select an OD -", new { id = "ddlODID2" })
+                        <label id="ddlSelectedODID2" style="display:none;">
+                            @Html.Raw(ViewBag.SelectedODID2)
+                        </label>
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">@Html.LabelFor(model => model.ManufacturerID)</div>
-        </td>
-        <td>
-        <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.WallThickness2)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.WallThickness2)
+                        @Html.ValidationMessageFor(model => model.WallThickness2)
+                    </div>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">@Html.LabelFor(model => model.ManufacturerTypeID)</div>
-        </td>
-        <td>
-        <div class="editor-field">@Html.DropDownList("ManufacturerTypeID", "- Select a Manufacturer Type -")</div>
-        </td></tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Seam Weld Type / Rec ID 1 / Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamWeldTypeID", ViewBag.SeamWeldTypeID as SelectList, "- Select a Seam Weld Type -", new { id = "ddlSeamWeldTypeID" })
+                                    <label id="ddlSelectedSeamWeldTypeID" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedSeamWeldTypeID)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1" })@*, onchange = "onchangeeventST();" })*@
+                                    <label id="ddlSelectedSTRecordID1" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedSTRecordID1)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2" })@*, onchange = "onchangeeventST();" })*@
+                                    <label id="ddlSelectedSTRecordID2" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedSTRecordID2)
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <label id="STRecordMatrixCheck" class="message-error"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">@Html.LabelFor(model => model.Mill)</div>
-        </td>
-        <td><table><tr><td>
-        <div class="wide">
-            @Html.EditorFor(model => model.Mill)
-        </div></td>
-        <td><div class="editor-field">
-            @Html.CheckBoxFor(model => model.MillUnknown) Unknown
-        </div>
-        </td></tr></table>
-        </td></tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
+                            <td>/</td>
+                            <td>
+                                <div class="editor-label">@Html.LabelFor(model => model.GradeID)</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, "- Select a Spec Rating -", new { id = "ddlSpecRatingID" })
+                                    <label id="ddlSelectedSpecRatingID" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedSpecRatingID)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, "- Select a Grade -", new { id = "ddlGradeID" })
+                                    <label id="ddlSelectedGradeID" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedGradeID)
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MFRDate)
-        </div></td>
-        <td><table><tr><td>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.MFRDate)
-                @Html.ValidationMessageFor(model => model.MFRDate)
-            </div></td>
-            <td><div class="editor-field">
-                @Html.CheckBoxFor(model => model.MFRDateUnknown) Unknown
-            </div>
-        </td></tr></table>
-        </td></tr>
+            <tr>
+                <td><div class="editor-label">@Html.Label("Spec/Grade Records 1 / 2")</div></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1" })@*, onchange = "onchangeeventSR();" })*@
+                                    <label id="ddlSelectedSRRecordID1" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedSRRecordID1)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2" })@*, onchange = "onchangeeventSR();" })*@
+                                    <label id="ddlSelectedSRRecordID2" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedSRRecordID2)
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <label id="SRRecordMatrixCheck" class="message-error"></label>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ANSIRatingID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select an ANSI Rating -", new { id = "ddlANSIRatingID" })
+                        <label id="ddlSelectedANSIRatingID" style="display:none;">
+                            @Html.Raw(ViewBag.SelectedANSIRatingID)
+                        </label>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MaterialTypeID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("MaterialTypeID", "- Select a Material Type -")
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td><div class="editor-label">@Html.LabelFor(model => model.AngleID)</div></td>
+                            <td>/</td>
+                            <td><div class="editor-label">@Html.LabelFor(model => model.RadiusID)</div></td>
+                            <td>/</td>
+                            <td>
+                                <div class="editor-label">@Html.LabelFor(model => model.OrientID)</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.AngleID)
+                                    @Html.ValidationMessageFor(model => model.AngleID)
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("RadiusID", ViewBag.RadiusID as SelectList, "- Select a Bend Radius -", new { id = "ddlRadiusID" })
+                                    <label id="ddlSelectedRadiusID" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedRadiusID)
+                                    </label>
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("OrientID", ViewBag.OrientID as SelectList, "- Select an Orientation -", new { id = "ddlOrientID" })
+                                    <label id="ddlSelectedOrientID" style="display:none;">
+                                        @Html.Raw(ViewBag.SelectedOrientID)
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model => model.CoatingTypeID)</div></td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("CoatingTypeID", "- Select a Coating Type -")
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.Description)</div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="wide">
+                                    @Html.EditorFor(model => model.Description)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.DescriptionUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.ManufacturerID)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.ManufacturerTypeID)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.DropDownList("ManufacturerTypeID", "- Select a Manufacturer Type -")</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.Mill)</div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="wide">
+                                    @Html.EditorFor(model => model.Mill)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.MillUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MFRDate)
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.MFRDate)
+                                    @Html.ValidationMessageFor(model => model.MFRDate)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.MFRDateUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MFRModelNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.MFRModelNumber)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CurrentClassLoc)
+                </td>
+                <td>
+                    @Html.DropDownList("CurrentClassLocID", "- Select Class Location -")
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.SMYS)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.SMYS)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.OperatingPressure)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.OperatingPressure)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTRID)
+                </td>
+                <td>
+                    @Html.DropDownList("PressureTestRecordID", "- Select a Pressure Test Record -")
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    HCA Status
+                </td>
+                <td>
+                    @Html.DropDownList("HCAStatuses", "- Choose Status of HCA -")
+                </td>
+            </tr>
+
         </table>
         
         <p>

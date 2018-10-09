@@ -18,9 +18,6 @@
         <th>
             @Html.Raw("Status")
         </th>
-        <th>
-            @Html.Raw("Segmentation Required")
-        </th>
     </tr>
 
     
@@ -36,7 +33,7 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionEngineeringAssigned.Pipeline.PipelineItem)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionEngineeringAssigned.ValveSection.ValveSectionBegin)
+                @Html.DisplayFor(modelItem => item.ValveSectionEngineeringAssigned.ValveSection.ValveSectionItem)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValveSectionEngineeringAssigned.ValveStatus.ValveSectionStatusItem)

@@ -15,7 +15,7 @@ namespace PipelineFeatureList.Models
         public CoatingType CoatingTypeData { get; set; }
         public ConstructionType ConstructionTypeData { get; set; }
         public CurrentClassLocation CurrentClassLocationData { get; set; }
-        public RecordIdentifier DrawingData { get; set; }
+        public DocumentRecord DrawingData { get; set; }
         public Feature FeatureData { get; set; }
         public Grade GradeData { get; set; }
         public HCA HCAData { get; set; }
@@ -26,14 +26,14 @@ namespace PipelineFeatureList.Models
         public OutsideDiameter OutsideDiameterData1 { get; set; }
         public OutsideDiameter OutsideDiameterData2 { get; set; }
         public PipeType PipeTypeData { get; set; }
-        public RecordIdentifier ODRecordID1Data { get; set; }
-        public RecordIdentifier ODRecordID2Data { get; set; }
-        public RecordIdentifier WTRecordID1Data { get; set; }
-        public RecordIdentifier WTRecordID2Data { get; set; }
-        public RecordIdentifier STRecordID1Data { get; set; }
-        public RecordIdentifier STRecordID2Data { get; set; }
-        public RecordIdentifier SRRecordID1Data { get; set; }
-        public RecordIdentifier SRRecordID2Data { get; set; }
+        public DocumentRecord ODRecordID1Data { get; set; }
+        public DocumentRecord ODRecordID2Data { get; set; }
+        public DocumentRecord WTRecordID1Data { get; set; }
+        public DocumentRecord WTRecordID2Data { get; set; }
+        public DocumentRecord STRecordID1Data { get; set; }
+        public DocumentRecord STRecordID2Data { get; set; }
+        public DocumentRecord SRRecordID1Data { get; set; }
+        public DocumentRecord SRRecordID2Data { get; set; }
         public SeamType SeamTypeData { get; set; }
         public SpecRating SpecRatingData { get; set; }
         public StandardEntry StandardEntryData { get; set; }

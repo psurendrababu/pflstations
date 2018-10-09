@@ -9,16 +9,16 @@ namespace PipelineFeatureList.Models
 {
     public class CustomReportCredentials : Microsoft.Reporting.WebForms.IReportServerCredentials
     {
-        private string _UserName;
-        private string _PassWord;
-        private string _DomainName;
+        //private string _UserName;
+        //private string _PassWord;
+        //private string _DomainName;
 
-        public CustomReportCredentials()
-        {
-            _UserName = "3cadmin";
-            _PassWord = "3c.Password1";
-            _DomainName = "g2partnersllc.local";
-        }
+        //public CustomReportCredentials()
+        //{
+        //    _UserName = "3cadmin";
+        //    _PassWord = "3c.Password1";
+        //    _DomainName = "g2partnersllc.local";
+        //}
 
         public bool GetFormsCredentials(out System.Net.Cookie authCookie, out string userName, out string password, out string authority)
         {
