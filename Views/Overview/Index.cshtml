@@ -3,7 +3,7 @@
     ViewBag.Title = "Valve Section Overview";
 }
 
-<table>
+<table class="overviewmaintable">
 @foreach (var itemSection in Model)
 {
     <tr><td><h3>Circuit: @Html.DisplayFor(modelitem => itemSection.ValveSectionData.ValveSectionID) Station: @Html.DisplayFor(modelitem => itemSection.PipelineData.PipelineItem)</h3></td></tr>
@@ -52,7 +52,8 @@
             }
             
                 <tr><td colspan="2" align="center">
-                    <table  class="overviewtable"><tr>
+                    <table  class="overviewtable">
+                    <tr>
                     <td>Builder ID: 
                         @foreach (var assignedSection in (ViewData["BuilderData"] as List<PipelineFeatureList.Models.OverviewBuilder>))
                         {
@@ -70,7 +71,9 @@
                         {
                             @Html.DisplayFor(modelItem => assignedSection.EngineerData.UserName)
                         }
-                    </td></tr></table>
+                    </td>
+                    </tr>
+                    </table>
                 </td></tr>
         </table>
         </td>
@@ -156,28 +159,6 @@
 
 @* ------------------------------ Valve Section Feature List ------------------------------ *@
 
-@{
-    string feature = "", featureid = "", pipetype = "", pipetypeid = "";
-    string od1 = "", od1id = "", od2 = "", od2id = "";
-    string odrecord1 = "", odrecord1id = "";
-    string odrecord2 = "", odrecord2id = "";
-    string wt1 = "", wt2 = "";
-    string wtrecord1 = "", wtrecord1id = "";
-    string wtrecord2 = "", wtrecord2id = "";
-    string st = "", stid = "";
-    string strecord1 = "", strecord1id = "";
-    string strecord2 = "", strecord2id = "";
-    string sr = "", srid = "", grade = "", gradeid = "";
-    string srrecord1 = "", srrecord1id = "";
-    string srrecord2 = "", srrecord2id = "";
-    string ansi = "", ansiid = "";
-    string material = "", materialid = "";
-    string angle = "";
-    string radius = "", radiusid = "";
-    string orient = "", orientid = "";
-    string mill = "";
-}
-
 <h3>Valve Section Feature List</h3><br />
     @if (ViewBag.EditDisabled == false)
     {
@@ -196,33 +177,7 @@
     {
         @Html.ActionLink("Regenerate Errors/Warnings", "Errors", null, htmlAttributes: new { @class = "linkbuttondisabled" })
     }
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    @*@if ( (ViewBag.EditDisabled == false && 
-        (ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Final Engineering"))
-        || ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Annual Review"
-        )
-    {
-        if (ViewBag.IsDirty)
-        {
-            @Html.ActionLink("Segment Now", "DSRs", null, htmlAttributes: new { @class = "linkbutton", @target = "child" })
-        }
-        else
-        {
-            @Html.ActionLink("Dynamic Segment Records", "DSRs", null, htmlAttributes: new { @class = "linkbutton", @target = "child" })
-        }
-    }*@
-    @*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    @if (ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Final Engineering"
-        || ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Annual Review")
-    {
-        @Html.ActionLink("Engineering Summary Report", "DownloadReport", "Reporting", new { ReportName = "Internal Engineering Summary Report By Valve", ReportFormat = "EXCEL" }, new { @class = "linkbutton" });
-    }
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    @if (ViewBag.DisplayGroupName == "Certification Approved" || ViewBag.DisplayGroupName == "Final Engineering"
-        || ViewBag.DisplayGroupName == "Engineering" || ViewBag.DisplayGroupName == "Annual Review")
-    {
-        @Html.ActionLink("Acceptance Form", "DownloadReport", "Reporting", new { ReportName = "Acceptance Form", ReportFormat = "EXCEL" }, new { @class = "linkbutton" });
-    }*@
+
      
 <div style="width:1100px; height:400px; overflow:scroll" >
         <table class="overviewfeaturetable">
@@ -231,7 +186,6 @@
             {
                 <tr><th colspan="45" style="text-align:left;">&nbsp;** BUILD RECORDS **</th></tr>
             }
-            @*<tr><th></th><th colspan="12">FEATURE INFORMATION</th><th colspan="21">MAOP SPECIFICATIONS</th><th>MATERIAL</th><th colspan="3">BEND DATA</th><th colspan="2">COATING</th><th colspan="4">PURCHASE/INSTALL</th><th></th></tr>*@
             <thead>
             <tr><th>Actions</th>
                 <th>Feature Order</th>
@@ -241,485 +195,243 @@
                 <th>Length (feet)</th>
                 <th>Job Number/Work Order/Purchase Order #</th>
                 <th>Install Date</th>
-                <th>In-Service Date</th>
                 <th>Construction Type</th>
                 <th>Notes / Comments</th>
-                <th>Drawing Identifier</th>
                 <th>O.D. 1 (inch)</th>
                 <th>OD RecID 1</th>
                 <th>OD RecID 2</th>
-                <th>OD Matrix</th>
                 <th>W.T. 1 (inch)</th>
                 <th>WT RecID 1</th>
                 <th>WT RecID 2</th>
-                <th>WT Matrix</th>
                 <th>O.D. 2 (inch)</th>
                 <th>W.T. 2 (inch)</th>
                 <th>Seam Weld Type</th>
                 <th>Seam RecID 1</th>
                 <th>Seam RecID 2</th>
-                <th>Seam Matrix</th>
-                <th>Spec/Rating</th>
+                <th>Spec</th>
                 <th>Grade</th>
-                <th>Spec/Grade RecID 1</th>
-                <th>Spec/Grade RecID 2</th>
-                <th>Spec/Grade Matrix</th>
+                <th>Grade RecID 1</th>
+                <th>Grade RecID 2</th>
                 <th>ANSI Rating</th>
+                <th>Rating RecID 1</th>
+                <th>Rating RecID 2</th>
                 <th>Material Type</th>
-                <th>Angle</th>
-                <th>Radius</th>
-                <th>Orient</th>
                 <th>Coating Type</th>
                 <th>Cooating Desc.</th>
                 <th>Manufacturer</th>
                 <th>Manufacturer Type</th>
-                <th>Mill</th>
-                <th>MFR Date</th>
+                <th>MFR Model #</th>
+                <th>Class Loc</th>
+                <th>SMYS</th>
+                <th>Estab. Op. Pressure</th>
+                <th>Pressure Test Rec.</th>
+                <th>HCA Status</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model)
-        {
-            if (item.ValveSectionFeatureData != null)
-            {
-            <tr>
-                <td>
-                    <p>
-                    @if (ViewBag.EditDisabled == false)
-                    {                
-                        @Html.ActionLink("Edit", "Edit", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })    
-                    }
-                    else
+                @foreach (var item in Model)
+                {
+                    if (item.ValveSectionFeatureData != null)
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })    
-                    }
-                    </p>
+                <tr>
+                    <td>
+                        <p>
+                            @if (ViewBag.EditDisabled == false)
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                            }
+                        </p>
 
-                    <p>
-                    @if (ViewBag.EditDisabled == false)
-                    {   
-                        @Html.ActionLink("Insert", "Insert", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Insert", "Insert", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
-                    }
-                    </p>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureMarkNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PipeTypeData.PipeTypeItem)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Length)
-                </td>
-                <td>
-                    @try
-                    {
-                        if (item.ValveSectionFeatureData.JobWOPOUnknown)
+                        <p>
+                            @if (ViewBag.EditDisabled == false)
+                            {
+                                @Html.ActionLink("Insert", "Insert", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Insert", "Insert", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
+                            }
+                        </p>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureMarkNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipeTypeData.PipeTypeItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Length)
+                    </td>
+                    <td>
+                        @try
                         {
-                            @Html.Raw("Unknown")
+                            if (item.ValveSectionFeatureData.JobWOPOUnknown)
+                            {
+                                @Html.Raw("Unknown")
+                            }
                         }
-                    }
-                    catch { }
-                    @try
-                    {
-                        if (!item.ValveSectionFeatureData.JobWOPOUnknown)
+                        catch { }
+                        @try
                         {
-                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.JobWOPO));
+                            if (!item.ValveSectionFeatureData.JobWOPOUnknown)
+                            {
+                                @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.JobWOPO));
+                            }
                         }
-                    }
-                    catch { }
-                </td>
-                <td>
-                    @try
-                    {
-                        if (item.ValveSectionFeatureData.InstallDateUnknown)
+                        catch { }
+                    </td>
+                    <td>
+                        @try
                         {
-                            @Html.Raw("Unknown")
+                            if (item.ValveSectionFeatureData.InstallDateUnknown)
+                            {
+                                @Html.Raw("Unknown")
+                            }
                         }
-                    }
-                    catch { }
-                    @try
-                    {
-                        if (!item.ValveSectionFeatureData.InstallDateUnknown)
+                        catch { }
+                        @try
                         {
-                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.InstallDate));
+                            if (!item.ValveSectionFeatureData.InstallDateUnknown)
+                            {
+                                @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.InstallDate));
+                            }
                         }
-                    }
-                    catch { }
-                </td>
-                <td>
-                    @try
-                    {
-                        if (item.ValveSectionFeatureData.InServiceDateUnknown)
-                        {
-                            @Html.Raw("Unknown")
-                        }
-                    }
-                    catch { }
-                    @try
-                    {
-                        if (!item.ValveSectionFeatureData.InServiceDateUnknown)
-                        {
-                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.InServiceDate));
-                        }
-                    }
-                    catch { }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ConstructionTypeData.ConstructionTypeItem)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DrawingData.Filename)
-                </td>
-                <td>
-                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && od1id == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                        catch { }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConstructionTypeData.ConstructionTypeItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.OutsideDiameterData1.OutsideDiameterItem)
-                    }
-                </td>
-                <td>
-                    @if (odrecord1id != "")
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ODRecordID1Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                <td>
-                    @if (odrecord2id != "")
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ODRecordID2Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                @if (item.ValveSectionFeatureData != null)
-                {
-                    if (item.ValveSectionFeatureData.ODRecordMatrixCheck == 0 || item.ValveSectionFeatureData.ODRecordMatrixCheck == null)
-                    {
-                    <td style='background-color:Red'>No</td>
-                    }
-                    else
-                    {
-                    <td style='background-color:Green'>Yes</td>
-                    }
-                }
-                else
-                {
-                    <td></td>
-                }
-                <td>
-                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && wt1 == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness1)
-                    }
-                </td>
-                <td>
-                    @if (wtrecord1id != "")
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.WTRecordID1Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                <td>
-                    @if (wtrecord2id != "")
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.WTRecordID2Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                @if (item.ValveSectionFeatureData != null)
-                {
-                    if (item.ValveSectionFeatureData.WTRecordMatrixCheck == 0 || item.ValveSectionFeatureData.WTRecordMatrixCheck == null)
-                    {
-                    <td style='background-color:Red'>No</td>
-                    }
-                    else
-                    {
-                    <td style='background-color:Green'>Yes</td>
-                    }
-                }
-                else
-                {
-                    <td></td>
-                }
-                <td>
-                    @if (feature == "Pipe" && pipetype == "Casing" && od2id == "")
-                    {
-                        @Html.Raw("Unknown")
-                    }
-                    else if (od2id == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.OutsideDiameterData2.OutsideDiameterItem)
-                    }
-                </td>
-                <td>
-                    @if (feature == "Pipe" && pipetype == "Casing" && wt2 == "")
-                    {
-                        @Html.Raw("Unknown")
-                    }
-                    else if (wt2 == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness2)
-                    }
-                </td>
-                <td>
-                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && stid == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.SeamTypeData.SeamTypeItem)
-                    }
-                </td>
-                <td>
-                    @if (strecord1id != "")
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.STRecordID1Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                <td>
-                    @if (strecord2id != "")
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.STRecordID2Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                @if (item.ValveSectionFeatureData != null)
-                {
-                    if (item.ValveSectionFeatureData.SeamRecordMatrixCheck == 0 || item.ValveSectionFeatureData.SeamRecordMatrixCheck == null)
-                    {
-                    <td style='background-color:Red'>No</td>
-                    }
-                    else
-                    {
-                    <td style='background-color:Green'>Yes</td>
-                    }
-                }
-                else
-                {
-                    <td></td>
-                }
-                <td>
-                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && srid == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.SpecRatingData.SpecRatingItem)
-                    }
-                </td>
-                <td>
-                    @if (feature == "Skip" && pipetype != "No Records" && pipetypeid != "0" && gradeid == "")
-                    {
-                        @Html.Raw("N/A")
-                    }
-                    else
-                    {
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.GradeData.GradeItem)
-                    }
-                </td>
-                <td>
-                    @if (srrecord1id != "")
-                    {
-                        @Html.DisplayFor(modelItem => item.SRRecordID1Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                <td>
-                    @if (srrecord2id != "")
-                    {
-                        @Html.DisplayFor(modelItem => item.SRRecordID2Data.Filename)
-                    }
-                    else
-                    {
-                        @Html.Raw("")
-                    }
-                </td>
-                @if (item.ValveSectionFeatureData != null)
-                {
-                    if (item.ValveSectionFeatureData.SpecRatingRecordMatrixCheck == 0 || item.ValveSectionFeatureData.SpecRatingRecordMatrixCheck == null)
-                    {
-                    <td style='background-color:Red'>No</td>
-                    }
-                    else
-                    {
-                    <td style='background-color:Green'>Yes</td>
-                    }
-                }
-                else
-                {
-                    <td></td>
-                }
-                <td>
-                    @if (ansiid != "")
-                    {
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GRRecordID1Data.Filename)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GRRecordID2Data.Filename)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ANSIRatingData.ANSIRatingItem)
-                    }
-                    else
-                    {
-                        @Html.Raw("N/A")
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaterialTypeData.MaterialTypeItem)
-                </td>
-                <td>
-                    @if (angle != "")
-                    {
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.AngleID)
-                    }
-                    else
-                    {
-                        @Html.Raw("N/A")
-                    }
-                </td>
-                <td>
-                    @if (radiusid != "")
-                    {
-                        @Html.DisplayFor(modelItem => item.BendRadiusData.BendRadiusItem)
-                    }
-                    else
-                    {
-                        @Html.Raw("N/A")
-                    }
-                </td>
-                <td>
-                    @if (orientid != "")
-                    {
-                        @Html.DisplayFor(modelItem => item.OrientationData.OrientationItem)
-                    }
-                    else
-                    {
-                        @Html.Raw("N/A")
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoatingTypeData.CoatingTypeItem)
-                </td>
-                <td>
-                    @try
-                    {
-                        if (item.ValveSectionFeatureData.DescriptionUnknown)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SRRecordID1Data.Filename)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SRRecordID2Data.Filename)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaterialTypeData.MaterialTypeItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CoatingTypeData.CoatingTypeItem)
+                    </td>
+                    <td>
+                        @try
                         {
-                            @Html.Raw("Unknown")
+                            if (item.ValveSectionFeatureData.DescriptionUnknown)
+                            {
+                                @Html.Raw("Unknown")
+                            }
                         }
-                    }
-                    catch { }
-                    @try
-                    {
-                        if (!item.ValveSectionFeatureData.DescriptionUnknown)
+                        catch { }
+                        @try
                         {
-                            @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Description);
+                            if (!item.ValveSectionFeatureData.DescriptionUnknown)
+                            {
+                                @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Description);
+                            }
                         }
-                    }
-                    catch { }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ManufacturerData.ManufacturerItem)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ManufacturerTypeData.ManufacturerTypeItem)
-                </td>
-                <td>
-                    @try
-                    {
-                        if (item.ValveSectionFeatureData.MillUnknown)
+                        catch { }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManufacturerData.ManufacturerItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManufacturerTypeData.ManufacturerTypeItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.MFRModelNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.CurrentClassLoc)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SMYS)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.OperatingPressure)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.PTRID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.HCAStatusID)
+                    </td>
+
+                    <td>
+                        @if (ViewBag.EditDisabled == false)
                         {
-                            @Html.Raw("Unknown")
+                            @Html.ActionLink("Delete", "Delete", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
                         }
-                    }
-                    catch { }
-                    @try
-                    {
-                        if (!item.ValveSectionFeatureData.MillUnknown)
+                        else
                         {
-                            @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Mill);
+                            @Html.ActionLink("Delete", "Delete", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
                         }
-                    }
-                    catch { }
-                </td>
-                <td>
-                    @try
-                    {
-                        if (item.ValveSectionFeatureData.MFRDateUnknown)
-                        {
-                            @Html.Raw("Unknown")
-                        }
-                    }
-                    catch { }
-                    @try
-                    {
-                        if (!item.ValveSectionFeatureData.MFRDateUnknown)
-                        {
-                            @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.MFRDate));
-                        }
-                    }
-                    catch { }
-                </td>
-                <td>
-                    @if (ViewBag.EditDisabled == false)
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = (item.ValveSectionFeatureData == null ? 0 : item.ValveSectionFeatureData.ValveSectionFeatureID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
-                    }
-                </td>
-            </tr>
+                    </td>
+                </tr>
             }
         }
         </tbody>

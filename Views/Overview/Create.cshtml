@@ -83,7 +83,7 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field" id="divPipeTypes">
-                                    @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, "- Select a Feature Type -", new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
+                                    @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, "- Select a Feature Type -", new { id = "ddlPipeTypes" })
                                 </div>
                             </td>
                         </tr>
@@ -118,11 +118,10 @@
             <tr>
                 <td>
                     <div class="editor-label">
-                        @Html.Label("Install / Inservice Date")
+                        @Html.Label("Install Date")
                     </div>
                 </td>
                 <td>
-                    <table>
                         <tr>
                             <td>
                                 <div class="editor-field">
@@ -135,20 +134,7 @@
                                     @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
                                 </div>
                             </td>
-                            <td> / </td>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.EditorFor(model => model.InServiceDate)
-                                    @Html.ValidationMessageFor(model => model.InServiceDate)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.CheckBoxFor(model => model.InServiceDateUnknown) Unknown
-                                </div>
-                            </td>
                         </tr>
-                    </table>
                 </td>
             </tr>
 
@@ -181,19 +167,6 @@
             <tr>
                 <td>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.DrawingID)
-                    </div>
-                </td>
-                <td>
-                    <div class="editor-field">
-                        @Html.DropDownList("DrawingID", "- Select a Drawing Identifier -")
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">
                         @Html.Label("OD 1 / Rec ID 1 / Rec ID 2")
                     </div>
                 </td>
@@ -208,13 +181,13 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
+                                    @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
+                                    @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -243,13 +216,13 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
+                                    @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
+                                    @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -304,13 +277,13 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -322,50 +295,38 @@
             </tr>
 
             <tr>
+                <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
                 <td>
-                    <table>
-                        <tr>
-                            <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
-                            <td>/</td>
-                            <td>
-                                <div class="editor-label">@Html.LabelFor(model => model.GradeID)</div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, "- Select a Spec Rating -", new { id = "ddlSpecRatingID" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Grade / Rec ID 1 / Rec ID 2")
+                    </div>
                 </td>
                 <td>
                     <table>
                         <tr>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, "- Select a Spec Rating -", new { id = "ddlSpecRatingID" })
-                                </div>
-                            </td>
-                            <td> / </td>
                             <td>
                                 <div class="editor-field">
                                     @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, "- Select a Grade -", new { id = "ddlGradeID" })
                                 </div>
                             </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td><div class="editor-label">@Html.Label("Spec/Grade Records 1 / 2")</div></td>
-                <td>
-                    <table>
-                        <tr>
+                            <td>/</td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -379,13 +340,34 @@
             <tr>
                 <td>
                     <div class="editor-label">
-                        @Html.LabelFor(model => model.ANSIRatingID)
+                        @Html.Label("ANSI Rating / Rec ID 1 / Rec ID 2")
                     </div>
                 </td>
                 <td>
-                    <div class="editor-field">
-                        @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select an ANSI Rating -", new { id = "ddlANSIRatingID" })
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select an ANSI Rating -", new { id = "ddlANSIRatingID" })
+                                </div>
+                            </td>
+                            <td>/</td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1" })
+                                </div>
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2" })
+                                </div>
+                            </td>
+                            <td>
+                                <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
 
@@ -399,46 +381,6 @@
                     <div class="editor-field">
                         @Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, "- Select a Material Type -", new { id = "ddlMaterialTypeID" })
                     </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <table>
-                        <tr>
-                            <td><div class="editor-label">@Html.LabelFor(model => model.AngleID)</div></td>
-                            <td>/</td>
-                            <td><div class="editor-label">@Html.LabelFor(model => model.RadiusID)</div></td>
-                            <td>/</td>
-                            <td>
-                                <div class="editor-label">@Html.LabelFor(model => model.OrientID)</div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.EditorFor(model => model.AngleID)
-                                    @Html.ValidationMessageFor(model => model.AngleID)
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.DropDownList("RadiusID", ViewBag.RadiusID as SelectList, "- Select a Bend Radius -", new { id = "ddlRadiusID" })
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.DropDownList("OrientID", ViewBag.OrientID as SelectList, "- Select an Orientation -", new { id = "ddlOrientID" })
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
                 </td>
             </tr>
 
@@ -490,54 +432,6 @@
                     <div class="editor-field">@Html.DropDownList("ManufacturerTypeID", "- Select a Manufacturer Type -")</div>
                 </td>
             </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">@Html.LabelFor(model => model.Mill)</div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="wide">
-                                    @Html.EditorFor(model => model.Mill)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.CheckBoxFor(model => model.MillUnknown) Unknown
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.MFRDate)
-                    </div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.EditorFor(model => model.MFRDate)
-                                    @Html.ValidationMessageFor(model => model.MFRDate)
-                                </div>
-                            </td>
-                            <td>
-                                <div class="editor-field">
-                                    @Html.CheckBoxFor(model => model.MFRDateUnknown) Unknown
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
             <tr>
                 <td>
                     @Html.LabelFor(model => model.MFRModelNumber)
@@ -552,7 +446,7 @@
                     @Html.LabelFor(model => model.CurrentClassLoc)
                 </td>
                 <td>
-                    @Html.DropDownList("CurrentClassLocID", "- Select Class Location -")
+                    @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
                 </td>
             </tr>
 
@@ -579,7 +473,7 @@
                     @Html.LabelFor(model => model.PTRID)
                 </td>
                 <td>
-                    @Html.DropDownList("PressureTestRecordID", "- Select a Pressure Test Record -")
+                    @Html.DropDownList("PTRID", "- Select a Pressure Test Record -")
                 </td>
             </tr>
 
@@ -588,7 +482,7 @@
                     HCA Status
                 </td>
                 <td>
-                    @Html.DropDownList("HCAStatuses", "- Choose Status of HCA -")
+                    @Html.DropDownList("HCAStatusID", "- Choose Status of HCA -")
                 </td>
             </tr>
 
@@ -610,171 +504,10 @@
   @*onchangeevent*@
     <script type="text/javascript">
         function onchangeevent(e) {
-            //alert("in");
-            var start = parseFloat($("#tbGISAlignStart").val());
-            //alert(start);
-            var end = parseFloat($("#tbGISAlignEnd").val());
-            var length = end - start;
-            //alert(length);
-            if (!isNaN(length)) {
-                $("#lblLength").html(length); //This shows the calculated field
-                //alert("set length");
-            }
-            else {
-                $("#lblLength").html("0"); //This shows the calculated field
-                //alert("0");
             }
         }
     </script>
-  @*onchangeeventlength*@
-    <script type="text/javascript">
-        function onchangeeventlength(e) {
-            //alert("in2");
-            var start = parseFloat($("#tbGISAlignStart").val());
-            var end = parseFloat($("#tbGISAlignEnd").val());
-            var length = parseFloat($("#lblLength").html());
-        }
-    </script>
-  @*onchangeeventOD*@
-    <script type="text/javascript">
-        function onchangeeventOD(e) {
-            var selectedItem1 = $("#ddlODRecordID1").val();
-            var selectedItem2 = $("#ddlODRecordID2").val();
-            var lbl = $('#ODRecordMatrixCheck');
-            var checktype = "OD";
-            if (selectedItem1 == null || selectedItem1 == "")
-                selectedItem1 = "0";
-            if (selectedItem2 == null || selectedItem2 == "")
-                selectedItem2 = "0";
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: '/Overview/MatrixCheck',
-                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
-                dataType: 'json',
-                success: function (data) {
-                    var items = "No";
-                    $.each(data, function (i, data) {
-                        items = "Yes";
-                    });
-                    var vFeature = document.getElementById('ddlFeatures');
-                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
-                    if (vFeatureText == "Skip")
-                        items = "No";
-                    $("#ODRecordMatrixCheck").html(items);
-                    document.getElementById("hdnODRecordMatrixCheck").value = (items == "No" ? "0" : "1");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    lbl.html("No");
-                }
-            });
-        }
-    </script>
-  @*onchangeeventWT*@
-    <script type="text/javascript">
-        function onchangeeventWT(e) {
-            var selectedItem1 = $("#ddlWTRecordID1").val();
-            var selectedItem2 = $("#ddlWTRecordID2").val();
-            var lbl = $('#WTRecordMatrixCheck');
-            var checktype = "WT";
-            if (selectedItem1 == null || selectedItem1 == "")
-                selectedItem1 = "0";
-            if (selectedItem2 == null || selectedItem2 == "")
-                selectedItem2 = "0";
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: '/Overview/MatrixCheck',
-                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
-                dataType: 'json',
-                success: function (data) {
-                    var items = "No";
-                    $.each(data, function (i, data) {
-                        items = "Yes";
-                    });
-                    var vFeature = document.getElementById('ddlFeatures');
-                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
-                    if (vFeatureText == "Skip")
-                        items = "No";
-                    $("#WTRecordMatrixCheck").html(items);
-                    document.getElementById("hdnWTRecordMatrixCheck").value = (items == "No" ? "0" : "1");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    lbl.html("No");
-                }
-            });
-        }
-    </script>
-  @*onchangeeventST*@
-    <script type="text/javascript">
-        function onchangeeventST(e) {
-            var selectedItem1 = $("#ddlSeamRecordID1").val();
-            var selectedItem2 = $("#ddlSeamRecordID2").val();
-            var lbl = $('#SeamRecordMatrixCheck');
-            var checktype = "ST";
-            if (selectedItem1 == null || selectedItem1 == "")
-                selectedItem1 = "0";
-            if (selectedItem2 == null || selectedItem2 == "")
-                selectedItem2 = "0";
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: '/Overview/MatrixCheck',
-                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
-                dataType: 'json',
-                success: function (data) {
-                    var items = "No";
-                    $.each(data, function (i, data) {
-                        items = "Yes";
-                    });
-                    var vFeature = document.getElementById('ddlFeatures');
-                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
-                    if (vFeatureText == "Skip")
-                        items = "No";
-                    $("#SeamRecordMatrixCheck").html(items);
-                    document.getElementById("hdnSeamRecordMatrixCheck").value = (items == "No" ? "0" : "1");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    lbl.html("No");
-                }
-            });
-        }
-    </script>
-  @*onchangeeventSR*@
-    <script type="text/javascript">
-        function onchangeeventSR(e) {
-            var selectedItem1 = $("#ddlSpecRatingRecordID1").val();
-            var selectedItem2 = $("#ddlSpecRatingRecordID2").val();
-            var lbl = $('#SpecRatingRecordMatrixCheck');
-            var checktype = "SR";
-            if (selectedItem1 == null || selectedItem1 == "")
-                selectedItem1 = "0";
-            if (selectedItem2 == null || selectedItem2 == "")
-                selectedItem2 = "0";
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: '/Overview/MatrixCheck',
-                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
-                dataType: 'json',
-                success: function (data) {
-                    var items = "No";
-                    $.each(data, function (i, data) {
-                        items = "Yes";
-                    });
-                    var vFeature = document.getElementById('ddlFeatures');
-                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
-                    if (vFeatureText == "Skip")
-                        items = "No";
-                    $("#SpecRatingRecordMatrixCheck").html(items);
-                    document.getElementById("hdnSpecRatingRecordMatrixCheck").value = (items == "No" ? "0" : "1");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    lbl.html("No");
-                }
-            });
-        }
-    </script>
+
   @*pipetypesfromfeatures*@
     <script type="text/javascript">
         function pipetypesfromfeatures(e) {
@@ -800,88 +533,7 @@
                 error: function (xhr, ajaxOptions, thrownError) {
                     //alert('Failed to retrieve pipe types.');
                 }
-            });
-
-            updateNAdropdowns();        
-        }
-    </script>
-  @*updateNAdropdowns*@
-    <script type="text/javascript">
-        function updateNAdropdowns() {
-            var vFeature = document.getElementById('ddlFeatures');
-            var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
-            var vPipeType = document.getElementById('ddlPipeTypes');
-            var vPipeTypeText = vPipeType.options[vPipeType.selectedIndex].innerHTML;
-
-            document.getElementById("ddlODID1").options[0].innerHTML = "- Select an OD -";
-            document.getElementById("ddlODID2").options[0].innerHTML = "- Select an OD -";
-            document.getElementById("ddlSeamWeldTypeID").options[0].innerHTML = "- Select a Seam Weld Type -";
-            document.getElementById("ddlSpecRatingID").options[0].innerHTML = "- Select a Spec Rating -";
-            document.getElementById("ddlGradeID").options[0].innerHTML = "- Select a Grade -";
-            
-            if (vFeatureText == "Skip" && vPipeTypeText == "No Records") {
-                document.getElementById("ddlODID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamWeldTypeID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlGradeID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
-            }
-            if (vFeatureText == "Skip" && vPipeTypeText != "No Records") {
-                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
-            }
-            if (vFeatureText == "Pipe") {
-                document.getElementById("ddlODID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
-            }
-            if (vFeatureText == "Non Rated") {
-                document.getElementById("ddlODID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
-                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
-            }
-            onchangeeventOD(null);
-            onchangeeventWT(null);
-            onchangeeventST(null);
-            onchangeeventSR(null);
+            });                          
         }
     </script>
 

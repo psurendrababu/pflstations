@@ -89,7 +89,7 @@ namespace PipelineFeatureList.Models
         public Nullable<int> SeamRecordID2 { get; set; }
         [DisplayName("Seam Record Matrix Check")]
         public Nullable<int> SeamRecordMatrixCheck { get; set; }
-        [DisplayName("Specification/Rating")]
+        [DisplayName("Specification")]
         public Nullable<int> SpecRatingID { get; set; }
         [DisplayName("Grade")]
         public Nullable<int> GradeID { get; set; }
@@ -130,13 +130,13 @@ namespace PipelineFeatureList.Models
         [DisplayName("Unknown")]
         public bool MFRDateUnknown { get; set; }
         [DisplayName("Current Class Loc.")]
-        public string CurrentClassLoc { get; set; }
+        public Nullable<int> CurrentClassLoc { get; set; }
         [DisplayName("Class Design Factor")]
         public string ClassDesignFactor { get; set; }
         //[DisplayName("HCA Name")]
         //public string HCAName { get; set; }
         [DisplayName("SMYS [S] (psi)")]
-        public string SMYS { get; set; }
+        public Nullable<int> SMYS { get; set; }
         [DisplayName("Outside Diameter [D] (inch)")]
         public string OutsideDiameter { get; set; }
         [DisplayName("Wall Thickness [t] (inch)")]
@@ -169,6 +169,8 @@ namespace PipelineFeatureList.Models
         public Nullable<int> GradeRecordID1 { get; set; }
         [DisplayName("Grade Record ID 2")]
         public Nullable<int> GradeRecordID2 { get; set; }
+        [DisplayName("Grade Record Matrix Check")]
+        public Nullable<int> GradeRecordMatrixCheck { get; set; }
         [DisplayName("MFR Model Number")]
         public string MFRModelNumber { get; set; }
         [DisplayName("PressureTestRecordID")]
@@ -179,5 +181,6 @@ namespace PipelineFeatureList.Models
         public Nullable<int> HCAStatusID { get; set; }
         [DisplayName("Established Operating Pressure")]
         public Nullable<int> OperatingPressure { get; set; }
+
     }
 }

@@ -641,7 +641,7 @@ input[type="checkbox"].input-validation-error {
 .overviewtable {
     border: 1px solid;
     margin-top: 0.75em;
-    width: 525px;
+    width: auto;
     overflow:scroll;
 }
 
@@ -658,31 +658,52 @@ input[type="checkbox"].input-validation-error {
     margin:2px 2px 2px 2px;
 }
 
+.overviewmaintable {
+
+    margin-top: 0.75em;
+
+    overflow: scroll;
+    epmty-cells: show;
+    border-collapse: collapse;
+    padding: 2px 2px 2px 2px;
+}
+
+    .overviewmaintable th {
+        font-size: 1em;
+        padding: 4px 4px 4px 4px;
+        margin: 4px 4px 4px 4px;
+    }
+
+    .overviewmaintable td {
+        font-size: 1em;
+        padding: 2px 2px 2px 2px;
+        margin: 2px 2px 2px 2px;
+    }
+
 .overviewfeaturetable {
     border: 1px solid;
     margin-top: 0.75em;
-    overflow:scroll;
+    overflow:scroll
     empty-cells: show;
     border-collapse:collapse;
+    padding: 2px 2px 2px 2px;
 }
 
 .overviewfeaturetable th {
     font-size: .75em;
     text-align: center;
     border: 1px solid;
-    padding-left: 0;
     empty-cells: show;
+    padding: 2px 2px 2px 2px;
 }
 
 .overviewfeaturetable td {
     font-size: .75em;
     text-align: center;
     border: 1px solid;
-    padding-left: 0;
-    padding:0;
+    padding:2px 2px 2px 2px;
     empty-cells: show;
     border-collapse:collapse;
-    
 }
 
 .clear {

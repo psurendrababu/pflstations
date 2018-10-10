@@ -34,6 +34,8 @@ namespace PipelineFeatureList.Models
         public DocumentRecord STRecordID2Data { get; set; }
         public DocumentRecord SRRecordID1Data { get; set; }
         public DocumentRecord SRRecordID2Data { get; set; }
+        public DocumentRecord GRRecordID1Data { get; set; }
+        public DocumentRecord GRRecordID2Data { get; set; }
         public SeamType SeamTypeData { get; set; }
         public SpecRating SpecRatingData { get; set; }
         public StandardEntry StandardEntryData { get; set; }

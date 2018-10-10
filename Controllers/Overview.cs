@@ -55,17 +55,17 @@ namespace PipelineFeatureList.Controllers
             ViewData.Add("EditDisabled", Smodel.FirstOrDefault().DisableEdit);
             ViewData.Add("DisplayGroupName", Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName);
 
-            if (Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Engineering" ||
-                Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Final Engineering" ||
-                Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Annual Review")
-            {
-                var DSRmodel = db.DynamicSegmentationRecords
-                               .Where(d => d.ValveSectionID == ValveSectionID)
-                               .OrderBy(d => d.FeatureNumber)
-                               .ThenBy(d => d.SegmentNumber)
-                               .ToList();
-                ViewData.Add("DSRSection", DSRmodel);
-            }
+            //if (Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Engineering" ||
+            //    Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Final Engineering" ||
+            //    Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Annual Review")
+            //{
+            //    var DSRmodel = db.DynamicSegmentationRecords
+            //                   .Where(d => d.ValveSectionID == ValveSectionID)
+            //                   .OrderBy(d => d.FeatureNumber)
+            //                   .ThenBy(d => d.SegmentNumber)
+            //                   .ToList();
+            //    ViewData.Add("DSRSection", DSRmodel);
+            //}
 
             var model = (from v in db.ValveSection
                             join vs in db.ValveSectionFeatures on v.ValveSectionID equals vs.ValveSectionID into vs1
@@ -100,8 +100,6 @@ namespace PipelineFeatureList.Controllers
                             from outd2d in outd12.DefaultIfEmpty()
                             join pt in db.PipeTypes on vsd.TypeID equals pt.PipeTypeID into pt1
                             from ptd in pt1.DefaultIfEmpty()
-                            join d in db.DocumentRecords on vsd.DrawingID equals d.DocumentRecordID into d1
-                            from drawd in d1.DefaultIfEmpty()
                             join riOD1 in db.DocumentRecords on vsd.ODRecordID1 equals riOD1.DocumentRecordID into riOD11
                             from riOD1d in riOD11.DefaultIfEmpty()
                             join riOD2 in db.DocumentRecords on vsd.ODRecordID2 equals riOD2.DocumentRecordID into riOD21
@@ -118,6 +116,10 @@ namespace PipelineFeatureList.Controllers
                             from riSR1d in riSR11.DefaultIfEmpty()
                             join riSR2 in db.DocumentRecords on vsd.SpecRatingRecordID2 equals riSR2.DocumentRecordID into riSR21
                             from riSR2d in riSR21.DefaultIfEmpty()
+                            join riGR1 in db.DocumentRecords on vsd.GradeRecordID1 equals riGR1.DocumentRecordID into riGR11
+                            from riGR1d in riGR11.DefaultIfEmpty()
+                            join riGR2 in db.DocumentRecords on vsd.GradeRecordID2 equals riGR2.DocumentRecordID into riGR21
+                            from riGR2d in riGR11.DefaultIfEmpty()
                             join st in db.SeamTypes on vsd.SeamWeldTypeID equals st.SeamTypeID into st1
                             from std in st1.DefaultIfEmpty()
                             join sr in db.SpecRatings on vsd.SpecRatingID equals sr.SpecRatingID into sr1
@@ -131,7 +133,6 @@ namespace PipelineFeatureList.Controllers
                                 PipeSystemData = psd,
                                 PipelineData = pd,
                                 ANSIRatingData = ad,
-                                DrawingData = drawd,
                                 BendRadiusData = brd,
                                 ConstructionTypeData = ctd,
                                 ODRecordID1Data = riOD1d,
@@ -142,6 +143,8 @@ namespace PipelineFeatureList.Controllers
                                 STRecordID2Data = riST2d,
                                 SRRecordID1Data = riSR1d,
                                 SRRecordID2Data = riSR2d,
+                                GRRecordID1Data = riGR1d,
+                                GRRecordID2Data = riGR2d,
                                 FeatureData = fd,
                                 GradeData = gd,
                                 MaterialTypeData = mtd,
@@ -155,11 +158,6 @@ namespace PipelineFeatureList.Controllers
                                 OutsideDiameterData1 = outd1d,
                                 OutsideDiameterData2 = outd2d
                             }).ToList();
-
-
-            // Document Records
-            //var RDmodel = db.DocumentRecords.Include("RecordIdentifier").Include("DocumentType").Where(d => d.ValveSectionID == ValveSectionID).OrderBy(d => d.DocumentRecordID).ToList();
-            //ViewData.Add("RecordData", RDmodel);
 
             // Issues
             var FImodel = db.FeatureIssues.Where(f => f.ValveSectionID == ValveSectionID).OrderBy(f => f.FeatureNumber).ThenBy(f => f.BuilderCreatedOn).ThenBy(f => f.CheckerCreatedOn).ThenBy(f => f.EngineerCreatedOn).ToList();
@@ -175,13 +173,7 @@ namespace PipelineFeatureList.Controllers
                 .ThenBy(d => d.FeatureError.OrderBy)
                 .ToList();
             ViewData.Add("ErrorData", VSEmodel);
-            
-            // Rules
-            //var Rmodel = db.WorkflowRules
-            //    .Include("WorkflowAction")
-            //    .Where(w => w.Old_ValveSectionStatusID == vsStatusID)
-            //    .ToList();
-
+         
             var Rmodel = (from wr in db.WorkflowRules
                            join wa in db.WorkflowActions on wr.WorkflowActionID equals wa.WorkflowActionID
                            join v in db.ValveSectionStatus on wr.New_ValveSectionStatusID equals v.ValveSectionStatusID
@@ -236,7 +228,6 @@ namespace PipelineFeatureList.Controllers
             // for Create and Insert
 
             ViewBag.FeatureID = new SelectList(db.Features, "FeatureID", "FeatureItem");
-            ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
             ViewBag.HCAName = new SelectList(db.HCAs, "HCAID", "HCAItem");
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem");
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
@@ -245,7 +236,7 @@ namespace PipelineFeatureList.Controllers
                             where d.PipelineID == currSection
                             orderby d.DocumentRecordID
                             select new { d.DocumentRecordID, d.Filename };
-            ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            //ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename");
             ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
             ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
             ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
@@ -254,6 +245,8 @@ namespace PipelineFeatureList.Controllers
             ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
             ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
             ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.GradeRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.GradeRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
             List<OutsideDiameter> od1List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD1List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem");
             ViewBag.ODID1 = OD1List; 
@@ -268,22 +261,24 @@ namespace PipelineFeatureList.Controllers
             ViewBag.RadiusID = new SelectList(db.BendRadiuses, "BendRadiusID", "BendRadiusItem");
             ViewBag.OrientID = new SelectList(db.Orientations, "OrientationID", "OrientationItem");
             ViewBag.CoatingTypeID = new SelectList(db.CoatingTypes, "CoatingTypeID", "CoatingTypeItem");
+
+
             List<Manufacturer> manuList = db.Manufacturers.OrderBy(m => m.ManufacturerItem).ToList();
             SelectList ManuList = new SelectList(manuList, "ManufacturerID", "ManufacturerItem");
-            ViewBag.ManufacturerID = ManuList; // new SelectList(db.Manufacturers, "ManufacturerID", "ManufacturerItem");
+            ViewBag.ManufacturerID = ManuList;
             List<ManufacturerType> manutypeList = db.ManufacturerTypes.OrderBy(m => m.ManufacturerTypeItem).ToList();
             SelectList ManuTypeList = new SelectList(manutypeList, "ManufacturerTypeID", "ManufacturerTypeItem");
-            ViewBag.ManufacturerTypeID = ManuTypeList; 
+            ViewBag.ManufacturerTypeID = ManuTypeList;
             ViewBag.TypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem");
             ViewBag.Length = 0;
-            ViewBag.CurrentClassLocID = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
+            ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
             var availPTRs =  from pt in db.PressureTestRecords
                              join p in db.Pipelines on pt.PipelineID equals p.PipelineID
                              where pt.PipelineID == currSection
                              orderby pt.Filename
                              select new { pt.PressureTestRecordID, pt.Filename };
-            ViewBag.PressureTestRecordID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
-            ViewBag.HCAStatuses = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
+            ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
+            ViewBag.HCAStatusID = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
         }
 
         public void ActionSetups(ValveSectionFeature valvesectionfeature)
@@ -309,10 +304,9 @@ namespace PipelineFeatureList.Controllers
             ViewBag.SelectedANSIRatingID = valvesectionfeature.ANSIRatingID;
             ViewBag.SelectedRadiusID = valvesectionfeature.RadiusID;
             ViewBag.SelectedOrientID = valvesectionfeature.OrientID;
+            ViewBag.SelectedCurrentClassLocID = valvesectionfeature.CurrentClassLoc;
 
             ViewBag.FeatureID = new SelectList(db.Features, "FeatureID", "FeatureItem", valvesectionfeature.FeatureID);
-            ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem", valvesectionfeature.CurrentClassLoc);
-            //ViewBag.HCAName = new SelectList(db.HCAs, "HCAID", "HCAItem", valvesectionfeature.HCAName);
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem", valvesectionfeature.ConstructionTypeID);
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availDocs = from d in db.DocumentRecords
@@ -320,7 +314,7 @@ namespace PipelineFeatureList.Controllers
                             where d.PipelineID == currSection
                             orderby d.DocumentRecordID
                             select new {d.DocumentRecordID, d.Filename };
-            ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.DrawingID);
+            //ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.DrawingID);
             ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID1);
             ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID2);
             ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID1);
@@ -354,14 +348,14 @@ namespace PipelineFeatureList.Controllers
             ViewBag.TypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem", valvesectionfeature.TypeID);
             ViewBag.ODRecordMatrixCheck = "";
             //ViewBag.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
-            ViewBag.CurrentClassLocID = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
+            ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
             var availPTRs = from pt in db.PressureTestRecords
                             join p in db.Pipelines on pt.PipelineID equals p.PipelineID
                             where pt.PipelineID == currSection
                             orderby pt.Filename
                             select new { pt.PressureTestRecordID, pt.Filename };
-            ViewBag.PressureTestRecordID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
-            ViewBag.HCAStatuses = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
+            ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
+            ViewBag.HCAStatusID = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
         }
 
         public void ActionUnknowns(ValveSectionFeature valvesectionfeature)
@@ -996,6 +990,7 @@ namespace PipelineFeatureList.Controllers
                     valvesectionfeature.WTRecordMatrixCheck = 0;
                     valvesectionfeature.SeamRecordMatrixCheck = 0;
                     valvesectionfeature.SpecRatingRecordMatrixCheck = 0;
+                    valvesectionfeature.GradeRecordMatrixCheck = 0;
                     /////////////////////////////////////////////////////
                 }
                 else if (feature.FeatureItem == "Skip")
@@ -1007,6 +1002,7 @@ namespace PipelineFeatureList.Controllers
                     valvesectionfeature.WTRecordMatrixCheck = 0;
                     valvesectionfeature.SeamRecordMatrixCheck = 0;
                     valvesectionfeature.SpecRatingRecordMatrixCheck = 0;
+                    valvesectionfeature.GradeRecordMatrixCheck = 0;
                     /////////////////////////////////////////////////////
                 }
                 else if (feature.FeatureItem == "Pipe")
@@ -1018,6 +1014,7 @@ namespace PipelineFeatureList.Controllers
                     valvesectionfeature.WTRecordMatrixCheck = 1;
                     valvesectionfeature.SeamRecordMatrixCheck = 1;
                     valvesectionfeature.SpecRatingRecordMatrixCheck = 1;
+                    valvesectionfeature.GradeRecordMatrixCheck = 1;
                     /////////////////////////////////////////////////////
                 }
                 else if (feature.FeatureItem == "Non Rated")
@@ -1029,27 +1026,30 @@ namespace PipelineFeatureList.Controllers
                     valvesectionfeature.WTRecordMatrixCheck = 1;
                     valvesectionfeature.SeamRecordMatrixCheck = 1;
                     valvesectionfeature.SpecRatingRecordMatrixCheck = 1;
+                    valvesectionfeature.GradeRecordMatrixCheck = 1;
                     /////////////////////////////////////////////////////
                 }
                 else
                 {
                     featurepipetype = "Invalid";
-                    // Set all matrix checks to "No"
-                    valvesectionfeature.ODRecordMatrixCheck = 0;
-                    valvesectionfeature.WTRecordMatrixCheck = 0;
-                    valvesectionfeature.SeamRecordMatrixCheck = 0;
-                    valvesectionfeature.SpecRatingRecordMatrixCheck = 0;
+                    // Set all matrix checks to "Yes"
+                    valvesectionfeature.ODRecordMatrixCheck = 1;
+                    valvesectionfeature.WTRecordMatrixCheck = 1;
+                    valvesectionfeature.SeamRecordMatrixCheck = 1;
+                    valvesectionfeature.SpecRatingRecordMatrixCheck = 1;
+                    valvesectionfeature.GradeRecordMatrixCheck = 1;
                     /////////////////////////////////////////////////////
                 }
             }
             catch
             {
                 featurepipetype = "Invalid";
-                // Set all matrix checks to "No"
-                valvesectionfeature.ODRecordMatrixCheck = 0;
-                valvesectionfeature.WTRecordMatrixCheck = 0;
-                valvesectionfeature.SeamRecordMatrixCheck = 0;
-                valvesectionfeature.SpecRatingRecordMatrixCheck = 0;
+                // Set all matrix checks to "Yes"
+                valvesectionfeature.ODRecordMatrixCheck = 1;
+                valvesectionfeature.WTRecordMatrixCheck = 1;
+                valvesectionfeature.SeamRecordMatrixCheck = 1;
+                valvesectionfeature.SpecRatingRecordMatrixCheck = 1;
+                valvesectionfeature.GradeRecordMatrixCheck = 1;
                 /////////////////////////////////////////////////////
             }
             // Get Warning and Error IDs
@@ -1119,12 +1119,12 @@ namespace PipelineFeatureList.Controllers
                 InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "InstallNoUnknown", false);
             }
             /////////////////////
-            // In-Service Date
+            // In-Service Date - Removed for Stations - Curtis
             /////////////////////            
-            if (valvesectionfeature.InServiceDate == null && valvesectionfeature.InServiceDateUnknown == false)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "InServiceNoUnknown", false);
-            }
+            //if (valvesectionfeature.InServiceDate == null && valvesectionfeature.InServiceDateUnknown == false)
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "InServiceNoUnknown", false);
+            //}
             /////////////////////
             // Construction Type
             /////////////////////            
@@ -1133,12 +1133,12 @@ namespace PipelineFeatureList.Controllers
                 InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "ConstructionTypeNoValue", true);
             }
             /////////////////////
-            // Drawing Identifier
+            // Drawing Identifier - Removed for Stations - Curtis
             /////////////////////
-            if (valvesectionfeature.DrawingID == 0 || valvesectionfeature.DrawingID == null)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "DrawingIDNoValue", true);
-            }
+            //if (valvesectionfeature.DrawingID == 0 || valvesectionfeature.DrawingID == null)
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "DrawingIDNoValue", true);
+            //}
             /////////////////////
             // OD1
             /////////////////////
@@ -1312,26 +1312,26 @@ namespace PipelineFeatureList.Controllers
             /////////////////////
             // Angles
             /////////////////////
-            if ((featurepipetype == "SkipNoRecords") && valvesectionfeature.AngleID == null)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "AngleNoValue", true); 
-            }
-            /////////////////////
-            // Radius
-            /////////////////////
-            if ((featurepipetype == "SkipNoRecords")
-                && (valvesectionfeature.RadiusID == null || valvesectionfeature.RadiusID == 0))
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "RadiusNoValue", true); 
-            }
-            /////////////////////
-            // Orientations
-            /////////////////////
-            if ((featurepipetype == "SkipNoRecords")
-                && (valvesectionfeature.OrientID == null || valvesectionfeature.OrientID == 0))
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "OrientationNoValue", true); 
-            }
+            //if ((featurepipetype == "SkipNoRecords") && valvesectionfeature.AngleID == null)
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "AngleNoValue", true); 
+            //}
+            ///////////////////////
+            //// Radius
+            ///////////////////////
+            //if ((featurepipetype == "SkipNoRecords")
+            //    && (valvesectionfeature.RadiusID == null || valvesectionfeature.RadiusID == 0))
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "RadiusNoValue", true); 
+            //}
+            ///////////////////////
+            //// Orientations
+            ///////////////////////
+            //if ((featurepipetype == "SkipNoRecords")
+            //    && (valvesectionfeature.OrientID == null || valvesectionfeature.OrientID == 0))
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, warningid, strWarning, "OrientationNoValue", true); 
+            //}
             /////////////////////
             // Coating Types
             /////////////////////
@@ -1353,10 +1353,10 @@ namespace PipelineFeatureList.Controllers
             /////////////////////
             // Mill
             /////////////////////
-            if (valvesectionfeature.Mill == null && valvesectionfeature.MillUnknown == false)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "MillNoUnknown", false); 
-            }
+            //if (valvesectionfeature.Mill == null && valvesectionfeature.MillUnknown == false)
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "MillNoUnknown", false); 
+            //}
             /////////////////////
             // Manufacturer Type
             /////////////////////
@@ -1367,10 +1367,10 @@ namespace PipelineFeatureList.Controllers
             /////////////////////
             // MFR Date
             /////////////////////
-            if (featurepipetype != "SkipFacility" && valvesectionfeature.MFRDate == null && valvesectionfeature.MFRDateUnknown == false)
-            {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "MFRDateNoUnknown", false); 
-            }
+            //if (featurepipetype != "SkipFacility" && valvesectionfeature.MFRDate == null && valvesectionfeature.MFRDateUnknown == false)
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "MFRDateNoUnknown", false); 
+            //}
             
             /// Update ValveSectionFeature with Matrix Checks performed
             db.Entry(valvesectionfeature).State = EntityState.Modified;
