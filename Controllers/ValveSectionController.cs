@@ -888,16 +888,11 @@ namespace PipelineFeatureList.Controllers
             {
                 ValveSection.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
                 ValveSection.ModifiedOn = DateTime.Now;
-                //ValveSection.IsSegmentationDirty = true;
-                //ValveSection.LengthDiscrepancyPlus = (ValveSection.OrionStationEnd - ValveSection.OrionStationBegin) - ValveSection.PFLLength;
 
                 db.Entry(ValveSection).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                return RedirectToAction("Index", "Overview", new { ValveSectionID = ValveSection.ValveSectionID, OrionStationSeries = ValveSection.OrionStationSeries });
             }
-            ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem", ValveSection.PipeSystemID);
-            ViewBag.PipelineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem", ValveSection.PipelineID);
-            //ViewBag.ValveSectionStatusID = new SelectList(db.ValveSectionStatus, "ValveSectionStatusID", "ValveSectionStatusItem", ValveSection.ValveSectionStatusID);
             return View(ValveSection);
         }
 
@@ -1104,18 +1099,15 @@ namespace PipelineFeatureList.Controllers
                 if (newStatusActions.GenerateGrades)
                     //GenerateGrades(ValveSection);
                     generategrades = 1;
-                if (newStatusActions.DynamicSegmentation)
-                    //DynamicSegmentation(ValveSection);
-                    dynamicsegmentation = 1;
 
                 //PH 2014.05.22 need user id
                 //PipelineFeatureList.AppCode.AppLibrary.CopyToHistoryGenerateGradesDynamicSegmentation(ValveSection.ValveSectionID, copytohistory, generategrades, dynamicsegmentation);
-                PipelineFeatureList.AppCode.AppLibrary.CopyToHistoryGenerateGradesDynamicSegmentation(
-                    Convert.ToInt64(Session["UserID"].ToString()),
-                    ValveSection.ValveSectionID,
-                    copytohistory,
-                    generategrades,
-                    dynamicsegmentation);
+                //PipelineFeatureList.AppCode.AppLibrary.CopyToHistoryGenerateGradesDynamicSegmentation(
+                //    Convert.ToInt64(Session["UserID"].ToString()),
+                //    ValveSection.ValveSectionID,
+                //    copytohistory,
+                //    generategrades,
+                //    dynamicsegmentation);
                 //PH 2014.05.22 end edit
 
                 if (newStatusActions.QueueCertification)

@@ -52,6 +52,17 @@
 
             <tr>
                 <td>
+                    <div class="editor-field">
+                        From Series / To Series
+                    </div>
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     @Html.LabelFor(model => model.Length)
                 </td>
                 <td>

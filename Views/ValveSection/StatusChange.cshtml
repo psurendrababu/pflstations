@@ -1,54 +1,43 @@
 ﻿@model PipelineFeatureList.Models.ValveSection
 
 @{
-    ViewBag.Title = "Edit Circuit";
+    ViewBag.Title = "Change Circuit Status";
 }
 
-<h2>Edit Valve Section</h2>
+<h2>Change Circuit Status</h2>
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>ValveSection</legend>
+<fieldset>
+    <legend>ValveSection</legend>
 
-        @Html.HiddenFor(model => model.ValveSectionID)
-        @Html.HiddenFor(model => model.CreatedBy_UserID)
-        @Html.HiddenFor(model => model.CreatedOn)
-        @Html.HiddenFor(model => model.PFLLength)
-        @Html.HiddenFor(model => model.LengthDiscrepancyPlus)
-        @Html.HiddenFor(model => model.LengthDiscrepancyMinus)
-        @Html.HiddenFor(model => model.PipeSystemID)
-        @Html.HiddenFor(model => model.PipelineID)
-        @Html.HiddenFor(model => model.OrionStationSeries)
-        @Html.HiddenFor(model => model.ValveSectionBegin)
-        @Html.HiddenFor(model => model.BuilderID)
-        @Html.HiddenFor(model => model.QCID)
-        @Html.HiddenFor(model => model.EngineerID)
-        @Html.HiddenFor(model => model.FinalEngineerID)
-        @Html.HiddenFor(model => model.ValveSectionStatusID)
-        @Html.HiddenFor(model => model.ValveSectionBegin)
-        @Html.HiddenFor(model => model.ValveSectionEnd)
-        @Html.HiddenFor(model => model.MilePointBegin)
-        @Html.HiddenFor(model => model.MilePointEnd)
-        @Html.HiddenFor(model => model.OrionStationBegin)
-        @Html.HiddenFor(model => model.OrionStationEnd)
-        @Html.HiddenFor(model => model.GISStationBegin)
-        @Html.HiddenFor(model => model.GISStationEnd)
-        @Html.HiddenFor(model => model.CurrentMAOP)
-        @Html.HiddenFor(model => model.CrossingsStatus)
-        @Html.HiddenFor(model => model.IsSegmentationDirty)
+    @Html.HiddenFor(model => model.ValveSectionID)
+    @Html.HiddenFor(model => model.CreatedBy_UserID)
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.HiddenFor(model => model.PFLLength)
+    @Html.HiddenFor(model => model.PipeSystemID)
+    @Html.HiddenFor(model => model.PipelineID)
+    @Html.HiddenFor(model => model.OrionStationSeries)
+    @Html.HiddenFor(model => model.BuilderID)
+    @Html.HiddenFor(model => model.QCID)
+    @Html.HiddenFor(model => model.EngineerID)
+    @Html.HiddenFor(model => model.FinalEngineerID)
+    @Html.HiddenFor(model => model.ValveSectionStatusID)
+    @Html.HiddenFor(model => model.CurrentMAOP)
+    @Html.HiddenFor(model => model.Description)
+    @Html.HiddenFor(model => model.ValveSectionItem)
 
-        <table>
-            <tr>
+    <table>
+        <tr>
             <td><div class="editor-field">@Html.Raw(ViewBag.Message)</div></td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td><p><input type="submit" value="Yes" /></p></td>
-            </tr>
-        </table>
-    </fieldset>
+        </tr>
+    </table>
+</fieldset>
 }
 
 <div>

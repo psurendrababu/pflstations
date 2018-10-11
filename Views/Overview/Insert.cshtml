@@ -53,6 +53,26 @@
 
         <tr>
             <td>
+                <div class="editor-field">
+                    From Series / To Series
+                </div>
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Length)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Length)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
                 @Html.LabelFor(model => model.Length)
             </td>
             <td>
@@ -123,20 +143,20 @@
                 </div>
             </td>
             <td>
-                    <tr>
-                        <td>
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.InstallDate)
-                                @Html.ValidationMessageFor(model => model.InstallDate)
-                            </div>
-                        </td>
-                        <td>
-                            <div class="editor-field">
-                                @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
-                            </div>
-                        </td>
-                    </tr>
+        <tr>
+            <td>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.InstallDate)
+                    @Html.ValidationMessageFor(model => model.InstallDate)
+                </div>
             </td>
+            <td>
+                <div class="editor-field">
+                    @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
+                </div>
+            </td>
+        </tr>
+        </td>
         </tr>
 
         <tr>

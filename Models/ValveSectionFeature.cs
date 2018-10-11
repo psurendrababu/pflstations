@@ -181,6 +181,11 @@ namespace PipelineFeatureList.Models
         public Nullable<int> HCAStatusID { get; set; }
         [DisplayName("Established Operating Pressure")]
         public Nullable<int> OperatingPressure { get; set; }
+        [DisplayName("From Series")]
+        public Nullable<int> FromSeries { get; set; }
+        [DisplayName("To Series")]
+        public Nullable<int> ToSeries { get; set; }
+
 
     }
 }

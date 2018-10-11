@@ -20,15 +20,9 @@
         @Html.HiddenFor(model => model.FinalEngineerID)
         @Html.HiddenFor(model => model.QCID)
         @Html.HiddenFor(model => model.PFLLength)
-        @Html.HiddenFor(model => model.LengthDiscrepancyPlus)
-        @Html.HiddenFor(model => model.LengthDiscrepancyMinus)
         @Html.HiddenFor(model => model.ValveSectionStatusID)
         @Html.HiddenFor(model => model.PipeSystemID)
         @Html.HiddenFor(model => model.PipelineID)
-        @Html.HiddenFor(model => model.OrionStationSeries)
-        @Html.HiddenFor(model => model.ValveSectionBegin)        
-        @Html.HiddenFor(model => model.CrossingsStatus)
-        @Html.HiddenFor(model => model.IsSegmentationDirty)
 
 
         <table>
@@ -45,50 +39,8 @@
             <td><div class="editor-field">@Html.Raw(ViewBag.PipelineItem)</div></td>
             </tr>
             <tr>
-            <td><div class="editor-label">@Html.Label("Valve Section Begin/End")</div></td>
-            <td>
-                <table><tr>
-                    <td><div class="editor-field">@Html.DisplayFor(model => model.ValveSectionBegin)</div></td>
-                    <td>/</td>
-                    <td><div class="editor-field">@Html.EditorFor(model => model.ValveSectionEnd) @Html.ValidationMessageFor(model => model.ValveSectionEnd)</div></td>
-                </tr></table>
-            </td>
-            </tr>
-            <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.OrionStationSeries)</div></td>
-            <td><div class="editor-field">@Html.DisplayFor(model => model.OrionStationSeries)</div></td>
-            </tr>
-            <tr>
-            <td><div class="editor-label">@Html.Label("Mile Point Begin/End")</div></td>
-            <td>
-                <table><tr>
-                    <td><div class="editor-field">@Html.EditorFor(model => model.MilePointBegin) @Html.ValidationMessageFor(model => model.MilePointBegin)</div></td>
-                    <td>/</td>
-                    <td><div class="editor-field">@Html.EditorFor(model => model.MilePointEnd) @Html.ValidationMessageFor(model => model.MilePointEnd)</div></td>
-                </tr></table>
-            </td>
-            </tr>
-            <tr>
-            <td><div class="editor-label">@Html.Label("Orion Station Begin/End")</div></td>
-            <td>
-                <table><tr>
-                    <td>
-                    @*<input id="OSB" type="text" value="@Html.ValueFor(model => model.OrionStationEnd)" />*@
-                    <div class="editor-field">@Html.EditorFor(model => model.OrionStationBegin) @Html.ValidationMessageFor(model => model.OrionStationBegin)</div></td>
-                    <td>/</td>
-                    <td><div class="editor-field">@Html.EditorFor(model => model.OrionStationEnd) @Html.ValidationMessageFor(model => model.OrionStationEnd)</div></td>
-            </tr></table>
-            </td>
-            </tr>
-            <tr>
-            <td><div class="editor-label">@Html.Label("GIS Station Begin/End")</div></td>
-            <td>
-                <table><tr>
-                    <td><div class="editor-field">@Html.EditorFor(model => model.GISStationBegin) @Html.ValidationMessageFor(model => model.GISStationBegin)</div></td>
-                    <td>/</td>
-                    <td><div class="editor-field">@Html.EditorFor(model => model.GISStationEnd) @Html.ValidationMessageFor(model => model.GISStationEnd)</div></td>
-            </tr></table>
-            </td>
+            <td><div class="editor-field">@Html.EditorFor(model => model.OrionStationSeries)</div></td>
             </tr>
             <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.CurrentMAOP)</div></td>

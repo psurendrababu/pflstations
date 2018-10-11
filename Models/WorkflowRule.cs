@@ -18,7 +18,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("Modified By")]
         public Int64 ModifiedBy_UserID { get; set; }
         [DisplayName("Modified Date/Time")]
-        public DateTime ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
         [DisplayName("Old Circuit Status ID")]
         public int Old_ValveSectionStatusID { get; set; }
         [DisplayName("Workflow Action ID")]
