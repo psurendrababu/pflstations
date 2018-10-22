@@ -1,10 +1,10 @@
 ﻿@model PipelineFeatureList.Models.ValveSection
 
 @{
-    ViewBag.Title = "Delete Valve Section";
+    ViewBag.Title = "Delete Circuit";
 }
 
-<h2>Delete Valve Section</h2>
+<h2>Delete Circuit</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
@@ -27,25 +27,6 @@
     <div class="display-field">
         @Html.Raw(ViewBag.PipelineItem)
     </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ValveSectionBegin)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ValveSectionBegin)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ValveSectionEnd)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ValveSectionEnd)
-    </div>
-    </td></tr>
     <tr><td>
     <div class="display-label">
          @Html.DisplayNameFor(model => model.OrionStationSeries)
@@ -53,60 +34,6 @@
     <td>
     <div class="display-field">
         @Html.DisplayFor(model => model.OrionStationSeries)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MilePointBegin)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MilePointBegin)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MilePointEnd)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MilePointEnd)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OrionStationBegin)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OrionStationBegin)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OrionStationEnd)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OrionStationEnd)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.GISStationBegin)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GISStationBegin)
-    </div>
-    </td></tr>
-    <tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.GISStationEnd)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GISStationEnd)
     </div>
     </td></tr>
     <tr><td>

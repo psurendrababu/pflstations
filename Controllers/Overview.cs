@@ -35,15 +35,14 @@ namespace PipelineFeatureList.Controllers
         {
             Session["CurrentValveSection"] = ValveSectionID;
             Session["CurrentOrionStationSeries"] = OrionStationSeries;
-
+  
             // Valve Section
             var VSmodel = db.ValveSection
                 .Include("ValveSectionStatus")
                 .Where(v => v.ValveSectionID == ValveSectionID)
                 .ToList();
             ViewData.Add("ValveSection", VSmodel);
-            //ViewData.Add("IsDirty",(VSmodel.First().IsSegmentationDirty == null ? false : VSmodel.First().IsSegmentationDirty));
-
+            
             int ? vsStatusID = VSmodel.FirstOrDefault().ValveSectionStatusID;
 
             // Status
@@ -54,18 +53,6 @@ namespace PipelineFeatureList.Controllers
             ViewData.Add("StatusSection", Smodel);
             ViewData.Add("EditDisabled", Smodel.FirstOrDefault().DisableEdit);
             ViewData.Add("DisplayGroupName", Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName);
-
-            //if (Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Engineering" ||
-            //    Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Final Engineering" ||
-            //    Smodel.FirstOrDefault().DisplayGroup.DisplayGroupName == "Annual Review")
-            //{
-            //    var DSRmodel = db.DynamicSegmentationRecords
-            //                   .Where(d => d.ValveSectionID == ValveSectionID)
-            //                   .OrderBy(d => d.FeatureNumber)
-            //                   .ThenBy(d => d.SegmentNumber)
-            //                   .ToList();
-            //    ViewData.Add("DSRSection", DSRmodel);
-            //}
 
             var model = (from v in db.ValveSection
                             join vs in db.ValveSectionFeatures on v.ValveSectionID equals vs.ValveSectionID into vs1
@@ -209,6 +196,7 @@ namespace PipelineFeatureList.Controllers
                           where v.ValveSectionID == ValveSectionID
                           select new OverviewEngineer { EngineerData = u }).ToList();
             ViewData.Add("EngineerData", Emodel);
+            
 
             return View(model);
         }
@@ -231,9 +219,10 @@ namespace PipelineFeatureList.Controllers
             ViewBag.HCAName = new SelectList(db.HCAs, "HCAID", "HCAItem");
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem");
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+            Int64 currPipeline = Convert.ToInt64(Session["CurrentStationID"].ToString());
             var availDocs = from d in db.DocumentRecords
                             join r in db.Pipelines on d.PipelineID equals r.PipelineID
-                            where d.PipelineID == currSection
+                            where d.PipelineID == currPipeline
                             orderby d.DocumentRecordID
                             select new { d.DocumentRecordID, d.Filename };
             //ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename");
@@ -389,6 +378,12 @@ namespace PipelineFeatureList.Controllers
 
             ViewBag.CurrentStation = CurSta;
 
+            Int64 CurrentStationID = (from p in db.Pipelines
+                                      join vs in db.ValveSection on p.PipelineID equals vs.PipelineID
+                                      where vs.ValveSectionID == currvalvesection
+                                      select p.PipelineID).FirstOrDefault();
+
+            Session["CurrentStationID"] = CurrentStationID;
 
             decimal featurenumber; 
             try { featurenumber = db.ValveSectionFeatures.Where(v => v.ValveSectionID == currvalvesection).Max(v => v.FeatureNumber); }
@@ -728,6 +723,9 @@ namespace PipelineFeatureList.Controllers
 
         public ActionResult Errors()
         {
+            Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+            var valvesectionfeature = db.ValveSectionFeatures.Where(v => v.ValveSectionID == currSection).ToList();
+
             return View();
         }
 

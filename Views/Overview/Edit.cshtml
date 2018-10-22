@@ -82,15 +82,6 @@
 
         <tr>
             <td>
-                @Html.LabelFor(model => model.Length)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Length)
-            </td>
-        </tr>
-
-        <tr>
-            <td>
                 <table>
                     <tr>
                         <td>
@@ -148,24 +139,25 @@
         <tr>
             <td>
                 <div class="editor-label">
-                    @Html.Label("Install / Inservice Date")
+                    @Html.LabelFor(model => model.InstallDate)
                 </div>
             </td>
             <td>
-        <tr>
-            <td>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.InstallDate)
-                    @Html.ValidationMessageFor(model => model.InstallDate)
-                </div>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.InstallDate)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </td>
-            <td>
-                <div class="editor-field">
-                    @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
-                </div>
-            </td>
-        </tr>
-        </td>
         </tr>
 
         <tr>
