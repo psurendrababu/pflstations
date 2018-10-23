@@ -98,13 +98,13 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, "- Select a Feature -", new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                                @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field" id="divPipeTypes">
-                                @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, "- Select a Feature Type -", new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
+                                @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
                             </div>
                         </td>
                     </tr>
@@ -197,19 +197,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ODID1", ViewBag.ODID1 as SelectList, "- Select an OD -", new { id = "ddlODID1" })
+                                @Html.DropDownList("ODID1", ViewBag.ODID1 as SelectList, new { id = "ddlODID1" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
+                                @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
+                                @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
                             </div>
                         </td>
                         <td>
@@ -238,13 +238,13 @@
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
+                                @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
+                                @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
                             </div>
                         </td>
                         <td>
@@ -263,7 +263,7 @@
             </td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("ODID2", ViewBag.ODID2 as SelectList, "- Select an OD -", new { id = "ddlODID2" })
+                    @Html.DropDownList("ODID2", ViewBag.ODID2 as SelectList, new { id = "ddlODID2" })
                 </div>
             </td>
         </tr>
@@ -293,19 +293,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SeamWeldTypeID", ViewBag.SeamWeldTypeID as SelectList, "- Select a Seam Weld Type -", new { id = "ddlSeamWeldTypeID" })
+                                @Html.DropDownList("SeamWeldTypeID", ViewBag.SeamWeldTypeID as SelectList, new { id = "ddlSeamWeldTypeID" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
+                                @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
+                                @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
                             </div>
                         </td>
                         <td>
@@ -320,7 +320,7 @@
             <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, "- Select a Spec Rating -", new { id = "ddlSpecRatingID" })
+                    @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, new { id = "ddlSpecRatingID" })
                 </div>
             </td>
         </tr>
@@ -336,19 +336,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, "- Select a Grade -", new { id = "ddlGradeID" })
+                                @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, new { id = "ddlGradeID" })
                             </div>
                         </td>
                         <td>/</td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("GradeRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR();" })
+                                @Html.DropDownList("GradeRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("GradeRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR();" })
+                                @Html.DropDownList("GradeRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR();" })
                             </div>
                         </td>
                         <td>
@@ -370,19 +370,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select an ANSI Rating -", new { id = "ddlANSIRatingID" })
+                                @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, new { id = "ddlANSIRatingID" })
                             </div>
                         </td>
                         <td>/</td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
+                                @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
+                                @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
                             </div>
                         </td>
                         <td>
@@ -401,7 +401,7 @@
             </td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, "- Select a Material Type -", new { id = "ddlMaterialTypeID" })
+                    @Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, new { id = "ddlMaterialTypeID" })
                 </div>
             </td>
         </tr>

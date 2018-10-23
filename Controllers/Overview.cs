@@ -777,6 +777,9 @@ namespace PipelineFeatureList.Controllers
 
             return Json(results, JsonRequestBehavior.AllowGet);
         }
+
+
+        //Records Matric Check - Returns True|False
         public bool MatrixCheckforErrors(string checktype, int id1, int id2)
         {
             var results = from d in db.DocumentMats
