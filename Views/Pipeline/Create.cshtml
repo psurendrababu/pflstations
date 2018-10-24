@@ -40,6 +40,14 @@
             </tr>
             <tr>
                 <td>
+                    @Html.LabelFor(model => model.Town)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Town)
+                </td>
+            </tr>
+            <tr>
+                <td>
                     @Html.LabelFor(model => model.Street)
                 </td>
                 <td>
@@ -53,14 +61,6 @@
                 <td>
                     @Html.EditorFor(model => model.CrossStreet)
                 </td>
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.Town)
-                </td>
-                <td>
-                    @Html.EditorFor(model => model.Town)
-                </td>
-            </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.Notes)

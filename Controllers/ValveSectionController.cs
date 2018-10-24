@@ -44,7 +44,7 @@ namespace PipelineFeatureList.Controllers
                              from vsd in vs1.DefaultIfEmpty()
                              //join dg in db.DisplayGroups on vsd.DisplayGroupID equals dg.DisplayGroupID into dg1
                              //from dgd in dg1.DefaultIfEmpty()
-                             orderby v.OrionStationSeries
+                             orderby v.PipelineID
                              select new ValveSectionAdmin
                              {
                                  ValveSection = v,
@@ -90,7 +90,7 @@ namespace PipelineFeatureList.Controllers
                          from vsd in vs1.DefaultIfEmpty()
                          where v.BuilderID == currbuilder
                          && dgd.DisplayGroupName == "Build"
-                         orderby v.OrionStationSeries
+                         orderby v.PipelineID
                          select new ValveSectionAdmin
                          {
                              ValveSection = v,
@@ -150,7 +150,7 @@ namespace PipelineFeatureList.Controllers
                          from bd in b1.DefaultIfEmpty()
                          where v.QCID == currQC
                          && dgd.DisplayGroupName == "Quality Control"
-                         orderby v.OrionStationSeries
+                         orderby v.PipelineID
                          select new ValveSectionQCAssigned
                          {
                              ValveSection = v,
@@ -196,7 +196,7 @@ namespace PipelineFeatureList.Controllers
                          && (v.EngineerID != currQC || v.EngineerID == null)
                          && (v.FinalEngineerID != currQC || v.FinalEngineerID == null)
                          && dgd.DisplayGroupName == "Quality Control"
-                         orderby v.OrionStationSeries
+                         orderby v.PipelineID
                          select new ValveSectionQCPool
                          {
                              ValveSection = v,
@@ -891,7 +891,7 @@ namespace PipelineFeatureList.Controllers
 
                 db.Entry(ValveSection).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Overview", new { ValveSectionID = ValveSection.ValveSectionID, OrionStationSeries = ValveSection.OrionStationSeries });
+                return RedirectToAction("Index", "Overview", new { ValveSectionID = ValveSection.ValveSectionID });
             }
             return View(ValveSection);
         }
@@ -1092,13 +1092,13 @@ namespace PipelineFeatureList.Controllers
 
                 InsertWorkHistory(ValveSection, origStatus.Value, approveORreject.WorkflowActionID, newStatus.Value);
 
-                int copytohistory = 0, generategrades = 0, dynamicsegmentation = 0;
-                if (newStatusActions.CopyDataToHistory && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
-                    //CopyToHistory(ValveSection);
-                    copytohistory = 1;
-                if (newStatusActions.GenerateGrades)
-                    //GenerateGrades(ValveSection);
-                    generategrades = 1;
+                //int copytohistory = 0, generategrades = 0, dynamicsegmentation = 0;
+                //if (newStatusActions.CopyDataToHistory && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
+                //    //CopyToHistory(ValveSection);
+                //    copytohistory = 1;
+                //if (newStatusActions.GenerateGrades)
+                //    //GenerateGrades(ValveSection);
+                //    generategrades = 1;
 
                 //PH 2014.05.22 need user id
                 //PipelineFeatureList.AppCode.AppLibrary.CopyToHistoryGenerateGradesDynamicSegmentation(ValveSection.ValveSectionID, copytohistory, generategrades, dynamicsegmentation);

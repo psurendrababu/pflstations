@@ -21,10 +21,6 @@
     @Html.HiddenFor(model => model.ValveSectionStatusID)
 
     <table>
-        @*<tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.PipeSystemID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipeSystemID", "- Select a Pipe System -") @Html.ValidationMessageFor(x => x.PipeSystemID)</div></td>
-        </tr>*@
         <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.PipelineID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("PipelineID", "- Select a Pipeline -") @Html.ValidationMessageFor(x => x.PipelineID)</div></td>
@@ -32,10 +28,6 @@
         <tr>
             <td>@Html.LabelFor(model => model.ValveSectionItem)</td>
             <td>@Html.EditorFor(model => model.ValveSectionItem)</td>
-        </tr>
-        <tr>
-            <td><div class="editor-label">@Html.Label("Series")</div></td>
-            <td><div class="editor-field">@Html.EditorFor(model => model.OrionStationSeries) @Html.ValidationMessageFor(model => model.OrionStationSeries)</div></td>
         </tr>
         <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.BuilderID)</div></td>
@@ -52,11 +44,6 @@
         <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.FinalEngineerID)</div></td>
             <td><div class="editor-field">@Html.DropDownList("FinalEngineerID", "- Select a Final Engineer -")</div></td>
-        </tr>
-        @*<tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.ValveSectionStatusID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("ValveSectionStatusID", "- Select a Status -")</div></td>
-            </tr>*@
         <tr>
             <td colspan="2"><p><input type="submit" value="Save" /></p></td>
         </tr>

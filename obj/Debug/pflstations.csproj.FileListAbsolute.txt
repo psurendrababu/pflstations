@@ -19,8 +19,8 @@ C:\Users\curtis.forsyth\source\repos\pflstations\bin\Org.Mentalis.Security.Crypt
 C:\Users\curtis.forsyth\source\repos\pflstations\bin\Mono.Math.dll
 C:\Users\curtis.forsyth\source\repos\pflstations\bin\Org.Mentalis.Security.Cryptography.xml
 C:\Users\curtis.forsyth\source\repos\pflstations\bin\Mono.Math.xml
-C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.csprojAssemblyReference.cache
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.csproj.CoreCompileInputs.cache
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.csproj.CopyComplete
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.dll
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.pdb
+C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.csprojAssemblyReference.cache

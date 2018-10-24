@@ -31,11 +31,10 @@ namespace PipelineFeatureList.Controllers
         //
         // GET: /ValveSectionFeature/
 
-        public ActionResult Index(int ValveSectionID, string OrionStationSeries)
+        public ActionResult Index(int ValveSectionID)
         {
             Session["CurrentValveSection"] = ValveSectionID;
-            Session["CurrentOrionStationSeries"] = OrionStationSeries;
-  
+              
             // Valve Section
             var VSmodel = db.ValveSection
                 .Include("ValveSectionStatus")
@@ -272,30 +271,30 @@ namespace PipelineFeatureList.Controllers
 
         public void ActionSetups(ValveSectionFeature valvesectionfeature)
         {
-            // for Edit
+            // for Edit to make sure that selected items are re-populated in the drop down lists
 
             Session["EditFirstPass"] = "1";
-            ViewBag.SelectedFeature = valvesectionfeature.FeatureID;
-            ViewBag.SelectedPipeType = valvesectionfeature.TypeID;
-            ViewBag.SelectedODRecordID1 = valvesectionfeature.ODRecordID1; 
-            ViewBag.SelectedODRecordID2 = valvesectionfeature.ODRecordID2; 
-            ViewBag.SelectedWTRecordID1 = valvesectionfeature.WTRecordID1; 
-            ViewBag.SelectedWTRecordID2 = valvesectionfeature.WTRecordID2; 
-            ViewBag.SelectedSTRecordID1 = valvesectionfeature.SeamRecordID1; 
-            ViewBag.SelectedSTRecordID2 = valvesectionfeature.SeamRecordID2; 
-            ViewBag.SelectedSRRecordID1 = valvesectionfeature.SpecRatingRecordID1; 
-            ViewBag.SelectedSRRecordID2 = valvesectionfeature.SpecRatingRecordID2; 
-            ViewBag.SelectedODID1 = valvesectionfeature.ODID1;
-            ViewBag.SelectedODID2 = valvesectionfeature.ODID2;
-            ViewBag.SelectedSeamWeldTypeID = valvesectionfeature.SeamWeldTypeID;
-            ViewBag.SelectedSpecRatingID = valvesectionfeature.SpecRatingID;
-            ViewBag.SelectedGradeID = valvesectionfeature.GradeID;
-            ViewBag.SelectedANSIRatingID = valvesectionfeature.ANSIRatingID;
-            ViewBag.SelectedRadiusID = valvesectionfeature.RadiusID;
-            ViewBag.SelectedOrientID = valvesectionfeature.OrientID;
-            ViewBag.SelectedCurrentClassLocID = valvesectionfeature.CurrentClassLoc;
+            //ViewBag.SelectedFeature = valvesectionfeature.FeatureID;
+            //ViewBag.SelectedPipeType = valvesectionfeature.TypeID;
+            //ViewBag.SelectedODRecordID1 = valvesectionfeature.ODRecordID1; 
+            //ViewBag.SelectedODRecordID2 = valvesectionfeature.ODRecordID2; 
+            //ViewBag.SelectedWTRecordID1 = valvesectionfeature.WTRecordID1; 
+            //ViewBag.SelectedWTRecordID2 = valvesectionfeature.WTRecordID2; 
+            //ViewBag.SelectedSTRecordID1 = valvesectionfeature.SeamRecordID1; 
+            //ViewBag.SelectedSTRecordID2 = valvesectionfeature.SeamRecordID2; 
+            //ViewBag.SelectedSRRecordID1 = valvesectionfeature.SpecRatingRecordID1; 
+            //ViewBag.SelectedSRRecordID2 = valvesectionfeature.SpecRatingRecordID2; 
+            //ViewBag.SelectedODID1 = valvesectionfeature.ODID1;
+            //ViewBag.SelectedODID2 = valvesectionfeature.ODID2;
+            //ViewBag.SelectedSeamWeldTypeID = valvesectionfeature.SeamWeldTypeID;
+            //ViewBag.SelectedSpecRatingID = valvesectionfeature.SpecRatingID;
+            //ViewBag.SelectedGradeID = valvesectionfeature.GradeID;
+            //ViewBag.SelectedANSIRatingID = valvesectionfeature.ANSIRatingID;
+            //ViewBag.SelectedRadiusID = valvesectionfeature.RadiusID;
+            //ViewBag.SelectedOrientID = valvesectionfeature.OrientID;
+            //ViewBag.SelectedCurrentClassLocID = valvesectionfeature.CurrentClassLoc;
 
-            ViewBag.FeatureID = new SelectList(db.Features, "FeatureID", "FeatureItem", valvesectionfeature.FeatureID);
+            ViewBag.SelectedFeatureID = new SelectList(db.Features, "FeatureID", "FeatureItem", valvesectionfeature.FeatureID);
             ViewBag.ConstructionTypeID = new SelectList(db.ConstructionTypes, "ConstructionTypeID", "ConstructionTypeItem", valvesectionfeature.ConstructionTypeID);
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var availDocs = from d in db.DocumentRecords
@@ -304,27 +303,29 @@ namespace PipelineFeatureList.Controllers
                             orderby d.DocumentRecordID
                             select new {d.DocumentRecordID, d.Filename };
             //ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.DrawingID);
-            ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID1);
-            ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID2);
-            ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID1);
-            ViewBag.WTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID2);
-            ViewBag.SeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID1);
-            ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID2);
-            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID1);
-            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID2);
+            ViewBag.SelectedODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID1);
+            ViewBag.SelectedODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID2);
+            ViewBag.SelectedWTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID1);
+            ViewBag.SelectedWTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID2);
+            ViewBag.SelectedSeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID1);
+            ViewBag.SelectedSeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID2);
+            ViewBag.SelectedSpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID1);
+            ViewBag.SelectedSpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID2);
+            ViewBag.SelectedGradeRecordID1 = new SelectList(availDocs, "DocumentRecordID", "FileName", valvesectionfeature.GradeRecordID1);
+            ViewBag.SelectedGradeRecordID2 = new SelectList(availDocs, "DocumentRecordID", "FileName", valvesectionfeature.GradeRecordID1);
             List<OutsideDiameter> od1List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD1List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID1);
-            ViewBag.ODID1 = OD1List;
+            ViewBag.SelectedODID1 = OD1List;
             //ViewBag.ODID1 = new SelectList(db.OutsideDiameters, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID1);
             List<OutsideDiameter> od2List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD2List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID2);
-            ViewBag.ODID2 = OD2List;
+            ViewBag.SelectedODID2 = OD2List;
             //ViewBag.ODID2 = new SelectList(db.OutsideDiameters, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID2);
-            ViewBag.SeamWeldTypeID = new SelectList(db.SeamTypes, "SeamTypeID", "SeamTypeItem", valvesectionfeature.SeamWeldTypeID);
-            ViewBag.SpecRatingID = new SelectList(db.SpecRatings, "SpecRatingID", "SpecRatingItem", valvesectionfeature.SpecRatingID);
-            ViewBag.GradeID = new SelectList(db.Grades, "GradeID", "GradeItem", valvesectionfeature.GradeID);
-            ViewBag.ANSIRatingID = new SelectList(db.ANSIRatings, "ANSIRatingID", "ANSIRatingItem", valvesectionfeature.ANSIRatingID);
-            ViewBag.MaterialTypeID = new SelectList(db.MaterialTypes, "MaterialTypeID", "MaterialTypeItem", valvesectionfeature.MaterialTypeID);
+            ViewBag.SelectedSeamWeldTypeID = new SelectList(db.SeamTypes, "SeamTypeID", "SeamTypeItem", valvesectionfeature.SeamWeldTypeID);
+            ViewBag.SelectedSpecRatingID = new SelectList(db.SpecRatings, "SpecRatingID", "SpecRatingItem", valvesectionfeature.SpecRatingID);
+            ViewBag.SelectedGradeID = new SelectList(db.Grades, "GradeID", "GradeItem", valvesectionfeature.GradeID);
+            ViewBag.SelectedANSIRatingID = new SelectList(db.ANSIRatings, "ANSIRatingID", "ANSIRatingItem", valvesectionfeature.ANSIRatingID);
+            ViewBag.SelectedMaterialTypeID = new SelectList(db.MaterialTypes, "MaterialTypeID", "MaterialTypeItem", valvesectionfeature.MaterialTypeID);
             ViewBag.RadiusID = new SelectList(db.BendRadiuses, "BendRadiusID", "BendRadiusItem", valvesectionfeature.RadiusID);
             ViewBag.OrientID = new SelectList(db.Orientations, "OrientationID", "OrientationItem", valvesectionfeature.OrientID);
             ViewBag.CoatingTypeID = new SelectList(db.CoatingTypes, "CoatingTypeID", "CoatingTypeItem", valvesectionfeature.CoatingTypeID);
@@ -334,17 +335,17 @@ namespace PipelineFeatureList.Controllers
             List<ManufacturerType> manutypeList = db.ManufacturerTypes.OrderBy(m => m.ManufacturerTypeItem).ToList();
             SelectList ManuTypeList = new SelectList(manutypeList, "ManufacturerTypeID", "ManufacturerTypeItem", valvesectionfeature.ManufacturerTypeID);
             ViewBag.ManufacturerTypeID = ManuTypeList;
-            ViewBag.TypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem", valvesectionfeature.TypeID);
+            ViewBag.SelectedTypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem", valvesectionfeature.TypeID);
             ViewBag.ODRecordMatrixCheck = "";
             //ViewBag.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
-            ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem");
+            ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem", valvesectionfeature.CurrentClassLoc);
             var availPTRs = from pt in db.PressureTestRecords
                             join p in db.Pipelines on pt.PipelineID equals p.PipelineID
                             where pt.PipelineID == currSection
                             orderby pt.Filename
                             select new { pt.PressureTestRecordID, pt.Filename };
-            ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
-            ViewBag.HCAStatusID = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
+            ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename", valvesectionfeature.PTRID);
+            ViewBag.HCAStatusID = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName", valvesectionfeature.HCAStatusID);
         }
 
         public void ActionUnknowns(ValveSectionFeature valvesectionfeature)
@@ -370,6 +371,10 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Create()
         {
             Int64 currvalvesection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+
+            string CurrCircuit = (from vs in db.ValveSection where vs.ValveSectionID == currvalvesection select vs.ValveSectionItem).FirstOrDefault();
+
+            ViewBag.CurrentCircuitItem = CurrCircuit;
 
             string CurSta = (from p in db.Pipelines
                              join vs in db.ValveSection on p.PipelineID equals vs.PipelineID
@@ -427,7 +432,7 @@ namespace PipelineFeatureList.Controllers
                 UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
                 GenerateValveSectionErrors(valvesectionfeature);
 
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
             }
              
             ViewBag.FeatureNumber = valvesectionfeature.FeatureNumber;
@@ -498,7 +503,7 @@ namespace PipelineFeatureList.Controllers
                 UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
                 GenerateValveSectionErrors(valvesectionfeature);
                 
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
             }
 
             ViewBag.FeatureNumber = valvesectionfeature.FeatureNumber;
@@ -545,7 +550,7 @@ namespace PipelineFeatureList.Controllers
                 featureissue.ValveSectionID = Convert.ToInt64(Session["CurrentValveSection"].ToString());
                 db.FeatureIssues.Add(featureissue);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
             }
 
             return View(featureissue);
@@ -597,7 +602,7 @@ namespace PipelineFeatureList.Controllers
                 UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
                 GenerateValveSectionErrors(valvesectionfeature);
                 
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
             }
 
             ActionSetups(valvesectionfeature);
@@ -637,7 +642,7 @@ namespace PipelineFeatureList.Controllers
                 db.Entry(featureissue).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
             }
             return View(featureissue);
         }
@@ -665,7 +670,7 @@ namespace PipelineFeatureList.Controllers
             db.FeatureIssues.Remove(featureissue);
             db.SaveChanges();
 
-            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
         }
         
         //
@@ -715,7 +720,7 @@ namespace PipelineFeatureList.Controllers
 
             UpdateValveSectionHeaderLengths(valvesectionfeature.ValveSectionID);
 
-            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
         }
 
         //
@@ -744,7 +749,7 @@ namespace PipelineFeatureList.Controllers
             }
             //GenerateGISBeginEndErrors();
 
-            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+            return RedirectToAction("Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
         }
 
         //

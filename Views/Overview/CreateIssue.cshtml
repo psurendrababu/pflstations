@@ -107,7 +107,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

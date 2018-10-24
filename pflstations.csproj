@@ -1010,9 +1010,6 @@
     <Content Include="Views\Pipeline\CreateDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Overview\EditDoc.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Overview\FeatureUserControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1137,9 +1134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ValveSectionError\Delete.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Overview\DeleteDoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages\DotNetOpenAuth.AspNet.4.0.3.12153\DotNetOpenAuth.AspNet.4.0.3.12153.nupkg" />
@@ -1270,7 +1264,6 @@
     <Content Include="Views\CertificationApproved\Edit.cshtml" />
     <Content Include="Views\CertificationApproved\Delete.cshtml" />
     <Content Include="Views\GenerateReport\Index.cshtml" />
-    <Content Include="Views\Overview\Index1.cshtml" />
     <Content Include="Views\Overview\ShowReport.cshtml" />
     <Content Include="Views\Reporting\DownloadReport.cshtml" />
     <Content Include="Views\Overview\DSRs.cshtml" />

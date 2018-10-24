@@ -184,7 +184,7 @@ namespace PipelineFeatureList.Controllers
                          from vsd in vs1.DefaultIfEmpty()
                          where v.BuilderID == currbuilder
                          && dgd.DisplayGroupName == "Build"
-                         orderby v.OrionStationSeries
+                         orderby v.PipelineID
                          select new ValveSectionAdmin
                          {
                              ValveSection = v,
@@ -244,7 +244,7 @@ namespace PipelineFeatureList.Controllers
                          from bd in b1.DefaultIfEmpty()
                          where v.QCID == currQC
                          && dgd.DisplayGroupName == "Quality Control"
-                         orderby v.OrionStationSeries
+                         orderby v.PipelineID
                          select new ValveSectionQCAssigned
                          {
                              ValveSection = v,
@@ -290,7 +290,7 @@ namespace PipelineFeatureList.Controllers
                          && (v.EngineerID != currQC || v.EngineerID == null)
                          && (v.FinalEngineerID != currQC || v.FinalEngineerID == null)
                          && dgd.DisplayGroupName == "Quality Control"
-                         orderby v.OrionStationSeries
+                         orderby v.PipelineID
                          select new ValveSectionQCPool
                          {
                              ValveSection = v,
@@ -1285,8 +1285,7 @@ namespace PipelineFeatureList.Controllers
         private void DynamicSegmentation(ValveSection valvesection)
         {
             ValveSection ValveSection = db.ValveSection.Find(valvesection.ValveSectionID);
-            ValveSection.OrionStationSeries = valvesection.OrionStationSeries.Replace('\t',' ').Trim();
-
+            
             DynamicSegmentation ds = new DynamicSegmentation
             {
                 QueuedOn = DateTime.Now,

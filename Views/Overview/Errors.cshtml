@@ -11,6 +11,6 @@
     <p>
         <input type="submit" value="Regenerate" /></p>
     <p>
-        @Html.ActionLink("Back to List", "Index", null, new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to List", "Index", null, new { ValveSectionID = Session["CurrentValveSection"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
     </p>
 }

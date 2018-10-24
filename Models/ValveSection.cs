@@ -20,8 +20,8 @@ namespace PipelineFeatureList.Models
         [DisplayName("Station")]
         [Required(ErrorMessage = "Station Required")]
         public int PipelineID { get; set; }
-        [DisplayName("Station Series")]
-        public string OrionStationSeries { get; set; }
+        //[DisplayName("Station Series")]
+        //public string OrionStationSeries { get; set; }
         //[DisplayName("Circuit Begin")]
         //[Required]
         //public string ValveSectionBegin { get; set; }

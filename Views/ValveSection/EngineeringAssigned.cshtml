@@ -39,7 +39,7 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionEngineeringAssigned.ValveStatus.ValveSectionStatusItem)
             </td>
             <td>
-                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionEngineeringAssigned.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionEngineeringAssigned.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
+                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionEngineeringAssigned.ValveSection.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
             </td>
         </tr>
     }

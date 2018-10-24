@@ -6,7 +6,7 @@
 <table class="overviewmaintable">
 @foreach (var itemSection in Model)
 {
-    <tr><td><h3>Circuit: @Html.DisplayFor(modelitem => itemSection.ValveSectionData.ValveSectionID) Station: @Html.DisplayFor(modelitem => itemSection.PipelineData.PipelineItem)</h3></td></tr>
+    <tr><td><h3>Circuit: @Html.DisplayFor(modelitem => itemSection.ValveSectionData.ValveSectionItem) Station: @Html.DisplayFor(modelitem => itemSection.PipelineData.PipelineItem)</h3></td></tr>
     break;
 }
         <tr>
@@ -14,8 +14,6 @@
         <table class="overviewtable">
             @foreach (var itemSection in (ViewData["ValveSection"] as List<PipelineFeatureList.Models.ValveSection>))
             {           
-                <tr><th>Station Series</th><td>@Html.DisplayFor(modelItem => itemSection.OrionStationSeries)</td></tr>
-                <tr><th>Current MAOP</th><td>@Html.DisplayFor(modelItem => itemSection.CurrentMAOP)</td></tr>
                 <tr><th>Length</th><td>@Html.DisplayFor(modelItem => itemSection.PFLLength)</td></tr>
 
                 <tr>
@@ -32,19 +30,6 @@
                                 htmlAttributes: new { @class = "linkbutton" })
                         }
                   </td>
-                </tr>
-
-                <tr><td></td>
-                <td align="right">
-                @if (ViewBag.EditDisabled == false)
-                {
-                    @Html.ActionLink("Edit", "AssignedEdit", "ValveSection", new { id = itemSection.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
-                }
-                else
-                {
-                    @Html.ActionLink("Edit", "AssignedEdit", "ValveSection", new { id = itemSection.ValveSectionID }, htmlAttributes: new { @class = "linkbuttondisabled" })
-                }
-                </td>
                 </tr>
             }
             
@@ -449,23 +434,23 @@
 {
     if (itemSection.DisplayGroup.DisplayGroupName == "Unassigned" || itemSection.DisplayGroup.DisplayGroupName == "Build")
     {
-        @Html.ActionLink("Back to Valve Sections", "BuildAssigned", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Circuit List", "BuildAssigned", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
     }
     else if (itemSection.DisplayGroup.DisplayGroupName == "Quality Control")
     {
-        @Html.ActionLink("Back to Valve Sections", "QC", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Circuit List", "QC", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
     }
     else if (itemSection.DisplayGroup.DisplayGroupName == "Engineering")
     {
-        @Html.ActionLink("Back to Valve Sections", "Engineering", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Circuit List", "Engineering", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
     }
     else if (itemSection.DisplayGroup.DisplayGroupName == "Final Engineering")
     {
-        @Html.ActionLink("Back to Valve Sections", "FinalEngineering", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Circuit List", "FinalEngineering", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
     }
     else if (itemSection.DisplayGroup.DisplayGroupName == "Annual Review")
     {
-        @Html.ActionLink("Back to Valve Sections", "AnnualReview", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Circuit List", "AnnualReview", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })
     }
 }
 

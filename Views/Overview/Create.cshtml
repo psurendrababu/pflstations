@@ -19,22 +19,18 @@
         <table>
             <tr>
                 <td>
-                    <div class="editor-label">
-                        @Html.Label("Series")
-                    </div>
-                </td>
-                <td>
-                    <div class="editor-field">
-                        @Html.Raw(Session["CurrentOrionStationSeries"].ToString())
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     Current Station
                 </td>
                 <td>
                     @Html.Raw(ViewBag.CurrentStation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Current Circuit
+                </td>
+                <td>
+                    @Html.Raw(ViewBag.CurrentCircuitItem)
                 </td>
             </tr>
             <tr>
@@ -58,15 +54,6 @@
                 </td>
                 <td>
                     @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.Length)
-                </td>
-                <td>
-                    @Html.EditorFor(model => model.Length)
                 </td>
             </tr>
 
@@ -212,6 +199,15 @@
 
             <tr>
                 <td>
+                    @Html.LabelFor(model => model.Length)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Length)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     <div class="editor-label">
                         @Html.Label("WT 1 / Rec ID 1 / Rec ID 2")
                     </div>
@@ -332,13 +328,13 @@
                             <td>/</td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("GradeRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID1" })
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.GradeRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("GradeRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID2" })
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.GradeRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -352,7 +348,7 @@
             <tr>
                 <td>
                     <div class="editor-label">
-                        @Html.Label("ANSI Rating / Rec ID 1 / Rec ID 2")
+                        @Html.Label("Rating Class / Rec ID 1 / Rec ID 2")
                     </div>
                 </td>
                 <td>
@@ -360,7 +356,7 @@
                         <tr>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select an ANSI Rating -", new { id = "ddlANSIRatingID" })
+                                    @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, "- Select a Rating Class -", new { id = "ddlANSIRatingID" })
                                 </div>
                             </td>
                             <td>/</td>
@@ -435,15 +431,6 @@
                     <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
                 </td>
             </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">@Html.LabelFor(model => model.ManufacturerTypeID)</div>
-                </td>
-                <td>
-                    <div class="editor-field">@Html.DropDownList("ManufacturerTypeID", "- Select a Manufacturer Type -")</div>
-                </td>
-            </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.MFRModelNumber)
@@ -459,15 +446,6 @@
                 </td>
                 <td>
                     @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.LabelFor(model => model.SMYS)
-                </td>
-                <td>
-                    @Html.EditorFor(model => model.SMYS)
                 </td>
             </tr>
 
@@ -508,7 +486,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

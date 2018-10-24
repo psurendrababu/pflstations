@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit Station Feature";
 }
 
-<h2>Edit Station Feature : Re-check ALL Selections and Dropsdowns</h2>
+<h2>Edit Station Feature</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -29,22 +29,18 @@
     <table>
         <tr>
             <td>
-                <div class="editor-label">
-                    @Html.Label("Series")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.Raw(Session["CurrentOrionStationSeries"].ToString())
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
                 Current Station
             </td>
             <td>
                 @Html.Raw(ViewBag.CurrentStation)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Current Circuit
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentCircuitItem)
             </td>
         </tr>
         <tr>
@@ -70,16 +66,6 @@
                 @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
             </td>
         </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.Length)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Length)
-            </td>
-        </tr>
-
         <tr>
             <td>
                 <table>
@@ -98,13 +84,13 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                                @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field" id="divPipeTypes">
-                                @Html.DropDownList("TypeID", ViewBag.TypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
+                                @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
                             </div>
                         </td>
                     </tr>
@@ -168,7 +154,7 @@
             </td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
+                    @Html.DropDownList("ConstructionTypeID","- Select a Construction Type -")
                 </div>
             </td>
         </tr>
@@ -197,19 +183,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ODID1", ViewBag.ODID1 as SelectList, new { id = "ddlODID1" })
+                                @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, new { id = "ddlODID1" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
+                                @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
+                                @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
                             </div>
                         </td>
                         <td>
@@ -219,7 +205,14 @@
                 </table>
             </td>
         </tr>
-
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Length)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Length)
+            </td>
+        </tr>
         <tr>
             <td>
                 <div class="editor-label">
@@ -238,13 +231,13 @@
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
+                                @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
+                                @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
                             </div>
                         </td>
                         <td>
@@ -263,7 +256,7 @@
             </td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("ODID2", ViewBag.ODID2 as SelectList, new { id = "ddlODID2" })
+                    @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, new { id = "ddlODID2" })
                 </div>
             </td>
         </tr>
@@ -293,19 +286,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SeamWeldTypeID", ViewBag.SeamWeldTypeID as SelectList, new { id = "ddlSeamWeldTypeID" })
+                                @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, new { id = "ddlSeamWeldTypeID" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
+                                @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
+                                @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
                             </div>
                         </td>
                         <td>
@@ -320,7 +313,7 @@
             <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("SpecRatingID", ViewBag.SpecRatingID as SelectList, new { id = "ddlSpecRatingID" })
+                    @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, new { id = "ddlSpecRatingID" })
                 </div>
             </td>
         </tr>
@@ -336,19 +329,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("GradeID", ViewBag.GradeID as SelectList, new { id = "ddlGradeID" })
+                                @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, new { id = "ddlGradeID" })
                             </div>
                         </td>
                         <td>/</td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("GradeRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR();" })
+                                @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("GradeRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR();" })
+                                @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR();" })
                             </div>
                         </td>
                         <td>
@@ -362,7 +355,7 @@
         <tr>
             <td>
                 <div class="editor-label">
-                    @Html.Label("ANSI Rating / Rec ID 1 / Rec ID 2")
+                    @Html.Label("Rating Class / Rec ID 1 / Rec ID 2")
                 </div>
             </td>
             <td>
@@ -370,19 +363,19 @@
                     <tr>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("ANSIRatingID", ViewBag.ANSIRatingID as SelectList, new { id = "ddlANSIRatingID" })
+                                @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, new { id = "ddlANSIRatingID" })
                             </div>
                         </td>
                         <td>/</td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
+                                @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
                             </div>
                         </td>
                         <td> / </td>
                         <td>
                             <div class="editor-field">
-                                @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
+                                @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
                             </div>
                         </td>
                         <td>
@@ -401,7 +394,7 @@
             </td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, new { id = "ddlMaterialTypeID" })
+                    @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, new { id = "ddlMaterialTypeID" })
                 </div>
             </td>
         </tr>
@@ -445,16 +438,6 @@
                 <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
             </td>
         </tr>
-
-        <tr>
-            <td>
-                <div class="editor-label">@Html.LabelFor(model => model.ManufacturerTypeID)</div>
-            </td>
-            <td>
-                <div class="editor-field">@Html.DropDownList("ManufacturerTypeID", "- Select a Manufacturer Type -")</div>
-            </td>
-        </tr>
-
         <tr>
             <td>
                 @Html.LabelFor(model => model.MFRModelNumber)
@@ -470,15 +453,6 @@
             </td>
             <td>
                 @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.SMYS)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.SMYS)
             </td>
         </tr>
 
@@ -519,7 +493,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

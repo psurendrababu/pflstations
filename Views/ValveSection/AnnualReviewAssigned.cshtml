@@ -33,16 +33,13 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionAnnualReviewAssigned.Pipeline.PipelineItem)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionAnnualReviewAssigned.ValveSection.ValveSectionBegin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValveSectionAnnualReviewAssigned.ValveSection.OrionStationSeries)
+                @Html.DisplayFor(modelItem => item.ValveSectionAnnualReviewAssigned.ValveSection.ValveSectionItem)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ValveSectionAnnualReviewAssigned.ValveStatus.ValveSectionStatusItem)
             </td>
             <td>
-                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionAnnualReviewAssigned.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionAnnualReviewAssigned.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
+                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionAnnualReviewAssigned.ValveSection.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
             </td>
         </tr>
     }

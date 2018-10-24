@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.ValveSectionQCPool.Builder.FirstName) @Html.DisplayFor(modelItem => item.ValveSectionQCPool.Builder.LastName)
             </td>
             <td>
-                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionQCPool.ValveSection.ValveSectionID, OrionStationSeries = item.ValveSectionQCPool.ValveSection.OrionStationSeries }, htmlAttributes: new { @class = "linkbutton" })
+                @Html.ActionLink("Overview", "", "Overview", new { ValveSectionID = item.ValveSectionQCPool.ValveSection.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
             </td>
         </tr>
     }
