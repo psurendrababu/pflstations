@@ -24,14 +24,14 @@ namespace PipelineFeatureList.Controllers
             var model = new List<Pipeline>();
 
             model = db.Pipelines.OrderBy(p => p.PipelineItem).ToList();
-            
+
             foreach (var c in model)
             {
                 c.CircuitCount = (from vs in db.ValveSection
                                   join p in db.Pipelines on vs.PipelineID equals p.PipelineID
                                   where p.PipelineID == c.PipelineID
                                   select vs).Count();
-                         
+
                 c.PipeSystem = (from p in db.Pipelines
                                 join ps in db.PipeSystems on p.PipeSystemID equals ps.PipeSystemID
                                 where p.PipelineID == c.PipelineID
@@ -50,7 +50,7 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Details(int id = 0)
         {
             Pipeline pipeline = db.Pipelines.Include("PipeSystem").Where(p => p.PipelineID == id).First();
-
+            
             Session["CurrentPipeline"] = pipeline.PipelineID;
 
             if (pipeline == null)
@@ -59,9 +59,9 @@ namespace PipelineFeatureList.Controllers
             }
 
             pipeline.CircuitCount = (from vs in db.ValveSection
-                              join p in db.Pipelines on vs.PipelineID equals p.PipelineID
-                              where p.PipelineID == pipeline.PipelineID
-                              select vs).Count();
+                                     join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                     where p.PipelineID == pipeline.PipelineID
+                                     select vs).Count();
 
             db.Entry(pipeline).Property("CircuitCount").IsModified = true;
             db.SaveChanges();
@@ -80,6 +80,8 @@ namespace PipelineFeatureList.Controllers
                            where ptr.PipelineID == pipeline.PipelineID
                            select ptr).ToList();
             ViewData.Add("PTRList", PTRList);
+
+            
 
             return View(pipeline);
         }
@@ -170,13 +172,13 @@ namespace PipelineFeatureList.Controllers
             Pipeline pipeline = db.Pipelines.Include("PipeSystem").Where(p => p.PipelineID == id).First();
 
             var assigned = (from v in db.ValveSection
-                        where v.PipelineID == id
-                        select new { found = v.ValveSectionID }).ToList();
+                            where v.PipelineID == id
+                            select new { found = v.ValveSectionID }).ToList();
 
             if (assigned.Count != 0)
             {
                 ModelState.AddModelError("", "Station assigned to a Valve Section and cannot be deleted.");
-                
+
                 if (pipeline == null)
                 {
                     return HttpNotFound();
@@ -298,7 +300,7 @@ namespace PipelineFeatureList.Controllers
 
                 db.Entry(documentrecord).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details","Pipeline",new { id = documentrecord.PipelineID });
+                return RedirectToAction("Details", "Pipeline", new { id = documentrecord.PipelineID });
             }
             return View(documentrecord);
         }
@@ -368,9 +370,12 @@ namespace PipelineFeatureList.Controllers
                 }
             }
 
-            
+
             PressureTestRecord pressuretestrecord = new PressureTestRecord() { PipelineID = pipeline.PipelineID };
+            
             ViewBag.PipelineItem = pipeline.PipelineItem;
+            //ViewBag.PTMedium = new SelectList(db.PTTestMediums, "PTTestMediumID", "PTMedium");
+            ViewBag.PTMedium = new SelectList(db.PTTestMediums, "PTMedium", "PTMedium");
             return View(pressuretestrecord);
         }
 
@@ -380,9 +385,16 @@ namespace PipelineFeatureList.Controllers
         [HttpPost]
         public ActionResult CreatePTR(PressureTestRecord pressuretestrecord)
         {
+
+
             if (ModelState.IsValid)
             {
                 //documentrecord.PipelineID = Convert.ToInt64(Session["CurrentPipeline"].ToString());
+
+                if(pressuretestrecord.PTMedium is null)
+                {
+                    pressuretestrecord.PTMedium = "Unknown";
+                }
                 pressuretestrecord.PressureTestRecordID = Convert.ToInt32(Session["CurrentRecordIdentifier"].ToString());
 
                 db.PressureTestRecords.Add(pressuretestrecord);
@@ -399,6 +411,9 @@ namespace PipelineFeatureList.Controllers
         public ActionResult EditPTR(int id = 0)
         {
             PressureTestRecord pressuretestrecord = db.PressureTestRecords.Find(id);
+            //ViewBag.SelectedPTMediumID = new SelectList(db.PTTestMediums, "PTTestMediumID", "PTMedium", pressuretestrecord.PTMedium);
+            ViewBag.SelectedPTMediumID = new SelectList(db.PTTestMediums, "PTMedium", "PTMedium", pressuretestrecord.PTMedium);
+
             if (pressuretestrecord == null)
             {
                 return HttpNotFound();
@@ -417,6 +432,8 @@ namespace PipelineFeatureList.Controllers
         [HttpPost]
         public ActionResult EditPTR(PressureTestRecord pressuretestrecord)
         {
+            
+            
             if (ModelState.IsValid)
             {
                 db.Entry(pressuretestrecord).State = EntityState.Modified;
@@ -466,5 +483,7 @@ namespace PipelineFeatureList.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        
     }
 }

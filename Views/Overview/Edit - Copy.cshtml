@@ -1,0 +1,1685 @@
+﻿@model PipelineFeatureList.Models.ValveSectionFeature
+
+@{
+    ViewBag.Title = "Edit Station Feature";
+}
+
+<h2>Edit Station Feature</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <legend>ValveSectionFeature</legend>
+
+    @Html.HiddenFor(model => model.ValveSectionFeatureID)
+    @Html.HiddenFor(model => model.ValveSectionID)
+    @Html.HiddenFor(model => model.FeatureNumber)
+    @Html.HiddenFor(model => model.CreatedBy_UserID)
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.HiddenFor(model => model.BuilderID)
+    @Html.HiddenFor(model => model.CheckerID)
+    @Html.HiddenFor(model => model.EngineerID)
+    @Html.HiddenFor(model => model.ODRecordMatrixCheck, new { id = "hdnODRecordMatrixCheck" })
+    @Html.HiddenFor(model => model.WTRecordMatrixCheck, new { id = "hdnWTRecordMatrixCheck" })
+    @Html.HiddenFor(model => model.SeamRecordMatrixCheck, new { id = "hdnSeamRecordMatrixCheck" })
+    @Html.HiddenFor(model => model.SpecRatingRecordMatrixCheck, new { id = "hdnSpecRatingRecordMatrixCheck" })
+    @Html.HiddenFor(model => model.GradeRecordMatrixCheck)
+
+    <table>
+        <tr>
+            <td>
+                Location
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentLocation)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Station Name
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentStationName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Town
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentTown)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Street
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentStreet)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Cross Street
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentCrosssStreet)
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                Current Station
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentStation)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Current Circuit
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentCircuitItem)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                From Circuit / To Circuit
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentCircuitItem) / @Html.Raw(ViewBag.CurrentCircuitItem)
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.FeatureMarkNumber)
+                </div>
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FeatureMarkNumber)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-field">
+                    From Series / To Series
+                </div>
+            </td>
+            <td>
+                @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="editor-label">@Html.LabelFor(model => model.FeatureID)</div>
+                        </td>
+                        <td>/</td>
+                        <td><div class="editor-label">@Html.LabelFor(model => model.TypeID)</div></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            @if (ViewBag.SelectedFeatureID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, "-Select a Feature-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedTypeID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, "-Select a Feature Type-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field" id="divPipeTypes">
+                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.JobWOPO)
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.JobWOPO)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.CheckBoxFor(model => model.JobWOPOUnknown) Unknown
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.InstallDate)
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.InstallDate)
+                            </div>
+                        </td>
+                        @*<td>
+                            <div class="editor-field">
+                                @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
+                            </div>
+                        </td>*@
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ConstructionTypeID)
+                </div>
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Feature Notes/Comments")
+                </div>
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Notes, 6, 200, null)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("OD 1 / Rec ID 1 / Rec ID 2")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            @if (ViewBag.SelectedODID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, "-Select an OD-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, new { id = "ddlODID1" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedODRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, "-Select a Record Identifier-")
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedODRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <label id="ODRecordMatrixCheck" class="message-error"></label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("OD1 RecID 1 DocType / OD1 RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+
+                        <td>
+                            @Html.Label("ODRecordID1DocType", new { id = "ODRecordID1DocType" })
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @Html.Label("ODRecordID2DocType", new { id = "ODRecordID2DocType" })
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Length)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Length)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("WT 1 / Rec ID 1 / Rec ID 2")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.WallThickness1)
+                                @Html.ValidationMessageFor(model => model.WallThickness1)
+                            </div>
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedWTRecordID1.SelectedValue == null)
+                            {
+
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, "-Select a Record Identifier-")
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedWTRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <label id="WTRecordMatrixCheck" class="message-error"></label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("WT1 RecID 1 DocType / WT1 RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+
+
+                        <td>
+
+                            @Html.Label("WTRecordID1DocType", new { id = "WTRecordID1DocType" })
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @Html.Label("WTRecordID2DocType", new { id = "WTRecordID2DocType" })
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ODID2)
+                </div>
+            </td>
+            <td>
+                @if (ViewBag.SelectedODID2.SelectedValue == null)
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, "-Select an OD-")
+                    </div>
+                }
+                else
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, new { id = "ddlODID2" })
+                    </div>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.WallThickness2)
+                </div>
+            </td>
+            <td>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.WallThickness2)
+                    @Html.ValidationMessageFor(model => model.WallThickness2)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Seam Weld Type / Rec ID 1 / Rec ID 2")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            @if (ViewBag.SelectedSeamWeldTypeID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, "-Select a Seam Weld Type-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, new { id = "ddlSeamWeldTypeID" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedSeamRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedSeamRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <label id="SeamRecordMatrixCheck" class="message-error"></label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Seam Weld RecID 1 DocType / Seam Weld RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+
+
+                        <td>
+                            @Html.Label("SeamRecordID1DocType", new { id = "SeamRecordID1DocType" })
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @Html.Label("SeamRecordID2DocType", new { id = "SeamRecordID2DocType" })
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
+            <td>
+                @if (ViewBag.SelectedSpecRatingID.SelectedValue == null)
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, "-Select a Spec Rating-")
+                    </div>
+                }
+                else
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, new { id = "ddlSpecRatingID" })
+                    </div>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Grade / Rec ID 1 / Rec ID 2")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            @if (ViewBag.SelectedGradeID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, "-Select a Grade-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, new { id = "ddlGradeID" })
+                                </div>
+                            }
+                        </td>
+                        <td>/</td>
+                        <td>
+                            @if (ViewBag.SelectedGradeRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR();" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedGradeRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR();" })
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Grade RecID 1 DocType / Grade RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+
+
+                        <td>
+                            @Html.Label("GradeRecordID1DocType", new { id = "GradeRecordID1DocType" })
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @Html.Label("GradeRecordID2DocType", new { id = "GradeRecordID2DocType" })
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Rating Class / Rec ID 1 / Rec ID 2")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            @if (ViewBag.SelectedANSIRatingID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, "-Select a Rating Class-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, new { id = "ddlANSIRatingID" })
+                                </div>
+                            }
+                        </td>
+                        <td>/</td>
+                        <td>
+                            @if (ViewBag.SelectedSpecRatingRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
+                                </div>
+                            }
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @if (ViewBag.SelectedSpecRatingRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, "-Select a Record Identifier-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Rating Class RecID 1 DocType / Rating Class RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+
+
+                        <td>
+                            @Html.Label("SpecRatingRecordID1DocType", new { id = "SpecRatingRecordID1DocType" })
+                        </td>
+                        <td> / </td>
+                        <td>
+                            @Html.Label("SpecRatingRecordID2DocType", new { id = "SpecRatingRecordID2DocType" })
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MaterialTypeID)
+                </div>
+            </td>
+            <td>
+                @if (ViewBag.SelectedMaterialTypeID.SelectedValue == null)
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, "-Select a Material Type-")
+                    </div>
+                }
+                else
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, new { id = "ddlMaterialTypeID" })
+                    </div>
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td><div class="editor-label">@Html.LabelFor(model => model.CoatingTypeID)</div></td>
+            <td>
+                <div class="editor-field">
+                    @Html.DropDownList("CoatingTypeID", "- Select a Coating Type -")
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.Description)</div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="wide">
+                                @Html.EditorFor(model => model.Description)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                @Html.CheckBoxFor(model => model.DescriptionUnknown) Unknown
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">@Html.LabelFor(model => model.ManufacturerID)</div>
+            </td>
+            <td>
+                <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.MFRModelNumber)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.MFRModelNumber)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.CurrentClassLoc)
+            </td>
+            <td>
+                @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.OperatingPressure)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.OperatingPressure)
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.PTRID)
+            </td>
+            <td>
+                @Html.DropDownList("PTRID", "- Select a Pressure Test Record -")
+            </td>
+        </tr>
+
+        @*<tr>
+            <td>
+                HCA Status
+            </td>
+            <td>
+                @Html.DropDownList("HCAStatusID", "- Choose Status of HCA -")
+            </td>
+        </tr>*@
+
+    </table>
+
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { ValveSectionID = Session["CurrentValveSection"].ToString() }, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+  @*@Scripts.Render("~/bundles/jqueryval")*@
+  @*onchangeevent*@
+    <script type="text/javascript">
+        function onchangeevent(e) {
+            var start = parseFloat($("#tbGISAlignStart").val());
+            var end = parseFloat($("#tbGISAlignEnd").val());
+            var length = end - start;
+            if (length != null)
+                $("#lblLength").html(length); //This shows the calculated field
+            else
+                $("#lblLength").html("0"); //This shows the calculated field
+        }
+    </script>
+  @*onchangeeventlength*@
+    <script type="text/javascript">
+        function onchangeeventlength(e) {
+            var start = parseFloat($("#tbGISAlignStart").val());
+            var end = parseFloat($("#tbGISAlignEnd").val());
+            var length = parseFloat($("#lblLength").html());
+        }
+    </script>
+  @*pipetypesfromfeatures*@
+    <script type="text/javascript">
+        function pipetypesfromfeatures(e) {
+            var selectedItem = $("#ddlFeatures").val();
+            var ddlPipeTypes = $("#ddlPipeTypes");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadPipeTypes/',
+                data: { "featureId": selectedItem },
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Feature Type -</option>");
+                    $.each(data, function (i, data) {
+                        items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlPipeTypes").html(items);
+                    $("#ddlPipeTypes").removeAttr('disabled');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve pipe types.');
+                }
+            });
+            updateNAdropdowns();
+        }
+    </script>
+  @*updateNAdropdowns*@
+    <script type="text/javascript">
+        function updateNAdropdowns() {
+            var vFeature = document.getElementById('ddlFeatures');
+            var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
+            var vPipeType = document.getElementById('ddlPipeTypes');
+            var vPipeTypeText = vPipeType.options[vPipeType.selectedIndex].innerHTML;
+
+            document.getElementById("ddlODID1").options[0].innerHTML = "- Select an OD -";
+            document.getElementById("ddlODID2").options[0].innerHTML = "- Select an OD -";
+            document.getElementById("ddlSeamWeldTypeID").options[0].innerHTML = "- Select a Seam Weld Type -";
+            document.getElementById("ddlSpecRatingID").options[0].innerHTML = "- Select a Spec Rating -";
+            document.getElementById("ddlGradeID").options[0].innerHTML = "- Select a Grade -";
+
+            if (vFeatureText == "Skip" && vPipeTypeText == "No Records") {
+                document.getElementById("ddlODID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamWeldTypeID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlGradeID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
+            }
+            if (vFeatureText == "Skip" && vPipeTypeText != "No Records") {
+                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
+            }
+            if (vFeatureText == "Pipe") {
+                document.getElementById("ddlODID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
+            }
+            if (vFeatureText == "Non Rated") {
+                document.getElementById("ddlODID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlODRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlWTRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSeamRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID1").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlSpecRatingRecordID2").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlANSIRatingID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlRadiusID").options[0].innerHTML = "- N/A -";
+                document.getElementById("ddlOrientID").options[0].innerHTML = "- N/A -";
+            }
+            if (sessionStorage.EditFirstPass == "0") {
+                onchangeeventOD(null);
+                onchangeeventWT(null);
+                onchangeeventST(null);
+                onchangeeventSR(null);
+            }
+        }
+    </script>
+  @*loadpipetypes*@
+    <script type="text/javascript">
+        function loadpipetypes() {
+            var selectedFeature = document.getElementById('ddlSelectedFeature').innerText;
+            var selectedPipeType = document.getElementById('ddlSelectedPipeType').innerText;
+            var ddlPipeTypes = $("#ddlPipeTypes");
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadPipeTypes/',
+                data: { "featureId": selectedFeature },
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Feature Type -</option>");
+                    $.each(data, function (i, data) {
+                        if (selectedPipeType.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlPipeTypes").html(items);
+                    $("#ddlPipeTypes").removeAttr('disabled');
+                    $("#ddlPipeTypes option[value='" + selectedPipeType.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve pipe types.');
+                }
+            });
+            updateNAdropdowns();
+        }
+    </script>
+  @*loadfeatures*@
+    <script type="text/javascript">
+        function loadfeatures() {
+            var ddlFeatures = $("#ddlFeatures");
+            var selected = document.getElementById('ddlSelectedFeature').innerText;
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadFeatures/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Feature -</option>");
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlFeatures").html(items);
+                    $("#ddlFeatures").removeAttr('disabled');
+                    $("#ddlFeatures option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve features.');
+                }
+            });
+        }
+    </script>
+    
+  @*onchangeeventOD*@
+    <script type="text/javascript">
+        function onchangeeventOD(e) {
+            var selectedItem1 = $("#ddlODRecordID1").val();
+            var selectedItem2 = $("#ddlODRecordID2").val();
+            var lbl = $('#ODRecordMatrixCheck');
+            var checktype = "OD";
+            if (selectedItem1 == null || selectedItem1 == "")
+                selectedItem1 = "0";
+            if (selectedItem2 == null || selectedItem2 == "")
+                selectedItem2 = "0";
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/MatrixCheck',
+                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
+                dataType: 'json',
+                success: function (data) {
+                    var items = "No";
+                    $.each(data, function (i, data) {
+                        items = "Yes";
+                    });
+                    var vFeature = document.getElementById('ddlFeatures');
+                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
+                    if (vFeatureText == "Skip")
+                        items = "No";
+                    $("#ODRecordMatrixCheck").html(items);
+                    if (sessionStorage.EditFirstPass == "0") {
+                        document.getElementById("hdnODRecordMatrixCheck").value = (items == "No" ? "0" : "1");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    lbl.html("No");
+                }
+            });
+        }
+    </script>
+  @*onchangeeventWT*@
+    <script type="text/javascript">
+        function onchangeeventWT(e) {
+            var selectedItem1 = $("#ddlWTRecordID1").val();
+            var selectedItem2 = $("#ddlWTRecordID2").val();
+            var lbl = $('#WTRecordMatrixCheck');
+            var checktype = "WT";
+            if (selectedItem1 == null || selectedItem1 == "")
+                selectedItem1 = "0";
+            if (selectedItem2 == null || selectedItem2 == "")
+                selectedItem2 = "0";
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/MatrixCheck',
+                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
+                dataType: 'json',
+                success: function (data) {
+                    var items = "No";
+                    $.each(data, function (i, data) {
+                        items = "Yes";
+                    });
+                    var vFeature = document.getElementById('ddlFeatures');
+                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
+                    if (vFeatureText == "Skip")
+                        items = "No";
+                    $("#WTRecordMatrixCheck").html(items);
+                    if (sessionStorage.EditFirstPass == "0") {
+                        document.getElementById("hdnWTRecordMatrixCheck").value = (items == "No" ? "0" : "1");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    lbl.html("No");
+                }
+            });
+        }
+    </script>
+  @*onchangeeventST*@
+    <script type="text/javascript">
+        function onchangeeventST(e) {
+            var selectedItem1 = $("#ddlSeamRecordID1").val();
+            var selectedItem2 = $("#ddlSeamRecordID2").val();
+            var lbl = $('#STRecordMatrixCheck');
+            var checktype = "ST";
+            if (selectedItem1 == null || selectedItem1 == "")
+                selectedItem1 = "0";
+            if (selectedItem2 == null || selectedItem2 == "")
+                selectedItem2 = "0";
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/MatrixCheck',
+                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
+                dataType: 'json',
+                success: function (data) {
+                    var items = "No";
+                    $.each(data, function (i, data) {
+                        items = "Yes";
+                    });
+                    var vFeature = document.getElementById('ddlFeatures');
+                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
+                    if (vFeatureText == "Skip")
+                        items = "No";
+                    $("#STRecordMatrixCheck").html(items);
+                    if (sessionStorage.EditFirstPass == "0") {
+                        document.getElementById("hdnSeamRecordMatrixCheck").value = (items == "No" ? "0" : "1");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    lbl.html("No");
+                }
+            });
+        }
+    </script>
+  @*onchangeeventSR*@
+    <script type="text/javascript">
+        function onchangeeventSR(e) {
+            var selectedItem1 = $("#ddlSpecRatingRecordID1").val();
+            var selectedItem2 = $("#ddlSpecRatingRecordID2").val();
+            var lbl = $('#SRRecordMatrixCheck');
+            var checktype = "SR";
+            if (selectedItem1 == null || selectedItem1 == "")
+                selectedItem1 = "0";
+            if (selectedItem2 == null || selectedItem2 == "")
+                selectedItem2 = "0";
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/MatrixCheck',
+                data: { "checktype": checktype, "id1": selectedItem1, "id2": selectedItem2 },
+                dataType: 'json',
+                success: function (data) {
+                    var items = "No";
+                    $.each(data, function (i, data) {
+                        items = "Yes";
+                    });
+                    var vFeature = document.getElementById('ddlFeatures');
+                    var vFeatureText = vFeature.options[vFeature.selectedIndex].innerHTML;
+                    if (vFeatureText == "Skip")
+                        items = "No";
+                    $("#SRRecordMatrixCheck").html(items);
+                    if (sessionStorage.EditFirstPass == "0") {
+                        document.getElementById("hdnSpecRatingRecordMatrixCheck").value = (items == "No" ? "0" : "1");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    lbl.html("No");
+                }
+            });
+        }
+    </script>
+  @*loaddocuments*@
+    <script type="text/javascript">
+        function loaddocuments() {
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    var selected = document.getElementById('ddlSelectedODRecordID1').innerText;
+                    items += ("<option value='0'>- N/A -</option>");
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlODRecordID1").html(items);
+                    $("#ddlODRecordID1").removeAttr('disabled');
+                    $("#ddlODRecordID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventOD(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedODRecordID2').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlODRecordID2").html(items);
+                    $("#ddlODRecordID2").removeAttr('disabled');
+                    $("#ddlODRecordID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventOD(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedWTRecordID1').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlWTRecordID1").html(items);
+                    $("#ddlWTRecordID1").removeAttr('disabled');
+                    $("#ddlWTRecordID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventWT(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedWTRecordID2').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlWTRecordID2").html(items);
+                    $("#ddlWTRecordID2").removeAttr('disabled');
+                    $("#ddlWTRecordID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventWT(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedSTRecordID1').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlSeamRecordID1").html(items);
+                    $("#ddlSeamRecordID1").removeAttr('disabled');
+                    $("#ddlSeamRecordID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventST(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedSTRecordID2').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlSeamRecordID2").html(items);
+                    $("#ddlSeamRecordID2").removeAttr('disabled');
+                    $("#ddlSeamRecordID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventST(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedSRRecordID1').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlSpecRatingRecordID1").html(items);
+                    $("#ddlSpecRatingRecordID1").removeAttr('disabled');
+                    $("#ddlSpecRatingRecordID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventSR(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadDocuments/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- N/A -</option>");
+                    selected = document.getElementById('ddlSelectedSRRecordID2').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlSpecRatingRecordID2").html(items);
+                    $("#ddlSpecRatingRecordID2").removeAttr('disabled');
+                    $("#ddlSpecRatingRecordID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                    if (sessionStorage.EditFirstPass == "0") {
+                        onchangeeventSR(null);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+        }
+    </script>
+
+    @*loadothers*@
+    <script type="text/javascript">
+        function loadothers() {
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadODs/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    var selected = document.getElementById('ddlSelectedODID1').innerText;
+                    items += ("<option value='0'>- Select an OD -</option>");
+                    $.each(data, function (i, data) {
+                        var amt = parseFloat(data.Text);
+                        var dataText = amt.toFixed(3);
+                        if (selected.toString() == data.Value)
+                            items += "<option value='" + data.Value + "' selected>" + dataText + "</option>";
+                        else
+                            items += "<option value='" + data.Value + "'>" + dataText + "</option>";
+                    });
+
+                    $("#ddlODID1").html(items);
+                    $("#ddlODID1").removeAttr('disabled');
+                    $("#ddlODID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadODs/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select an OD -</option>");
+                    selected = document.getElementById('ddlSelectedODID2').innerText;
+                    $.each(data, function (i, data) {
+                        var amt = parseFloat(data.Text);
+                        var dataText = amt.toFixed(3);
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + dataText + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + dataText + "</option>";
+                    });
+                    $("#ddlODID2").html(items);
+                    $("#ddlODID2").removeAttr('disabled');
+                    $("#ddlODID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadSeamWelds/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Seam Weld Type -</option>");
+                    selected = document.getElementById('ddlSelectedSeamWeldTypeID').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlSeamWeldTypeID").html(items);
+                    $("#ddlSeamWeldTypeID").removeAttr('disabled');
+                    $("#ddlSeamWeldTypeID option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadSpecRatings/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Spec Rating -</option>");
+                    selected = document.getElementById('ddlSelectedSpecRatingID').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlSpecRatingID").html(items);
+                    $("#ddlSpecRatingID").removeAttr('disabled');
+                    $("#ddlSpecRatingID option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadGrades/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Grade -</option>");
+                    selected = document.getElementById('ddlSelectedGradeID').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlGradeID").html(items);
+                    $("#ddlGradeID").removeAttr('disabled');
+                    $("#ddlGradeID option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadANSIRatings/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select an ANSI Rating -</option>");
+                    selected = document.getElementById('ddlSelectedANSIRatingID').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlANSIRatingID").html(items);
+                    $("#ddlANSIRatingID").removeAttr('disabled');
+                    $("#ddlANSIRatingID option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadRadius/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select a Radius -</option>");
+                    selected = document.getElementById('ddlSelectedRadiusID').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlRadiusID").html(items);
+                    $("#ddlRadiusID").removeAttr('disabled');
+                    $("#ddlRadiusID option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: '/Overview/LoadOrientations/',
+                data: {},
+                dataType: 'json',
+                success: function (data) {
+                    var items = "";
+                    items += ("<option value='0'>- Select an Orientation -</option>");
+                    selected = document.getElementById('ddlSelectedOrientID').innerText;
+                    $.each(data, function (i, data) {
+                        if (selected.toString() == data.Value) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+                        else
+                            items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
+                    });
+                    $("#ddlOrientID").html(items);
+                    $("#ddlOrientID").removeAttr('disabled');
+                    $("#ddlOrientID option[value='" + selected.toString() + "']").attr("selected", "selected");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //alert('Failed to retrieve records.');
+                }
+            });
+        }
+    </script>
+    @*getmatrixchecks*@
+    <script type="text/javascript">
+        function getmatrixchecks() {
+            //alert(document.getElementById("hdnSpecRatingRecordMatrixCheck").value);
+            $("#ODRecordMatrixCheck").html(document.getElementById("hdnODRecordMatrixCheck").value == "0" ? "No" : "Yes");
+            $("#WTRecordMatrixCheck").html(document.getElementById("hdnWTRecordMatrixCheck").value == "0" ? "No" : "Yes");
+            $("#STRecordMatrixCheck").html(document.getElementById("hdnSeamRecordMatrixCheck").value == "0" ? "No" : "Yes");
+            $("#SRRecordMatrixCheck").html(document.getElementById("hdnSpecRatingRecordMatrixCheck").value == "0" ? "No" : "Yes");
+            window.setTimeout(onchanges, 1000);
+            sessionStorage.EditFirstPass = "0";
+        }
+    </script>
+    @*onchanges*@
+    <script type="text/javascript">
+        function onchanges() {
+            document.getElementById("ddlODRecordID1").onchange = function () { onchangeeventOD(null); };
+            document.getElementById("ddlODRecordID2").onchange = function () { onchangeeventOD(null); };
+            document.getElementById("ddlWTRecordID1").onchange = function () { onchangeeventWT(null); };
+            document.getElementById("ddlWTRecordID2").onchange = function () { onchangeeventWT(null); };
+            document.getElementById("ddlSeamRecordID1").onchange = function () { onchangeeventST(null); };
+            document.getElementById("ddlSeamRecordID2").onchange = function () { onchangeeventST(null); };
+            document.getElementById("ddlSpecRatingRecordID1").onchange = function () { onchangeeventSR(null); };
+            document.getElementById("ddlSpecRatingRecordID2").onchange = function () { onchangeeventSR(null); };
+        }
+    </script>
+    <script type="text/javascript">
+                 $(document).ready(function () {
+                     sessionStorage.EditFirstPass = "1";
+                     loadfeatures();
+                     loadpipetypes();
+                     loaddocuments();
+                     //pipetypesfromfeatures(null);
+                     loadothers();
+                     updateNAdropdowns();
+                     onchangeevent();
+                     //onchangeeventOD(null);
+                     //onchangeeventWT(null);
+                     //onchangeeventST(null);
+                     //onchangeeventSR(null);
+                     window.setTimeout(getmatrixchecks, 5000);
+                 });
+    </script>
+}

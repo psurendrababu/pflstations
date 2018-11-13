@@ -25,33 +25,39 @@
         <th>
             Revision Number
         </th>
+        <th>
+            Page No./Total No. of Pages
+        </th>
         <th></th>
     </tr>
 
 
     @foreach (var ItemDoc in ViewData["DocumentList"] as List<PipelineFeatureList.Models.DocumentRecord>)
     {
-        <tr>
-            <td>
-                @ItemDoc.RecordIDName
-            </td>
-            <td>
-                @ItemDoc.DocumentTypeItem
-            </td>
-            <td>
-                @ItemDoc.Filename
-            </td>
-            <td>
-                @ItemDoc.DrawingNumber
-            </td>
-            <td>
-                @ItemDoc.RevisionNumber
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditDoc",new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })
-                @Html.ActionLink("Delete", "DeleteDoc",new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @ItemDoc.RecordIDName
+        </td>
+        <td>
+            @ItemDoc.DocumentTypeItem
+        </td>
+        <td>
+            @ItemDoc.Filename
+        </td>
+        <td>
+            @ItemDoc.DrawingNumber
+        </td>
+        <td>
+            @ItemDoc.RevisionNumber
+        </td>
+        <td>
+            @ItemDoc.PageNumber / @ItemDoc.TotalPages
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditDoc", new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })
+            @Html.ActionLink("Delete", "DeleteDoc", new { id = ItemDoc.DocumentRecordID }, htmlAttributes: new { @class = "linkbutton" })
+        </td>
+    </tr>
     }
 </table>
 

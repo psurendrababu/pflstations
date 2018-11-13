@@ -89,13 +89,13 @@
 
     <td colspan="1"><div style="width:100%; height:200px; overflow:scroll">
         <table class="overviewfeaturetable">
-            <tr><th></th><th>FEATURE NUMBER</th><th>BUILDER DESCRIPTION</th><th>QC DESCRIPTION</th><th>ENGINEER DESCRIPTION</th><th></th></tr>
+            <tr><th></th><th>FEATURE MARK NUMBER</th><th>BUILDER DESCRIPTION</th><th>QC DESCRIPTION</th><th>ENGINEER DESCRIPTION</th><th>NATGRID CORRESPONDENCE</th><th></th></tr>
             @foreach (var itemIssues in (ViewData["IssueData"] as List<PipelineFeatureList.Models.FeatureIssue>))
             {
                 if (itemIssues.ValveSectionFeatureID != null)
                 {
-                    <tr>
-                    <td>
+            <tr>
+                <td>
                     @if (ViewBag.EditDisabled == false)
                     {
                         @Html.ActionLink("Edit", "EditIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
@@ -104,12 +104,13 @@
                     {
                         @Html.ActionLink("Edit", "EditIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmalldisabled" })
                     }
-                    </td>
-                    <td>@Html.DisplayFor(modelItem => itemIssues.FeatureNumber)</td>
-                    <td>@Html.DisplayFor(modelItem => itemIssues.BuilderDescription)</td>
-                    <td>@Html.DisplayFor(modelItem => itemIssues.CheckerDescription)</td>
-                    <td>@Html.DisplayFor(modelItem => itemIssues.EngineerDescription)</td>
-                    <td>
+                </td>
+                <td>@Html.DisplayFor(modelItem => itemIssues.FeatureNumber)</td>
+                <td>@Html.DisplayFor(modelItem => itemIssues.BuilderDescription)</td>
+                <td>@Html.DisplayFor(modelItem => itemIssues.CheckerDescription)</td>
+                <td>@Html.DisplayFor(modelItem => itemIssues.EngineerDescription)</td>
+                <td>@Html.DisplayFor(modelItem => itemIssues.NatGridCorrespondence)</td>
+                <td>
                     @if (ViewBag.EditDisabled == false)
                     {
                         @Html.ActionLink("Delete", "DeleteIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
@@ -118,11 +119,11 @@
                     {
                         @Html.ActionLink("Delete", "DeleteIssue", new { id = (itemIssues.FeatureIssueID == null ? 0 : itemIssues.FeatureIssueID) }, htmlAttributes: new { @class = "linkbuttonsmall" })
                     }
-                    </td>
-                    </tr>
+                </td>
+            </tr>
                 }
             }
-            <tr><th colspan="6">
+            <tr><th colspan="7">
                 @if (ViewBag.EditDisabled == false)
                 {
                     @Html.ActionLink("Create New Issue", "CreateIssue", null, htmlAttributes: new { @class = "linkbuttonsmall" })
@@ -171,46 +172,85 @@
             <thead>
                 <tr>
                     <th>Actions</th>
-                    <th>Feature Order</th>
-                    <th>Feature Mark #</th>
-                    <th>Feature</th>
-                    <th>Type</th>
+                    <th>Feature Number</th>
+                    <th>Location</th>
+                    <th>Station ID</th>
+                    <th>Station Name</th>
+                    <th>Town</th>
+                    <th>Street</th>
+                    <th>Cross Street</th>
+
+                    <th>Feature Mark Number</th>
+                    <th>Length (feet)</th>
+
+                    <th>From Circuit</th>
+                    <th>To Circuit</th>
+
                     <th>From Series</th>
                     <th>To Series</th>
-                    <th>Length (feet)</th>
-                    <th>Job Number/Work Order/Purchase Order #</th>
-                    <th>Install Date</th>
-                    <th>Construction Type</th>
+
+                    <th>Feature</th>
+                    <th>Feature Type</th>
+
                     <th>Notes / Comments</th>
+                    <th>Job Number / Work Order / Purchase Order #</th>
+
+                    <th>Feature Install Date</th>
+                    <th>Construction Type</th>
+
                     <th>O.D. 1 (inch)</th>
                     <th>OD RecID 1</th>
                     <th>OD RecID 2</th>
+
+                    <th>OD RecID 1 DocType</th>
+                    <th>OD RecID 2 DocType</th>
+
                     <th>W.T. 1 (inch)</th>
                     <th>WT RecID 1</th>
                     <th>WT RecID 2</th>
-                    <th>O.D. 2 (inch)</th>
-                    <th>W.T. 2 (inch)</th>
+                    <th>WT RecID 1 DocType</th>
+                    <th>WT RecID 2 DocType</th>
+
                     <th>Seam Weld Type</th>
                     <th>Seam RecID 1</th>
                     <th>Seam RecID 2</th>
-                    <th>Spec</th>
+                    <th>Seam RecID 1 DocType</th>
+                    <th>Seam RecID 2 DocType</th>
+
                     <th>Grade</th>
                     <th>Grade RecID 1</th>
                     <th>Grade RecID 2</th>
+                    <th>Grade RecID 1 DocType</th>
+                    <th>Grade RecID 2 DocType</th>
+
+                    <th>Specifiction</th>
+
                     <th>ANSI Rating</th>
                     <th>Rating RecID 1</th>
                     <th>Rating RecID 2</th>
+                    <th>Rating RecID 1  DocType</th>
+                    <th>Rating RecID 2  DocType</th>
+
+                    <th>OD 2 (inch)</th>
+                    <th>WT 2 (inch)</th>
+
                     <th>Material Type</th>
                     <th>Coating Type</th>
-                    <th>Cooating Desc.</th>
-                    <th>Manufacturer</th>
-                    <th>Manufacturer Type</th>
-                    <th>MFR Model #</th>
-                    <th>Class Loc</th>
-                    <th>SMYS</th>
+                    <th>Coating Desc.</th>
+                    <th>Manufacturer</th>                   
+
+                    <th>MFR Model Number</th>
+
+                    <th>Class Exceptions</th>
+
+                    <th>Current Class Location</th>
+
+                   
                     <th>Estab. Op. Pressure</th>
-                    <th>Pressure Test Rec.</th>
-                    <th>HCA Status</th>
+
+                    <th>PT Documnet</th>
+
+                   
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -246,14 +286,40 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureNumber)
                     </td>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipeSystemData.PipeSystemItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipelineData.PipelineItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipelineData.StationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipelineData.Town)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipelineData.Street)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipelineData.CrossStreet)
+                    </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.FeatureMarkNumber)
                     </td>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Length)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionData.ValveSectionItem)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PipeTypeData.PipeTypeItem)
+                        @Html.DisplayFor(modelItem => item.ValveSectionData.ValveSectionItem)
                     </td>
                     <td>
                         @Html.DisplayFor(model => item.ValveSectionFeatureData.FromSeries)
@@ -261,9 +327,17 @@
                     <td>
                         @Html.DisplayFor(model => item.ValveSectionFeatureData.ToSeries)
                     </td>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Length)
+                        @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PipeTypeData.PipeTypeItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
+                    </td>
+
                     <td>
                         @try
                         {
@@ -282,6 +356,7 @@
                         }
                         catch { }
                     </td>
+
                     <td>
                         @try
                         {
@@ -300,12 +375,11 @@
                         }
                         catch { }
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ConstructionTypeData.ConstructionTypeItem)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
-                    </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.OutsideDiameterData1.OutsideDiameterItem)
                     </td>
@@ -315,6 +389,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ODRecordID2Data.Filename)
                     </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.ODRecordID1DocType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.ODRecordID2DocType)
+                    </td>
+
+
+
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness1)
                     </td>
@@ -325,11 +410,12 @@
                         @Html.DisplayFor(modelItem => item.WTRecordID2Data.Filename)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.OutsideDiameterData2.OutsideDiameterItem)
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WTRecordID1DocType)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness2)
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WTRecordID2DocType)
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.SeamTypeData.SeamTypeItem)
                     </td>
@@ -340,8 +426,12 @@
                         @Html.DisplayFor(modelItem => item.STRecordID2Data.Filename)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SpecRatingData.SpecRatingItem)
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SeamRecordID1DocType)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SeamRecordID2DocType)
+                    </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.GradeData.GradeItem)
                     </td>
@@ -352,6 +442,17 @@
                         @Html.DisplayFor(modelItem => item.GRRecordID2Data.Filename)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.GradeRecordID1DocType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.GradeRecordID2DocType)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SpecRatingData.SpecRatingItem)
+                    </td>
+
+                    <td>
                         @Html.DisplayFor(modelItem => item.ANSIRatingData.ANSIRatingItem)
                     </td>
                     <td>
@@ -361,11 +462,31 @@
                         @Html.DisplayFor(modelItem => item.SRRecordID2Data.Filename)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SpecRatingRecordID1DocType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SpecRatingRecordID2DocType)
+                    </td>
+
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OutsideDiameterData2.OutsideDiameterItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness2)
+                    </td>
+
+
+                    <td>
                         @Html.DisplayFor(modelItem => item.MaterialTypeData.MaterialTypeItem)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CoatingTypeData.CoatingTypeItem)
                     </td>
+
+
+
                     <td>
                         @try
                         {
@@ -387,19 +508,22 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ManufacturerData.ManufacturerItem)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.ManufacturerTypeData.ManufacturerTypeItem)
-                    </td>
+                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.MFRModelNumber)
                     </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.ClassExceptionsID)
+                    </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.CurrentClassLoc)
                     </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SMYS)
-                    </td>
+                   
 
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.OperatingPressure)
@@ -408,9 +532,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.PTRID)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.HCAStatusID)
-                    </td>
+                   
 
                     <td>
                         @if (ViewBag.EditDisabled == false)

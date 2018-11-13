@@ -24,3 +24,11 @@ C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.csproj.Co
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.dll
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.pdb
 C:\Users\curtis.forsyth\source\repos\pflstations\obj\Debug\pflstations.csprojAssemblyReference.cache
+C:\Surendra\PFL\bin\pflstations.dll.config
+C:\Surendra\PFL\bin\pflstations.dll
+C:\Surendra\PFL\bin\pflstations.pdb
+C:\Surendra\PFL\obj\Debug\pflstations.csprojAssemblyReference.cache
+C:\Surendra\PFL\obj\Debug\pflstations.csproj.CoreCompileInputs.cache
+C:\Surendra\PFL\obj\Debug\pflstations.csproj.CopyComplete
+C:\Surendra\PFL\obj\Debug\pflstations.dll
+C:\Surendra\PFL\obj\Debug\pflstations.pdb

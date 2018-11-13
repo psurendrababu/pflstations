@@ -29,19 +29,75 @@
     <table>
         <tr>
             <td>
-                Current Station
+                Location
             </td>
             <td>
-                @Html.Raw(ViewBag.CurrentStation)
+                @Html.Raw(ViewBag.CurrentLocation)
             </td>
         </tr>
         <tr>
             <td>
-                Current Circuit
+                Station Name
+            </td>
+            <td>
+                @*@Html.Raw(ViewBag.CurrentStationName)*@
+                @Html.Raw(ViewBag.currentPipeline.StationName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Town
+            </td>
+            <td>
+                @*@Html.Raw(ViewBag.CurrentTown)*@
+                @Html.Raw(ViewBag.currentPipeline.Town)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Street
+            </td>
+            <td>
+                @*@Html.Raw(ViewBag.CurrentStreet)*@
+                @Html.Raw(ViewBag.currentPipeline.Street)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Cross Street
+            </td>
+            <td>
+                @*@Html.Raw(ViewBag.CurrentCrosssStreet)*@
+                @Html.Raw(ViewBag.currentPipeline.CrossStreet)
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                Current Station
+            </td>
+            <td>
+                @*@Html.Raw(ViewBag.CurrentStation)*@
+                @Html.Raw(ViewBag.currentPipeline.PipelineItem)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Current Flow Circuit
             </td>
             <td>
                 @Html.Raw(ViewBag.CurrentCircuitItem)
             </td>
+        </tr>
+        <tr>
+            <td>
+                From Circuit / To Circuit
+            </td>
+            <td>
+                @Html.Raw(ViewBag.CurrentCircuitItem) / @Html.Raw(ViewBag.CurrentCircuitItem)
+            </td>
+
         </tr>
         <tr>
             <td>
@@ -83,15 +139,33 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
-                            </div>
+                            @if (ViewBag.SelectedFeatureID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, "-Select a Feature-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field" id="divPipeTypes">
-                                @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
-                            </div>
+                            @if (ViewBag.SelectedTypeID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, "-Select a Feature Type-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field" id="divPipeTypes">
+                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
+                                </div>
+                            }
                         </td>
                     </tr>
                 </table>
@@ -136,11 +210,11 @@
                                 @Html.EditorFor(model => model.InstallDate)
                             </div>
                         </td>
-                        <td>
+                        @*<td>
                             <div class="editor-field">
                                 @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
                             </div>
-                        </td>
+                        </td>*@
                     </tr>
                 </table>
             </td>
@@ -154,7 +228,7 @@
             </td>
             <td>
                 <div class="editor-field">
-                    @Html.DropDownList("ConstructionTypeID","- Select a Construction Type -")
+                    @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
                 </div>
             </td>
         </tr>
@@ -182,21 +256,50 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, new { id = "ddlODID1" })
-                            </div>
+                            @if (ViewBag.SelectedODID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, "-Select an OD-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, new { id = "ddlODID1" })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
-                            </div>
+                            @if (ViewBag.SelectedODRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID1",  ViewBag.SelectedODRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID1", onchange = "onchange_doctype(ddlODRecordID1, ODRecordID1DocType); onchangeeventOD();" })
+
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, new { id = "ddlODRecordID1", onchange = "onchange_doctype(ddlODRecordID1, ODRecordID1DocType);onchangeeventOD(); " })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, new { id = "ddlODRecordID2", onchange = "onchangeeventOD();" })
-                            </div>
+                            @if (ViewBag.SelectedODRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID2", onchange = "onchangeeventOD(); onchange_doctype(ddlODRecordID2, ODRecordID2DocType);" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, new { id = "ddlODRecordID2", onchange = "onchangeeventOD(); onchange_doctype(ddlODRecordID2, ODRecordID2DocType);" })
+                                </div>
+                            }
                         </td>
                         <td>
                             <label id="ODRecordMatrixCheck" class="message-error"></label>
@@ -205,6 +308,34 @@
                 </table>
             </td>
         </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("OD1 RecID 1 DocType / OD1 RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.ODRecordID1DocType, new { id = "ODRecordID1DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+                        <td> / </td>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.ODRecordID2DocType, new { id = "ODRecordID2DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
         <tr>
             <td>
                 @Html.LabelFor(model => model.Length)
@@ -230,15 +361,35 @@
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, new { id = "ddlWTRecordID1", onchange = "onchangeeventWT();" })
-                            </div>
+                            @if (ViewBag.SelectedWTRecordID1.SelectedValue == null)
+                            {
+
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlWTRecordID1", onchange = "onchangeeventWT(); onchange_doctype(ddlWTRecordID1, WTRecordID1DocType);" })
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, new { id = "ddlWTRecordID1", onchange = "onchangeeventWT(); onchange_doctype(ddlWTRecordID1, WTRecordID1DocType);" })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, new { id = "ddlWTRecordID2", onchange = "onchangeeventWT();" })
-                            </div>
+                            @if (ViewBag.SelectedWTRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlWTRecordID2", onchange = "onchangeeventWT(); onchange_doctype(ddlWTRecordID2, WTRecordID2DocType);" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, new { id = "ddlWTRecordID2", onchange = "onchangeeventWT(); onchange_doctype(ddlWTRecordID2, WTRecordID2DocType);" })
+                                </div>
+                            }
                         </td>
                         <td>
                             <label id="WTRecordMatrixCheck" class="message-error"></label>
@@ -251,13 +402,49 @@
         <tr>
             <td>
                 <div class="editor-label">
+                    @Html.Label("WT1 RecID 1 DocType / WT1 RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.WTRecordID1DocType, new { id = "WTRecordID1DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+                        <td> / </td>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.WTRecordID2DocType, new { id = "WTRecordID2DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
                     @Html.LabelFor(model => model.ODID2)
                 </div>
             </td>
             <td>
-                <div class="editor-field">
-                    @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, new { id = "ddlODID2" })
-                </div>
+                @if (ViewBag.SelectedODID2.SelectedValue == null)
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, "-Select an OD-")
+                    </div>
+                }
+                else
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, new { id = "ddlODID2" })
+                    </div>
+                }
             </td>
         </tr>
 
@@ -285,21 +472,48 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, new { id = "ddlSeamWeldTypeID" })
-                            </div>
+                            @if (ViewBag.SelectedSeamWeldTypeID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, "-Select a Seam Weld Type-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, new { id = "ddlSeamWeldTypeID" })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, new { id = "ddlSeamRecordID1", onchange = "onchangeeventST();" })
-                            </div>
+                            @if (ViewBag.SelectedSeamRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlSeamRecordID1", onchange = "onchangeeventST(); onchange_doctype(ddlSeamRecordID1, SeamRecordID1DocType);" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, new { id = "ddlSeamRecordID1", onchange = "onchangeeventST(); onchange_doctype(ddlSeamRecordID1, SeamRecordID1DocType);" })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, new { id = "ddlSeamRecordID2", onchange = "onchangeeventST();" })
-                            </div>
+                            @if (ViewBag.SelectedSeamRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlSeamRecordID2", onchange = "onchangeeventST(); onchange_doctype(ddlSeamRecordID2, SeamRecordID2DocType);" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, new { id = "ddlSeamRecordID2", onchange = "onchangeeventST(); onchange_doctype(ddlSeamRecordID2, SeamRecordID2DocType);" })
+                                </div>
+                            }
                         </td>
                         <td>
                             <label id="SeamRecordMatrixCheck" class="message-error"></label>
@@ -310,11 +524,46 @@
         </tr>
 
         <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Seam Weld RecID 1 DocType / Seam Weld RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.SeamRecordID1DocType, new { id = "SeamRecordID1DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+                        <td> / </td>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.SeamRecordID2DocType, new { id = "SeamRecordID2DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
             <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
             <td>
-                <div class="editor-field">
-                    @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, new { id = "ddlSpecRatingID" })
-                </div>
+                @if (ViewBag.SelectedSpecRatingID.SelectedValue == null)
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, "-Select a Spec Rating-")
+                    </div>
+                }
+                else
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, new { id = "ddlSpecRatingID" })
+                    </div>
+                }
             </td>
         </tr>
 
@@ -328,21 +577,48 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, new { id = "ddlGradeID" })
-                            </div>
+                            @if (ViewBag.SelectedGradeID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, "-Select a Grade-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, new { id = "ddlGradeID" })
+                                </div>
+                            }
                         </td>
                         <td>/</td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR();" })
-                            </div>
+                            @if (ViewBag.SelectedGradeRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlGradeRecordID1", onchange = "onchange_doctype(ddlGradeRecordID1, GradeRecordID1DocType); onchangeeventGR(); " })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, new { id = "ddlGradeRecordID1", onchange = "onchange_doctype(ddlGradeRecordID1, GradeRecordID1DocType); onchangeeventGR(); " })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR();" })
-                            </div>
+                            @if (ViewBag.SelectedGradeRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlGradeRecordID2", onchange = "onchange_doctype(ddlGradeRecordID2, GradeRecordID2DocType); " })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, new { id = "ddlGradeRecordID2", onchange = "onchange_doctype(ddlGradeRecordID2, GradeRecordID2DocType); " })
+                                </div>
+                            }
                         </td>
                         <td>
                             <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
@@ -355,6 +631,34 @@
         <tr>
             <td>
                 <div class="editor-label">
+                    @Html.Label("Grade RecID 1 DocType / Grade RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.GradeRecordID1DocType, new { id = "GradeRecordID1DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+                        <td> / </td>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.GradeRecordID2DocType, new { id = "GradeRecordID2DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <div class="editor-label">
                     @Html.Label("Rating Class / Rec ID 1 / Rec ID 2")
                 </div>
             </td>
@@ -362,25 +666,78 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, new { id = "ddlANSIRatingID" })
-                            </div>
+                            @if (ViewBag.SelectedANSIRatingID.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, "-Select a Rating Class-")
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, new { id = "ddlANSIRatingID" })
+                                </div>
+                            }
                         </td>
                         <td>/</td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
-                            </div>
+                            @if (ViewBag.SelectedSpecRatingRecordID1.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR(); onchange_doctype(ddlSpecRatingRecordID1, SpecRatingRecordID1DocType);" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR(); onchange_doctype(ddlSpecRatingRecordID1, SpecRatingRecordID1DocType);" })
+                                </div>
+                            }
                         </td>
                         <td> / </td>
                         <td>
-                            <div class="editor-field">
-                                @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
-                            </div>
+                            @if (ViewBag.SelectedSpecRatingRecordID2.SelectedValue == null)
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR(); onchange_doctype(ddlSpecRatingRecordID2, SpecRatingRecordID2DocType);" })
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="editor-field">
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR(); onchange_doctype(ddlSpecRatingRecordID2, SpecRatingRecordID2DocType);" })
+                                </div>
+                            }
                         </td>
                         <td>
                             <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
                         </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.Label("Rating Class RecID 1 DocType / Rating Class RecID 2  DocType")
+                </div>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.SpecRatingRecordID1DocType, new { id = "SpecRatingRecordID1DocType", @readonly = "readonly" })
+                            </div>
+                        </td>
+                        <td> / </td>
+                        <td>
+                            <div class="medium">
+                                @Html.TextBoxFor(model => model.SpecRatingRecordID2DocType, new { id = "SpecRatingRecordID2DocType",  @readonly = "readonly" })
+                            </div>
+                        </td>
+
                     </tr>
                 </table>
             </td>
@@ -393,9 +750,18 @@
                 </div>
             </td>
             <td>
-                <div class="editor-field">
-                    @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, new { id = "ddlMaterialTypeID" })
-                </div>
+                @if (ViewBag.SelectedMaterialTypeID.SelectedValue == null)
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, "-Select a Material Type-")
+                    </div>
+                }
+                else
+                {
+                    <div class="editor-field">
+                        @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, new { id = "ddlMaterialTypeID" })
+                    </div>
+                }
             </td>
         </tr>
 
@@ -446,6 +812,19 @@
                 @Html.EditorFor(model => model.MFRModelNumber)
             </td>
         </tr>
+        <tr>
+            <td>
+                Class Exceptions
+            </td>
+            <td>
+     
+                        @Html.DropDownList("ClassExceptionsID", "- Select Class Exceptions -")
+                     
+              
+            </td>
+
+       
+        </tr>
 
         <tr>
             <td>
@@ -474,14 +853,14 @@
             </td>
         </tr>
 
-        <tr>
+        @*<tr>
             <td>
                 HCA Status
             </td>
             <td>
                 @Html.DropDownList("HCAStatusID", "- Choose Status of HCA -")
             </td>
-        </tr>
+        </tr>*@
 
     </table>
 
@@ -516,7 +895,22 @@
             var start = parseFloat($("#tbGISAlignStart").val());
             var end = parseFloat($("#tbGISAlignEnd").val());
             var length = parseFloat($("#lblLength").html());
-        }
+        };
+        function onchange_doctype(ddl, docTypeLabel) {
+            var selectedItem1 = $(ddl).val();   
+            var array = @Html.Raw(Json.Encode(@ViewBag.CurrentDocumentRecords));
+            var docType = array.filter(function (val) {
+                //return val.RecordIDName === selectedItem1;
+                return (val.DocumentRecordID).toString() === selectedItem1;
+            });
+            if (docType.length > 0) {
+                $(docTypeLabel).val(docType[0].DocumentTypeItem);
+            }
+            else {
+                $(docTypeLabel).val("None");
+            };
+
+        };
     </script>
   @*pipetypesfromfeatures*@
     <script type="text/javascript">

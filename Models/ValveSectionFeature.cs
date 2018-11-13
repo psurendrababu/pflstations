@@ -40,9 +40,10 @@ namespace PipelineFeatureList.Models
         [DisplayName("Unknown")]
         public bool JobWOPOUnknown { get; set; }
         [DisplayName("Install Date mm/dd/yyyy")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> InstallDate { get; set; }
+        
         [DisplayName("Unknown")]
         public bool InstallDateUnknown { get; set; }
         [DisplayName("In-Service Date mm/dd/yyyy")]
@@ -179,12 +180,44 @@ namespace PipelineFeatureList.Models
         public string FeatureMarkNumber { get; set; }
         [DisplayName("HCA Status ID")]
         public Nullable<int> HCAStatusID { get; set; }
+
+        [DisplayName("Class Exceptions ID")]
+        public Nullable<int> ClassExceptionsID { get; set; }
+
         [DisplayName("Established Operating Pressure")]
         public Nullable<int> OperatingPressure { get; set; }
-        [DisplayName("From Series")]
+        //[DisplayName("From Series")]
+        [DisplayName("From Pressure Zone")]
         public Nullable<int> FromSeries { get; set; }
-        [DisplayName("To Series")]
+        //[DisplayName("To Series")]
+        [DisplayName("To Pressure Zone")]
         public Nullable<int> ToSeries { get; set; }
+
+
+        [DisplayName("OD1 RecID 1 DocType")]
+        public string ODRecordID1DocType { get; set; }
+        [DisplayName("OD1 RecID 2  DocType")]
+        public string ODRecordID2DocType { get; set; }
+
+        [DisplayName("WT1 RecID 1 DocType")]
+        public string WTRecordID1DocType { get; set; }
+        [DisplayName("WT1 RecID 2  DocType")]
+        public string WTRecordID2DocType { get; set; }
+
+        [DisplayName("Seam Weld RecID 1 DocType")]
+        public string SeamRecordID1DocType { get; set; }
+        [DisplayName("Seam Weld RecID 2  DocType")]
+        public string SeamRecordID2DocType { get; set; }
+
+        [DisplayName("Grade RecID 1 DocType")]
+        public string GradeRecordID1DocType { get; set; }
+        [DisplayName("Grade RecID 2  DocType")]
+        public string GradeRecordID2DocType { get; set; }
+
+        [DisplayName("Rating Class RecID 1 DocType")]
+        public string SpecRatingRecordID1DocType { get; set; }
+        [DisplayName("Rating Class RecID 2  DocType")]
+        public string SpecRatingRecordID2DocType { get; set; }
 
 
     }
