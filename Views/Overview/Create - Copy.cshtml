@@ -19,71 +19,20 @@
         <table>
             <tr>
                 <td>
-                    Location
-                </td>
-                <td>
-                    @Html.Raw(ViewBag.CurrentLocation)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Station Name
-                </td>
-                <td>
-                    @Html.Raw(ViewBag.currentPipeline.StationName)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Town
-                </td>
-                <td>
-                    @Html.Raw(ViewBag.currentPipeline.Town)
-                </td>
-            </tr>
-            <tr>
-                <td> Street</td>
-                    
-                <td>
-                    @Html.Raw(ViewBag.currentPipeline.Street)
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Cross Street
-                </td>
-                <td>
-                    @Html.Raw(ViewBag.currentPipeline.CrossStreet)
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>
                     Current Station
                 </td>
                 <td>
-                    @Html.Raw(ViewBag.currentPipeline.PipelineItem)
+                    @Html.Raw(ViewBag.CurrentStation)
                 </td>
             </tr>
             <tr>
                 <td>
-                    Current Flow Circuit
+                    Current Circuit
                 </td>
                 <td>
                     @Html.Raw(ViewBag.CurrentCircuitItem)
                 </td>
             </tr>
-            <tr>
-                <td>
-                    From Circuit / To Circuit
-                </td>
-                <td>
-                    @Html.Raw(ViewBag.CurrentCircuitItem) / @Html.Raw(ViewBag.CurrentCircuitItem)
-                </td>
-
-            </tr>
-
             <tr>
                 <td>
                     <div class="editor-label">
@@ -99,15 +48,12 @@
 
             <tr>
                 <td>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.FromSeries) @Html.LabelFor(model => model.ToSeries)
-                      
+                    <div class="editor-field">
+                        From Series / To Series
                     </div>
                 </td>
                 <td>
-                    <div class="editor-field">
-                        @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
-                    </div>
+                    @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
                 </td>
             </tr>
 
@@ -152,7 +98,7 @@
                 <td>
                     <table>
                         <tr>
-                            <td class="medium">
+                            <td>
                                 <div class="editor-field">
                                     @Html.EditorFor(model => model.JobWOPO)
                                 </div>
@@ -178,15 +124,14 @@
                         <tr>
                             <td>
                                 <div class="editor-field">
-                                    @*@Html.EditorFor(model => model.InstallDate)*@
-                                    @Html.TextBox("InstallDate", "01/01/1900")
+                                    @Html.EditorFor(model => model.InstallDate)
                                 </div>
                             </td>
-                            @*<td>
-                                    <div class="editor-field">
-                                        @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
-                                    </div>
-                                </td>*@
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -235,44 +180,18 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1", onchange = "onchange_doctype(ddlODRecordID1, ODRecordID1DocType);" })
+                                    @Html.DropDownList("ODRecordID1", ViewBag.ODRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2", onchange = "onchange_doctype(ddlODRecordID2, ODRecordID2DocType);" })
+                                    @Html.DropDownList("ODRecordID2", ViewBag.ODRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlODRecordID2" })
                                 </div>
                             </td>
                             <td>
                                 <label id="ODRecordMatrixCheck" class="message-error"></label>
                             </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.Label("OD1 RecID 1 DocType / OD1 RecID 2  DocType")
-                    </div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.ODRecordID1DocType, new { id = "ODRecordID1DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.ODRecordID2DocType, new { id = "ODRecordID2DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-
                         </tr>
                     </table>
                 </td>
@@ -305,45 +224,18 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1", onchange = "onchange_doctype(ddlWTRecordID1, WTRecordID1DocType);" })
+                                    @Html.DropDownList("WTRecordID1", ViewBag.WTRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2", onchange = "onchange_doctype(ddlWTRecordID2, WTRecordID2DocType);" })
+                                    @Html.DropDownList("WTRecordID2", ViewBag.WTRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlWTRecordID2" })
                                 </div>
                             </td>
                             <td>
                                 <label id="WTRecordMatrixCheck" class="message-error"></label>
                             </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.Label("WT1 RecID 1 DocType / WT1 RecID 2  DocType")
-                    </div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.WTRecordID1DocType, new { id = "WTRecordID1DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.WTRecordID2DocType, new { id = "WTRecordID2DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-
                         </tr>
                     </table>
                 </td>
@@ -393,13 +285,13 @@
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1", onchange = "onchange_doctype(ddlSeamRecordID1, SeamRecordID1DocType);" })
+                                    @Html.DropDownList("SeamRecordID1", ViewBag.SeamRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2", onchange = "onchange_doctype(ddlSeamRecordID2, SeamRecordID2DocType);" })
+                                    @Html.DropDownList("SeamRecordID2", ViewBag.SeamRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSeamRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -409,33 +301,6 @@
                     </table>
                 </td>
             </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.Label("Seam Weld RecID 1 DocType / Seam Weld RecID 2  DocType")
-                    </div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.SeamRecordID1DocType, new { id = "SeamRecordID1DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.SeamRecordID2DocType, new { id = "SeamRecordID2DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
 
             <tr>
                 <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
@@ -463,44 +328,18 @@
                             <td>/</td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("GradeRecordID1", ViewBag.GradeRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID1", onchange = "onchange_doctype(ddlGradeRecordID1, GradeRecordID1DocType);" })
+                                    @Html.DropDownList("GradeRecordID1", ViewBag.GradeRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("GradeRecordID2", ViewBag.GradeRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID2", onchange = "onchange_doctype(ddlGradeRecordID2, GradeRecordID2DocType);" })
+                                    @Html.DropDownList("GradeRecordID2", ViewBag.GradeRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlGradeRecordID2" })
                                 </div>
                             </td>
                             <td>
                                 <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
                             </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.Label("Grade RecID 1 DocType / Grade RecID 2  DocType")
-                    </div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.GradeRecordID1DocType, new { id = "GradeRecordID1DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.GradeRecordID2DocType, new { id = "GradeRecordID2DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-
                         </tr>
                     </table>
                 </td>
@@ -523,13 +362,13 @@
                             <td>/</td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1", onchange = "onchange_doctype(ddlSpecRatingRecordID1, SpecRatingRecordID1DocType);" })
+                                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SpecRatingRecordID1 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID1" })
                                 </div>
                             </td>
                             <td> / </td>
                             <td>
                                 <div class="editor-field">
-                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2", onchange = "onchange_doctype(ddlSpecRatingRecordID2, SpecRatingRecordID2DocType);" })
+                                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SpecRatingRecordID2 as SelectList, "- Select a Record Identifier -", new { id = "ddlSpecRatingRecordID2" })
                                 </div>
                             </td>
                             <td>
@@ -543,40 +382,12 @@
             <tr>
                 <td>
                     <div class="editor-label">
-                        @Html.Label("Rating Class RecID 1 DocType / Rating Class RecID 2  DocType")
-                    </div>
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.SpecRatingRecordID1DocType, new { id = "SpecRatingRecordID1DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-                            <td> / </td>
-                            <td>
-                                <div class="medium">
-                                    @Html.TextBoxFor(model => model.SpecRatingRecordID2DocType, new { id = "SpecRatingRecordID2DocType", @readonly = "readonly" })
-                                </div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>
-                    <div class="editor-label">
                         @Html.LabelFor(model => model.MaterialTypeID)
                     </div>
                 </td>
                 <td>
                     <div class="editor-field">
-                        @*@Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, "- Select a Material Type -", new { id = "ddlMaterialTypeID" })*@
-                        @Html.DropDownList("MaterialTypeID", "- Select a Material Type -")
+                        @Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, "- Select a Material Type -", new { id = "ddlMaterialTypeID" })
                     </div>
                 </td>
             </tr>
@@ -629,27 +440,12 @@
                 </td>
             </tr>
 
-
-            <tr>
-                <td>
-                    @*Class Exceptions*@
-                    @Html.LabelFor(model => model.ClassExceptionsID)
-                </td>
-                <td>
-                    @*@Html.DropDownList("ClassExceptionsID", "- Select Class Exception -")*@
-                    @Html.DropDownList("ClassExceptionsID", ViewBag.ClassExceptionsID as SelectList, new { id = "ddlClassExceptionsID" })
-                </td>
-            </tr>
-
-
-
             <tr>
                 <td>
                     @Html.LabelFor(model => model.CurrentClassLoc)
                 </td>
                 <td>
                     @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
-                    
                 </td>
             </tr>
 
@@ -658,14 +454,8 @@
                     @Html.LabelFor(model => model.OperatingPressure)
                 </td>
                 <td>
-                    @Html.TextBoxFor( model => model.OperatingPressure, new {@Value = "0"})
+                    @Html.EditorFor(model => model.OperatingPressure)
                 </td>
-
-                @*<td>
-                        <div class="editor-field">
-                            @Html.CheckBoxFor(model => model.OperatingPressureUnknown) Unknown
-                        </div>
-                    </td>*@
             </tr>
 
             <tr>
@@ -675,15 +465,8 @@
                 <td>
                     @Html.DropDownList("PTRID", "- Select a Pressure Test Record -")
                 </td>
-
-                @*<td>
-                        <div class="editor-field">
-                            @Html.CheckBoxFor(model => model.PTRIDUnknown) Unknown
-                        </div>
-                    </td>*@
-
             </tr>
-            <!--
+
             <tr>
                 <td>
                     HCA Status
@@ -692,13 +475,13 @@
                     @Html.DropDownList("HCAStatusID", "- Choose Status of HCA -")
                 </td>
             </tr>
-            -->
-        </table>
 
+        </table>
+        
         <p>
             <input type="submit" value="Create" />
         </p>
-
+    
     </fieldset>
 }
 
@@ -707,15 +490,15 @@
 </div>
 
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jqueryval")*@
-    @*onchangeevent*@
+  @*@Scripts.Render("~/bundles/jqueryval")*@
+  @*onchangeevent*@
     <script type="text/javascript">
         function onchangeevent(e) {
-        }
             }
+        }
     </script>
 
-    @*pipetypesfromfeatures*@
+  @*pipetypesfromfeatures*@
     <script type="text/javascript">
         function pipetypesfromfeatures(e) {
             var vFeature = document.getElementById('ddlFeatures');
@@ -740,23 +523,8 @@
                 error: function (xhr, ajaxOptions, thrownError) {
                     //alert('Failed to retrieve pipe types.');
                 }
-            });
-        };
-        function onchange_doctype(ddl, docTypeLabel) {
-            var selectedItem1 = $(ddl).val();   
-            var array = @Html.Raw(Json.Encode(@ViewBag.CurrentDocumentRecords));
-            var docType = array.filter(function (val) {
-                //return val.RecordIDName === selectedItem1;
-                return (val.DocumentRecordID).toString() === selectedItem1;
-            });
-            if (docType.length > 0) {
-                $(docTypeLabel).val(docType[0].DocumentTypeItem);
-            }
-            else {
-                $(docTypeLabel).val("None");
-            };
-
-        };
+            });                          
+        }
     </script>
 
     <script type="text/javascript">
@@ -768,12 +536,6 @@
                     vMaterialType.options[i].selected = true;
                 }
             }
-
-            
         });
     </script>
-
- 
-
-
 }

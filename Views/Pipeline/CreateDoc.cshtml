@@ -23,8 +23,9 @@
                 <td>
                     @Html.LabelFor(model => model.RecordIDName)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.RecordIDName)
+                    @*@Html.ValidationMessageFor(model => model.RecordIDName)*@
                 </td>
             </tr>
             <tr>
@@ -39,15 +40,16 @@
                 <td>
                     @Html.LabelFor(model => model.Filename)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.Filename)
+                    @*@Html.ValidationMessageFor(model => model.Filename)*@
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.DrawingNumber)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.DrawingNumber)
                 </td>
             </tr>
@@ -55,10 +57,28 @@
                 <td>
                     @Html.LabelFor(model => model.RevisionNumber)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.RevisionNumber)
                 </td>
             </tr>
+            <tr>
+                @*<td width="500px">
+            <div >
+                @Html.LabelFor(model => model.PageNumber) /  @Html.LabelFor(model => model.TotalPages)
+            </div>
+        </td>*@
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Page Number / Total Number of Pages")
+                    </div>
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PageNumber) / @Html.EditorFor(model => model.TotalPages)
+                    @*@Html.ValidationMessageFor(model => model.PageNumber)  @Html.ValidationMessageFor(model => model.TotalPages)*@ 
+                </td>
+            </tr>
+
+
         </table>
 
         <p>

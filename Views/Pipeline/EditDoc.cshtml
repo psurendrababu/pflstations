@@ -25,7 +25,7 @@
                 <td>
                     @Html.LabelFor(model => model.RecordIDName)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.RecordIDName)
                 </td>
             </tr>
@@ -41,7 +41,7 @@
                 <td>
                     @Html.LabelFor(model => model.Filename)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.Filename)
                 </td>
             </tr>
@@ -49,7 +49,7 @@
                 <td>
                     @Html.LabelFor(model => model.DrawingNumber)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.DrawingNumber)
                 </td>
             </tr>
@@ -57,8 +57,18 @@
                 <td>
                     @Html.LabelFor(model => model.RevisionNumber)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.RevisionNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Page Number / Total Number of Pages")
+                    </div>
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.PageNumber) / @Html.EditorFor(model => model.TotalPages)
                 </td>
             </tr>
         </table>
