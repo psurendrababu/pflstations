@@ -114,12 +114,15 @@
 
         <tr>
             <td>
-                <div class="editor-field">
-                    From Series / To Series
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.FromSeries) @Html.LabelFor(model => model.ToSeries)
+
                 </div>
             </td>
             <td>
-                @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+                </div>
             </td>
         </tr>
         <tr>
@@ -181,7 +184,7 @@
             <td>
                 <table>
                     <tr>
-                        <td>
+                        <td class="medium">
                             <div class="editor-field">
                                 @Html.EditorFor(model => model.JobWOPO)
                             </div>
@@ -274,7 +277,7 @@
                             @if (ViewBag.SelectedODRecordID1.SelectedValue == null)
                             {
                                 <div class="editor-field">
-                                    @Html.DropDownList("ODRecordID1",  ViewBag.SelectedODRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID1", onchange = "onchange_doctype(ddlODRecordID1, ODRecordID1DocType); onchangeeventOD();" })
+                                    @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID1", onchange = "onchange_doctype(ddlODRecordID1, ODRecordID1DocType); onchangeeventOD();" })
 
                                 </div>
 
@@ -734,7 +737,7 @@
                         <td> / </td>
                         <td>
                             <div class="medium">
-                                @Html.TextBoxFor(model => model.SpecRatingRecordID2DocType, new { id = "SpecRatingRecordID2DocType",  @readonly = "readonly" })
+                                @Html.TextBoxFor(model => model.SpecRatingRecordID2DocType, new { id = "SpecRatingRecordID2DocType", @readonly = "readonly" })
                             </div>
                         </td>
 
@@ -814,16 +817,14 @@
         </tr>
         <tr>
             <td>
-                Class Exceptions
+                @*Class Exceptions*@
+                @Html.LabelFor(model => model.ClassExceptionsID)
             </td>
             <td>
-     
-                        @Html.DropDownList("ClassExceptionsID", "- Select Class Exceptions -")
-                     
-              
+                @Html.DropDownList("ClassExceptionsID", "- Select Class Exceptions -")
             </td>
 
-       
+
         </tr>
 
         <tr>

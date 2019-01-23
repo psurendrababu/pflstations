@@ -638,11 +638,6 @@
     <Content Include="Views\Pipeline\PTDocumentsDisplay.cshtml" />
     <Content Include="Views\Pipeline\EditPTR.cshtml" />
     <Content Include="Views\Pipeline\DeletePTR.cshtml" />
-    <Content Include="Views\Overview\Create - Copy.cshtml" />
-    <Content Include="Views\Overview\Index - Copy.cshtml" />
-    <Content Include="Views\Overview\Edit - Copy.cshtml" />
-    <Content Include="Views\Overview\Insert - Copy.cshtml" />
-    <Content Include="Views\Overview\Create - Copy %282%29.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />

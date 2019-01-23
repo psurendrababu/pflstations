@@ -64,7 +64,12 @@ namespace PipelineFeatureList.Controllers
                             from ad in a1.DefaultIfEmpty()
                             join br in db.BendRadiuses on vsd.RadiusID equals br.BendRadiusID into br1
                             from brd in br1.DefaultIfEmpty()
-                            join c in db.CoatingTypes on vsd.CoatingTypeID equals c.CoatingTypeID into c1
+                         join ce in db.ClassExceptions on vsd.ClassExceptionsID equals ce.ClassExceptionsID into ce1
+                         from ced in ce1.DefaultIfEmpty()
+                         join cl in db.CurrentClassLocations on vsd.CurrentClassLoc equals cl.CurrentClassLocationID into cl1
+                         from cld in cl1.DefaultIfEmpty()
+
+                         join c in db.CoatingTypes on vsd.CoatingTypeID equals c.CoatingTypeID into c1
                             from cd in c1.DefaultIfEmpty()
                             join ct in db.ConstructionTypes on vsd.ConstructionTypeID equals ct.ConstructionTypeID into ct1
                             from ctd in ct1.DefaultIfEmpty()
@@ -86,6 +91,8 @@ namespace PipelineFeatureList.Controllers
                             from outd2d in outd12.DefaultIfEmpty()
                             join pt in db.PipeTypes on vsd.TypeID equals pt.PipeTypeID into pt1
                             from ptd in pt1.DefaultIfEmpty()
+                         join ptr in db.PressureTestRecords on vsd.PTRID equals (int) ptr.PressureTestRecordID into ptr1
+                         from ptrd in ptr1.DefaultIfEmpty()
                             join riOD1 in db.DocumentRecords on vsd.ODRecordID1 equals riOD1.DocumentRecordID into riOD11
                             from riOD1d in riOD11.DefaultIfEmpty()
                             join riOD2 in db.DocumentRecords on vsd.ODRecordID2 equals riOD2.DocumentRecordID into riOD21
@@ -105,7 +112,7 @@ namespace PipelineFeatureList.Controllers
                             join riGR1 in db.DocumentRecords on vsd.GradeRecordID1 equals riGR1.DocumentRecordID into riGR11
                             from riGR1d in riGR11.DefaultIfEmpty()
                             join riGR2 in db.DocumentRecords on vsd.GradeRecordID2 equals riGR2.DocumentRecordID into riGR21
-                            from riGR2d in riGR11.DefaultIfEmpty()
+                            from riGR2d in riGR21.DefaultIfEmpty()
                             join st in db.SeamTypes on vsd.SeamWeldTypeID equals st.SeamTypeID into st1
                             from std in st1.DefaultIfEmpty()
                             join sr in db.SpecRatings on vsd.SpecRatingID equals sr.SpecRatingID into sr1
@@ -120,6 +127,8 @@ namespace PipelineFeatureList.Controllers
                                 PipelineData = pd,
                                 ANSIRatingData = ad,
                                 BendRadiusData = brd,
+                                ClassExceptionsData = ced,
+                                CurrentClassLocationData = cld,
                                 ConstructionTypeData = ctd,
                                 ODRecordID1Data = riOD1d,
                                 ODRecordID2Data = riOD2d,
@@ -136,6 +145,7 @@ namespace PipelineFeatureList.Controllers
                                 MaterialTypeData = mtd,
                                 OrientationData = od,
                                 PipeTypeData = ptd,
+                                PressureTestRecordData = ptrd,
                                 SeamTypeData = std,
                                 SpecRatingData = srd,
                                 ManufacturerData = md,
@@ -223,8 +233,8 @@ namespace PipelineFeatureList.Controllers
 
 
             Int64 currentPipelineID = (from vs in db.ValveSection
-                                  join vsf in db.ValveSectionFeatures on vs.ValveSectionID equals vsf.ValveSectionID
-                                  where vsf.ValveSectionID == currSection
+                                  //join vsf in db.ValveSectionFeatures on vs.ValveSectionID equals vsf.ValveSectionID
+                                  where vs.ValveSectionID == currSection
                                   select vs.PipelineID).FirstOrDefault();
 
             fillPipelineDetails(currSection);
@@ -259,7 +269,12 @@ namespace PipelineFeatureList.Controllers
             ViewBag.SpecRatingID = new SelectList(db.SpecRatings, "SpecRatingID", "SpecRatingItem");
             ViewBag.GradeID = new SelectList(db.Grades, "GradeID", "GradeItem");
             ViewBag.ANSIRatingID = new SelectList(db.ANSIRatings, "ANSIRatingID", "ANSIRatingItem");
-            ViewBag.MaterialTypeID = new SelectList(db.MaterialTypes, "MaterialTypeID", "MaterialTypeItem");
+             //get the default Material Type: Steel
+            int materialTypeID = (from mt in db.MaterialTypes
+                                  where mt.MaterialTypeItem == "Steel"
+                                       select mt.MaterialTypeID).FirstOrDefault();
+
+            ViewBag.MaterialTypeID = new SelectList(db.MaterialTypes, "MaterialTypeID", "MaterialTypeItem", materialTypeID);
             ViewBag.RadiusID = new SelectList(db.BendRadiuses, "BendRadiusID", "BendRadiusItem");
             ViewBag.OrientID = new SelectList(db.Orientations, "OrientationID", "OrientationItem");
             ViewBag.CoatingTypeID = new SelectList(db.CoatingTypes, "CoatingTypeID", "CoatingTypeItem");
@@ -280,7 +295,7 @@ namespace PipelineFeatureList.Controllers
             ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem", classLocationID);
             var availPTRs =  from pt in db.PressureTestRecords
                              join p in db.Pipelines on pt.PipelineID equals p.PipelineID
-                             where pt.PipelineID == currSection
+                             where pt.PipelineID == currentPipelineID //currSection
                              orderby pt.Filename
                              select new { pt.PressureTestRecordID, pt.Filename };
             ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
@@ -318,8 +333,8 @@ namespace PipelineFeatureList.Controllers
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             //get the PipelineID for the selected ValvesectionID
             Int64 currPipelineID = (from vs in db.ValveSection
-                                    join vsf in db.ValveSectionFeatures on vs.ValveSectionID equals vsf.ValveSectionID
-                                    where vsf.ValveSectionID == currSection
+                                    //join vsf in db.ValveSectionFeatures on vs.ValveSectionID equals vsf.ValveSectionID
+                                    where vs.ValveSectionID == currSection
                                     select vs.PipelineID).FirstOrDefault();
 
             fillPipelineDetails(currSection);
@@ -380,7 +395,7 @@ namespace PipelineFeatureList.Controllers
             ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem", valvesectionfeature.CurrentClassLoc);
             var availPTRs = from pt in db.PressureTestRecords
                             join p in db.Pipelines on pt.PipelineID equals p.PipelineID
-                            where pt.PipelineID == currSection
+                            where pt.PipelineID == currPipelineID //currSection
                             orderby pt.Filename
                             select new { pt.PressureTestRecordID, pt.Filename };
             ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename", valvesectionfeature.PTRID);

@@ -29,7 +29,7 @@ namespace PipelineFeatureList.Models
         public DateTime PTDate { get; set; }
         [DisplayName("PT Duration (Hrs)")]
         public int PTDuration { get; set; }
-        [DisplayName("Inst. Dead Wt. Evaluation")]
+        [DisplayName("Inst. Dead Wt. Elevation")]
         public int InstDeadWtEval { get; set; }
         [DisplayName("Min Elevation")]
         public int MinElevation { get; set; }

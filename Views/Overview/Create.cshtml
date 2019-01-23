@@ -99,12 +99,15 @@
 
             <tr>
                 <td>
-                    <div class="editor-field">
-                        From Series / To Series
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FromSeries) @Html.LabelFor(model => model.ToSeries)
+                      
                     </div>
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
+                    </div>
                 </td>
             </tr>
 
@@ -149,7 +152,7 @@
                 <td>
                     <table>
                         <tr>
-                            <td>
+                            <td class="medium">
                                 <div class="editor-field">
                                     @Html.EditorFor(model => model.JobWOPO)
                                 </div>
@@ -572,7 +575,8 @@
                 </td>
                 <td>
                     <div class="editor-field">
-                        @Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, "- Select a Material Type -", new { id = "ddlMaterialTypeID" })
+                        @*@Html.DropDownList("MaterialTypeID", ViewBag.MaterialTypeID as SelectList, "- Select a Material Type -", new { id = "ddlMaterialTypeID" })*@
+                        @Html.DropDownList("MaterialTypeID", "- Select a Material Type -")
                     </div>
                 </td>
             </tr>
@@ -628,7 +632,8 @@
 
             <tr>
                 <td>
-                    Class Exceptions
+                    @*Class Exceptions*@
+                    @Html.LabelFor(model => model.ClassExceptionsID)
                 </td>
                 <td>
                     @*@Html.DropDownList("ClassExceptionsID", "- Select Class Exception -")*@
@@ -653,7 +658,7 @@
                     @Html.LabelFor(model => model.OperatingPressure)
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.OperatingPressure)
+                    @Html.TextBoxFor( model => model.OperatingPressure, new {@Value = "0"})
                 </td>
 
                 @*<td>

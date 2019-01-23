@@ -86,12 +86,29 @@
             @ItemDoc.PTNameLocation
         </td>
         <td>
-            @ItemDoc.PTRecordingCharts
+            @if (@ItemDoc.PTRecordingCharts)
+            {
+            <div>Yes</div>
+            }
+            else
+            {
+            <div>No</div>
+            }
+                @*@ItemDoc.PTRecordingCharts*@
         </td>
         <td>
-            @ItemDoc.PTInstCalibrated
+            @if (@ItemDoc.PTInstCalibrated)
+            {
+                <div>Yes</div>
+            }
+            else
+            {
+                <div>No</div>
+            }
+            @*@ItemDoc.PTInstCalibrated*@
         </td>
         <td>
+
             @ItemDoc.PTOperatorName
         </td>
         <td>

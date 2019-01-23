@@ -89,7 +89,7 @@
 
     <td colspan="1"><div style="width:100%; height:200px; overflow:scroll">
         <table class="overviewfeaturetable">
-            <tr><th></th><th>FEATURE MARK NUMBER</th><th>BUILDER DESCRIPTION</th><th>QC DESCRIPTION</th><th>ENGINEER DESCRIPTION</th><th>NATGRID CORRESPONDENCE</th><th></th></tr>
+            <tr><th>ACTIONS</th><th>FEATURE MARK NUMBER</th><th>BUILDER DESCRIPTION</th><th>QC DESCRIPTION</th><th>ENGINEER DESCRIPTION</th><th>NATGRID CORRESPONDENCE</th><th></th></tr>
             @foreach (var itemIssues in (ViewData["IssueData"] as List<PipelineFeatureList.Models.FeatureIssue>))
             {
                 if (itemIssues.ValveSectionFeatureID != null)
@@ -186,8 +186,8 @@
                     <th>From Circuit</th>
                     <th>To Circuit</th>
 
-                    <th>From Series</th>
-                    <th>To Series</th>
+                    <th>From Pressure Zone</th>
+                    <th>To Pressure Zone</th>
 
                     <th>Feature</th>
                     <th>Feature Type</th>
@@ -223,9 +223,9 @@
                     <th>Grade RecID 1 DocType</th>
                     <th>Grade RecID 2 DocType</th>
 
-                    <th>Specifiction</th>
+                    <th>Specification</th>
 
-                    <th>ANSI Rating</th>
+                    <th>Rating Class</th>
                     <th>Rating RecID 1</th>
                     <th>Rating RecID 2</th>
                     <th>Rating RecID 1  DocType</th>
@@ -248,7 +248,7 @@
                    
                     <th>Estab. Op. Pressure</th>
 
-                    <th>PT Documnet</th>
+                    <th>PT Document</th>
 
                    
                     <th>Delete</th>
@@ -516,11 +516,12 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.ClassExceptionsID)
+                        @*@Html.DisplayFor(modelItem => item.ValveSectionFeatureData.ClassExceptionsID)*@
+                        @Html.DisplayFor(modelItem => item.ClassExceptionsData.ClassExceptionsName)
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.CurrentClassLoc)
+                        @Html.DisplayFor(modelItem => item.CurrentClassLocationData.CurrentClassLocationItem)
                     </td>
 
                    
@@ -530,7 +531,8 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.PTRID)
+                        @Html.DisplayFor(modelItem => item.PressureTestRecordData.Filename)
+                        @*@Html.DisplayFor(modelItem => item.ValveSectionFeatureData.PTRID)*@
                     </td>
                    
 

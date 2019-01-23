@@ -185,9 +185,9 @@ namespace PipelineFeatureList.Models
         public Nullable<int> ClassExceptionsID { get; set; }
 
         [DisplayName("Established Operating Pressure")]
-        public Nullable<int> OperatingPressure { get; set; }
+        public int OperatingPressure { get; set; }
         //[DisplayName("From Series")]
-        [DisplayName("From Pressure Zone")]
+        [DisplayName("From Pressure Zone /")]
         public Nullable<int> FromSeries { get; set; }
         //[DisplayName("To Series")]
         [DisplayName("To Pressure Zone")]
@@ -218,7 +218,6 @@ namespace PipelineFeatureList.Models
         public string SpecRatingRecordID1DocType { get; set; }
         [DisplayName("Rating Class RecID 2  DocType")]
         public string SpecRatingRecordID2DocType { get; set; }
-
 
     }
 }

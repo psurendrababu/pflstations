@@ -12,9 +12,11 @@ namespace PipelineFeatureList.Models
         public ValveSectionFeature ValveSectionFeatureData { get; set; }
         public ANSIRating ANSIRatingData { get; set; }
         public BendRadius BendRadiusData { get; set; }
+        public ClassExceptions ClassExceptionsData { get; set; }
         public CoatingType CoatingTypeData { get; set; }
         public ConstructionType ConstructionTypeData { get; set; }
         public CurrentClassLocation CurrentClassLocationData { get; set; }
+        public PressureTestRecord PressureTestRecordData { get; set; }
         public DocumentRecord DrawingData { get; set; }
         public Feature FeatureData { get; set; }
         public Grade GradeData { get; set; }
