@@ -21,12 +21,15 @@ namespace PipelineFeatureList.Models
         [DisplayName("PT Min Test Pressure")]
         public int PTMinTestPressure { get; set; }
         [DisplayName("PT Medium")]
-        public string PTMedium { get; set; }
-        [DisplayName("PT Date")]
+        public string PTMedium { get; set; }   
+        //public int PTTestMediumID { get; set; }
+        //public  Nullable<int> PTTestMediumID  { get; set; }
+
+        [DisplayName("PT Date (mm/dd/yyyy)")]
         public DateTime PTDate { get; set; }
         [DisplayName("PT Duration (Hrs)")]
         public int PTDuration { get; set; }
-        [DisplayName("Inst. Dead Wt. Evaluation")]
+        [DisplayName("Inst. Dead Wt. Elevation")]
         public int InstDeadWtEval { get; set; }
         [DisplayName("Min Elevation")]
         public int MinElevation { get; set; }
@@ -44,6 +47,9 @@ namespace PipelineFeatureList.Models
         public string PTPersonResponsible { get; set; }
         [DisplayName("PT Test Company")]
         public string PTTestCompany { get; set; }
+
+
+        
 
 
     }

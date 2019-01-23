@@ -17,7 +17,7 @@ namespace PipelineFeatureList.Models
         [Required]
         [DisplayName("Circuit Feature ID")]
         public Int64 ValveSectionFeatureID { get; set; }
-        [DisplayName("Feature Number")]
+        [DisplayName("Feature Mark Number")]
         public string FeatureNumber { get; set; }
         [DisplayName("Builder ID")]
         public Nullable<Int64> BuilderID { get; set; }
@@ -36,6 +36,9 @@ namespace PipelineFeatureList.Models
         [DisplayName("Created by Engineer")]
         public Nullable<DateTime> EngineerCreatedOn { get; set; }
         [DisplayName("Description of Issue: Engineer")]
-        public String EngineerDescription { get; set; }        
+        public String EngineerDescription { get; set; }
+
+        [DisplayName("NatGrid Correspondence")]
+        public String NatGridCorrespondence { get; set; }
     }
 }

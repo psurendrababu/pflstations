@@ -20,7 +20,7 @@
                 <td>
                     @Html.LabelFor(model => model.Filename)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.Filename)
                 </td>
             </tr>
@@ -36,8 +36,11 @@
                 <td>
                     @Html.LabelFor(model => model.PTMedium)
                 </td>
+                @*<td>
+            @Html.EditorFor(model => model.PTMedium)
+        </td>*@
                 <td>
-                    @Html.EditorFor(model => model.PTMedium)
+                    <div class="editor-field">@Html.DropDownList("PTMedium", "- Select PT Test Medium -")</div>
                 </td>
             </tr>
             <tr>
@@ -45,7 +48,8 @@
                     @Html.LabelFor(model => model.PTDate)
                 </td>
                 <td>
-                    @Html.TextBox("Test Date", Model.PTDate, new { @class = "datepicker", @type = "date" })
+                    @*@Html.TextBox("Test Date", Model.PTDate, new { @class = "datepicker", @type = "date" })*@
+                    @Html.TextBox("PTDate", "01/01/1900")
                 </td>
             </tr>
             <tr>
@@ -84,7 +88,7 @@
                 <td>
                     @Html.LabelFor(model => model.PTNameLocation)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.PTNameLocation)
                 </td>
             </tr>
@@ -93,7 +97,11 @@
                     @Html.LabelFor(model => model.PTRecordingCharts)
                 </td>
                 <td>
-                    @Html.CheckBoxFor(model => model.PTRecordingCharts)
+                    @*@Html.CheckBoxFor(model => model.PTRecordingCharts)*@
+                    <div>
+                        @Html.RadioButtonFor(model => model.PTRecordingCharts, "true") Yes
+                        @Html.RadioButtonFor(model => model.PTRecordingCharts, "false") No
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -101,14 +109,18 @@
                     @Html.LabelFor(model => model.PTInstCalibrated)
                 </td>
                 <td>
-                    @Html.CheckBoxFor(model => model.PTInstCalibrated)
+                    @*@Html.CheckBoxFor(model => model.PTInstCalibrated)*@
+                    <div>
+                        @Html.RadioButtonFor(model => model.PTInstCalibrated, "true") Yes
+                        @Html.RadioButtonFor(model => model.PTInstCalibrated, "false") No
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.PTOperatorName)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.PTOperatorName)
                 </td>
             </tr>
@@ -116,15 +128,15 @@
                 <td>
                     @Html.LabelFor(model => model.PTPersonResponsible)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.PTPersonResponsible)
                 </td>
             </tr>
             <tr>
-                <td>
+                <td >
                     @Html.LabelFor(model => model.PTTestCompany)
                 </td>
-                <td>
+                <td class="medium">
                     @Html.EditorFor(model => model.PTTestCompany)
                 </td>
             </tr>

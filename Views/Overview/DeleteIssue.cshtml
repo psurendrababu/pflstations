@@ -41,7 +41,21 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.EngineerDescription)
     </div>
-    </td></tr></table>
+    </td></tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.NatGridCorrespondence)
+            </div>
+        </td>
+        <td>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.NatGridCorrespondence)
+            </div>
+        </td>
+    </tr>
+    
+    </table>
 
 </fieldset>
 @using (Html.BeginForm()) {
