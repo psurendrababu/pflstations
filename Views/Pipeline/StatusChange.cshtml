@@ -1,0 +1,49 @@
+﻿@model PipelineFeatureList.Models.Pipeline
+
+@{
+    ViewBag.Title = "Change all Circuits Status in Station";
+}
+
+<h2>Change all Circuits Status in Station</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <legend>ValveSection</legend>
+
+    @Html.HiddenFor(model => model.ValveSectionID)
+    @Html.HiddenFor(model => model.CreatedBy_UserID)
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.HiddenFor(model => model.PFLLength)
+    @Html.HiddenFor(model => model.PipeSystemID)
+    @Html.HiddenFor(model => model.PipelineID)
+    @Html.HiddenFor(model => model.BuilderID)
+    @Html.HiddenFor(model => model.QCID)
+    @Html.HiddenFor(model => model.EngineerID)
+    @Html.HiddenFor(model => model.FinalEngineerID)
+    @Html.HiddenFor(model => model.ValveSectionStatusID)
+    @Html.HiddenFor(model => model.CurrentMAOP)
+    @Html.HiddenFor(model => model.Description)
+    @Html.HiddenFor(model => model.ValveSectionItem)
+
+    <table>
+        <tr>
+            <td><div class="editor-field">@Html.Raw(ViewBag.Message)</div></td>
+        </tr>
+        <tr>
+            <td><p><input type="submit" value="Yes" /></p></td>
+        </tr>
+    </table>
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("No, Back to Overview", "Index", "Overview", new { ValveSectionID = Model.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}

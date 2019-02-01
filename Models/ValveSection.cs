@@ -49,10 +49,12 @@ namespace PipelineFeatureList.Models
         public Nullable<int> CurrentMAOP { get; set; }
         [DisplayName("Builder")]
         public Nullable<Int64> BuilderID { get; set; }
-        [DisplayName("QC")]
+        [DisplayName("QCer")]
         public Nullable<Int64> QCID { get; set; }
         [DisplayName("Engineer")]
         public Nullable<Int64> EngineerID { get; set; }
+        [DisplayName("Certification Approver")]
+        public Nullable<Int64> CAID { get; set; }
         [DisplayName("Final Engineer")]
         public Nullable<Int64> FinalEngineerID { get; set; }
         [DisplayName("Annual Reviewer")]

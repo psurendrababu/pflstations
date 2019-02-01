@@ -638,6 +638,7 @@
     <Content Include="Views\Pipeline\PTDocumentsDisplay.cshtml" />
     <Content Include="Views\Pipeline\EditPTR.cshtml" />
     <Content Include="Views\Pipeline\DeletePTR.cshtml" />
+    <Content Include="Views\Pipeline\StatusChange.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />

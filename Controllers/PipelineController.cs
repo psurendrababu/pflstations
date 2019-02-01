@@ -81,8 +81,44 @@ namespace PipelineFeatureList.Controllers
                            select ptr).ToList();
             ViewData.Add("PTRList", PTRList);
 
-            
+            // check if all circuits in this station Engineering review is approved if so then 'Delivered' button gets enabled.
+            int reviewedCircuits = (from vs in db.ValveSection
+                                   join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                   where p.PipelineID == pipeline.PipelineID && vs.ValveSectionStatusID == 8
+                                   select vs).Count();
 
+            if(pipeline.CircuitCount == reviewedCircuits)
+            {
+                ViewData.Add("Reviewed", "true");
+            }
+
+            // check if all circuits in this station are delivered, if so then 'Client Approved' button gets enabled.
+            int Delivered = (from vs in db.ValveSection
+                                    join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                    where p.PipelineID == pipeline.PipelineID && vs.ValveSectionStatusID == 9
+                                    select vs).Count();
+
+            if (pipeline.CircuitCount == Delivered)
+            {
+                ViewData.Add("Delivered", "true");
+            }
+
+            // If all circuits in this station are delivered more than 7 days ago, then enable 'Default Client Acceptance' button gets enabled.
+            var accept = (from vs in db.ValveSection
+                          join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                          join wh in db.WorkflowHistories on vs.ValveSectionID equals wh.ValveSectionID
+                          where p.PipelineID == pipeline.PipelineID && vs.ValveSectionStatusID == 9
+                          select new
+                          {
+                              changedOn = wh.ChangedOn
+
+                          }).ToList();
+
+            if ((DateTime.Now - accept.Min(a => a.changedOn)).TotalDays > 7 && accept.Count == pipeline.CircuitCount)
+            {
+                ViewData.Add("accept", "true");
+            }
+            
             return View(pipeline);
         }
 

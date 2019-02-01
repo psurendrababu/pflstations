@@ -4,6 +4,19 @@
     ViewBag.Title = "Station Details";
 }
 
+@if (ViewData["Reviewed"] == "true")
+{
+    @Html.ActionLink("Delivered", "Delivered", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+}
+@if (ViewData["Delivered"] == "true")
+{
+    @Html.ActionLink("Client Accepted", "Client Accepted", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+}
+@if (ViewData["Delivered"] == "true" && ViewData["accept"] == "true")
+{
+    @Html.ActionLink("Default Client Acceptance", "Index", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+}
+
 <h2>Station Details</h2>
 
 <table border="1">
@@ -81,6 +94,6 @@
 @Html.Partial("PTDocumentsDisplay")
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" }) 
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
     @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </p>
