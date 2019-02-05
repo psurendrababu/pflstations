@@ -1,35 +1,55 @@
 ﻿@model PipelineFeatureList.Models.SeamType
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Seam Weld Type";
 }
 
-<h2>Edit</h2>
+<h2>Edit Seam Weld Type</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>SeamType</legend>
+<fieldset>
+    <legend>SeamType</legend>
 
-        @Html.HiddenFor(model => model.SeamTypeID)
+    @Html.HiddenFor(model => model.SeamTypeID)
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SeamTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.SeamTypeItem)
+                    @Html.ValidationMessageFor(model => model.SeamTypeItem)
+                </div>
+            </td>
+        </tr>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SeamTypeItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SeamTypeItem)
-            @Html.ValidationMessageFor(model => model.SeamTypeItem)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.JointFactor)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.JointFactor)
+                    @Html.ValidationMessageFor(model => model.JointFactor)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

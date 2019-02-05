@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             SeamType seamtype = db.SeamTypes.Find(id);
+            var seamfeatures = (from vf in db.ValveSectionFeatures
+                                where vf.SeamWeldTypeID == seamtype.SeamTypeID
+                                select new
+                                {
+                                    vf
+                                }).ToList();
+
+
+            if (seamfeatures.Count > 0)
+            {
+                ModelState.AddModelError("SeamTypeItem", "Warning! This Seam Weld Type is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (seamtype == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             SeamType seamtype = db.SeamTypes.Find(id);
+            var seamfeatures = (from vf in db.ValveSectionFeatures
+                               where vf.SeamWeldTypeID == seamtype.SeamTypeID
+                                select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (seamfeatures.Count > 0)
+            {
+                ModelState.AddModelError("SeamTypeItem", "This Seam Weld Type is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
             if (seamtype == null)
             {
                 return HttpNotFound();

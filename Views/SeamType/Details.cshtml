@@ -1,22 +1,42 @@
 ﻿@model PipelineFeatureList.Models.SeamType
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Seam Weld Type Details";
 }
 
-<h2>Details</h2>
+<h2>Seam Weld Type Details</h2>
 
 <fieldset>
     <legend>SeamType</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.SeamTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.SeamTypeItem)
+                </div>
+            </td>
+        </tr>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SeamTypeItem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.SeamTypeItem)
-    </div>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.JointFactor)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.JointFactor)
+                </div>
+            </td>
+        </tr>
+    </table>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.SeamTypeID }) |
-    @Html.ActionLink("Back to List", "Index")
+<p>   
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SeamTypeID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </p>

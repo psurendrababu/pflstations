@@ -243,22 +243,39 @@ namespace PipelineFeatureList.Controllers
 
             Int64 currPipeline = Convert.ToInt64(Session["CurrentStationID"].ToString());
             
-            var availDocs = from d in db.DocumentRecords
+            var availDocs_old = from d in db.DocumentRecords
                             join r in db.Pipelines on d.PipelineID equals r.PipelineID
                             where d.PipelineID == currentPipelineID
                             orderby d.DocumentRecordID
                             select new { d.DocumentRecordID, d.Filename };
+
+            var availDocs = from d in db.DocumentRecords
+                            join r in db.Pipelines on d.PipelineID equals r.PipelineID
+                            where d.PipelineID == currentPipelineID
+                            orderby d.DocumentRecordID
+                            select new {
+                                value = d.DocumentRecordID,
+                                text = d.RecordIDName 
+                                        + " | " +
+                                        (string.IsNullOrEmpty(d.DocumentTypeItem) ? "" : d.DocumentTypeItem) 
+                                        + " | " +                                        
+                                        (string.IsNullOrEmpty(d.Filename) ? "" : d.Filename) 
+                                        //+ " | " +
+                                        //(string.IsNullOrEmpty(d.DrawingNumber) ? "" : d.DrawingNumber) //d.DrawingNumber //Concatenated record id, type and name
+                                      };
+            
+            
             //ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.ODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.ODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.WTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.WTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.SeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.SeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.GradeRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename");
-            ViewBag.GradeRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.ODRecordID1 = new SelectList(availDocs, "value", "text"); //old list: new SelectList(availDocs, "DocumentRecordID", "Filename");
+            ViewBag.ODRecordID2 = new SelectList(availDocs, "value", "text");
+            ViewBag.WTRecordID1 = new SelectList(availDocs, "value", "text");
+            ViewBag.WTRecordID2 = new SelectList(availDocs, "value", "text");
+            ViewBag.SeamRecordID1 = new SelectList(availDocs, "value", "text");
+            ViewBag.SeamRecordID2 = new SelectList(availDocs, "value", "text");
+            ViewBag.SpecRatingRecordID1 = new SelectList(availDocs, "value", "text");
+            ViewBag.SpecRatingRecordID2 = new SelectList(availDocs, "value", "text");
+            ViewBag.GradeRecordID1 = new SelectList(availDocs, "value", "text");
+            ViewBag.GradeRecordID2 = new SelectList(availDocs, "value", "text");
             List<OutsideDiameter> od1List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD1List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem");
             ViewBag.ODID1 = OD1List; 
@@ -339,34 +356,53 @@ namespace PipelineFeatureList.Controllers
 
             fillPipelineDetails(currSection);
 
-            var availDocs = from d in db.DocumentRecords
+            var availDocs_old = from d in db.DocumentRecords
                             join r in db.DocumentRecords on d.DocumentRecordID equals r.DocumentRecordID
                             //where d.PipelineID == currSection
                             where d.PipelineID == currPipelineID
                             orderby d.DocumentRecordID
                             select new {d.DocumentRecordID, d.Filename };
 
+            var availDocs = from d in db.DocumentRecords
+                            join r in db.DocumentRecords on d.DocumentRecordID equals r.DocumentRecordID
+                            //where d.PipelineID == currSection
+                            where d.PipelineID == currPipelineID
+                            orderby d.DocumentRecordID
+                            select new {
+                                    value = d.DocumentRecordID,
+                                    text = d.RecordIDName
+                                            + " | " +
+                                            (string.IsNullOrEmpty(d.DocumentTypeItem) ? "" : d.DocumentTypeItem)
+                                            + " | " +
+                                            (string.IsNullOrEmpty(d.Filename) ? "" : d.Filename)
+                                            //+ " | " +
+                                            //(string.IsNullOrEmpty(d.DrawingNumber) ? "" : d.DrawingNumber) //d.DrawingNumber //Concatenated record id, type and name
+                                    };
 
-            //******update the CurrentCircuitItem ****           
-            string CurrCircuit = (from vs in db.ValveSection where vs.ValveSectionID == currSection select vs.ValveSectionItem).FirstOrDefault();
+
+
+        //******update the CurrentCircuitItem ****           
+        string CurrCircuit = (from vs in db.ValveSection where vs.ValveSectionID == currSection select vs.ValveSectionItem).FirstOrDefault();
             ViewBag.CurrentCircuitItem = CurrCircuit;
-
-            
 
 
             //ViewBag.DrawingID = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.DrawingID);
+            
+            //before concatenate---ViewBag.SelectedODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID1);
 
-            ViewBag.SelectedODRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID1);
+           
 
-            ViewBag.SelectedODRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.ODRecordID2);
-            ViewBag.SelectedWTRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID1);
-            ViewBag.SelectedWTRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.WTRecordID2);
-            ViewBag.SelectedSeamRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID1);
-            ViewBag.SelectedSeamRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SeamRecordID2);
-            ViewBag.SelectedSpecRatingRecordID1 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID1);
-            ViewBag.SelectedSpecRatingRecordID2 = new SelectList(availDocs, "DocumentRecordID", "Filename", valvesectionfeature.SpecRatingRecordID2);
-            ViewBag.SelectedGradeRecordID1 = new SelectList(availDocs, "DocumentRecordID", "FileName", valvesectionfeature.GradeRecordID1);
-            ViewBag.SelectedGradeRecordID2 = new SelectList(availDocs, "DocumentRecordID", "FileName", valvesectionfeature.GradeRecordID1);
+            ViewBag.SelectedODRecordID1 = new SelectList(availDocs, "value", "text", valvesectionfeature.ODRecordID1);
+
+            ViewBag.SelectedODRecordID2 = new SelectList(availDocs, "value", "text", valvesectionfeature.ODRecordID2);
+            ViewBag.SelectedWTRecordID1 = new SelectList(availDocs, "value", "text", valvesectionfeature.WTRecordID1);
+            ViewBag.SelectedWTRecordID2 = new SelectList(availDocs, "value", "text", valvesectionfeature.WTRecordID2);
+            ViewBag.SelectedSeamRecordID1 = new SelectList(availDocs, "value", "text", valvesectionfeature.SeamRecordID1);
+            ViewBag.SelectedSeamRecordID2 = new SelectList(availDocs, "value", "text", valvesectionfeature.SeamRecordID2);
+            ViewBag.SelectedSpecRatingRecordID1 = new SelectList(availDocs, "value", "text", valvesectionfeature.SpecRatingRecordID1);
+            ViewBag.SelectedSpecRatingRecordID2 = new SelectList(availDocs, "value", "text", valvesectionfeature.SpecRatingRecordID2);
+            ViewBag.SelectedGradeRecordID1 = new SelectList(availDocs, "value", "text", valvesectionfeature.GradeRecordID1);
+            ViewBag.SelectedGradeRecordID2 = new SelectList(availDocs, "value", "text", valvesectionfeature.GradeRecordID1);
             List<OutsideDiameter> od1List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD1List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID1);
             ViewBag.SelectedODID1 = OD1List;
@@ -1050,7 +1086,7 @@ namespace PipelineFeatureList.Controllers
         {
             Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
             var ANSIRatings = from a in db.ANSIRatings
-                         orderby a.ANSIRatingItem
+                              orderby a.ANSIRatingItem
                          select new { Value = a.ANSIRatingID, Text = a.ANSIRatingItem };
 
             return Json(ANSIRatings, JsonRequestBehavior.AllowGet);

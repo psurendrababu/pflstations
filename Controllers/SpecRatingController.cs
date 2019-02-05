@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             SpecRating specrating = db.SpecRatings.Find(id);
+            var specfeatures = (from vf in db.ValveSectionFeatures
+                                where vf.SpecRatingID == specrating.SpecRatingID
+                                select new
+                                {
+                                    vf
+                                }).ToList();
+
+
+            if (specfeatures.Count > 0)
+            {
+                ModelState.AddModelError("SpecRatingItem", "Warning! This Specification is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (specrating == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             SpecRating specrating = db.SpecRatings.Find(id);
+            var specfeatures = (from vf in db.ValveSectionFeatures
+                               where vf.SpecRatingID == specrating.SpecRatingID
+                                select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (specfeatures.Count > 0)
+            {
+                ModelState.AddModelError("SpecRatingItem", "This Specification is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
             if (specrating == null)
             {
                 return HttpNotFound();

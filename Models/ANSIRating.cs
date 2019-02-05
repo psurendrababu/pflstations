@@ -13,5 +13,8 @@ namespace PipelineFeatureList.Models
         public int ANSIRatingID { get; set; }
         [DisplayName("ANSI Rating")]
         public string ANSIRatingItem { get; set; }
+        [DisplayName("Pressure Rating")]
+        public string PressureRating { get; set; }
+
     }
 }

@@ -1,22 +1,29 @@
 ﻿@model PipelineFeatureList.Models.MaterialType
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Material Type Details";
 }
 
-<h2>Details</h2>
+<h2>Material Type Details</h2>
 
 <fieldset>
     <legend>MaterialType</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MaterialTypeItem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MaterialTypeItem)
-    </div>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.MaterialTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.MaterialTypeItem)
+                </div>
+            </td>
+        </tr>
+    </table>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.MaterialTypeID }) |
-    @Html.ActionLink("Back to List", "Index")
+<p>  
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaterialTypeID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </p>

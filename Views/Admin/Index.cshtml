@@ -11,9 +11,34 @@
 
         <td>@Html.ActionLink("Circuits", "", "ValveSection", null, htmlAttributes: new { @class = "linkbutton" })</td>
 
-        <td>@Html.ActionLink("Manufacturers", "", "Manufacturer", null, htmlAttributes: new { @class = "linkbutton" })</td>
-
         <td>@Html.ActionLink("Users", "", "User", null, htmlAttributes: new { @class = "linkbutton" })</td>
+
+        <td>
+            <ul >
+                <li class="lookups">
+                    <a href="">Code Lookups</a>
+                    <ul>
+                        <li>@Html.ActionLink("Coating Type", "", "CoatingType", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Feature", "", "Feature", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Feature Type", "", "PipeType", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Grade", "", "Grade", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Manufacturer", "", "Manufacturer", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Material Type", "", "MaterialType", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("PT Medium", "", "PTTestMedium", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Rating Class", "", "ANSIRating", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Seam Weld Type", "", "SeamType", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Specification", "", "SpecRating", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                        <li>@Html.ActionLink("Station Location", "", "PipeSystem", null, htmlAttributes: new { @class = "linkbutton" })</li>
+                    </ul>
+                </li>
+
+            </ul>
+
+
+            @*@Html.ActionLink("Manufacturers", "", "Manufacturer", null, htmlAttributes: new { @class = "linkbutton" })*@
+        </td>
+
+
     </tr>
 </table>
 

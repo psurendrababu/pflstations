@@ -1,35 +1,41 @@
 ﻿@model PipelineFeatureList.Models.SpecRating
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Specification";
 }
 
-<h2>Edit</h2>
+<h2>Edit Specification</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>SpecRating</legend>
+<fieldset>
+    <legend>SpecRating</legend>
 
-        @Html.HiddenFor(model => model.SpecRatingID)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SpecRatingItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SpecRatingItem)
-            @Html.ValidationMessageFor(model => model.SpecRatingItem)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    @Html.HiddenFor(model => model.SpecRatingID)
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SpecRatingItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.SpecRatingItem)
+                    @Html.ValidationMessageFor(model => model.SpecRatingItem)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

@@ -1,18 +1,22 @@
 ﻿@model IEnumerable<PipelineFeatureList.Models.Grade>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Grades";
 }
 
-<h2>Index</h2>
+<h2>Grades</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
 </p>
 <table>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.GradeItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SMYS)
         </th>
         <th></th>
     </tr>
@@ -23,11 +27,19 @@
             @Html.DisplayFor(modelItem => item.GradeItem)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GradeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GradeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GradeID })
+            @Html.DisplayFor(modelItem => item.SMYS)
+        </td>
+        <td>
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.GradeID }, htmlAttributes: new { @class = "linkbutton" })
+            @Html.ActionLink("Details", "Details", new { id = item.GradeID }, htmlAttributes: new { @class = "linkbutton" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.GradeID }, htmlAttributes: new { @class = "linkbutton" })
         </td>
     </tr>
 }
 
 </table>
+
+<div>
+    @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+</div>

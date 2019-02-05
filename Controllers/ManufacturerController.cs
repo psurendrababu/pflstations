@@ -69,6 +69,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             Manufacturer manufacturer = db.Manufacturers.Find(id);
+            var manfeatures = (from vf in db.ValveSectionFeatures
+                               where vf.ManufacturerID == manufacturer.ManufacturerID
+                               select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (manfeatures.Count > 0)
+            {
+                ModelState.AddModelError("ManufacturerItem", "Warning! This Manufacturer is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (manufacturer == null)
             {
                 return HttpNotFound();
@@ -100,6 +113,20 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             Manufacturer manufacturer = db.Manufacturers.Find(id);
+            var manfeatures = (from vf in db.ValveSectionFeatures
+                               where vf.ManufacturerID == manufacturer.ManufacturerID
+                               select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (manfeatures.Count > 0)
+            {
+                ModelState.AddModelError("ManufacturerItem", "This Manufacturer is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
+
             if (manufacturer == null)
             {
                 return HttpNotFound();

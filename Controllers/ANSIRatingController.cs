@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             ANSIRating ansirating = db.ANSIRatings.Find(id);
+            var ansiratings = (from vf in db.ValveSectionFeatures
+                               where vf.ANSIRatingID == ansirating.ANSIRatingID
+                               select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (ansiratings.Count > 0)
+            {
+                ModelState.AddModelError("ANSIRatingItem", "Warning! This Rating Class is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (ansirating == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,21 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             ANSIRating ansirating = db.ANSIRatings.Find(id);
+
+            var ansiratings = (from vf in db.ValveSectionFeatures
+                               where vf.ANSIRatingID == ansirating.ANSIRatingID                               
+                               select new
+                                {
+                                   vf
+                                }).ToList();
+
+
+            if (ansiratings.Count > 0)
+            {
+                ModelState.AddModelError("ANSIRatingItem", "This Rating Class is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
+
             if (ansirating == null)
             {
                 return HttpNotFound();

@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             MaterialType materialtype = db.MaterialTypes.Find(id);
+            var materialfeatures = (from vf in db.ValveSectionFeatures
+                                    where vf.MaterialTypeID == materialtype.MaterialTypeID
+                                    select new
+                                    {
+                                        vf
+                                    }).ToList();
+
+
+            if (materialfeatures.Count > 0)
+            {
+                ModelState.AddModelError("MaterialTypeItem", "Warning! This Material Type is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (materialtype == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,20 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             MaterialType materialtype = db.MaterialTypes.Find(id);
+            var materialfeatures = (from vf in db.ValveSectionFeatures
+                               where vf.MaterialTypeID == materialtype.MaterialTypeID
+                                    select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (materialfeatures.Count > 0)
+            {
+                ModelState.AddModelError("MaterialTypeItem", "This Material Type is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
+
             if (materialtype == null)
             {
                 return HttpNotFound();

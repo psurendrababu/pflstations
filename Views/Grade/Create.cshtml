@@ -1,33 +1,54 @@
 ﻿@model PipelineFeatureList.Models.Grade
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Grade";
 }
 
-<h2>Create</h2>
+<h2>Create Grade</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Grade</legend>
+<fieldset>
+    <legend>Grade</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.GradeItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.GradeItem)
+                    @Html.ValidationMessageFor(model => model.GradeItem)
+                </div>
+            </td>
+        </tr>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.GradeItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.GradeItem)
-            @Html.ValidationMessageFor(model => model.GradeItem)
-        </div>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SMYS)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.SMYS)
+                    @Html.ValidationMessageFor(model => model.SMYS)
+                </div>
+            </td>
+        </tr>
+    </table>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             CoatingType coatingtype = db.CoatingTypes.Find(id);
+            var coatingfeatiures = (from vf in db.ValveSectionFeatures
+                                    where vf.CoatingTypeID == coatingtype.CoatingTypeID
+                                    select new
+                                    {
+                                        vf
+                                    }).ToList();
+
+
+            if (coatingfeatiures.Count > 0)
+            {
+                ModelState.AddModelError("CoatingTypeItem", "Warning! This Coating Type is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";                
+            }
             if (coatingtype == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             CoatingType coatingtype = db.CoatingTypes.Find(id);
+            var coatingfeatiures = (from vf in db.ValveSectionFeatures
+                               where vf.CoatingTypeID == coatingtype.CoatingTypeID
+                                    select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (coatingfeatiures.Count > 0)
+            {
+                ModelState.AddModelError("CoatingTypeItem", "This Coating Type is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";               
+            }
             if (coatingtype == null)
             {
                 return HttpNotFound();

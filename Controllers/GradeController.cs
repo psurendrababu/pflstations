@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             Grade grade = db.Grades.Find(id);
+            var gradefeatures = (from vf in db.ValveSectionFeatures
+                                 where vf.GradeID == grade.GradeID
+                                 select new
+                                 {
+                                     vf
+                                 }).ToList();
+
+
+            if (gradefeatures.Count > 0)
+            {
+                ModelState.AddModelError("GradeItem", "Warning! This Grade is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";               
+            }
             if (grade == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             Grade grade = db.Grades.Find(id);
+            var gradefeatures = (from vf in db.ValveSectionFeatures
+                               where vf.GradeID == grade.GradeID
+                                 select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (gradefeatures.Count > 0)
+            {
+                ModelState.AddModelError("GradeItem", "This Grade is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
             if (grade == null)
             {
                 return HttpNotFound();

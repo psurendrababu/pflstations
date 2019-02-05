@@ -1,0 +1,45 @@
+﻿@model PipelineFeatureList.Models.ANSIRatingsLookup
+
+@{
+    ViewBag.Title = "Delete Rating Class";
+}
+
+<h2>Delete Rating Class</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>ANSIRating</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.ANSIRatingItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.ANSIRatingItem)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PressureRating)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PressureRating)
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Delete" />
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+}

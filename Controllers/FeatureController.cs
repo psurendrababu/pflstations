@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             Feature feature = db.Features.Find(id);
+            var features = (from vf in db.ValveSectionFeatures
+                            where vf.FeatureID == feature.FeatureID
+                            select new
+                            {
+                                vf
+                            }).ToList();
+
+
+            if (features.Count > 0)
+            {
+                ModelState.AddModelError("FeatureItem", "Warning! This Feature is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (feature == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             Feature feature = db.Features.Find(id);
+            var features = (from vf in db.ValveSectionFeatures
+                               where vf.FeatureID == feature.FeatureID
+                        select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (features.Count > 0)
+            {
+                ModelState.AddModelError("FeatureItem", "This Feature is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
             if (feature == null)
             {
                 return HttpNotFound();

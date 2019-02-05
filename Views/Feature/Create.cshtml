@@ -1,34 +1,40 @@
 ﻿@model PipelineFeatureList.Models.Feature
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Feature";
 }
 
-<h2>Create</h2>
+<h2>Create Feature</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Feature</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FeatureItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FeatureItem)
-            @Html.ValidationMessageFor(model => model.FeatureItem)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+<fieldset>
+    <legend>Feature</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.FeatureItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.FeatureItem)
+                    @Html.ValidationMessageFor(model => model.FeatureItem)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,41 @@
+﻿@model PipelineFeatureList.Models.ANSIRatingsLookup
+
+@{
+    ViewBag.Title = "Rating Class Details";
+}
+
+<h2>Rating Class Details</h2>
+
+<fieldset>
+    <legend>ANSIRating</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.ANSIRatingItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.ANSIRatingItem)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PressureRating)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PressureRating)
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ANSIRatingID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>

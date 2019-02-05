@@ -64,6 +64,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             PipeSystem pipesystem = db.PipeSystems.Find(id);
+            var psfeatures = (from vf in db.ValveSection
+                              where vf.PipeSystemID == pipesystem.PipeSystemID
+                              select new
+                              {
+                                  vf
+                              }).ToList();
+
+
+            if (psfeatures.Count > 0)
+            {
+                ModelState.AddModelError("PipeSystemItem", "Warning! This Station Location is assigned to Circuit(s).");
+                ViewBag.HasError = "True";
+            }
             if (pipesystem == null)
             {
                 return HttpNotFound();
@@ -92,6 +105,20 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             PipeSystem pipesystem = db.PipeSystems.Find(id);
+            var psfeatures = (from vf in db.ValveSection
+                              where vf.PipeSystemID == pipesystem.PipeSystemID
+                              select new
+                              {
+                                  vf
+                              }).ToList();
+
+
+            if (psfeatures.Count > 0)
+            {
+                ModelState.AddModelError("PipeSystemItem", "This Station Location is assigned to Circuit(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
+
             if (pipesystem == null)
             {
                 return HttpNotFound();

@@ -1,10 +1,10 @@
 ﻿@model PipelineFeatureList.Models.PipeSystem
 
 @{
-    ViewBag.Title = "Edit Pipe System";
+    ViewBag.Title = "Edit Station Location";
 }
 
-<h2>Edit Pipe System</h2>
+<h2>Edit Station Location</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -19,7 +19,7 @@
             @Html.LabelFor(model => model.PipeSystemItem)
         </div></td>
         <td>
-        <div class="editor-field">
+        <div class="wide">
             @Html.EditorFor(model => model.PipeSystemItem)
             @Html.ValidationMessageFor(model => model.PipeSystemItem)
         </div>
@@ -31,9 +31,9 @@
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

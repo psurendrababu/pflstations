@@ -13,5 +13,7 @@ namespace PipelineFeatureList.Models
         public int SeamTypeID { get; set; }
         [DisplayName("Seam Type")]
         public string SeamTypeItem { get; set; }
+        [DisplayName("Joint Factor")]
+        public decimal? JointFactor { get; set; }
     }
 }

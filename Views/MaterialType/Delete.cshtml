@@ -1,25 +1,36 @@
 ﻿@model PipelineFeatureList.Models.MaterialType
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Material Type";
 }
 
-<h2>Delete</h2>
+<h2>Delete Material Type</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
     <legend>MaterialType</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MaterialTypeItem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MaterialTypeItem)
-    </div>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.MaterialTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.MaterialTypeItem)
+                    @Html.ValidationMessageFor(model => model.MaterialTypeItem)
+                </div>
+            </td>
+        </tr>
+    </table>
 </fieldset>
 @using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @if (ViewBag.HasError != "True")
+    {
+        <input type="submit" value="Delete" />
+    }
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
 }

@@ -1,33 +1,39 @@
 ﻿@model IEnumerable<PipelineFeatureList.Models.MaterialType>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+        ViewBag.Title = "Material Types";
+    }
 
-<h2>Index</h2>
+    <h2>Material Types</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MaterialTypeItem)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaterialTypeItem)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaterialTypeItem)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaterialTypeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaterialTypeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaterialTypeID })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaterialTypeItem)
+                </td>
+                <td>
 
-</table>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaterialTypeID }, htmlAttributes: new { @class = "linkbutton" })
+                    @Html.ActionLink("Details", "Details", new { id = item.MaterialTypeID }, htmlAttributes: new { @class = "linkbutton" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaterialTypeID }, htmlAttributes: new { @class = "linkbutton" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>

@@ -12,16 +12,21 @@
     <fieldset>
         <legend>Manufacturer</legend>
 
-        <table><tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ManufacturerItem)
-        </div></td>
-        <td>
-        <div class="wide">
-            @Html.EditorFor(model => model.ManufacturerItem)
-            @Html.ValidationMessageFor(model => model.ManufacturerItem)
-        </div>
-        </td></tr></table>
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ManufacturerItem)
+                    </div>
+                </td>
+                <td>
+                    <div class="wide">
+                        @Html.EditorFor(model => model.ManufacturerItem)
+                        @Html.ValidationMessageFor(model => model.ManufacturerItem)
+                    </div>
+                </td>
+            </tr>
+        </table>
         <p>
             <input type="submit" value="Create" />
         </p>
