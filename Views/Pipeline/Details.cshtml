@@ -6,15 +6,15 @@
 
 @if (ViewData["Reviewed"] == "true")
 {
-    @Html.ActionLink("Delivered", "Delivered", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Delivered", "StatusChange", "Pipeline", new { id = Model.PipelineID , description = "Are you sure you want to update status to 'Delivered' for all the circuits in this station?", newStatus = 9, oldStatus = 8}, htmlAttributes: new { @class = "linkbutton" })
 }
 @if (ViewData["Delivered"] == "true")
 {
-    @Html.ActionLink("Client Accepted", "Client Accepted", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Client Accepted", "StatusChange", "Pipeline", new { id = Model.PipelineID, description = "Are you sure you want to update status to 'Client Approved' for all the circuits in this station?", newStatus = 10, oldStatus = 9 }, htmlAttributes: new { @class = "linkbutton" })
 }
-@if (ViewData["Delivered"] == "true" && ViewData["accept"] == "true")
+@if (ViewData["accept"] == "true")
 {
-    @Html.ActionLink("Default Client Acceptance", "Index", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Default Client Acceptance", "StatusChange", "Pipeline", new { id = Model.PipelineID, description = "Are you sure you want to update status to 'Default Client Approved' for all the circuits in this station?", newStatus = 11, oldStatus = 9 }, htmlAttributes: new { @class = "linkbutton" })
 }
 
 <h2>Station Details</h2>

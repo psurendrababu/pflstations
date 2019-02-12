@@ -11,22 +11,20 @@
     @Html.ValidationSummary(true)
 
 <fieldset>
-    <legend>ValveSection</legend>
+    <legend>Pipeline</legend>
 
-    @Html.HiddenFor(model => model.ValveSectionID)
+    @Html.HiddenFor(model => model.PipelineID)
+    @Html.HiddenFor(model => model.PipelineItem)
+    @Html.HiddenFor(model => model.PipeSystemID)
     @Html.HiddenFor(model => model.CreatedBy_UserID)
     @Html.HiddenFor(model => model.CreatedOn)
-    @Html.HiddenFor(model => model.PFLLength)
-    @Html.HiddenFor(model => model.PipeSystemID)
-    @Html.HiddenFor(model => model.PipelineID)
-    @Html.HiddenFor(model => model.BuilderID)
-    @Html.HiddenFor(model => model.QCID)
-    @Html.HiddenFor(model => model.EngineerID)
-    @Html.HiddenFor(model => model.FinalEngineerID)
-    @Html.HiddenFor(model => model.ValveSectionStatusID)
-    @Html.HiddenFor(model => model.CurrentMAOP)
-    @Html.HiddenFor(model => model.Description)
-    @Html.HiddenFor(model => model.ValveSectionItem)
+    @Html.HiddenFor(model => model.Street)
+    @Html.HiddenFor(model => model.CrossStreet)
+    @Html.HiddenFor(model => model.Notes)
+    @Html.HiddenFor(model => model.Town)
+    @Html.HiddenFor(model => model.CircuitCount)
+    @Html.HiddenFor(model => model.StationName)
+
 
     <table>
         <tr>
@@ -40,7 +38,7 @@
 }
 
 <div>
-    @Html.ActionLink("No, Back to Overview", "Index", "Overview", new { ValveSectionID = Model.ValveSectionID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("No, Back to Details", "Details", "Pipeline", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

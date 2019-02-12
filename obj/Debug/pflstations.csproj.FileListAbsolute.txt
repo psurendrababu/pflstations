@@ -39,3 +39,4 @@ C:\workspace\pflstations\obj\Debug\pflstations.csproj.CoreCompileInputs.cache
 C:\workspace\pflstations\obj\Debug\pflstations.csproj.CopyComplete
 C:\workspace\pflstations\obj\Debug\pflstations.dll
 C:\workspace\pflstations\obj\Debug\pflstations.pdb
+C:\workspace\pflstations\obj\Debug\pflstations.csprojAssemblyReference.cache

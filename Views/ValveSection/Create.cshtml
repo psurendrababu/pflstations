@@ -15,14 +15,16 @@
         <table>
             <tr>
                 <td><div class="editor-label">@Html.LabelFor(model => model.PipelineID)</div></td>
-                <td><div class="editor-field">@Html.DropDownList("PipelineID", "- Select a Station -") @Html.ValidationMessageFor(x => x.PipelineID)</div></td>
+                <td><div class="editor-field">
+                 @Html.DropDownList("PipelineID", "- Select a Station -")                
+            </div></td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.ValveSectionItem)
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.ValveSectionItem)
+                    @Html.EditorFor(model => model.ValveSectionItem)                    
                 </td>
             </tr>
             <tr>

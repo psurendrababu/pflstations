@@ -205,7 +205,13 @@ namespace PipelineFeatureList.Controllers
                           where v.ValveSectionID == ValveSectionID
                           select new OverviewEngineer { EngineerData = u }).ToList();
             ViewData.Add("EngineerData", Emodel);
-            
+
+            int vsf = (from vs in db.ValveSection
+                                    join p in db.ValveSectionFeatures on vs.ValveSectionID equals p.ValveSectionID
+                                    where vs.ValveSectionID == ValveSectionID
+                       select vs).Count();
+
+            ViewData.Add("vsf", vsf);
 
             return View(model);
         }

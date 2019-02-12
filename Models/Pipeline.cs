@@ -39,5 +39,8 @@ namespace PipelineFeatureList.Models
         [DisplayName("Station Location")]
         public PipeSystem PipeSystem { get; set; }
 
+        [DisplayName("Station Status")]
+        public string StationStatus { get; set; }
+
     }
 }
