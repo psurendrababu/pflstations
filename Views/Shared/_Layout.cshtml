@@ -28,7 +28,7 @@
                         @Html.Partial("_LoginPartial")
                     </section>
                 </div>
-                <div class="float-right">
+                <div class="float-left">
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -64,7 +64,7 @@
                                 }
                             }
                             catch { }
-                            @try
+                            @*@try
                             {
                                 if (Session["GroupClassificationFinalEngineer"].ToString() == "Final Engineering Analysis Team")
                                 {
@@ -87,7 +87,7 @@
                                     <li>@Html.ActionLink("Certified", "CertificationApproved", "ValveSection")</li>
                                 }
                             }
-                            catch { }
+                            catch { }*@
                             @try
                             {
                                 if (Session["UserID"] != null)
