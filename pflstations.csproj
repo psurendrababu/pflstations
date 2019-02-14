@@ -189,7 +189,7 @@
     <Compile Include="Controllers\ReportEmailController.cs" />
     <Compile Include="Controllers\PTTestMediumController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\ANSIRatingsLookup - Copy.cs" />
+    <Compile Include="Models\ANSIRatingsLookup.cs" />
     <Compile Include="Models\ClassExceptions.cs" />
     <Compile Include="Models\ClientImportList.cs" />
     <Compile Include="Models\ClientReport.cs" />
