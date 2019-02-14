@@ -1,0 +1,38 @@
+﻿@model PipelineFeatureList.Models.PTTestMedium
+
+@{
+    ViewBag.Title = "Delete PT Medium";
+}
+
+<h2>Delete PT Medium</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>SpecRating</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PTMedium)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PTMedium)
+                    @Html.ValidationMessageFor(model => model.PTMedium)
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+@using (Html.BeginForm())
+{
+<p>
+    @if (ViewBag.HasError != "True")
+    {
+        <input type="submit" value="Delete" />
+    }
+
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
+}

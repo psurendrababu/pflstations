@@ -1,28 +1,61 @@
 ﻿@model PipelineFeatureList.Models.PipeType
 
 @{
-    ViewBag.Title = "Delete Pipe Type";
+    ViewBag.Title = "Delete Feature Type";
 }
 
-<h2>Delete Pipe Type</h2>
+<h2>Delete Feature Type</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>PipeType</legend>
+    <legend>FeatureType</legend>
 
-    <table><tr><td>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PipeTypeItem)
-    </div></td>
-    <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PipeTypeItem)
-    </div>
-    </td></tr></table>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PipeTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PipeTypeItem)
+                    @Html.ValidationMessageFor(model => model.PipeTypeItem)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.Feature)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.RatingType)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.RatingType)
+                </div>
+            </td>
+        </tr>
+    </table>
 </fieldset>
 @using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @if (ViewBag.HasError != "True")
+    {
+        <input type="submit" value="Delete" />
+    }
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
 }

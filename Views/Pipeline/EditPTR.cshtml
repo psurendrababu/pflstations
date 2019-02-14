@@ -20,6 +20,14 @@
     <table>
         <tr>
             <td>
+                @Html.LabelFor(model => model.PTRIDName)
+            </td>
+            <td class="medium">
+                @Html.EditorFor(model => model.PTRIDName)
+            </td>
+        </tr>
+        <tr>
+            <td>
                 @Html.LabelFor(model => model.Filename)
             </td>
             <td class="medium">

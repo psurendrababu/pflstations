@@ -11,12 +11,15 @@ namespace PipelineFeatureList.Models
     {
         [DisplayName("ID")]
         public int PipeTypeID { get; set; }
-        [DisplayName("Pipe Type")]
+        [DisplayName("Feature Type")]
         public string PipeTypeItem { get; set; } 
         [DisplayName("Feature")]
         public int FeatureID { get; set; }
 
         [DisplayName("Features")]
         public Feature Feature { get; set; }
+
+        [DisplayName("Rating Type")]
+        public string RatingType { get; set; }
     }
 }

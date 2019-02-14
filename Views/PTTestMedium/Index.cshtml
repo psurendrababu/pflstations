@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PipelineFeatureList.Models.PTTestMedium>
+
+    @{
+        ViewBag.Title = "PT Mediums";
+    }
+
+    <h2>PT Mediums</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PTMedium)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PTMedium)
+                </td>
+                <td>                 
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PTTestMediumID }, htmlAttributes: new { @class = "linkbutton" })
+                    @Html.ActionLink("Details", "Details", new { id = item.PTTestMediumID }, htmlAttributes: new { @class = "linkbutton" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PTTestMediumID }, htmlAttributes: new { @class = "linkbutton" })
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>

@@ -324,7 +324,10 @@ namespace PipelineFeatureList.Models
         public DbSet<SeamType> SeamTypes { get; set; }
         public DbSet<SpecRating> SpecRatings { get; set; }
         public DbSet<Grade> Grades { get; set; }
+
         public DbSet<ANSIRating> ANSIRatings { get; set; }
+        public DbSet<ANSIRatingsLookup> ANSIRatingsLookups { get; set; }
+
         public DbSet<MaterialType> MaterialTypes { get; set; }
         public DbSet<BendRadius> BendRadiuses { get; set; }
         public DbSet<Orientation> Orientations { get; set; }
@@ -368,6 +371,7 @@ namespace PipelineFeatureList.Models
         public DbSet<HCAStatus> HCAStatus { get; set; }
         public DbSet<ClassExceptions> ClassExceptions { get; set; }
         public DbSet<PTTestMedium> PTTestMediums { get; set; }
+       
 
 
 

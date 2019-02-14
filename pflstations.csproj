@@ -183,10 +183,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\AppLibrary.cs" />
+    <Compile Include="Controllers\ANSIRatingsLookupController - Copy.cs" />
     <Compile Include="Controllers\ClientReportController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ReportEmailController.cs" />
+    <Compile Include="Controllers\PTTestMediumController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\ANSIRatingsLookup - Copy.cs" />
     <Compile Include="Models\ClassExceptions.cs" />
     <Compile Include="Models\ClientImportList.cs" />
     <Compile Include="Models\ClientReport.cs" />
@@ -638,6 +641,16 @@
     <Content Include="Views\Pipeline\PTDocumentsDisplay.cshtml" />
     <Content Include="Views\Pipeline\EditPTR.cshtml" />
     <Content Include="Views\Pipeline\DeletePTR.cshtml" />
+    <Content Include="Views\PTTestMedium\Create.cshtml" />
+    <Content Include="Views\PTTestMedium\Delete.cshtml" />
+    <Content Include="Views\PTTestMedium\Details.cshtml" />
+    <Content Include="Views\PTTestMedium\Edit.cshtml" />
+    <Content Include="Views\PTTestMedium\Index.cshtml" />
+    <Content Include="Views\ANSIRatingsLookup - Copy\Create.cshtml" />
+    <Content Include="Views\ANSIRatingsLookup - Copy\Delete.cshtml" />
+    <Content Include="Views\ANSIRatingsLookup - Copy\Details.cshtml" />
+    <Content Include="Views\ANSIRatingsLookup - Copy\Edit.cshtml" />
+    <Content Include="Views\ANSIRatingsLookup - Copy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />

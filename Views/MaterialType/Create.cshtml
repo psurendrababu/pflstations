@@ -1,33 +1,39 @@
 ﻿@model PipelineFeatureList.Models.MaterialType
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Material Type";
 }
 
-<h2>Create</h2>
+<h2>Create Material Type</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>MaterialType</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MaterialTypeItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MaterialTypeItem)
-            @Html.ValidationMessageFor(model => model.MaterialTypeItem)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+<fieldset>
+    <legend>MaterialType</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.MaterialTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.MaterialTypeItem)
+                    @Html.ValidationMessageFor(model => model.MaterialTypeItem)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

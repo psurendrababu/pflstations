@@ -1,0 +1,44 @@
+﻿@model PipelineFeatureList.Models.PTTestMedium
+
+@{
+    ViewBag.Title = "Edit PT Medium";
+}
+
+<h2>Edit PT Medium</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SpecRating</legend>
+
+        @Html.HiddenFor(model => model.PTTestMediumID)
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PTMedium)
+                    </div>
+                </td>
+                <td>
+                    <div class="wide">
+                        @Html.EditorFor(model => model.PTMedium)
+                        @Html.ValidationMessageFor(model => model.PTMedium)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

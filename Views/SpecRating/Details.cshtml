@@ -1,22 +1,30 @@
 ﻿@model PipelineFeatureList.Models.SpecRating
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Specification Details";
 }
 
-<h2>Details</h2>
+<h2>Specification Details</h2>
 
 <fieldset>
     <legend>SpecRating</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SpecRatingItem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.SpecRatingItem)
-    </div>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.SpecRatingItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.SpecRatingItem)
+                </div>
+            </td>
+        </tr>
+    </table>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.SpecRatingID }) |
-    @Html.ActionLink("Back to List", "Index")
+  
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SpecRatingID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </p>

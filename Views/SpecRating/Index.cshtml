@@ -1,33 +1,37 @@
 ﻿@model IEnumerable<PipelineFeatureList.Models.SpecRating>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+        ViewBag.Title = "Specification";
+    }
 
-<h2>Index</h2>
+    <h2>Specification</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SpecRatingItem)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecRatingItem)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SpecRatingItem)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SpecRatingID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SpecRatingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SpecRatingID })
-        </td>
-    </tr>
-}
-
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecRatingItem)
+                </td>
+                <td>                 
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SpecRatingID }, htmlAttributes: new { @class = "linkbutton" })
+                    @Html.ActionLink("Details", "Details", new { id = item.SpecRatingID }, htmlAttributes: new { @class = "linkbutton" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SpecRatingID }, htmlAttributes: new { @class = "linkbutton" })
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>

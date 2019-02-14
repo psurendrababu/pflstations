@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PipelineFeatureList.Models;
+using System.Data.SqlClient;
 
 namespace PipelineFeatureList.Controllers
 {
@@ -52,6 +53,10 @@ namespace PipelineFeatureList.Controllers
             {
                 db.Grades.Add(grade);
                 db.SaveChanges();
+                if (Insert_CodeLookUp_Audit("Grade", "Create", "", grade.GradeItem))
+                {
+                    //nothing to do at this point.
+                }
                 return RedirectToAction("Index");
             }
 
@@ -64,10 +69,24 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             Grade grade = db.Grades.Find(id);
+            var gradefeatures = (from vf in db.ValveSectionFeatures
+                                 where vf.GradeID == grade.GradeID
+                                 select new
+                                 {
+                                     vf
+                                 }).ToList();
+
+
+            if (gradefeatures.Count > 0)
+            {
+                ModelState.AddModelError("GradeItem", "Warning! This Grade is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";               
+            }
             if (grade == null)
             {
                 return HttpNotFound();
             }
+            Session["CodeLookUpAduit_Oldvalue"] = grade.GradeItem;
             return View(grade);
         }
 
@@ -81,6 +100,10 @@ namespace PipelineFeatureList.Controllers
             {
                 db.Entry(grade).State = EntityState.Modified;
                 db.SaveChanges();
+                if (Insert_CodeLookUp_Audit("Grade", "Edit", Session["CodeLookUpAduit_Oldvalue"].ToString(), grade.GradeItem))
+                {
+                    //nothing to do at this point.
+                }
                 return RedirectToAction("Index");
             }
             return View(grade);
@@ -92,6 +115,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             Grade grade = db.Grades.Find(id);
+            var gradefeatures = (from vf in db.ValveSectionFeatures
+                               where vf.GradeID == grade.GradeID
+                                 select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (gradefeatures.Count > 0)
+            {
+                ModelState.AddModelError("GradeItem", "This Grade is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
             if (grade == null)
             {
                 return HttpNotFound();
@@ -108,6 +144,10 @@ namespace PipelineFeatureList.Controllers
             Grade grade = db.Grades.Find(id);
             db.Grades.Remove(grade);
             db.SaveChanges();
+            if (Insert_CodeLookUp_Audit("Grade", "Delete", grade.GradeItem, ""))
+            {
+                //nothing to do at this point.
+            }
             return RedirectToAction("Index");
         }
 
@@ -115,6 +155,37 @@ namespace PipelineFeatureList.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        public bool Insert_CodeLookUp_Audit(string codelookup_name, string act, string oldvalue, string newvalue)
+        {
+            SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("spInsert_dbo_CodeLookUpAudit", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@CodeLookUp_Name", codelookup_name));
+            cmd.Parameters.Add(new SqlParameter("@Action", act));
+            cmd.Parameters.Add(new SqlParameter("@Old_Value", oldvalue));
+            cmd.Parameters.Add(new SqlParameter("@New_Value", newvalue));
+            cmd.Parameters.Add(new SqlParameter("@Modified_User", Session["UserName"].ToString()));
+            cmd.Parameters.Add(new SqlParameter("@Modified_Date", DateTime.Now));
+            try
+            {
+                cmd.BeginExecuteNonQuery(delegate (IAsyncResult ar)
+                {
+                    int rowCount = cmd.EndExecuteNonQuery(ar);
+                }, cmd);
+                return true;
+            }
+            catch (SqlException s)
+            {
+                throw s;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
         }
     }
 }

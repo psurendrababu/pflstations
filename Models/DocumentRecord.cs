@@ -44,5 +44,7 @@ namespace PipelineFeatureList.Models
         [DisplayName("Total No. of Pages")]
         [Required]
         public string TotalPages { get; set; }
+
+
     }
 }

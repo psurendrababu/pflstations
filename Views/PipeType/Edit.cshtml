@@ -1,38 +1,77 @@
 ﻿@model PipelineFeatureList.Models.PipeType
 
 @{
-    ViewBag.Title = "Edit Pipe Type";
+    ViewBag.Title = "Edit Feature Type";
 }
 
-<h2>Edit Pipe Type</h2>
+<h2>Edit Feature Type</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>PipeType</legend>
+<fieldset>
+    <legend>FeatureType</legend>
 
-        @Html.HiddenFor(model => model.PipeTypeID)
+    @Html.HiddenFor(model => model.PipeTypeID)
+    
 
-        <table><tr><td>
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PipeTypeItem)
-        </div></td>
-        <td>
-        <div class="medium">
-            @Html.EditorFor(model => model.PipeTypeItem)
-            @Html.ValidationMessageFor(model => model.PipeTypeItem)
-        </div>
-        </td></tr></table>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.Feature)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                </div>
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PipeTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.PipeTypeItem)
+                    @Html.ValidationMessageFor(model => model.PipeTypeItem)
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.RatingType)
+                </div>
+            </td>
+            <td>
+                <div>
+                    @*@Html.EditorFor(model => model.RatingType)
+                        @Html.ValidationMessageFor(model => model.RatingType)*@
+
+                    Rated:   @Html.RadioButton("RatingType", "Rated")
+                    Non-Rated: @Html.RadioButton("RatingType", "Non-Rated")
+
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+</fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

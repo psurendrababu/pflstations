@@ -1,10 +1,10 @@
 ﻿@model PipelineFeatureList.Models.PipeSystem
 
 @{
-    ViewBag.Title = "Pipe System Details";
+    ViewBag.Title = "Station Location Details";
 }
 
-<h2>Pipe System Details</h2>
+<h2>Station Location Details</h2>
 
 <fieldset>
     <legend>PipeSystem</legend>
@@ -19,7 +19,7 @@
     </div>
     </td></tr></table>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.PipeSystemID }) |
-    @Html.ActionLink("Back to List", "Index")
+<p>   
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PipeSystemID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </p>

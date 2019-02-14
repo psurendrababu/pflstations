@@ -12,6 +12,9 @@
 <table>
     <tr>
         <th>
+            Record Identifier
+        </th>
+        <th>
             FileName
         </th>
         <th>
@@ -58,6 +61,9 @@
     @foreach (var ItemDoc in ViewData["PTRList"] as List<PipelineFeatureList.Models.PressureTestRecord>)
     {
     <tr>
+        <td>
+            @ItemDoc.PTRIDName
+        </td>
         <td>
             @ItemDoc.Filename
         </td>

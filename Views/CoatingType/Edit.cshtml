@@ -31,9 +31,9 @@
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,33 +1,53 @@
 ﻿@model PipelineFeatureList.Models.ANSIRating
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Rating Class";
 }
 
-<h2>Create</h2>
+<h2>Create Rating Class</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>ANSIRating</legend>
+<fieldset>
+    <legend>ANSIRating</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ANSIRatingItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.ANSIRatingItem)
+                    @Html.ValidationMessageFor(model => model.ANSIRatingItem)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PressureRating)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.PressureRating)
+                    @Html.ValidationMessageFor(model => model.PressureRating)
+                </div>
+            </td>
+        </tr>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ANSIRatingItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ANSIRatingItem)
-            @Html.ValidationMessageFor(model => model.ANSIRatingItem)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    </table>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {
