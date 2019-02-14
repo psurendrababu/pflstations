@@ -12,47 +12,27 @@ namespace PipelineFeatureList.Models
 {
     public class ValveSection
     {
-        [DisplayName("CircuitID")]
+        [DisplayName("CircuitID")]        
         public Int64 ValveSectionID { get; set; }
         [DisplayName("Station System")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Station System Required")]
+        [Required]
         public int? PipeSystemID { get; set; }
         [DisplayName("Station")]
-        [Required(ErrorMessage = "Station Required")]
-        public int PipelineID { get; set; }
-        //[DisplayName("Station Series")]
-        //public string OrionStationSeries { get; set; }
-        //[DisplayName("Circuit Begin")]
-        //[Required]
-        //public string ValveSectionBegin { get; set; }
-        //[DisplayName("Circuit End")]
-        //public string ValveSectionEnd { get; set; }
-        //[DisplayName("Mile Point Begin")]
-        //public Nullable<decimal> MilePointBegin { get; set; }
-        //[DisplayName("Mile Point End")]
-        //public Nullable<decimal> MilePointEnd { get; set; }
-        //[DisplayName("Series Begin")]
-        ////[InputMask("99999+99.99")]
-        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        //public Nullable<decimal> OrionStationBegin { get; set; }
-        //[DisplayName("Series End")]
-        ////[InputMask("999-999-9999")]
-        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        //public Nullable<decimal> OrionStationEnd { get; set; }
-        //[DisplayName("GIS Start")]
-        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        //public Nullable<decimal> GISStationBegin { get; set; }
-        //[DisplayName("GIS End")]
-        //[DisplayFormat(DataFormatString = "{0:0+00}", ApplyFormatInEditMode = false)]
-        //public Nullable<decimal> GISStationEnd { get; set; }
+        [Required]
+        public int PipelineID { get; set; }        
         [DisplayName("Current MAOP")]
         public Nullable<int> CurrentMAOP { get; set; }
         [DisplayName("Builder")]
-        public Nullable<Int64> BuilderID { get; set; }
-        [DisplayName("QC")]
-        public Nullable<Int64> QCID { get; set; }
+        public Nullable<Int64> BuilderID { get; set; }        
+        [DisplayName("QCer")]
+        //[Required]
+        public Nullable<Int64> QCID { get; set; }           
         [DisplayName("Engineer")]
-        public Nullable<Int64> EngineerID { get; set; }
+        //[Required]
+        public Nullable<Int64> EngineerID { get; set; }        
+        [DisplayName("Certification Approver")]
+        //[Required]
+        public Nullable<Int64> CAID { get; set; }
         [DisplayName("Final Engineer")]
         public Nullable<Int64> FinalEngineerID { get; set; }
         [DisplayName("Annual Reviewer")]
@@ -67,24 +47,12 @@ namespace PipelineFeatureList.Models
         public DateTime ModifiedOn { get; set; }
         [DisplayName("Valve Section Status")]
         public Nullable<int> ValveSectionStatusID { get; set; }
-        [DisplayName("PFL Length")]
-        //[DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = false)]
-        public Nullable<decimal> PFLLength { get; set; }
-        //[DisplayName("Orion vs. PFL Length Discrepancy")]
-        //[DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
-        //public Nullable<decimal> LengthDiscrepancyPlus { get; set; }
-        //[DisplayName("Length Discrepancy -")]
-        //[DisplayFormat(DataFormatString = "{0:0.0}", ApplyFormatInEditMode = false)]
-        //public Nullable<decimal> LengthDiscrepancyMinus { get; set; }
-        //[DisplayName("Is Segmentation Dirty")]
-        //public Nullable<bool> IsSegmentationDirty { get; set; }
-        //[DisplayName("Crossings Status")]
-        //public string CrossingsStatus { get; set; }
+        [DisplayName("PFL Length")]        
+        public Nullable<decimal> PFLLength { get; set; }        
         [DisplayName("Description")]
         public string Description { get; set; }
         [DisplayName("Circuit ID")]
         public string ValveSectionItem { get; set; }
-
         [DisplayName("Station System")]
         public PipeSystem PipeSystem { get; set; }
         [DisplayName("Station")]

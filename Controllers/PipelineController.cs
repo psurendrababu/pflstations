@@ -31,6 +31,75 @@ namespace PipelineFeatureList.Controllers
                                   join p in db.Pipelines on vs.PipelineID equals p.PipelineID
                                   where p.PipelineID == c.PipelineID
                                   select vs).Count();
+                //update status of station based on circiuts status
+                // check if all circuits in this station are eng approved    
+
+                c.StationStatus = null;
+
+                var engapproved = (from vs in db.ValveSection
+                                   join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                   where p.PipelineID == c.PipelineID && vs.ValveSectionStatusID >= 8
+                                   select new
+                                   {
+                                       vs.ValveSectionStatusID
+                                   }).ToList();
+                if (c.CircuitCount == engapproved.Count)
+                {
+                    if (engapproved.Where(a => a.ValveSectionStatusID == 8).Count() > 0)
+                    {
+                        c.StationStatus = "Ready for Deliver";
+                    }                    
+                }
+                else
+                  c.StationStatus = null;
+                // check if all circuits in this station are delivered
+                var delivered = (from vs in db.ValveSection
+                                   join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                   where p.PipelineID == c.PipelineID && vs.ValveSectionStatusID >= 9
+                                   select new
+                                   {
+                                       vs.ValveSectionStatusID
+                                   }).ToList();
+                if (c.CircuitCount == delivered.Count)
+                {
+                    if (delivered.Where(a => a.ValveSectionStatusID == 9).Count() > 0)
+                    {
+                        c.StationStatus = "Delivered";
+                    }                    
+                }
+                // check if all circuits in this station are client approved
+                var clapprove = (from vs in db.ValveSection
+                                 join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                 where p.PipelineID == c.PipelineID && vs.ValveSectionStatusID >= 10
+                                 select new
+                                 {
+                                     vs.ValveSectionStatusID
+                                 }).ToList();
+
+                if (c.CircuitCount == clapprove.Count)
+                {
+                    if (clapprove.Where(a => a.ValveSectionStatusID == 10).Count() > 0)
+                    {
+                        c.StationStatus = "Client Approved";
+                    }                    
+                }
+
+                // check if all circuits in this station are client approved by default
+                var clapprovedef = (from vs in db.ValveSection
+                                 join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                                 where p.PipelineID == c.PipelineID && vs.ValveSectionStatusID >= 11
+                                 select new
+                                 {
+                                     vs.ValveSectionStatusID
+                                 }).ToList();
+
+                if (c.CircuitCount == clapprovedef.Count)
+                {
+                    if (clapprovedef.Where(a => a.ValveSectionStatusID == 11).Count() > 0)
+                    {
+                        c.StationStatus = "Client Approved by default";
+                    }                    
+                }
 
                 c.PipeSystem = (from p in db.Pipelines
                                 join ps in db.PipeSystems on p.PipeSystemID equals ps.PipeSystemID
@@ -81,9 +150,125 @@ namespace PipelineFeatureList.Controllers
                            select ptr).ToList();
             ViewData.Add("PTRList", PTRList);
 
+            // check if all circuits in this station Engineering review is approved if so then 'Delivered' button gets enabled.
+            var engapproved = (from vs in db.ValveSection
+                               join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                               where p.PipelineID == pipeline.PipelineID && vs.ValveSectionStatusID >= 8
+                               select new
+                               {
+                                   vs.ValveSectionStatusID
+                               }).ToList();
+            if (pipeline.CircuitCount == engapproved.Count)
+            {
+                if (engapproved.Where(a => a.ValveSectionStatusID == 8).Count() > 0)
+                {
+                    ViewData.Add("Reviewed", "true");
+                }
+            }
+
+
+            // check if all circuits in this station are delivered, if so then 'Client Approved' button gets enabled.
+            var delivered = (from vs in db.ValveSection
+                               join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                               where p.PipelineID == pipeline.PipelineID && vs.ValveSectionStatusID >= 9
+                               select new
+                               {
+                                   vs.ValveSectionStatusID
+                               }).ToList();
+            if (pipeline.CircuitCount == delivered.Count)
+            {
+                if (delivered.Where(a => a.ValveSectionStatusID == 9).Count() > 0)
+                {
+                    ViewData.Add("Delivered", "true");
+                }
+            }            
+
+            // If all circuits in this station are delivered more than 7 days ago, then enable 'Default Client Acceptance' button gets enabled.
+            var accept = (from vs in db.ValveSection
+                          join p in db.Pipelines on vs.PipelineID equals p.PipelineID
+                          join wh in db.WorkflowHistories on vs.ValveSectionID equals wh.ValveSectionID
+                          where p.PipelineID == pipeline.PipelineID && vs.ValveSectionStatusID >= 9 && wh.New_WorkflowStatusID >= 9
+                          select new
+                          {
+                              changedOn = wh.ChangedOn
+
+                          }).ToList();
+           
+            if (accept.Count != 0 && (DateTime.Now - accept.Min(a => a.changedOn)).TotalDays > 7 && accept.Count == pipeline.CircuitCount )
+            {
+
+                ViewData.Add("accept", "true");
+                //ViewData.Remove("Delivered");
+            }
             
+            return View(pipeline);
+        }
+
+        // GET: /Pipeline/StatusChange/5
+
+        public ActionResult StatusChange(int id = 0, string description = "",int newStatus= 0, int oldStatus = 0)
+        {
+            Pipeline pipeline = db.Pipelines.Find(id);
+            if (pipeline == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Message = description;
+            Session["StatusChangeNewStatusID"] = newStatus;
+            Session["StatusChangeOldStatusID"] = oldStatus;
+            return View(pipeline);
+        }
+
+        // POST: /ValveSection/StatusChange/5
+        [HttpPost]
+        public ActionResult StatusChange(Pipeline pipeline)
+        {
+            if (ModelState.IsValid)
+            {
+                pipeline.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
+                pipeline.ModifiedOn = DateTime.Now;
+                               
+                int? newStatus = Convert.ToInt32(Session["StatusChangeNewStatusID"].ToString());
+                int? oldStatus = Convert.ToInt32(Session["StatusChangeOldStatusID"].ToString());
+                //ValveSection valveSection = new ValveSection();
+                //db.Entry(valveSection).State = EntityState.Modified;
+                //db.SaveChanges();
+
+                using (PipelineFeatureListDBContext db1 = new PipelineFeatureListDBContext())
+                {
+
+                    db1.ValveSection
+                          .Where(x => x.PipelineID == pipeline.PipelineID)
+                          .ToList()
+                          .ForEach(a =>
+                          {
+                              a.ValveSectionStatusID = newStatus;
+                              InsertWorkHistory(a.ValveSectionID, oldStatus.Value, 1, newStatus.Value);
+                          }
+                          );
+
+                    db1.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
 
             return View(pipeline);
+        }
+
+        private void InsertWorkHistory(long ValveSectionID, int origStatusID, int actionID, int newsStatusID)
+        {
+            PipelineFeatureListDBContext db1 = new PipelineFeatureListDBContext();
+
+            WorkflowHistory wf = new WorkflowHistory();
+            wf.ValveSectionID = Convert.ToInt64(ValveSectionID);
+            wf.ChangedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
+            wf.ChangedOn = DateTime.Now;
+            wf.Old_WorkflowStatusID = origStatusID;
+            wf.WorkflowActionID = actionID;
+            wf.New_WorkflowStatusID = newsStatusID;
+
+            db1.WorkflowHistories.Add(wf);
+            db1.SaveChanges();
         }
 
         //

@@ -641,6 +641,9 @@
     <Content Include="Views\Pipeline\PTDocumentsDisplay.cshtml" />
     <Content Include="Views\Pipeline\EditPTR.cshtml" />
     <Content Include="Views\Pipeline\DeletePTR.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Pipeline\StatusChange.cshtml" />
+=======
     <Content Include="Views\PTTestMedium\Create.cshtml" />
     <Content Include="Views\PTTestMedium\Delete.cshtml" />
     <Content Include="Views\PTTestMedium\Details.cshtml" />
@@ -651,6 +654,7 @@
     <Content Include="Views\ANSIRatingsLookup - Copy\Details.cshtml" />
     <Content Include="Views\ANSIRatingsLookup - Copy\Edit.cshtml" />
     <Content Include="Views\ANSIRatingsLookup - Copy\Index.cshtml" />
+>>>>>>> upstream/master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\CrossingUploads\" />

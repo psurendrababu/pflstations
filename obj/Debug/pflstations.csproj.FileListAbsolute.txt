@@ -32,3 +32,11 @@ C:\Surendra\PFL\obj\Debug\pflstations.csproj.CoreCompileInputs.cache
 C:\Surendra\PFL\obj\Debug\pflstations.csproj.CopyComplete
 C:\Surendra\PFL\obj\Debug\pflstations.dll
 C:\Surendra\PFL\obj\Debug\pflstations.pdb
+C:\workspace\pflstations\bin\pflstations.dll.config
+C:\workspace\pflstations\bin\pflstations.dll
+C:\workspace\pflstations\bin\pflstations.pdb
+C:\workspace\pflstations\obj\Debug\pflstations.csprojAssemblyReference.cache
+C:\workspace\pflstations\obj\Debug\pflstations.csproj.CoreCompileInputs.cache
+C:\workspace\pflstations\obj\Debug\pflstations.csproj.CopyComplete
+C:\workspace\pflstations\obj\Debug\pflstations.dll
+C:\workspace\pflstations\obj\Debug\pflstations.pdb

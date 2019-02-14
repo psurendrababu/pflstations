@@ -207,7 +207,13 @@ namespace PipelineFeatureList.Controllers
                           where v.ValveSectionID == ValveSectionID
                           select new OverviewEngineer { EngineerData = u }).ToList();
             ViewData.Add("EngineerData", Emodel);
-            
+
+            int vsf = (from vs in db.ValveSection
+                                    join p in db.ValveSectionFeatures on vs.ValveSectionID equals p.ValveSectionID
+                                    where vs.ValveSectionID == ValveSectionID
+                       select vs).Count();
+
+            ViewData.Add("vsf", vsf);
 
             return View(model);
         }
@@ -664,19 +670,40 @@ namespace PipelineFeatureList.Controllers
             }
             Int64 currvalvesection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
 
-            Int64 currfeaturenumber = Convert.ToInt64(valvesectionfeature.FeatureNumber+1);
-            var featurenumberall =
-                    from v in db.ValveSectionFeatures
-                    where v.ValveSectionID == currvalvesection && v.FeatureNumber < currfeaturenumber
-                    orderby v.FeatureNumber descending
-                    select new { featurenumber = v.FeatureNumber };
-            
-            decimal featurenumber = featurenumberall.First().featurenumber + (decimal).01;
-                        
-            Session["CurrentFeatureNumber"] = featurenumber;
-            ViewBag.FeatureNumber = featurenumber;
+            //Int64 currfeaturenumber = Convert.ToInt64(valvesectionfeature.FeatureNumber+1);
+            //var featurenumberall =
+            //        from v in db.ValveSectionFeatures
+            //        where v.ValveSectionID == currvalvesection && v.FeatureNumber < currfeaturenumber
+            //        orderby v.FeatureNumber descending
+            //        select new { featurenumber = v.FeatureNumber };
+
+            //decimal featurenumber = featurenumberall.First().featurenumber + (decimal).01;
+
+            //Session["CurrentFeatureNumber"] = featurenumber;
+            //ViewBag.FeatureNumber = featurenumber;
+
+            Session["CurrentFeatureNumber"] = valvesectionfeature.FeatureNumber+1;
+            ViewBag.FeatureNumber = valvesectionfeature.FeatureNumber+1;
+
+            //update feature number for all the other records
+            using (PipelineFeatureListDBContext db1 = new PipelineFeatureListDBContext())
+            {
+
+                db1.ValveSectionFeatures
+                      .Where(x => x.ValveSectionID == valvesectionfeature.ValveSectionID && x.FeatureNumber > valvesectionfeature.FeatureNumber)
+                      .ToList()
+                      .ForEach(a =>
+                      {
+                          a.FeatureNumber = a.FeatureNumber + 1;
+                      }
+                      );
+
+                db1.SaveChanges();
+            }
 
             ActionSetups();
+
+            
 
             string CurSta = (from p in db.Pipelines
                              join vs in db.ValveSection on p.PipelineID equals vs.PipelineID
@@ -930,6 +957,19 @@ namespace PipelineFeatureList.Controllers
             ValveSectionFeature valvesectionfeature = db.ValveSectionFeatures.Find(id);
             db.ValveSectionFeatures.Remove(valvesectionfeature);
             db.SaveChanges();
+
+            //reorder featuremarknumber
+            db.ValveSectionFeatures
+            .Where(x => x.ValveSectionID == valvesectionfeature.ValveSectionID && x.FeatureNumber > valvesectionfeature.FeatureNumber)
+            .ToList()
+            .ForEach(a =>
+            {
+                a.FeatureNumber = a.FeatureNumber - 1;
+            }
+            );
+
+            db.SaveChanges();
+            
 
             var deleteValveSectionErrors =
                 from e in db.ValveSectionErrors

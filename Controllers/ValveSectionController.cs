@@ -59,6 +59,7 @@ namespace PipelineFeatureList.Controllers
                              }).ToList();
                 return View(model);
             }
+            
         }
 
         //
@@ -137,7 +138,8 @@ namespace PipelineFeatureList.Controllers
             try { currQC = Convert.ToInt64(Session["UserID"].ToString()); }
             catch { currQC = -1; }
 
-            List<ValveSectionQCAssigned> model = (from v in db.ValveSection
+            //List<ValveSectionQCAssigned> model =
+            var model = (from v in db.ValveSection
                          join vss in db.ValveSectionStatus on v.ValveSectionStatusID equals vss.ValveSectionStatusID into vss1
                          from vssd in vss1.DefaultIfEmpty()
                          join dg in db.DisplayGroups on vssd.DisplayGroupID equals dg.DisplayGroupID into dg1
@@ -674,16 +676,69 @@ namespace PipelineFeatureList.Controllers
             //ViewBag.PipeSystemID = new SelectList(db.PipeSystems, "PipeSystemID", "PipeSystemItem");
             ViewBag.PipelineID = new SelectList(db.Pipelines, "PipelineID", "PipelineItem");
             //ViewBag.ValveSectionStatusID = new SelectList(db.ValveSectionStatus, "ValveSectionStatusID", "ValveSectionStatusItem");
-            var builder = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
-                                          select new
-                                          {
-                                              value = u.UserID,
-                                              text = u.FirstName + " " + u.LastName
-                                          }),
-                            "value",
-                            "text",
-                            null); 
-            ViewBag.BuilderID = builder;
+            //var builder = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
+            //                              select new
+            //                              {
+            //                                  value = u.UserID,
+            //                                  text = u.FirstName + " " + u.LastName
+            //                              }),
+            //                "value",
+            //                "text",
+            //                null); 
+            //ViewBag.BuilderID = builder;
+            
+            var builder = (from u in db.Users.OrderBy(u => u.FirstName)
+                           join ut in db.UsersTypes on u.UserID equals ut.UserID
+                           join gc in db.GroupClassifications on ut.GroupClassificationID equals gc.GroupClassificationID
+                           where gc.GroupClassificationID == 2
+                           select new
+                           {
+                               value = u.UserID,
+                               text = u.FirstName + " " + u.LastName
+                           });
+
+
+            ViewBag.BuilderID = new SelectList(builder, "value", "text");
+
+            
+            var qcer = (from u in db.Users.OrderBy(u => u.FirstName)
+                           join ut in db.UsersTypes on u.UserID equals ut.UserID
+                           join gc in db.GroupClassifications on ut.GroupClassificationID equals gc.GroupClassificationID
+                           where gc.GroupClassificationID == 3
+                           select new
+                           {
+                               value = u.UserID,
+                               text = u.FirstName + " " + u.LastName
+                           });
+
+
+            ViewBag.QCID = new SelectList(qcer, "value", "text");
+
+            var eng = (from u in db.Users.OrderBy(u => u.FirstName)
+                        join ut in db.UsersTypes on u.UserID equals ut.UserID
+                        join gc in db.GroupClassifications on ut.GroupClassificationID equals gc.GroupClassificationID
+                        where gc.GroupClassificationID == 4
+                        select new
+                        {
+                            value = u.UserID,
+                            text = u.FirstName + " " + u.LastName
+                        });
+
+
+            ViewBag.EngineerID = new SelectList(eng, "value", "text");
+
+            var caid = (from u in db.Users.OrderBy(u => u.FirstName)
+                       join ut in db.UsersTypes on u.UserID equals ut.UserID
+                       join gc in db.GroupClassifications on ut.GroupClassificationID equals gc.GroupClassificationID
+                       where gc.GroupClassificationID == 6
+                       select new
+                       {
+                           value = u.UserID,
+                           text = u.FirstName + " " + u.LastName
+                       });
+
+
+            ViewBag.CAID = new SelectList(caid, "value", "text");
 
             return View();
         }
@@ -694,37 +749,96 @@ namespace PipelineFeatureList.Controllers
         [HttpPost]
         public ActionResult Create(ValveSection ValveSection)
         {
-                ValveSection.CreatedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
-                ValveSection.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
-                ValveSection.CreatedOn = DateTime.Now;
-                ValveSection.ModifiedOn = DateTime.Now;
-                ValveSection.PipeSystemID = (from p in db.Pipelines where p.PipelineID == ValveSection.PipelineID select p.PipeSystemID).FirstOrDefault();
+            //bool hasError = false;
+            //if (ValveSection.ValveSectionID == 0)
+            //{
+            //    ModelState.AddModelError("ValveSectionID", "Please enter valid value to CircuitID");
+            //    hasError = true;
+            //}
+            //if (ValveSection.PipelineID == 0)
+            //{
+            //    ModelState.AddModelError("PipelineID", "Please select value to Station");
+            //    hasError = true;
+            //}
+            //if (ValveSection.QCID == null)
+            //{
+            //    ModelState.AddModelError("QCID", "Please select value to Qcer");
+            //    hasError = true;
+            //}
+            //if (ValveSection.EngineerID == null)
+            //{
+            //    ModelState.AddModelError("EngineerID", "Please select value to Engineer");
+            //    hasError = true;
+            //}
+            //if (ValveSection.CAID == null)
+            //{
+            //    ModelState.AddModelError("CAID", "Please select value to Certification Approver");
+            //    hasError = true;
+            //}            
 
-                db.ValveSection.Add(ValveSection);
-                db.SaveChanges();
+            //if(hasError)
+            //    return View(ValveSection);
+                       
 
-                // Workflow Actions IDs
-                var approve = (from w in db.WorkflowActions where w.WorkflowActionItem == "Approve"
-                                  select new { w.WorkflowActionID }).FirstOrDefault();
-                var unassigned = (from v in db.ValveSectionStatus where v.ValveSectionStatusItem == "Unassigned / New"
-                                  select new { v.ValveSectionStatusID }).FirstOrDefault();
+            //var errors = ModelState
+            //.Where(x => x.Value.Errors.Count > 0)
+            //.Select(x => new { x.Key, x.Value.Errors })
+            //.ToArray();
 
-                InsertWorkHistory(ValveSection, 0, approve.WorkflowActionID, unassigned.ValveSectionStatusID);
-                ValveSection.ValveSectionStatusID = unassigned.ValveSectionStatusID;
-                if (ValveSection.BuilderID != null)
-                {
-                    var readyforbuild = (from v in db.ValveSectionStatus
-                                         where v.ValveSectionStatusItem == "Ready for Build"
-                                      select new { v.ValveSectionStatusID }).FirstOrDefault();
-                    InsertWorkHistory(ValveSection, unassigned.ValveSectionStatusID, approve.WorkflowActionID, readyforbuild.ValveSectionStatusID);
-                    ValveSection.ValveSectionStatusID = readyforbuild.ValveSectionStatusID;
+            //if (!ModelState.IsValid)
+            //    return View(ValveSection);
+
+            ValveSection.CreatedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
+            ValveSection.ModifiedBy_UserID = Convert.ToInt64(Session["UserID"].ToString());
+            ValveSection.CreatedOn = DateTime.Now;
+            ValveSection.ModifiedOn = DateTime.Now;
+            ValveSection.PipeSystemID = (from p in db.Pipelines where p.PipelineID == ValveSection.PipelineID select p.PipeSystemID).FirstOrDefault();
+
+            db.ValveSection.Add(ValveSection);
+            db.SaveChanges();
+
+            // Workflow Actions IDs
+            var approve = (from w in db.WorkflowActions
+                            where w.WorkflowActionItem == "Approve"
+                            select new { w.WorkflowActionID }).FirstOrDefault();
+            //var unassigned = (from v in db.ValveSectionStatus where v.ValveSectionStatusItem == "Unassigned / New"
+            //                  select new { v.ValveSectionStatusID }).FirstOrDefault();
+            var unassigned = (from v in db.ValveSectionStatus
+                                where v.ValveSectionStatusItem == "New Circuit"
+                                select new { v.ValveSectionStatusID }).FirstOrDefault();
+
+            InsertWorkHistory(ValveSection, 0, approve.WorkflowActionID, unassigned.ValveSectionStatusID);
+            ValveSection.ValveSectionStatusID = unassigned.ValveSectionStatusID;
+            if (ValveSection.BuilderID != null)
+            {
+                var readyforbuild = (from v in db.ValveSectionStatus
+                                        where v.ValveSectionStatusItem == "Ready for Build"
+                                        select new { v.ValveSectionStatusID }).FirstOrDefault();
+                InsertWorkHistory(ValveSection, unassigned.ValveSectionStatusID, approve.WorkflowActionID, readyforbuild.ValveSectionStatusID);
+                ValveSection.ValveSectionStatusID = readyforbuild.ValveSectionStatusID;
 
                 db.Entry(ValveSection).State = EntityState.Modified;
                 db.SaveChanges();
-                
-                return RedirectToAction("Index");
-            }
 
+                return RedirectToAction("Index");
+                    
+            }
+            else
+            {
+                var readyforbuild = (from v in db.ValveSectionStatus
+                                            //where v.ValveSectionStatusItem == "Ready for Build"
+                                        where v.ValveSectionStatusItem == "New Circuit"
+                                        select new { v.ValveSectionStatusID }).FirstOrDefault();
+                InsertWorkHistory(ValveSection, unassigned.ValveSectionStatusID, approve.WorkflowActionID, readyforbuild.ValveSectionStatusID);
+                ValveSection.ValveSectionStatusID = readyforbuild.ValveSectionStatusID;
+
+                db.Entry(ValveSection).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+                //return View(ValveSection);
+            }
+            
             return View(ValveSection);
         }
 
@@ -768,15 +882,26 @@ namespace PipelineFeatureList.Controllers
                             "value",
                             "text", ValveSection.EngineerID);
             ViewBag.EngineerID = engineer;
-            var finalengineer = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
+
+            var certifier = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
                                            select new
                                            {
                                                value = u.UserID,
                                                text = u.FirstName + " " + u.LastName
                                            }),
-                            "value",
-                            "text", ValveSection.FinalEngineerID);
-            ViewBag.FinalEngineerID = finalengineer;
+                "value",
+                "text", ValveSection.CAID);
+            ViewBag.CAID = certifier;
+
+            //var finalengineer = new SelectList((from u in db.Users.OrderBy(u => u.FirstName).ToList()
+            //                               select new
+            //                               {
+            //                                   value = u.UserID,
+            //                                   text = u.FirstName + " " + u.LastName
+            //                               }),
+            //                "value",
+            //                "text", ValveSection.FinalEngineerID);
+            //ViewBag.FinalEngineerID = finalengineer;
             return View(ValveSection);
         }
 
@@ -800,7 +925,7 @@ namespace PipelineFeatureList.Controllers
                                where w.WorkflowActionItem == "Approve"
                                select new { w.WorkflowActionID }).FirstOrDefault();
                 var unassigned = (from v in db.ValveSectionStatus
-                                  where v.ValveSectionStatusItem == "Unassigned / New"
+                                  where v.ValveSectionStatusItem == "New Circuit"
                                   select new { v.ValveSectionStatusID }).FirstOrDefault();
 
                 if (ValveSection.BuilderID != null && ValveSection.ValveSectionStatusID == unassigned.ValveSectionStatusID)
@@ -1075,16 +1200,17 @@ namespace PipelineFeatureList.Controllers
                                             v.CopyDataToHistory, v.GenerateGrades, v.QueueCertification, v.DynamicSegmentation, v.RedirectAction }).FirstOrDefault();
 
                 // Assign Users as necessary
-                if (newStatusActions.AssignBuilder && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
-                    ValveSection.BuilderID = Convert.ToInt64(Session["UserID"].ToString());
-                if (newStatusActions.AssignQC && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
-                    ValveSection.QCID = Convert.ToInt64(Session["UserID"].ToString());
-                if (newStatusActions.AssignEngineer && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
-                    ValveSection.EngineerID = Convert.ToInt64(Session["UserID"].ToString());
-                if (newStatusActions.AssignFinalEngineer && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
-                    ValveSection.FinalEngineerID = Convert.ToInt64(Session["UserID"].ToString());
-                if (newStatusActions.AssignAnnualReviewer && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
-                    ValveSection.AnnualReviewerID = Convert.ToInt64(Session["UserID"].ToString());
+               //commented by Siva
+                //if (newStatusActions.AssignBuilder && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
+                //    ValveSection.BuilderID = Convert.ToInt64(Session["UserID"].ToString());
+                //if (newStatusActions.AssignQC && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
+                //    ValveSection.QCID = Convert.ToInt64(Session["UserID"].ToString());
+                //if (newStatusActions.AssignEngineer && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
+                //    ValveSection.EngineerID = Convert.ToInt64(Session["UserID"].ToString());
+                //if (newStatusActions.AssignFinalEngineer && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
+                //    ValveSection.FinalEngineerID = Convert.ToInt64(Session["UserID"].ToString());
+                //if (newStatusActions.AssignAnnualReviewer && approveORreject.WorkflowAction.WorkflowActionItem == "Approve")
+                //    ValveSection.AnnualReviewerID = Convert.ToInt64(Session["UserID"].ToString());
 
                 ValveSection.ValveSectionStatusID = newStatus;
                 db.Entry(ValveSection).State = EntityState.Modified;
@@ -1113,12 +1239,34 @@ namespace PipelineFeatureList.Controllers
                 if (newStatusActions.QueueCertification)
                     QueueCertification(ValveSection);
 
+                if(origStatus == 3 && newStatus == 4)
+                {
+                    return RedirectToAction("BuildAssigned", "ValveSection");
+                }
+                else if (origStatus == 5 && (newStatus == 2 || newStatus == 6))
+                {
+                    return RedirectToAction("QC", "ValveSection");
+                }                            
+                else if (origStatus == 7 && (newStatus == 2 || newStatus == 4 || newStatus == 8))
+                {
+                    return RedirectToAction("Engineering", "ValveSection"); 
+                }
+                else if(newStatus == 2)
+                {
+                    return RedirectToAction("BuildAssigned", "ValveSection");
+                }
                 // Return to valve sections list if out of user's control
-                if (newStatusActions.RedirectAction != "" && newStatusActions.RedirectAction != null)
-                    return RedirectToAction(newStatusActions.RedirectAction, "ValveSection", null);
+                else if (newStatusActions.RedirectAction == null)
+                    return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
+
+                return RedirectToAction("Index");               
 
                 // Return to Overview screen if still in user's control
-                return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+
+                //return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString(), OrionStationSeries = Session["CurrentOrionStationSeries"].ToString() });
+                //return RedirectToAction("Index", "Overview", new { ValveSectionID = Session["CurrentValveSection"].ToString() });
+                
+
             }
             ViewBag.Message = "An error occurred while processing your request.";
             return View(ValveSection);

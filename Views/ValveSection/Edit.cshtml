@@ -42,8 +42,12 @@
             <td><div class="editor-field">@Html.DropDownList("EngineerID", "- Select an Engineer -")</div></td>
         </tr>
         <tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.FinalEngineerID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("FinalEngineerID", "- Select a Final Engineer -")</div></td>
+            <td><div class="editor-label">@Html.LabelFor(model => model.CAID)</div></td>
+            <td><div class="editor-field">@Html.DropDownList("CAID", "- Select an Certifier -")</div></td>
+        </tr>
+        @*<tr>
+        <td><div class="editor-label">@Html.LabelFor(model => model.FinalEngineerID)</div></td>
+        <td><div class="editor-field">@Html.DropDownList("FinalEngineerID", "- Select a Final Engineer -")</div></td>*@
         <tr>
             <td colspan="2"><p><input type="submit" value="Save" /></p></td>
         </tr>

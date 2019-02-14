@@ -34,6 +34,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CircuitCount)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StationStatus)
+        </th>
         <th></th>
     </tr>
 
@@ -60,6 +63,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CircuitCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StationStatus)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.PipelineID }, htmlAttributes: new { @class = "linkbutton" })

@@ -1,0 +1,47 @@
+﻿@model PipelineFeatureList.Models.Pipeline
+
+@{
+    ViewBag.Title = "Change all Circuits Status in Station";
+}
+
+<h2>Change all Circuits Status in Station</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+<fieldset>
+    <legend>Pipeline</legend>
+
+    @Html.HiddenFor(model => model.PipelineID)
+    @Html.HiddenFor(model => model.PipelineItem)
+    @Html.HiddenFor(model => model.PipeSystemID)
+    @Html.HiddenFor(model => model.CreatedBy_UserID)
+    @Html.HiddenFor(model => model.CreatedOn)
+    @Html.HiddenFor(model => model.Street)
+    @Html.HiddenFor(model => model.CrossStreet)
+    @Html.HiddenFor(model => model.Notes)
+    @Html.HiddenFor(model => model.Town)
+    @Html.HiddenFor(model => model.CircuitCount)
+    @Html.HiddenFor(model => model.StationName)
+
+
+    <table>
+        <tr>
+            <td><div class="editor-field">@Html.Raw(ViewBag.Message)</div></td>
+        </tr>
+        <tr>
+            <td><p><input type="submit" value="Yes" /></p></td>
+        </tr>
+    </table>
+</fieldset>
+}
+
+<div>
+    @Html.ActionLink("No, Back to Details", "Details", "Pipeline", new { id = Model.PipelineID }, htmlAttributes: new { @class = "linkbutton" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}

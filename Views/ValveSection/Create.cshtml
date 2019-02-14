@@ -14,23 +14,37 @@
 
         <table>
             <tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.PipelineID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("PipelineID", "- Select a Station -") @Html.ValidationMessageFor(x => x.PipelineID)</div></td>
+                <td><div class="editor-label">@Html.LabelFor(model => model.PipelineID)</div></td>
+                <td><div class="editor-field">
+                 @Html.DropDownList("PipelineID", "- Select a Station -")                
+            </div></td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.ValveSectionItem)
                 </td>
                 <td>
-                    @Html.EditorFor(model => model.ValveSectionItem)
+                    @Html.EditorFor(model => model.ValveSectionItem)                    
                 </td>
             </tr>
             <tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.BuilderID)</div></td>
-            <td><div class="editor-field">@Html.DropDownList("BuilderID", "- Select a Builder -")</div></td>
+                <td><div class="editor-label">@Html.LabelFor(model => model.BuilderID)</div></td>
+                <td><div class="editor-field">@Html.DropDownList("BuilderID", "- Select a Builder -")</div></td>
             </tr>
             <tr>
-            <td colspan="2"><p><input type="submit" value="Create" /></p></td>
+                <td><div class="editor-label">@Html.LabelFor(model => model.QCID)</div></td>
+                <td><div class="editor-field">@Html.DropDownList("QCID", "- Select a QCer -")</div></td>
+            </tr>
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model => model.EngineerID)</div></td>
+                <td><div class="editor-field">@Html.DropDownList("EngineerID", "- Select a Engineer -")</div></td>
+            </tr>
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model => model.CAID)</div></td>
+                <td><div class="editor-field">@Html.DropDownList("CAID", "- Select a Certifier -")</div></td>
+            </tr>
+            <tr>
+                <td colspan="2"><p><input type="submit" value="Create" /></p></td>
             </tr>
         </table>
     </fieldset>
