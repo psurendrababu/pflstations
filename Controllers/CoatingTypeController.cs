@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PipelineFeatureList.Models;
+using System.Data.SqlClient;
 
 namespace PipelineFeatureList.Controllers
 {
@@ -52,6 +53,11 @@ namespace PipelineFeatureList.Controllers
             {
                 db.CoatingTypes.Add(coatingtype);
                 db.SaveChanges();
+
+                if (Insert_CodeLookUp_Audit("Coating Type", "Create", "", coatingtype.CoatingTypeItem))
+                {
+                    //nothing to do at this point.
+                }
                 return RedirectToAction("Index");
             }
 
@@ -81,6 +87,7 @@ namespace PipelineFeatureList.Controllers
             {
                 return HttpNotFound();
             }
+            Session["CodeLookUpAduit_Oldvalue"] = coatingtype.CoatingTypeItem;
             return View(coatingtype);
         }
 
@@ -94,6 +101,10 @@ namespace PipelineFeatureList.Controllers
             {
                 db.Entry(coatingtype).State = EntityState.Modified;
                 db.SaveChanges();
+                if (Insert_CodeLookUp_Audit("Coating Type", "Edit", Session["CodeLookUpAduit_Oldvalue"].ToString(), coatingtype.CoatingTypeItem))
+                {
+                    //nothing to do at this point.
+                }
                 return RedirectToAction("Index");
             }
             return View(coatingtype);
@@ -134,6 +145,10 @@ namespace PipelineFeatureList.Controllers
             CoatingType coatingtype = db.CoatingTypes.Find(id);
             db.CoatingTypes.Remove(coatingtype);
             db.SaveChanges();
+            if (Insert_CodeLookUp_Audit("Coating Type", "Delete", coatingtype.CoatingTypeItem, ""))
+            {
+                //nothing to do at this point.
+            }
             return RedirectToAction("Index");
         }
 
@@ -141,6 +156,40 @@ namespace PipelineFeatureList.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public bool Insert_CodeLookUp_Audit(string codelookup_name, string act, string oldvalue, string newvalue)
+        {
+            SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("spInsert_dbo_CodeLookUpAudit", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@CodeLookUp_Name", codelookup_name));
+            cmd.Parameters.Add(new SqlParameter("@Action", act));
+            cmd.Parameters.Add(new SqlParameter("@Old_Value", oldvalue));
+            cmd.Parameters.Add(new SqlParameter("@New_Value", newvalue));
+            cmd.Parameters.Add(new SqlParameter("@Modified_User", Session["UserName"].ToString()));
+            cmd.Parameters.Add(new SqlParameter("@Modified_Date", DateTime.Now));
+            try
+            {
+                cmd.BeginExecuteNonQuery(delegate (IAsyncResult ar)
+                {
+                    int rowCount = cmd.EndExecuteNonQuery(ar);                    
+                }, cmd);
+                return true;
+            }
+            catch (SqlException s)
+            {
+                throw s;
+                
+            }
+            catch (Exception e)
+            {
+                throw e;
+                
+            }
+            
+
         }
     }
 }

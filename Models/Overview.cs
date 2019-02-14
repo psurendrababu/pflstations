@@ -13,6 +13,7 @@ namespace PipelineFeatureList.Models
         public ANSIRating ANSIRatingData { get; set; }
         public BendRadius BendRadiusData { get; set; }
         public ClassExceptions ClassExceptionsData { get; set; }
+       
         public CoatingType CoatingTypeData { get; set; }
         public ConstructionType ConstructionTypeData { get; set; }
         public CurrentClassLocation CurrentClassLocationData { get; set; }

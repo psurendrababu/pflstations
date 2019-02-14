@@ -9,66 +9,67 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>FeatureType</legend>
+<fieldset>
+    <legend>FeatureType</legend>
+    
 
-        <table>
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.DisplayNameFor(model => model.Feature)
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.DisplayNameFor(model => model.Feature)
 
-                    </div>
+                </div>
 
-                </td>
-                <td>
-                    <div class="wide">
-                        @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, "- Select a Feature -", new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
-                        @Html.ValidationMessageFor(model => model.FeatureID)
-                    </div>
-                </td>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.DropDownList("FeatureID", ViewBag.FeatureID as SelectList, "- Select a Feature -", new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                    @Html.ValidationMessageFor(model => model.FeatureID)
+                </div>
+            </td>
 
-            </tr>
+        </tr>
 
 
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.PipeTypeItem)
-                    </div>
-                </td>
-                <td>
-                    <div class="wide">
-                        @Html.EditorFor(model => model.PipeTypeItem)
-                        @Html.ValidationMessageFor(model => model.PipeTypeItem)
-                    </div>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PipeTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.PipeTypeItem)
+                    @Html.ValidationMessageFor(model => model.PipeTypeItem)
+                </div>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <div class="editor-label">
-                        @Html.LabelFor(model => model.RatingType)
-                    </div>
-                </td>
-                <td>
-                    <div >
-                        @*@Html.EditorFor(model => model.RatingType)
-                          @Html.ValidationMessageFor(model => model.RatingType)*@
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.RatingType)
+                </div>
+            </td>
+            <td>
+                <div>
+                    @*@Html.EditorFor(model => model.RatingType)
+                        @Html.ValidationMessageFor(model => model.RatingType)*@
 
-                        Rated:   @Html.RadioButton("RatingType", "Rated")
-                        Non-Rated: @Html.RadioButton("RatingType", "Non-Rated", new { Checked = "checked" })
+                    Rated:   @Html.RadioButton("RatingType", "Rated")
+                    Non-Rated: @Html.RadioButton("RatingType", "Non-Rated", new { Checked = "checked" })
 
-                    </div>
-                </td>
-            </tr>
+                </div>
+            </td>
+        </tr>
 
-        </table>
+    </table>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</fieldset>
 }
 
     <div>

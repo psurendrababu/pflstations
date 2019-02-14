@@ -14,5 +14,7 @@ namespace PipelineFeatureList.Models
         public int FeatureID { get; set; }
         [DisplayName("Feature")]
         public string FeatureItem { get; set; }
+        [DisplayName("Length Lookup")]
+        public bool LengthLookup { get; set; }
     }
 }

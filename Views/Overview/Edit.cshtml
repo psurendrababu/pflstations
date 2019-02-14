@@ -6,113 +6,114 @@
 
 <h2>Edit Circuit Feature</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-<fieldset>
-    <legend>ValveSectionFeature</legend>
+    <fieldset>
+        <legend>ValveSectionFeature</legend>
 
-    @Html.HiddenFor(model => model.ValveSectionFeatureID)
-    @Html.HiddenFor(model => model.ValveSectionID)
-    @Html.HiddenFor(model => model.FeatureNumber)
-    @Html.HiddenFor(model => model.CreatedBy_UserID)
-    @Html.HiddenFor(model => model.CreatedOn)
-    @Html.HiddenFor(model => model.BuilderID)
-    @Html.HiddenFor(model => model.CheckerID)
-    @Html.HiddenFor(model => model.EngineerID)
-    @Html.HiddenFor(model => model.ODRecordMatrixCheck, new { id = "hdnODRecordMatrixCheck" })
-    @Html.HiddenFor(model => model.WTRecordMatrixCheck, new { id = "hdnWTRecordMatrixCheck" })
-    @Html.HiddenFor(model => model.SeamRecordMatrixCheck, new { id = "hdnSeamRecordMatrixCheck" })
-    @Html.HiddenFor(model => model.SpecRatingRecordMatrixCheck, new { id = "hdnSpecRatingRecordMatrixCheck" })
-    @Html.HiddenFor(model => model.GradeRecordMatrixCheck)
+        @Html.HiddenFor(model => model.ValveSectionFeatureID)
+        @Html.HiddenFor(model => model.ValveSectionID)
+        @Html.HiddenFor(model => model.FeatureNumber)
+        @Html.HiddenFor(model => model.CreatedBy_UserID)
+        @Html.HiddenFor(model => model.CreatedOn)
+        @Html.HiddenFor(model => model.BuilderID)
+        @Html.HiddenFor(model => model.CheckerID)
+        @Html.HiddenFor(model => model.EngineerID)
+        @Html.HiddenFor(model => model.ODRecordMatrixCheck, new { id = "hdnODRecordMatrixCheck" })
+        @Html.HiddenFor(model => model.WTRecordMatrixCheck, new { id = "hdnWTRecordMatrixCheck" })
+        @Html.HiddenFor(model => model.SeamRecordMatrixCheck, new { id = "hdnSeamRecordMatrixCheck" })
+        @Html.HiddenFor(model => model.SpecRatingRecordMatrixCheck, new { id = "hdnSpecRatingRecordMatrixCheck" })
+        @Html.HiddenFor(model => model.GradeRecordMatrixCheck)
 
-    <table>
-        <tr>
-            <td>
-                Location
-            </td>
-            <td>
-                @Html.Raw(ViewBag.CurrentLocation)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Station Name
-            </td>
-            <td>
-                @*@Html.Raw(ViewBag.CurrentStationName)*@
-                @Html.Raw(ViewBag.currentPipeline.StationName)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Town
-            </td>
-            <td>
-                @*@Html.Raw(ViewBag.CurrentTown)*@
-                @Html.Raw(ViewBag.currentPipeline.Town)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Street
-            </td>
-            <td>
-                @*@Html.Raw(ViewBag.CurrentStreet)*@
-                @Html.Raw(ViewBag.currentPipeline.Street)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Cross Street
-            </td>
-            <td>
-                @*@Html.Raw(ViewBag.CurrentCrosssStreet)*@
-                @Html.Raw(ViewBag.currentPipeline.CrossStreet)
-            </td>
-        </tr>
+        <table>
+            <tr>
+                <td>
+                    Location
+                </td>
+                <td>
+                    @Html.Raw(ViewBag.CurrentLocation)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Station Name
+                </td>
+                <td>
+                    @*@Html.Raw(ViewBag.CurrentStationName)*@
+                    @Html.Raw(ViewBag.currentPipeline.StationName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Town
+                </td>
+                <td>
+                    @*@Html.Raw(ViewBag.CurrentTown)*@
+                    @Html.Raw(ViewBag.currentPipeline.Town)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Street
+                </td>
+                <td>
+                    @*@Html.Raw(ViewBag.CurrentStreet)*@
+                    @Html.Raw(ViewBag.currentPipeline.Street)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cross Street
+                </td>
+                <td>
+                    @*@Html.Raw(ViewBag.CurrentCrosssStreet)*@
+                    @Html.Raw(ViewBag.currentPipeline.CrossStreet)
+                </td>
+            </tr>
 
 
-        <tr>
-            <td>
-                Current Station
-            </td>
-            <td>
-                @*@Html.Raw(ViewBag.CurrentStation)*@
-                @Html.Raw(ViewBag.currentPipeline.PipelineItem)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Current Flow Circuit
-            </td>
-            <td>
-                @Html.Raw(ViewBag.CurrentCircuitItem)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                From Circuit / To Circuit
-            </td>
-            <td>
-                @Html.Raw(ViewBag.CurrentCircuitItem) / @Html.Raw(ViewBag.CurrentCircuitItem)
-            </td>
+            <tr>
+                <td>
+                    Current Station
+                </td>
+                <td>
+                    @*@Html.Raw(ViewBag.CurrentStation)*@
+                    @Html.Raw(ViewBag.currentPipeline.PipelineItem)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Current Flow Circuit
+                </td>
+                <td>
+                    @Html.Raw(ViewBag.CurrentCircuitItem)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    From Circuit / To Circuit
+                </td>
+                <td>
+                    @Html.Raw(ViewBag.CurrentCircuitItem) / @Html.Raw(ViewBag.CurrentCircuitItem)
+                </td>
 
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.FeatureMarkNumber)
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.FeatureMarkNumber)
-                </div>
-            </td>
-        </tr>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.FeatureMarkNumber)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.FeatureMarkNumber)
+                    </div>
+                </td>
+            </tr>
 
-        <tr>
+            @*<tr>
             <td>
                 <div class="editor-label">
                     @Html.LabelFor(model => model.FromSeries) @Html.LabelFor(model => model.ToSeries)
@@ -124,481 +125,553 @@
                     @Html.EditorFor(model => model.FromSeries) / @Html.EditorFor(model => model.ToSeries)
                 </div>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <table>
-                    <tr>
-                        <td>
-                            <div class="editor-label">@Html.LabelFor(model => model.FeatureID)</div>
-                        </td>
-                        <td>/</td>
-                        <td><div class="editor-label">@Html.LabelFor(model => model.TypeID)</div></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </td>
-            <td>
-                <table>
-                    <tr>
-                        <td>
-                            @if (ViewBag.SelectedFeatureID.SelectedValue == null)
-                            {
-                                <div class="editor-field">
-                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, "-Select a Feature-")
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="editor-field">
-                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
-                                </div>
-                            }
-                        </td>
-                        <td> / </td>
-                        <td>
-                            @if (ViewBag.SelectedTypeID.SelectedValue == null)
-                            {
-                                <div class="editor-field">
-                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, "-Select a Feature Type-")
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="editor-field" id="divPipeTypes">
-                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, new { id = "ddlPipeTypes", onchange = "updateNAdropdowns()" })
-                                </div>
-                            }
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+        </tr>*@
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-label">@Html.LabelFor(model => model.FeatureID)</div>
+                            </td>
+                            <td>/</td>
+                            <td>
+                                <div class="editor-label">@Html.LabelFor(model => model.TypeID)</div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.JobWOPO)
-                </div>
-            </td>
-            <td>
-                <table>
-                    <tr>
-                        <td class="medium">
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.JobWOPO)
-                            </div>
-                        </td>
-                        <td>
-                            <div class="editor-field">
-                                @Html.CheckBoxFor(model => model.JobWOPOUnknown) Unknown
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                                <div class="editor-field">
+                                    @Html.DropDownList("FeatureID", ViewBag.SelectedFeatureID as SelectList, "-Select a Feature-", new { id = "ddlFeatures", onchange = "pipetypesfromfeatures();" })
+                                </div>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.InstallDate)
-                </div>
-            </td>
-            <td>
-                <table>
-                    <tr>
-                        <td>
-                            <div class="editor-field">
-                                @Html.EditorFor(model => model.InstallDate)
-                            </div>
-                        </td>
-                        @*<td>
+
+                            </td>
+                            <td> / </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.DropDownList("TypeID", ViewBag.SelectedTypeID as SelectList, "-Select a Feature Type-", new { id = "ddlPipeTypes", onchange = "onchange_featuretype(); " }) @*updateNAdropdowns(); " })*@
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.PONumber)
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="medium">
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.PONumber)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.POUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.WONumber)
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="medium">
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.WONumber)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.WOUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.JobNumber)
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="medium">
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.JobNumber)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.JobUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.InstallDate)
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.EditorFor(model => model.InstallDate)
+                                </div>
+                            </td>
+                            @*<td>
                             <div class="editor-field">
                                 @Html.CheckBoxFor(model => model.InstallDateUnknown) Unknown
                             </div>
                         </td>*@
-                    </tr>
-                </table>
-            </td>
-        </tr>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ConstructionTypeID)
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ConstructionTypeID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ConstructionTypeID", "- Select a Construction Type -")
+                    </div>
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Feature Notes/Comments")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.TextAreaFor(model => model.Notes, 6, 200, null)
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("OD 1")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, "-Select an OD-")
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("OD 1 Rec ID 1")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID1", onchange = "onchange_doctype(ddlODRecordID1, ODRecordID1DocType); onchangeeventOD();" })
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("OD 1 Rec ID 2")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID2", onchange = "onchangeeventOD(); onchange_doctype(ddlODRecordID2, ODRecordID2DocType);" })
-                </div>
-            </td>
-            @*<td>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Feature Notes/Comments")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Notes, 6, 200, null)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("OD 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @if (ViewBag.SelectedRatingType == "Rated")
+                        {
+
+                            @Html.DropDownList("ODID1", ViewBag.SelectedODID1_Nominal as SelectList, "-Select an OD-", new { id = "ddlODID1" })
+                        }
+                        else
+                        {
+                            @Html.DropDownList("ODID1", ViewBag.SelectedODID1 as SelectList, "-Select an OD-", new { id = "ddlODID1" })
+                        }
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("OD 1 Rec ID 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ODRecordID1", ViewBag.SelectedODRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID1", onchange = "onchangeeventOD();" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("OD 1 Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ODRecordID2", ViewBag.SelectedODRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlODRecordID2", onchange = "onchangeeventOD(); " })
+                    </div>
+                </td>
+                @*<td>
                 <label id="ODRecordMatrixCheck" class="message-error"></label>
             </td>*@
-        </tr>
+            </tr>
+           
+           
 
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.Length)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Length)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("WT 1")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.WallThickness1)
-                    @Html.ValidationMessageFor(model => model.WallThickness1)
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("WT 1 Rec ID 1")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlWTRecordID1", onchange = "onchangeeventWT(); onchange_doctype(ddlWTRecordID1, WTRecordID1DocType);" })
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("WT 1 Rec ID 2")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlWTRecordID2", onchange = "onchangeeventWT(); onchange_doctype(ddlWTRecordID2, WTRecordID2DocType);" })
-                </div>
-            </td>
-            @*<td>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Length)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Length)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("WT 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.WallThickness1, new { id = "editWT1" })
+                        @Html.ValidationMessageFor(model => model.WallThickness1)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("WT 1 Rec ID 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("WTRecordID1", ViewBag.SelectedWTRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlWTRecordID1", onchange = "onchangeeventWT(); " })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("WT 1 Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("WTRecordID2", ViewBag.SelectedWTRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlWTRecordID2", onchange = "onchangeeventWT(); " })
+                    </div>
+                </td>
+                @*<td>
                 <label id="WTRecordMatrixCheck" class="message-error"></label>
             </td>*@
-        </tr>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.ODID2)
-                </div>
-            </td>
-            <td>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ODID2)
+                    </div>
+                </td>
+                <td>
 
-                <div class="editor-field">
-                    @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, "-Select an OD-")
-                </div>
-            </td>
-        </tr>
+                    <div class="editor-field">
+                        @if (ViewBag.SelectedRatingType == "Rated")
+                        {
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.WallThickness2)
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.EditorFor(model => model.WallThickness2)
-                    @Html.ValidationMessageFor(model => model.WallThickness2)
-                </div>
-            </td>
-        </tr>
+                            @Html.DropDownList("ODID2", ViewBag.SelectedODID2_Nominal as SelectList, "-Select an OD-", new { id = "ddlODID2" })
+                        }
+                        else
+                        {
+                            @Html.DropDownList("ODID2", ViewBag.SelectedODID2 as SelectList, "-Select an OD-", new { id = "ddlODID2" })
+                        }
+                    </div>
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Seam Weld Type")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, "-Select a Seam Weld Type-")
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Seam Weld Type Rec ID 1")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlSeamRecordID1", onchange = "onchangeeventST(); onchange_doctype(ddlSeamRecordID1, SeamRecordID1DocType);" })
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Seam Weld Type Rec ID 2")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlSeamRecordID2", onchange = "onchangeeventST(); onchange_doctype(ddlSeamRecordID2, SeamRecordID2DocType);" })
-                </div>
-            </td>
-            @*<td>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.WallThickness2)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.WallThickness2)
+                        @Html.ValidationMessageFor(model => model.WallThickness2)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Seam Weld Type")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("SeamWeldTypeID", ViewBag.SelectedSeamWeldTypeID as SelectList, "-Select a Seam Weld Type-", new { id = "ddlSeamWeldTypeID" })
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Seam Weld Type Rec ID 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("SeamRecordID1", ViewBag.SelectedSeamRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlSeamRecordID1", onchange = "onchangeeventST(); " })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Seam Weld Type Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("SeamRecordID2", ViewBag.SelectedSeamRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlSeamRecordID2", onchange = "onchangeeventST(); " })
+                    </div>
+                </td>
+                @*<td>
                 <label id="SeamRecordMatrixCheck" class="message-error"></label>
             </td>*@
-        </tr>
+            </tr>
 
 
-        <tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
-            <td>
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model => model.SpecRatingID)</div></td>
+                <td>
 
-                <div class="editor-field">
-                    @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, "-Select a Spec Rating-")
-                </div>
-            </td>
-        </tr>
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingID", ViewBag.SelectedSpecRatingID as SelectList, "-Select a Spec Rating-")
+                    </div>
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Grade")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, "-Select a Grade-")
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Grade Rec ID 1")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlGradeRecordID1", onchange = "onchange_doctype(ddlGradeRecordID1, GradeRecordID1DocType); onchangeeventGR(); " })
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Grade Rec ID 2")
-                </div>
-            </td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlGradeRecordID2", onchange = "onchange_doctype(ddlGradeRecordID2, GradeRecordID2DocType); " })
-                </div>
-            </td>
-            @*<td>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Grade")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("GradeID", ViewBag.SelectedGradeID as SelectList, "-Select a Grade-", new { id = "ddlGradeID" })
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Grade Rec ID 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("GradeRecordID1", ViewBag.SelectedGradeRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlGradeRecordID1", onchange = "onchangeeventGR(); " })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Grade Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("GradeRecordID2", ViewBag.SelectedGradeRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlGradeRecordID2", onchange = "onchangeeventGR(); " })
+                    </div>
+                </td>
+                @*<td>
                 <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
             </td>*@
-        </tr>
+            </tr>
 
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Rating Class")
-                </div>
-            </td>            
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, "-Select a Rating Class-")
-                </div>
-            </td>                        
-        </tr>
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Rating Class Rec ID 1")
-                </div>
-            </td>            
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR(); onchange_doctype(ddlSpecRatingRecordID1, SpecRatingRecordID1DocType);" })
-                </div>
-            </td>                       
-        </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Rating Class")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("ANSIRatingID", ViewBag.SelectedANSIRatingID as SelectList, "-Select a Rating Class-", new { id = "ddlANSIRatingID" })
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.Label("Rating Class Rec ID 2")
-                </div>
-            </td>            
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR(); onchange_doctype(ddlSpecRatingRecordID2, SpecRatingRecordID2DocType);" })
-                </div>
-            </td>
-            @*<td>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Rating Class Rec ID 1")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingRecordID1", ViewBag.SelectedSpecRatingRecordID1 as SelectList, "-Select a Record Identifier-", new { id = "ddlSpecRatingRecordID1", onchange = "onchangeeventSR();" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.Label("Rating Class Rec ID 2")
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("SpecRatingRecordID2", ViewBag.SelectedSpecRatingRecordID2 as SelectList, "-Select a Record Identifier-", new { id = "ddlSpecRatingRecordID2", onchange = "onchangeeventSR();" })
+                    </div>
+                </td>
+                @*<td>
                 <label id="SpecRatingRecordMatrixCheck" class="message-error"></label>
-            </td>*@                    
-        </tr>
+            </td>*@
+            </tr>
 
 
-        <tr>
-            <td>
-                <div class="editor-label">
-                    @Html.LabelFor(model => model.MaterialTypeID)
-                </div>
-            </td>
-            <td>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.MaterialTypeID)
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, "-Select a Material Type-", new { id = "ddlMaterialTypeID" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><div class="editor-label">@Html.LabelFor(model => model.CoatingTypeID)</div></td>
+                <td>
+                    <div class="editor-field">
+                        @Html.DropDownList("CoatingTypeID", "- Select a Coating Type -")
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.Description)</div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="wide">
+                                    @Html.EditorFor(model => model.Description)
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    @Html.CheckBoxFor(model => model.DescriptionUnknown) Unknown
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">@Html.LabelFor(model => model.ManufacturerID)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MFRModelNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.MFRModelNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.HeatNumber)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.HeatNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @*Class Exceptions*@
+                    @Html.LabelFor(model => model.ClassExceptionsID)
+                </td>
+                <td>
+                    @Html.DropDownList("ClassExceptionsID", "- Select Class Exceptions -")
+                </td>
+
+
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CurrentClassLoc)
+                </td>
+                <td>
+                    @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.OperatingPressure)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.OperatingPressure)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.PTRID)
+                </td>
+                <td>
+                    @Html.DropDownList("PTRID", "- Select a Pressure Test Record -")
+                </td>
+
+                @*<td>
                 <div class="editor-field">
-                    @Html.DropDownList("MaterialTypeID", ViewBag.SelectedMaterialTypeID as SelectList, "-Select a Material Type-")
+                    @Html.CheckBoxFor(model => model.PTRIDUnknown) Unknown
                 </div>
-            </td>
-        </tr>
+            </td>*@
 
-        <tr>
-            <td><div class="editor-label">@Html.LabelFor(model => model.CoatingTypeID)</div></td>
-            <td>
-                <div class="editor-field">
-                    @Html.DropDownList("CoatingTypeID", "- Select a Coating Type -")
-                </div>
-            </td>
-        </tr>
+            </tr>
 
-        <tr>
-            <td>
-                <div class="editor-label">@Html.LabelFor(model => model.Description)</div>
-            </td>
-            <td>
-                <table>
-                    <tr>
-                        <td>
-                            <div class="wide">
-                                @Html.EditorFor(model => model.Description)
-                            </div>
-                        </td>
-                        <td>
-                            <div class="editor-field">
-                                @Html.CheckBoxFor(model => model.DescriptionUnknown) Unknown
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <div class="editor-label">@Html.LabelFor(model => model.ManufacturerID)</div>
-            </td>
-            <td>
-                <div class="editor-field">@Html.DropDownList("ManufacturerID", "- Select a Manufacturer -")</div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.MFRModelNumber)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.MFRModelNumber)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @*Class Exceptions*@
-                @Html.LabelFor(model => model.ClassExceptionsID)
-            </td>
-            <td>
-                @Html.DropDownList("ClassExceptionsID", "- Select Class Exceptions -")
-            </td>
-
-
-        </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.CurrentClassLoc)
-            </td>
-            <td>
-                @Html.DropDownList("CurrentClassLoc", "- Select Class Location -")
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.OperatingPressure)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.OperatingPressure)
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                @Html.LabelFor(model => model.PTRID)
-            </td>
-            <td>
-                @Html.DropDownList("PTRID", "- Select a Pressure Test Record -")
-            </td>
-        </tr>
-
-        @*<tr>
+            @*<tr>
             <td>
                 HCA Status
             </td>
@@ -607,13 +680,13 @@
             </td>
         </tr>*@
 
-    </table>
+        </table>
 
-    <p>
-        <input type="submit" value="Save" />
-    </p>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
 
-</fieldset>
+    </fieldset>
 }
 
 <div>
@@ -621,8 +694,8 @@
 </div>
 
 @section Scripts {
-  @*@Scripts.Render("~/bundles/jqueryval")*@
-  @*onchangeevent*@
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @*onchangeevent*@
     <script type="text/javascript">
         function onchangeevent(e) {
             var start = parseFloat($("#tbGISAlignStart").val());
@@ -634,7 +707,190 @@
                 $("#lblLength").html("0"); //This shows the calculated field
         }
     </script>
-  @*onchangeeventlength*@
+
+    <script type="text/javascript">
+
+        function load_ODActual() {
+            var array = @Html.Raw(Json.Encode(@ViewBag.SelectedODID1));            
+            var items = "";
+            var vFeatureType = document.getElementById('ddlPipeTypes');
+            var idx = vFeatureType.selectedIndex;
+
+            var selectedOD = $("#ddlODID1").val();   
+            items += ("<option value='0'>- Select an OD -</option>");
+            for (i = 0; i < array.length; i++) {
+                var amt = parseFloat(array[i].Text);
+                var dataText = amt.toFixed(3); 
+                if (selectedOD.toString() == array[i].Value && idx > 0) {
+                    items += "<option value='" + array[i].Value + "' selected>" + dataText + "</option>";
+                }                
+                items += "<option value='" + array[i].Value + "'>" + dataText + "</option>";
+            }
+
+            $("#ddlODID1").html(items);
+            $("#ddlODID1").removeAttr('disabled');
+
+            array = @Html.Raw(Json.Encode(@ViewBag.SelectedODID2));            
+            items = "";
+          
+            selectedOD = $("#ddlODID2").val();   
+            items += ("<option value='0'>- Select an OD -</option>");
+            for (i = 0; i < array.length; i++) {
+                var amt = parseFloat(array[i].Text);
+                var dataText = amt.toFixed(3); 
+                if (selectedOD.toString() == array[i].Value && idx > 0) {
+                    items += "<option value='" + array[i].Value + "' selected>" + dataText + "</option>";
+                }                
+                items += "<option value='" + array[i].Value + "'>" + dataText + "</option>";
+            }
+
+            $("#ddlODID2").html(items);
+            $("#ddlODID2").removeAttr('disabled');
+        };
+
+        function load_ODNominal() {
+            var array = @Html.Raw(Json.Encode(@ViewBag.SelectedODID1_nominal));            
+            var items = "";
+            var vFeatureType = document.getElementById('ddlPipeTypes');
+            var idx = vFeatureType.selectedIndex;
+            var selectedOD1 = $("#ddlODID1").val();
+
+            items += ("<option value='0'>- Select an OD -</option>");
+            for (i = 0; i < array.length; i++) {
+                var amt = parseFloat(array[i].Text);
+                var dataText = amt.toFixed(3);
+                if (selectedOD1.toString() == array[i].Value && idx > 0) {
+                    items += "<option value='" + array[i].Value + "' selected>" + dataText + "</option>";
+                } 
+                items += "<option value='" + array[i].Value + "'>" + dataText + "</option>";
+            }
+
+            $("#ddlODID1").html(items);
+            $("#ddlODID1").removeAttr('disabled');
+
+
+            array = @Html.Raw(Json.Encode(@ViewBag.SelectedODID2_nominal));            
+            items = "";
+            
+            selectedOD = $("#ddlODID2").val();
+
+            items += ("<option value='0'>- Select an OD -</option>");
+            for (i = 0; i < array.length; i++) {
+                var amt = parseFloat(array[i].Text);
+                var dataText = amt.toFixed(3);
+                if (selectedOD.toString() == array[i].Value && idx > 0) {
+                    items += "<option value='" + array[i].Value + "' selected>" + dataText + "</option>";
+                } 
+                items += "<option value='" + array[i].Value + "'>" + dataText + "</option>";
+            }
+
+            $("#ddlODID2").html(items);
+            $("#ddlODID2").removeAttr('disabled');
+        };
+
+
+        function onchange_featuretype() {      
+            var selectedFeature = $("#ddlPipeTypes").val(); 
+            var array = @Html.Raw(Json.Encode(@ViewBag.FeatureTypeRated)); 
+
+            var featuretypearray = array.filter(function (val) {               
+                return (val.Value.toString() === selectedFeature.toString());
+            });
+            if (featuretypearray.length > 0) {               
+                if (featuretypearray[0].Text == "Rated") {                    
+                    $("#editWT1").prop("disabled", true); 
+                    $("#ddlWTRecordID1").prop("disabled", true); 
+                    $("#ddlWTRecordID2").prop("disabled", true); 
+
+                    $("#ddlSeamWeldTypeID").prop("disabled", true);
+                    $("#ddlSeamRecordID1").prop("disabled", true);
+                    $("#ddlSeamRecordID2").prop("disabled", true);
+
+                    $("#ddlGradeID").prop("disabled", true);
+                    $("#ddlGradeRecordID1").prop("disabled", true);
+                    $("#ddlGradeRecordID2").prop("disabled", true);
+
+                    $("#ddlODID1").prop("disabled", false);
+                    $("#ddlODRecordID1").prop("disabled", false);
+                    $("#ddlODRecordID2").prop("disabled", false);
+
+                    $("#ddlANSIRatingID").prop("disabled", false);
+                    $("#ddlSpecRatingRecordID1").prop("disabled", false);
+                    $("#ddlSpecRatingRecordID2").prop("disabled", false);
+                    load_ODNominal();
+
+                   
+                }
+                else if (featuretypearray[0].Text == "Non-Rated") {
+                    $("#editWT1").prop("disabled", false);
+                    $("#ddlWTRecordID1").prop("disabled", false);
+                    $("#ddlWTRecordID2").prop("disabled", false);
+
+                    $("#ddlSeamWeldTypeID").prop("disabled", false);
+                    $("#ddlSeamRecordID1").prop("disabled", false);
+                    $("#ddlSeamRecordID2").prop("disabled", false);
+
+                    $("#ddlGradeID").prop("disabled", false);
+                    $("#ddlGradeRecordID1").prop("disabled", false);
+                    $("#ddlGradeRecordID2").prop("disabled", false);
+
+                    $("#ddlODID1").prop("disabled", false);
+                    $("#ddlODRecordID1").prop("disabled", false);
+                    $("#ddlODRecordID2").prop("disabled", false);
+
+                    $("#ddlANSIRatingID").prop("disabled", true);
+                    $("#ddlSpecRatingRecordID1").prop("disabled", true);
+                    $("#ddlSpecRatingRecordID2").prop("disabled", true);
+                    load_ODActual();
+                }
+                else {
+                    $("#editWT1").prop("disabled", false);
+                    $("#ddlWTRecordID1").prop("disabled", false);
+                    $("#ddlWTRecordID2").prop("disabled", false);
+
+                    $("#ddlSeamWeldTypeID").prop("disabled", false);
+                    $("#ddlSeamRecordID1").prop("disabled", false);
+                    $("#ddlSeamRecordID2").prop("disabled", false);
+
+                    $("#ddlGradeID").prop("disabled", false);
+                    $("#ddlGradeRecordID1").prop("disabled", false);
+                    $("#ddlGradeRecordID1").prop("disabled", false);
+
+                    $("#ddlODID1").prop("disabled", false);
+                    $("#ddlODRecordID1").prop("disabled", false);
+                    $("#ddlODRecordID2").prop("disabled", false);
+
+                    $("#ddlANSIRatingID").prop("disabled", false);
+                    $("#ddlSpecRatingRecordID1").prop("disabled", false);
+                    $("#ddlSpecRatingRecordID2").prop("disabled", false);
+                    load_ODActual();
+                }
+            }
+            else {
+                $("#editWT1").prop("disabled", false);
+                $("#ddlWTRecordID1").prop("disabled", false);
+                $("#ddlWTRecordID2").prop("disabled", false);
+
+                $("#ddlSeamWeldTypeID").prop("disabled", false);
+                $("#ddlSeamRecordID1").prop("disabled", false);
+                $("#ddlSeamRecordID2").prop("disabled", false);
+
+                $("#ddlGradeID").prop("disabled", false);
+                $("#ddlGradeRecordID1").prop("disabled", false);
+                $("#ddlGradeRecordID1").prop("disabled", false);
+
+                $("#ddlODID1").prop("disabled", false);
+                $("#ddlODRecordID1").prop("disabled", false);
+                $("#ddlODRecordID2").prop("disabled", false);
+
+                $("#ddlANSIRatingID").prop("disabled", false);
+                $("#ddlSpecRatingRecordID1").prop("disabled", false);
+                $("#ddlSpecRatingRecordID2").prop("disabled", false);
+                load_ODActual();
+            }
+        };
+    </script>
+    @*onchangeeventlength*@
     <script type="text/javascript">
         function onchangeeventlength(e) {
             var start = parseFloat($("#tbGISAlignStart").val());
@@ -642,7 +898,7 @@
             var length = parseFloat($("#lblLength").html());
         };
         function onchange_doctype(ddl, docTypeLabel) {
-            var selectedItem1 = $(ddl).val();   
+            var selectedItem1 = $(ddl).val();
             var array = @Html.Raw(Json.Encode(@ViewBag.CurrentDocumentRecords));
             var docType = array.filter(function (val) {
                 //return val.RecordIDName === selectedItem1;
@@ -657,11 +913,19 @@
 
         };
     </script>
-  @*pipetypesfromfeatures*@
+    @*pipetypesfromfeatures*@
     <script type="text/javascript">
         function pipetypesfromfeatures(e) {
-            var selectedItem = $("#ddlFeatures").val();
-            var ddlPipeTypes = $("#ddlPipeTypes");
+            var vFeature = document.getElementById('ddlFeatures');            
+            var idx = vFeature.selectedIndex
+            var vFeatureType = $("#ddlPipeTypes").val();   
+            var selectedItem;
+            if (idx == 0) {
+                selectedItem = 0
+            }
+            else {
+                selectedItem = $("#ddlFeatures").val()
+            }           
             $.ajax({
                 cache: false,
                 type: "GET",
@@ -672,6 +936,10 @@
                     var items = "";
                     items += ("<option value='0'>- Select a Feature Type -</option>");
                     $.each(data, function (i, data) {
+                        if (vFeatureType.toString() == data.Value && idx > 0) {
+                            items += "<option value='" + data.Value + "' selected>" + data.Text + "</option>";
+                        }
+
                         items += "<option value='" + data.Value + "'>" + data.Text + "</option>";
                     });
                     $("#ddlPipeTypes").html(items);
@@ -681,10 +949,10 @@
                     //alert('Failed to retrieve pipe types.');
                 }
             });
-            updateNAdropdowns();
-        }
+            //updateNAdropdowns();
+        };
     </script>
-  @*updateNAdropdowns*@
+    @*updateNAdropdowns*@
     <script type="text/javascript">
         function updateNAdropdowns() {
             var vFeature = document.getElementById('ddlFeatures');
@@ -765,11 +1033,13 @@
             }
         }
     </script>
-  @*loadpipetypes*@
+    @*loadpipetypes*@
     <script type="text/javascript">
         function loadpipetypes() {
-            var selectedFeature = document.getElementById('ddlSelectedFeature').innerText;
-            var selectedPipeType = document.getElementById('ddlSelectedPipeType').innerText;
+            //var selectedFeature = document.getElementById('ddlSelectedFeature').innerText;
+            //var selectedPipeType = document.getElementById('ddlSelectedPipeType').innerText;
+            var selectedFeature = document.getElementById('ddlFeatures').innerText;
+            var selectedPipeType = document.getElementById('ddlPipeTypes').innerText;
             var ddlPipeTypes = $("#ddlPipeTypes");
             $.ajax({
                 cache: false,
@@ -795,14 +1065,19 @@
                     //alert('Failed to retrieve pipe types.');
                 }
             });
-            updateNAdropdowns();
+            //updateNAdropdowns();
         }
     </script>
-  @*loadfeatures*@
+    @*loadfeatures*@
     <script type="text/javascript">
         function loadfeatures() {
-            var ddlFeatures = $("#ddlFeatures");
-            var selected = document.getElementById('ddlSelectedFeature').innerText;
+            var vFeature = document.getElementById('ddlFeatures');
+            var selected = vFeature.options[vFeature.selectedIndex].innerHTML;
+
+
+            //var ddlFeatures = $("#ddlFeatures");
+            //var selected = document.getElementById('ddlSelectedFeature').innerText;
+            //var selected = document.getElementById('ddlFeatures').innerText;
 
             $.ajax({
                 cache: false,
@@ -830,8 +1105,8 @@
             });
         }
     </script>
-    
-  @*onchangeeventOD*@
+
+    @*onchangeeventOD*@
     <script type="text/javascript">
         function onchangeeventOD(e) {
             var selectedItem1 = $("#ddlODRecordID1").val();
@@ -868,7 +1143,7 @@
             });
         }
     </script>
-  @*onchangeeventWT*@
+    @*onchangeeventWT*@
     <script type="text/javascript">
         function onchangeeventWT(e) {
             var selectedItem1 = $("#ddlWTRecordID1").val();
@@ -905,7 +1180,7 @@
             });
         }
     </script>
-  @*onchangeeventST*@
+    @*onchangeeventST*@
     <script type="text/javascript">
         function onchangeeventST(e) {
             var selectedItem1 = $("#ddlSeamRecordID1").val();
@@ -942,7 +1217,7 @@
             });
         }
     </script>
-  @*onchangeeventSR*@
+    @*onchangeeventSR*@
     <script type="text/javascript">
         function onchangeeventSR(e) {
             var selectedItem1 = $("#ddlSpecRatingRecordID1").val();
@@ -979,7 +1254,7 @@
             });
         }
     </script>
-  @*loaddocuments*@
+    @*loaddocuments*@
     <script type="text/javascript">
         function loaddocuments() {
             $.ajax({
@@ -1219,61 +1494,61 @@
     @*loadothers*@
     <script type="text/javascript">
         function loadothers() {
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: '/Overview/LoadODs/',
-                data: {},
-                dataType: 'json',
-                success: function (data) {
-                    var items = "";
-                    var selected = document.getElementById('ddlSelectedODID1').innerText;
-                    items += ("<option value='0'>- Select an OD -</option>");
-                    $.each(data, function (i, data) {
-                        var amt = parseFloat(data.Text);
-                        var dataText = amt.toFixed(3);
-                        if (selected.toString() == data.Value)
-                            items += "<option value='" + data.Value + "' selected>" + dataText + "</option>";
-                        else
-                            items += "<option value='" + data.Value + "'>" + dataText + "</option>";
-                    });
+            //$.ajax({
+            //    cache: false,
+            //    type: "GET",
+            //    url: '/Overview/LoadODs/',
+            //    data: {},
+            //    dataType: 'json',
+            //    success: function (data) {
+            //        var items = "";
+            //        var selected = document.getElementById('ddlSelectedODID1').innerText;
+            //        items += ("<option value='0'>- Select an OD -</option>");
+            //        $.each(data, function (i, data) {
+            //            var amt = parseFloat(data.Text);
+            //            var dataText = amt.toFixed(3);
+            //            if (selected.toString() == data.Value)
+            //                items += "<option value='" + data.Value + "' selected>" + dataText + "</option>";
+            //            else
+            //                items += "<option value='" + data.Value + "'>" + dataText + "</option>";
+            //        });
 
-                    $("#ddlODID1").html(items);
-                    $("#ddlODID1").removeAttr('disabled');
-                    $("#ddlODID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    //alert('Failed to retrieve records.');
-                }
-            });
+            //        $("#ddlODID1").html(items);
+            //        $("#ddlODID1").removeAttr('disabled');
+            //        $("#ddlODID1 option[value='" + selected.toString() + "']").attr("selected", "selected");
+            //    },
+            //    error: function (xhr, ajaxOptions, thrownError) {
+            //        //alert('Failed to retrieve records.');
+            //    }
+            //});
 
-            $.ajax({
-                cache: false,
-                type: "GET",
-                url: '/Overview/LoadODs/',
-                data: {},
-                dataType: 'json',
-                success: function (data) {
-                    var items = "";
-                    items += ("<option value='0'>- Select an OD -</option>");
-                    selected = document.getElementById('ddlSelectedODID2').innerText;
-                    $.each(data, function (i, data) {
-                        var amt = parseFloat(data.Text);
-                        var dataText = amt.toFixed(3);
-                        if (selected.toString() == data.Value) {
-                            items += "<option value='" + data.Value + "' selected>" + dataText + "</option>";
-                        }
-                        else
-                            items += "<option value='" + data.Value + "'>" + dataText + "</option>";
-                    });
-                    $("#ddlODID2").html(items);
-                    $("#ddlODID2").removeAttr('disabled');
-                    $("#ddlODID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    //alert('Failed to retrieve records.');
-                }
-            });
+            //$.ajax({
+            //    cache: false,
+            //    type: "GET",
+            //    url: '/Overview/LoadODs/',
+            //    data: {},
+            //    dataType: 'json',
+            //    success: function (data) {
+            //        var items = "";
+            //        items += ("<option value='0'>- Select an OD -</option>");
+            //        selected = document.getElementById('ddlSelectedODID2').innerText;
+            //        $.each(data, function (i, data) {
+            //            var amt = parseFloat(data.Text);
+            //            var dataText = amt.toFixed(3);
+            //            if (selected.toString() == data.Value) {
+            //                items += "<option value='" + data.Value + "' selected>" + dataText + "</option>";
+            //            }
+            //            else
+            //                items += "<option value='" + data.Value + "'>" + dataText + "</option>";
+            //        });
+            //        $("#ddlODID2").html(items);
+            //        $("#ddlODID2").removeAttr('disabled');
+            //        $("#ddlODID2 option[value='" + selected.toString() + "']").attr("selected", "selected");
+            //    },
+            //    error: function (xhr, ajaxOptions, thrownError) {
+            //        //alert('Failed to retrieve records.');
+            //    }
+            //});
 
             $.ajax({
                 cache: false,
@@ -1458,20 +1733,26 @@
         }
     </script>
     <script type="text/javascript">
-                 $(document).ready(function () {
-                     sessionStorage.EditFirstPass = "1";
-                     loadfeatures();
-                     loadpipetypes();
-                     loaddocuments();
-                     //pipetypesfromfeatures(null);
-                     loadothers();
-                     updateNAdropdowns();
-                     onchangeevent();
-                     //onchangeeventOD(null);
-                     //onchangeeventWT(null);
-                     //onchangeeventST(null);
-                     //onchangeeventSR(null);
-                     window.setTimeout(getmatrixchecks, 5000);
-                 });
+        $(document).ready(function () {
+            sessionStorage.EditFirstPass = "1";
+            //loadfeatures();
+            //loadpipetypes();
+            $("#ddlFeatures").trigger('change');
+            $("#ddlPipeTypes").trigger('change');
+           
+           
+            //loaddocuments();
+            //pipetypesfromfeatures(null);
+            //loadothers();
+            //updateNAdropdowns();
+            onchangeevent();
+            //onchangeeventOD(null);
+            //onchangeeventWT(null);
+            //onchangeeventST(null);
+            //onchangeeventSR(null);
+            window.setTimeout(getmatrixchecks, 5000);
+        });
     </script>
+
+
 }

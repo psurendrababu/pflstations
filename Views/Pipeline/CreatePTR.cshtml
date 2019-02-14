@@ -18,6 +18,14 @@
         <table>
             <tr>
                 <td>
+                    @Html.LabelFor(model => model.PTRIDName)
+                </td>
+                <td class="medium">
+                    @Html.EditorFor(model => model.PTRIDName)
+                </td>
+            </tr>
+            <tr>
+                <td>
                     @Html.LabelFor(model => model.Filename)
                 </td>
                 <td class="medium">
@@ -37,8 +45,8 @@
                     @Html.LabelFor(model => model.PTMedium)
                 </td>
                 @*<td>
-            @Html.EditorFor(model => model.PTMedium)
-        </td>*@
+                @Html.EditorFor(model => model.PTMedium)
+            </td>*@
                 <td>
                     <div class="editor-field">@Html.DropDownList("PTMedium", "- Select PT Test Medium -")</div>
                 </td>
@@ -133,7 +141,7 @@
                 </td>
             </tr>
             <tr>
-                <td >
+                <td>
                     @Html.LabelFor(model => model.PTTestCompany)
                 </td>
                 <td class="medium">

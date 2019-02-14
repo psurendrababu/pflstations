@@ -14,5 +14,11 @@ namespace PipelineFeatureList.Models
         [DisplayName("Outside Diameter")]
         [DisplayFormat(DataFormatString = "{0:0.000}", ApplyFormatInEditMode = false)]
         public decimal OutsideDiameterItem { get; set; }
+
+        [DisplayName("Nominal Diameter")]
+        [DisplayFormat(DataFormatString = "{0:0.000}", ApplyFormatInEditMode = false)]
+        public decimal NominalDiameterItem { get; set; }     
+     
+
     }
 }

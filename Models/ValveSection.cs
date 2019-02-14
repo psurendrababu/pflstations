@@ -371,6 +371,7 @@ namespace PipelineFeatureList.Models
         public DbSet<HCAStatus> HCAStatus { get; set; }
         public DbSet<ClassExceptions> ClassExceptions { get; set; }
         public DbSet<PTTestMedium> PTTestMediums { get; set; }
+       
 
 
 

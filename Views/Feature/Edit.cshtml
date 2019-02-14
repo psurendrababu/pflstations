@@ -27,6 +27,20 @@
                 </div>
             </td>
         </tr>
+
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.LengthLookup)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.LengthLookup)
+                    @Html.ValidationMessageFor(model => model.LengthLookup)
+                </div>
+            </td>
+        </tr>
     </table>
 
     <p>

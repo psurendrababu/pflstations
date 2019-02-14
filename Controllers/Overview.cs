@@ -68,6 +68,7 @@ namespace PipelineFeatureList.Controllers
                          from ced in ce1.DefaultIfEmpty()
                          join cl in db.CurrentClassLocations on vsd.CurrentClassLoc equals cl.CurrentClassLocationID into cl1
                          from cld in cl1.DefaultIfEmpty()
+                        
 
                          join c in db.CoatingTypes on vsd.CoatingTypeID equals c.CoatingTypeID into c1
                             from cd in c1.DefaultIfEmpty()
@@ -128,6 +129,7 @@ namespace PipelineFeatureList.Controllers
                                 ANSIRatingData = ad,
                                 BendRadiusData = brd,
                                 ClassExceptionsData = ced,
+                               
                                 CurrentClassLocationData = cld,
                                 ConstructionTypeData = ctd,
                                 ODRecordID1Data = riOD1d,
@@ -281,7 +283,16 @@ namespace PipelineFeatureList.Controllers
             ViewBag.ODID1 = OD1List; 
             List<OutsideDiameter> od2List = db.OutsideDiameters.OrderBy(o => o.OutsideDiameterItem).ToList();
             SelectList OD2List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem");
-            ViewBag.ODID2 = OD2List; 
+            ViewBag.ODID2 = OD2List;
+            
+            //Nominal OD
+            List<OutsideDiameter> od1List_nominal = db.OutsideDiameters.OrderBy(o => o.NominalDiameterItem).ToList();
+            SelectList OD1List_nominal = new SelectList(od1List_nominal, "OutsideDiameterID", "NominalDiameterItem");
+            ViewBag.ODID1_nominal = OD1List_nominal;
+            List<OutsideDiameter> od2List_nominal = db.OutsideDiameters.OrderBy(o => o.NominalDiameterItem).ToList();
+            SelectList OD2List_nominal = new SelectList(od2List_nominal, "OutsideDiameterID", "NominalDiameterItem");
+            ViewBag.ODID2_nominal = OD2List_nominal;
+
             ViewBag.SeamWeldTypeID = new SelectList(db.SeamTypes, "SeamTypeID", "SeamTypeItem");
             ViewBag.SpecRatingID = new SelectList(db.SpecRatings, "SpecRatingID", "SpecRatingItem");
             ViewBag.GradeID = new SelectList(db.Grades, "GradeID", "GradeItem");
@@ -304,6 +315,9 @@ namespace PipelineFeatureList.Controllers
             SelectList ManuTypeList = new SelectList(manutypeList, "ManufacturerTypeID", "ManufacturerTypeItem");
             ViewBag.ManufacturerTypeID = ManuTypeList;
             ViewBag.TypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem");
+
+            ViewBag.FeatureTypeRated = new SelectList(db.PipeTypes, "PipeTypeID", "RatingType");
+
             ViewBag.Length = 0;
             //get the default class locaion: Unknown
             int classLocationID = (from cl in db.CurrentClassLocations                                     
@@ -314,16 +328,30 @@ namespace PipelineFeatureList.Controllers
                              join p in db.Pipelines on pt.PipelineID equals p.PipelineID
                              where pt.PipelineID == currentPipelineID //currSection
                              orderby pt.Filename
-                             select new { pt.PressureTestRecordID, pt.Filename };
-            ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename");
+                             //select new { pt.PressureTestRecordID, pt.Filename };
+                             select new
+                             {
+                                 value = pt.PressureTestRecordID,
+                                 text = pt.PTRIDName
+                                       + " | " +
+                                       (string.IsNullOrEmpty(pt.Filename) ? "" : pt.Filename)                                      
+                             };
+
+            //ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename"); //old value
+            ViewBag.PTRID = new SelectList(availPTRs, "value", "text");
+
             ViewBag.HCAStatusID = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName");
+
+
             //get the default class exceptions: In Station
             int classExceptionsID = (from ce in db.ClassExceptions
                                      where ce.ClassExceptionsName == "In Station"
                                    select ce.ClassExceptionsID).FirstOrDefault();
 
             ViewBag.ClassExceptionsID = new SelectList(db.ClassExceptions, "ClassExceptionsID", "ClassExceptionsName", classExceptionsID);
+
            
+
 
 
         }
@@ -411,6 +439,16 @@ namespace PipelineFeatureList.Controllers
             SelectList OD2List = new SelectList(od1List, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID2);
             ViewBag.SelectedODID2 = OD2List;
             //ViewBag.ODID2 = new SelectList(db.OutsideDiameters, "OutsideDiameterID", "OutsideDiameterItem", valvesectionfeature.ODID2);
+
+            //Nominal OD
+            List<OutsideDiameter> od1List_nominal = db.OutsideDiameters.OrderBy(o => o.NominalDiameterItem).ToList();
+            SelectList OD1List_nominal = new SelectList(od1List_nominal, "OutsideDiameterID", "NominalDiameterItem", valvesectionfeature.ODID1);
+            ViewBag.SelectedODID1_nominal = OD1List_nominal;
+           
+            List<OutsideDiameter> od2List_nominal = db.OutsideDiameters.OrderBy(o => o.NominalDiameterItem).ToList();
+            SelectList OD2List_nominal = new SelectList(od2List_nominal, "OutsideDiameterID", "NominalDiameterItem", valvesectionfeature.ODID2);
+            ViewBag.SelectedODID2_nominal = OD2List_nominal;
+
             ViewBag.SelectedSeamWeldTypeID = new SelectList(db.SeamTypes, "SeamTypeID", "SeamTypeItem", valvesectionfeature.SeamWeldTypeID);
             ViewBag.SelectedSpecRatingID = new SelectList(db.SpecRatings, "SpecRatingID", "SpecRatingItem", valvesectionfeature.SpecRatingID);
             ViewBag.SelectedGradeID = new SelectList(db.Grades, "GradeID", "GradeItem", valvesectionfeature.GradeID);
@@ -426,6 +464,13 @@ namespace PipelineFeatureList.Controllers
             SelectList ManuTypeList = new SelectList(manutypeList, "ManufacturerTypeID", "ManufacturerTypeItem", valvesectionfeature.ManufacturerTypeID);
             ViewBag.ManufacturerTypeID = ManuTypeList;
             ViewBag.SelectedTypeID = new SelectList(db.PipeTypes, "PipeTypeID", "PipeTypeItem", valvesectionfeature.TypeID);
+
+            ViewBag.FeatureTypeRated = new SelectList(db.PipeTypes, "PipeTypeID", "RatingType");
+
+           
+            string ratingtype = (from pt in db.PipeTypes where pt.PipeTypeID == valvesectionfeature.TypeID
+                                 select pt.RatingType).FirstOrDefault();
+            ViewBag.SelectedRatingType = ratingtype;
             ViewBag.ODRecordMatrixCheck = "";
             //ViewBag.Length = valvesectionfeature.GISAlignEnd - valvesectionfeature.GISAlignStart;
             ViewBag.CurrentClassLoc = new SelectList(db.CurrentClassLocations, "CurrentClassLocationID", "CurrentClassLocationItem", valvesectionfeature.CurrentClassLoc);
@@ -433,8 +478,19 @@ namespace PipelineFeatureList.Controllers
                             join p in db.Pipelines on pt.PipelineID equals p.PipelineID
                             where pt.PipelineID == currPipelineID //currSection
                             orderby pt.Filename
-                            select new { pt.PressureTestRecordID, pt.Filename };
-            ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename", valvesectionfeature.PTRID);
+                            //select new { pt.PressureTestRecordID, pt.Filename };
+                            select new
+                            {
+                                value = pt.PressureTestRecordID,
+                                text = pt.PTRIDName
+                                      + " | " +
+                                      (string.IsNullOrEmpty(pt.Filename) ? "" : pt.Filename)
+                            };
+
+            //ViewBag.PTRID = new SelectList(availPTRs, "PressureTestRecordID", "Filename"); //old value
+            ViewBag.PTRID = new SelectList(availPTRs, "value", "text");
+
+
             ViewBag.HCAStatusID = new SelectList(db.HCAStatus, "HCAStatusID", "HCAStatusName", valvesectionfeature.HCAStatusID);
           
             ViewBag.ClassExceptionsID = new SelectList(db.ClassExceptions, "ClassExceptionsID", "ClassExceptionsName", valvesectionfeature.ClassExceptionsID);
@@ -448,7 +504,11 @@ namespace PipelineFeatureList.Controllers
         public void ActionUnknowns(ValveSectionFeature valvesectionfeature)
         {
             if (valvesectionfeature.DescriptionUnknown) valvesectionfeature.Description = "";
-            if (valvesectionfeature.JobWOPOUnknown) valvesectionfeature.JobWOPO = "";
+            //if (valvesectionfeature.JobWOPOUnknown) valvesectionfeature.JobWOPO = "";
+            if (valvesectionfeature.JobUnknown) valvesectionfeature.JobNumber = "";
+            if (valvesectionfeature.WOUnknown) valvesectionfeature.WONumber = "";
+            if (valvesectionfeature.POUnknown) valvesectionfeature.PONumber = "";
+
             if (valvesectionfeature.MillUnknown) valvesectionfeature.Mill = "";
             if (valvesectionfeature.InServiceDateUnknown) valvesectionfeature.InServiceDate = null;
             if (valvesectionfeature.InstallDateUnknown) valvesectionfeature.InstallDate = null;
@@ -1005,12 +1065,26 @@ namespace PipelineFeatureList.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult LoadPipeTypes(int featureid)
         {
-            var availpipetypes = from p in db.PipeTypes
-                                 where p.FeatureID == featureid
-                                 orderby p.PipeTypeItem
-                                 select new { Value = p.PipeTypeID, Text = p.PipeTypeItem };
+            
 
-            return Json(availpipetypes, JsonRequestBehavior.AllowGet);
+            if (featureid == 0) //No feature selected from the Feature dropdown
+            {
+                var availpipetypes = from p in db.PipeTypes
+                                         //orderby p.PipeTypeItem
+                                     select new { Value = p.PipeTypeID, Text = p.PipeTypeItem };
+                return Json(availpipetypes, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                var availpipetypes = from p in db.PipeTypes
+                                     where p.FeatureID == featureid
+                                     orderby p.PipeTypeItem
+                                     select new { Value = p.PipeTypeID, Text = p.PipeTypeItem };
+                return Json(availpipetypes, JsonRequestBehavior.AllowGet);
+            }
+
+            
         }
         
         [AcceptVerbs(HttpVerbs.Get)]
@@ -1047,6 +1121,19 @@ namespace PipelineFeatureList.Controllers
 
             return Json(ODs, JsonRequestBehavior.AllowGet);
         }
+
+        //Nominal OD
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult LoadODs_Nominal()
+        {
+            Int64 currSection = Convert.ToInt64(Session["CurrentValveSection"].ToString());
+            var ODs = from o in db.OutsideDiameters
+                      orderby o.NominalDiameterItem descending
+                      select new { Value = o.OutsideDiameterID, Text = o.NominalDiameterItem };
+
+            return Json(ODs, JsonRequestBehavior.AllowGet);
+        }
+
 
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult LoadSeamWelds()
@@ -1288,9 +1375,21 @@ namespace PipelineFeatureList.Controllers
             /////////////////////
             // Job / WO / PO
             /////////////////////
-            if (valvesectionfeature.JobWOPO == null && valvesectionfeature.JobWOPOUnknown == false)
+            //if (valvesectionfeature.JobWOPO == null && valvesectionfeature.JobWOPOUnknown == false)
+            //{
+            //    InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "JobWOPONoUnknown", false);
+            //}
+            if (valvesectionfeature.JobNumber == null && valvesectionfeature.JobUnknown == false)
             {
-                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "JobWOPONoUnknown", false);
+                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "JobUnknown", false);
+            }
+            if (valvesectionfeature.WONumber == null && valvesectionfeature.WOUnknown == false)
+            {
+                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "WOUnknown", false);
+            }
+            if (valvesectionfeature.PONumber == null && valvesectionfeature.POUnknown == false)
+            {
+                InsertError(valvesectionfeature.ValveSectionID, valvesectionfeature.ValveSectionFeatureID, errorid, strError, "POUnknown", false);
             }
             /////////////////////
             // Install Date

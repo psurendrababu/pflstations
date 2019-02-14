@@ -186,14 +186,16 @@
                     <th>From Circuit</th>
                     <th>To Circuit</th>
 
-                    <th>From Pressure Zone</th>
-                    <th>To Pressure Zone</th>
+                    @*<th>From Pressure Zone</th>
+        <th>To Pressure Zone</th>*@
 
                     <th>Feature</th>
                     <th>Feature Type</th>
 
                     <th>Notes / Comments</th>
-                    <th>Job Number / Work Order / Purchase Order #</th>
+                    <th>PO Number</th>
+                    <th>WO Number</th>
+                    <th>Job Number</th>
 
                     <th>Feature Install Date</th>
                     <th>Construction Type</th>
@@ -237,20 +239,21 @@
                     <th>Material Type</th>
                     <th>Coating Type</th>
                     <th>Coating Desc.</th>
-                    <th>Manufacturer</th>                   
+                    <th>Manufacturer</th>
 
                     <th>MFR Model Number</th>
+                    <th>Heat Number</th>
 
                     <th>Class Exceptions</th>
 
                     <th>Current Class Location</th>
 
-                   
+
                     <th>Estab. Op. Pressure</th>
 
                     <th>PT Document</th>
 
-                   
+
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -321,12 +324,12 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionData.ValveSectionItem)
                     </td>
-                    <td>
-                        @Html.DisplayFor(model => item.ValveSectionFeatureData.FromSeries)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => item.ValveSectionFeatureData.ToSeries)
-                    </td>
+                    @*<td>
+            @Html.DisplayFor(model => item.ValveSectionFeatureData.FromSeries)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.ValveSectionFeatureData.ToSeries)
+        </td>*@
 
                     <td>
                         @Html.DisplayFor(modelItem => item.FeatureData.FeatureItem)
@@ -338,10 +341,28 @@
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.Notes)
                     </td>
 
+                    @*<td>
+            @try
+            {
+                if (item.ValveSectionFeatureData.JobWOPOUnknown)
+                {
+                    @Html.Raw("Unknown")
+                }
+            }
+            catch { }
+            @try
+            {
+                if (!item.ValveSectionFeatureData.JobWOPOUnknown)
+                {
+                    @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.JobWOPO));
+                }
+            }
+            catch { }
+        </td>*@
                     <td>
                         @try
                         {
-                            if (item.ValveSectionFeatureData.JobWOPOUnknown)
+                            if (item.ValveSectionFeatureData.POUnknown)
                             {
                                 @Html.Raw("Unknown")
                             }
@@ -349,9 +370,45 @@
                         catch { }
                         @try
                         {
-                            if (!item.ValveSectionFeatureData.JobWOPOUnknown)
+                            if (!item.ValveSectionFeatureData.POUnknown)
                             {
-                                @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.JobWOPO));
+                                @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.PONumber));
+                            }
+                        }
+                        catch { }
+                    </td>
+                    <td>
+                        @try
+                        {
+                            if (item.ValveSectionFeatureData.WOUnknown)
+                            {
+                                @Html.Raw("Unknown")
+                            }
+                        }
+                        catch { }
+                        @try
+                        {
+                            if (!item.ValveSectionFeatureData.WOUnknown)
+                            {
+                                @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.WONumber));
+                            }
+                        }
+                        catch { }
+                    </td>
+                    <td>
+                        @try
+                        {
+                            if (item.ValveSectionFeatureData.JobUnknown)
+                            {
+                                @Html.Raw("Unknown")
+                            }
+                        }
+                        catch { }
+                        @try
+                        {
+                            if (!item.ValveSectionFeatureData.JobUnknown)
+                            {
+                                @Html.Raw(string.Format("{0:d}", item.ValveSectionFeatureData.JobNumber));
                             }
                         }
                         catch { }
@@ -381,8 +438,15 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.OutsideDiameterData1.OutsideDiameterItem)
-                    </td>
+                        @if (item.PipeTypeData != null && item.PipeTypeData.RatingType == "Non-Rated")
+                        {
+                            @Html.DisplayFor(modelItem => item.OutsideDiameterData1.OutsideDiameterItem)
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.OutsideDiameterData1.NominalDiameterItem)
+                        }
+                        
                     <td>
                         @Html.DisplayFor(modelItem => item.ODRecordID1Data.Filename)
                     </td>
@@ -467,12 +531,17 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.SpecRatingRecordID2DocType)
                     </td>
-
-
-
                     <td>
-                        @Html.DisplayFor(modelItem => item.OutsideDiameterData2.OutsideDiameterItem)
+                        @if (item.PipeTypeData != null && item.PipeTypeData.RatingType == "Non-Rated")
+                        {
+                            @Html.DisplayFor(modelItem => item.OutsideDiameterData2.OutsideDiameterItem)
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.OutsideDiameterData2.NominalDiameterItem)
+                        }
                     </td>
+
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.WallThickness2)
                     </td>
@@ -509,10 +578,14 @@
                         @Html.DisplayFor(modelItem => item.ManufacturerData.ManufacturerItem)
                     </td>
                     @*<td>
-                        @Html.DisplayFor(modelItem => item.ManufacturerTypeData.ManufacturerTypeItem)
-                    </td>*@
+            @Html.DisplayFor(modelItem => item.ManufacturerTypeData.ManufacturerTypeItem)
+        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.MFRModelNumber)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.HeatNumber)
                     </td>
 
                     <td>
@@ -524,7 +597,7 @@
                         @Html.DisplayFor(modelItem => item.CurrentClassLocationData.CurrentClassLocationItem)
                     </td>
 
-                   
+
 
                     <td>
                         @Html.DisplayFor(modelItem => item.ValveSectionFeatureData.OperatingPressure)
@@ -534,7 +607,7 @@
                         @Html.DisplayFor(modelItem => item.PressureTestRecordData.Filename)
                         @*@Html.DisplayFor(modelItem => item.ValveSectionFeatureData.PTRID)*@
                     </td>
-                   
+
 
                     <td>
                         @if (ViewBag.EditDisabled == false)
