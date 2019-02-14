@@ -1,33 +1,52 @@
 ﻿@model PipelineFeatureList.Models.SeamType
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Seam Weld Type";
 }
 
-<h2>Create</h2>
+<h2>Create Seam Weld Type</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>SeamType</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SeamTypeItem)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SeamTypeItem)
-            @Html.ValidationMessageFor(model => model.SeamTypeItem)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+<fieldset>
+    <legend>SeamType</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.SeamTypeItem)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.SeamTypeItem)
+                    @Html.ValidationMessageFor(model => model.SeamTypeItem)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.JointFactor)
+                </div>
+            </td>
+            <td>
+                <div class="wide">
+                    @Html.EditorFor(model => model.JointFactor)
+                    @Html.ValidationMessageFor(model => model.JointFactor)
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</fieldset>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </div>
 
 @section Scripts {

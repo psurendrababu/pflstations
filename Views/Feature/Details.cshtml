@@ -1,22 +1,43 @@
 ﻿@model PipelineFeatureList.Models.Feature
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Feature Details";
 }
 
-<h2>Details</h2>
+<h2>Feature Details</h2>
 
 <fieldset>
     <legend>Feature</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FeatureItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FeatureItem)
+                </div>
+            </td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FeatureItem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FeatureItem)
-    </div>
+        </tr>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.LengthLookup)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.LengthLookup)
+                </div>
+            </td>
+
+        </tr>
+    </table>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.FeatureID }) |
-    @Html.ActionLink("Back to List", "Index")
+<p>   
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FeatureID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
 </p>

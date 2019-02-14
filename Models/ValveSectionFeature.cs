@@ -219,5 +219,26 @@ namespace PipelineFeatureList.Models
         [DisplayName("Rating Class RecID 2  DocType")]
         public string SpecRatingRecordID2DocType { get; set; }
 
+        [DisplayName("PO Number")]
+        public string PONumber { get; set; }
+        [DisplayName("PO Unknown")]
+        public bool POUnknown { get; set; }
+
+        [DisplayName("WO Number")]
+        public string WONumber { get; set; }
+        [DisplayName("WO Unknown")]
+        public bool WOUnknown { get; set; }
+
+        [DisplayName("Job Number")]
+        public string JobNumber { get; set; }
+        [DisplayName("Job Unknown")]
+        public bool JobUnknown { get; set; }
+
+        [DisplayName("Heat Number")]
+        public string HeatNumber { get; set; }
+
+       
+
+
     }
 }

@@ -1,25 +1,37 @@
 ﻿@model PipelineFeatureList.Models.Feature
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Feature";
 }
 
-<h2>Delete</h2>
+<h2>Delete Feature</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
     <legend>Feature</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FeatureItem)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FeatureItem)
-    </div>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.FeatureItem)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.FeatureItem)
+                    @Html.ValidationMessageFor(model => model.FeatureItem)
+                </div>
+            </td>
+            
+        </tr>
+    </table>
 </fieldset>
 @using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+    @if (ViewBag.HasError != "True")
+    {
+        <input type="submit" value="Delete" />
+    }
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
 }

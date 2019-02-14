@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PipelineFeatureList.Models;
+using System.Data.SqlClient;
 
 namespace PipelineFeatureList.Controllers
 {
@@ -52,6 +53,10 @@ namespace PipelineFeatureList.Controllers
             {
                 db.SpecRatings.Add(specrating);
                 db.SaveChanges();
+                if (Insert_CodeLookUp_Audit("Specification", "Create", "", specrating.SpecRatingItem))
+                {
+                    //nothing to do at this point.
+                }
                 return RedirectToAction("Index");
             }
 
@@ -64,10 +69,24 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Edit(int id = 0)
         {
             SpecRating specrating = db.SpecRatings.Find(id);
+            var specfeatures = (from vf in db.ValveSectionFeatures
+                                where vf.SpecRatingID == specrating.SpecRatingID
+                                select new
+                                {
+                                    vf
+                                }).ToList();
+
+
+            if (specfeatures.Count > 0)
+            {
+                ModelState.AddModelError("SpecRatingItem", "Warning! This Specification is assigned to Circuit feature(s).");
+                ViewBag.HasError = "True";
+            }
             if (specrating == null)
             {
                 return HttpNotFound();
             }
+            Session["CodeLookUpAduit_Oldvalue"] = specrating.SpecRatingItem;
             return View(specrating);
         }
 
@@ -81,6 +100,10 @@ namespace PipelineFeatureList.Controllers
             {
                 db.Entry(specrating).State = EntityState.Modified;
                 db.SaveChanges();
+                if (Insert_CodeLookUp_Audit("Specification", "Edit", Session["CodeLookUpAduit_Oldvalue"].ToString(), specrating.SpecRatingItem))
+                {
+                    //nothing to do at this point.
+                }
                 return RedirectToAction("Index");
             }
             return View(specrating);
@@ -92,6 +115,19 @@ namespace PipelineFeatureList.Controllers
         public ActionResult Delete(int id = 0)
         {
             SpecRating specrating = db.SpecRatings.Find(id);
+            var specfeatures = (from vf in db.ValveSectionFeatures
+                               where vf.SpecRatingID == specrating.SpecRatingID
+                                select new
+                               {
+                                   vf
+                               }).ToList();
+
+
+            if (specfeatures.Count > 0)
+            {
+                ModelState.AddModelError("SpecRatingItem", "This Specification is assigned to Circuit feature(s) and cannot be deleted.");
+                ViewBag.HasError = "True";
+            }
             if (specrating == null)
             {
                 return HttpNotFound();
@@ -108,6 +144,10 @@ namespace PipelineFeatureList.Controllers
             SpecRating specrating = db.SpecRatings.Find(id);
             db.SpecRatings.Remove(specrating);
             db.SaveChanges();
+            if (Insert_CodeLookUp_Audit("Specification", "Delete", specrating.SpecRatingItem, ""))
+            {
+                //nothing to do at this point.
+            }
             return RedirectToAction("Index");
         }
 
@@ -115,6 +155,37 @@ namespace PipelineFeatureList.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+        public bool Insert_CodeLookUp_Audit(string codelookup_name, string act, string oldvalue, string newvalue)
+        {
+            SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PipelineFeatureListDBContext"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("spInsert_dbo_CodeLookUpAudit", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@CodeLookUp_Name", codelookup_name));
+            cmd.Parameters.Add(new SqlParameter("@Action", act));
+            cmd.Parameters.Add(new SqlParameter("@Old_Value", oldvalue));
+            cmd.Parameters.Add(new SqlParameter("@New_Value", newvalue));
+            cmd.Parameters.Add(new SqlParameter("@Modified_User", Session["UserName"].ToString()));
+            cmd.Parameters.Add(new SqlParameter("@Modified_Date", DateTime.Now));
+            try
+            {
+                cmd.BeginExecuteNonQuery(delegate (IAsyncResult ar)
+                {
+                    int rowCount = cmd.EndExecuteNonQuery(ar);
+                }, cmd);
+                return true;
+            }
+            catch (SqlException s)
+            {
+                throw s;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+
+            }
         }
     }
 }

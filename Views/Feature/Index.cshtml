@@ -1,33 +1,45 @@
 ﻿@model IEnumerable<PipelineFeatureList.Models.Feature>
 
-@{
-    ViewBag.Title = "Index";
-}
+    @{
+        ViewBag.Title = "Features";
+    }
 
-<h2>Index</h2>
+    <h2>Features</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FeatureItem)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "linkbutton" })
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FeatureItem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LengthLookup)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FeatureItem)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FeatureID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FeatureID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FeatureID })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeatureItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LengthLookup)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FeatureID }, htmlAttributes: new { @class = "linkbutton" })
+                @Html.ActionLink("Details", "Details", new { id = item.FeatureID }, htmlAttributes: new { @class = "linkbutton" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.FeatureID }, htmlAttributes: new { @class = "linkbutton" })
+            </td>
+        </tr>
+        }
 
-</table>
+    </table>
+
+    <div>
+        @Html.ActionLink("Back to Admin", "Index", "Admin", null, htmlAttributes: new { @class = "linkbutton" })
+    </div>

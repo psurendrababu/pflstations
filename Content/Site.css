@@ -959,3 +959,60 @@ input[name="file"] {
 .listBoxClass2 {
     height: 200px;
 }
+
+
+/*Added for Code Lookups/**/
+.lookups {
+    background-color: #d3dce0;
+    border: 1px solid #787878;
+    cursor: pointer;
+    font-size: .9em;
+    font-weight: 600;
+   
+    margin: 1px, 1px, 1px, 1px;
+    width: auto;
+    text-decoration: none;
+}
+
+ul li {
+    display: block;
+    position: relative;
+    float: left;        
+}
+
+li ul {
+    display: none;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    /*border-top: 1px solid #ffffff;*/
+    padding: 4px;
+    background-color: #d3dce0;
+    margin-left: 1px;
+    white-space: nowrap;
+}
+
+ul li a:hover {
+    background: #617F8A;
+}
+
+li:hover ul {
+    display: block;
+    position: absolute;
+}
+
+li:hover li {
+    float: none;
+    font-size: 12px;
+}
+
+li:hover a {
+    background-color: #d3dce0;
+}
+
+li:hover li a:hover {
+    background: #95A9B1;
+}

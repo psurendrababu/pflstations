@@ -1,0 +1,30 @@
+﻿@model PipelineFeatureList.Models.PTTestMedium
+
+@{
+    ViewBag.Title = "PT Medium Details";
+}
+
+<h2>PT Medium Details</h2>
+
+<fieldset>
+    <legend>SpecRating</legend>
+    <table>
+        <tr>
+            <td>
+                <div class="display-label">
+                    @Html.DisplayNameFor(model => model.PTMedium)
+                </div>
+            </td>
+            <td>
+                <div class="display-field">
+                    @Html.DisplayFor(model => model.PTMedium)
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+<p>
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PTTestMediumID }, htmlAttributes: new { @class = "linkbutton" })
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>

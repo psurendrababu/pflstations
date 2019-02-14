@@ -47,9 +47,11 @@ namespace PipelineFeatureList.Models
         public string PTPersonResponsible { get; set; }
         [DisplayName("PT Test Company")]
         public string PTTestCompany { get; set; }
+        [DisplayName("Record Identifier")]
+        public string PTRIDName { get; set; }
 
 
-        
+
 
 
     }

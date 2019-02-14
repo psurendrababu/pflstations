@@ -15,14 +15,20 @@
          @Html.DisplayNameFor(model => model.CoatingTypeItem)
     </div></td>
     <td>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CoatingTypeItem)
-    </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.CoatingTypeItem)
+            @Html.ValidationMessageFor(model => model.CoatingTypeItem)
+        </div>
     </td></tr></table>
 </fieldset>
 @using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p>
+
+    @if (ViewBag.HasError != "True")
+    {
+        <input type="submit" value="Delete" />
+    }
+
+    @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "linkbutton" })
+</p>
 }

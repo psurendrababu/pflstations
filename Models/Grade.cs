@@ -13,5 +13,7 @@ namespace PipelineFeatureList.Models
         public int GradeID { get; set; }
         [DisplayName("Grade")]
         public string GradeItem { get; set; }
+        [DisplayName("SMYS")]
+        public decimal? SMYS { get; set; }
     }
 }

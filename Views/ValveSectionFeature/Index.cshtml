@@ -58,8 +58,17 @@
         <th>
             @Html.DisplayNameFor(model => model.Length)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.JobWOPO)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PONumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WONumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.InstallDate)
@@ -228,8 +237,17 @@
         <td>
             @Html.DisplayFor(modelItem => item.Length)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.JobWOPO)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.PONumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WONumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.InstallDate)
@@ -373,9 +391,9 @@
             @Html.DisplayFor(modelItem => item.EngineerID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ValveSectionFeatureID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ValveSectionFeatureID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ValveSectionFeatureID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ValveSectionFeatureID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ValveSectionFeatureID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ValveSectionFeatureID })
         </td>
     </tr>
 }
